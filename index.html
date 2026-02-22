@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="description" content="CanadaInvesting.app - AI-powered investment advisor marketplace connecting Canadians with qualified, CIRO-registered financial professionals. Built by Arthur Kostaras.">
+    <meta name="keywords" content="investment advisor marketplace, Canadian financial advisors, AI matching, wealth management, portfolio management, CFA, CFP">
+
+    <title>CanadaInvesting.app - AI-Powered Investment Advisor Marketplace | Built by Arthur Kostaras</title>
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://canadainvesting.app/">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://canadainvesting.app/">
+    <meta property="og:title" content="CanadaInvesting.app - AI-Powered Investment Advisor Marketplace">
+    <meta property="og:description" content="AI-powered investment advisor marketplace connecting Canadians with qualified, CIRO-registered financial professionals.">
+    <meta property="og:image" content="https://canadainvesting.app/icon-512.png">
+    <meta property="og:site_name" content="CanadaInvesting">
+    <meta property="og:locale" content="en_CA">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="CanadaInvesting.app - AI-Powered Investment Advisor Marketplace">
+    <meta name="twitter:description" content="AI-powered investment advisor marketplace connecting Canadians with qualified, CIRO-registered financial professionals.">
+    <meta name="twitter:image" content="https://canadainvesting.app/icon-512.png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <meta name="theme-color" content="#667eea">
+
+    <!-- Google Analytics 4 - placeholder until configured -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script> -->
+
+    <!-- JSON-LD Organization Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "CanadaInvesting",
+        "url": "https://canadainvesting.app",
+        "logo": "https://canadainvesting.app/icon-512.png",
+        "description": "AI-powered investment advisor marketplace connecting Canadians with qualified, CIRO-registered financial professionals.",
+        "founder": {
+            "@type": "Person",
+            "name": "Arthur Kostaras",
+            "jobTitle": "Founder"
+        },
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+1-647-956-7290",
+            "contactType": "customer service",
+            "email": "arthur@negotiateandwin.com",
+            "areaServed": "CA",
+            "availableLanguage": ["English", "French"]
+        },
+        "areaServed": {
+            "@type": "Country",
+            "name": "Canada"
+        }
+    }
+    </script>
+
+    <style>
+        :root {
+            --primary-purple: #667eea;
+            --primary-violet: #764ba2;
+            --primary-emerald: #059669;
+            --accent-green: #059669;
+            --dark-bg: #0a0a0a;
+            --card-bg: #1a1a1a;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --border-color: #333333;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Navigation */
+        .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(0,0,0,0.4); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; height: 64px; }
+        .nav-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; color: white; font-weight: 700; font-size: 1.25rem; }
+        .nav-logo .maple { color: var(--primary-purple); font-size: 1.5rem; }
+        .nav-links { display: flex; align-items: center; gap: 24px; list-style: none; }
+        .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.3s; }
+        .nav-links a:hover { color: white; }
+        .nav-cta { background: white !important; color: var(--primary-purple) !important; padding: 10px 24px; border-radius: 8px; font-weight: 700 !important; transition: transform 0.3s, box-shadow 0.3s; }
+        .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 4px 15px rgba(102,126,234,0.3); }
+
+        /* Hero */
+        .hero {
+            padding: 140px 24px 100px;
+            background: linear-gradient(135deg, var(--primary-purple) 0%, var(--primary-violet) 50%, #1e3a5f 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(ellipse at 30% 20%, rgba(255,255,255,0.1) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: rgba(255,255,255,0.15); backdrop-filter: blur(10px);
+            padding: 10px 22px; border-radius: 50px; font-size: 0.85rem; font-weight: 500;
+            margin-bottom: 28px; border: 1px solid rgba(255,255,255,0.2);
+            position: relative;
+        }
+        .hero h1 {
+            font-size: 3.5rem; font-weight: 900; line-height: 1.1; margin-bottom: 24px;
+            max-width: 900px; margin-left: auto; margin-right: auto;
+            position: relative;
+        }
+        .hero p {
+            font-size: 1.25rem; max-width: 700px; margin: 0 auto 48px; opacity: 0.9; line-height: 1.7;
+            position: relative;
+        }
+        .hero-ctas {
+            display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+            margin-bottom: 60px; position: relative;
+        }
+        .btn-primary {
+            background: white; color: var(--primary-purple); padding: 16px 36px;
+            border-radius: 10px; font-weight: 700; font-size: 1rem;
+            text-decoration: none; transition: all 0.3s; display: inline-flex; align-items: center; gap: 8px;
+        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.25); }
+        .btn-secondary {
+            background: rgba(255,255,255,0.15); color: white; padding: 16px 36px;
+            border-radius: 10px; font-weight: 700; font-size: 1rem;
+            text-decoration: none; border: 1px solid rgba(255,255,255,0.3);
+            transition: all 0.3s; display: inline-flex; align-items: center; gap: 8px;
+        }
+        .btn-secondary:hover { background: rgba(255,255,255,0.25); transform: translateY(-2px); }
+
+        /* Hero Stats */
+        .hero-stats {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+            max-width: 900px; margin: 0 auto; position: relative;
+        }
+        .hero-stat {
+            background: rgba(255,255,255,0.1); backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.15); border-radius: 14px; padding: 20px;
+        }
+        .hero-stat .value { font-size: 1.6rem; font-weight: 900; margin-bottom: 4px; }
+        .hero-stat .label { font-size: 0.8rem; opacity: 0.8; }
+
+        /* Sections */
+        .section { padding: 100px 24px; max-width: 1200px; margin: 0 auto; }
+        .section-header { text-align: center; max-width: 700px; margin: 0 auto 60px; }
+        .section-header .overline {
+            display: inline-block; font-size: 0.8rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 2px; color: var(--primary-purple); margin-bottom: 16px;
+        }
+        .section-header h2 { font-size: 2.5rem; font-weight: 900; margin-bottom: 16px; line-height: 1.15; }
+        .section-header p { font-size: 1.1rem; color: var(--text-secondary); line-height: 1.7; }
+
+        /* Two-Sided Value Cards */
+        .value-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; max-width: 1000px; margin: 0 auto; }
+        .value-card {
+            background: var(--card-bg); border: 1px solid var(--border-color);
+            border-radius: 20px; padding: 40px; transition: transform 0.3s, border-color 0.3s;
+        }
+        .value-card:hover { transform: translateY(-4px); border-color: var(--primary-purple); }
+        .value-card-icon { font-size: 2.5rem; margin-bottom: 20px; }
+        .value-card h3 { font-size: 1.4rem; font-weight: 700; margin-bottom: 12px; }
+        .value-card p { color: var(--text-secondary); margin-bottom: 20px; line-height: 1.6; }
+        .value-card ul { list-style: none; }
+        .value-card li { padding: 8px 0; padding-left: 28px; position: relative; color: rgba(255,255,255,0.85); font-size: 0.95rem; }
+        .value-card li::before { content: "\f00c"; font-family: "Font Awesome 6 Free"; font-weight: 900; position: absolute; left: 0; color: var(--accent-green); font-size: 0.85rem; }
+        .value-card .card-link { display: inline-block; margin-top: 20px; color: var(--primary-purple); font-weight: 600; text-decoration: none; font-size: 0.95rem; }
+        .value-card .card-link:hover { text-decoration: underline; }
+
+        /* Problem Stats */
+        .problem-section { background: var(--card-bg); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); padding: 100px 24px; }
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; max-width: 1000px; margin: 0 auto; }
+        .stat-card { text-align: center; padding: 24px; }
+        .stat-card .number { font-size: 2.5rem; font-weight: 900; color: var(--primary-purple); margin-bottom: 8px; }
+        .stat-card .label { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.5; }
+
+        /* How It Works */
+        .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; max-width: 1000px; margin: 0 auto; }
+        .step { text-align: center; }
+        .step-number {
+            width: 56px; height: 56px; background: linear-gradient(135deg, var(--primary-purple), var(--primary-violet));
+            color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.4rem; font-weight: 900; margin: 0 auto 20px;
+        }
+        .step h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 10px; }
+        .step p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; }
+
+        /* AI Matching Grid */
+        .matching-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1000px; margin: 0 auto; }
+        .match-card {
+            background: var(--card-bg); border: 1px solid var(--border-color);
+            border-radius: 16px; padding: 32px; text-align: center;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+        .match-card:hover { transform: translateY(-3px); border-color: var(--primary-purple); }
+        .match-icon { font-size: 2rem; margin-bottom: 16px; width: 56px; height: 56px; background: linear-gradient(135deg, rgba(102,126,234,0.15), rgba(118,75,162,0.15)); border-radius: 14px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; color: var(--primary-purple); }
+        .match-card h4 { font-size: 1.05rem; font-weight: 700; margin-bottom: 8px; }
+        .match-card p { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; }
+
+        /* Pricing Preview */
+        .pricing-section { background: var(--card-bg); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); padding: 100px 24px; }
+        .pricing-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1000px; margin: 0 auto; }
+        .pricing-card {
+            background: rgba(255,255,255,0.03); border: 1px solid var(--border-color);
+            border-radius: 20px; padding: 40px 32px; text-align: center;
+            transition: transform 0.3s, border-color 0.3s; position: relative;
+        }
+        .pricing-card:hover { transform: translateY(-4px); border-color: var(--primary-purple); }
+        .pricing-card.popular { border-color: var(--primary-purple); box-shadow: 0 0 30px rgba(102,126,234,0.15); }
+        .popular-badge {
+            position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+            background: linear-gradient(135deg, var(--primary-purple), var(--primary-violet));
+            color: white; padding: 6px 20px; border-radius: 20px;
+            font-size: 0.7rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+        }
+        .pricing-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 16px; letter-spacing: 1px; text-transform: uppercase; color: var(--text-secondary); }
+        .pricing-card .price { font-size: 3rem; font-weight: 900; margin-bottom: 4px; }
+        .pricing-card .period { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 24px; }
+        .pricing-card ul { list-style: none; text-align: left; margin-bottom: 32px; }
+        .pricing-card li { padding: 10px 0; padding-left: 28px; position: relative; font-size: 0.9rem; color: rgba(255,255,255,0.85); }
+        .pricing-card li::before { content: "\f00c"; font-family: "Font Awesome 6 Free"; font-weight: 900; position: absolute; left: 0; color: var(--accent-green); font-size: 0.8rem; }
+        .pricing-card .card-btn {
+            display: block; width: 100%; padding: 14px; border-radius: 10px;
+            text-decoration: none; font-weight: 700; font-size: 0.95rem; transition: all 0.3s;
+            background: linear-gradient(135deg, var(--primary-purple), var(--primary-violet));
+            color: white; border: none; cursor: pointer;
+        }
+        .pricing-card .card-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(102,126,234,0.4); }
+
+        /* Founder */
+        .founder-section { padding: 100px 24px; }
+        .founder-content { max-width: 900px; margin: 0 auto; display: flex; gap: 48px; align-items: center; }
+        .founder-avatar {
+            flex: 0 0 180px; width: 180px; height: 180px; border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-purple), var(--primary-violet));
+            display: flex; align-items: center; justify-content: center; font-size: 72px;
+        }
+        .founder-text { flex: 1; }
+        .founder-text h2 { font-size: 2rem; font-weight: 900; margin-bottom: 8px; }
+        .founder-text .credentials { color: var(--primary-purple); font-weight: 600; font-size: 0.9rem; margin-bottom: 20px; }
+        .founder-text p { color: var(--text-secondary); line-height: 1.7; margin-bottom: 16px; font-size: 0.95rem; }
+        .founder-text a { color: white; }
+
+        /* Compliance */
+        .compliance-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1000px; margin: 0 auto; }
+        .compliance-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 16px; padding: 32px; }
+        .compliance-card .check { color: var(--accent-green); font-size: 1.5rem; margin-bottom: 12px; }
+        .compliance-card h4 { font-size: 1.05rem; font-weight: 700; margin-bottom: 8px; }
+        .compliance-card p { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 100px 24px; text-align: center;
+            background: linear-gradient(135deg, var(--primary-purple) 0%, var(--primary-violet) 50%, #1e3a5f 100%);
+            position: relative; overflow: hidden;
+        }
+        .cta-section::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(ellipse at 70% 80%, rgba(255,255,255,0.08) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        .cta-section h2 { font-size: 2.5rem; font-weight: 900; margin-bottom: 16px; max-width: 700px; margin-left: auto; margin-right: auto; position: relative; }
+        .cta-section p { font-size: 1.1rem; opacity: 0.9; max-width: 600px; margin: 0 auto 40px; line-height: 1.7; position: relative; }
+        .cta-buttons { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; position: relative; }
+
+        /* Footer */
+        .footer { background: #111; padding: 60px 24px; border-top: 1px solid var(--border-color); }
+        .footer-inner { max-width: 1100px; margin: 0 auto; }
+        .footer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; margin-bottom: 40px; }
+        .footer-grid h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 16px; }
+        .footer-grid ul { list-style: none; }
+        .footer-grid li { margin-bottom: 10px; }
+        .footer-grid a { color: var(--text-secondary); text-decoration: none; font-size: 0.85rem; transition: color 0.3s; }
+        .footer-grid a:hover { color: white; }
+        .footer-bottom { border-top: 1px solid var(--border-color); padding-top: 24px; text-align: center; }
+        .footer-logo { display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 1.5rem; font-weight: 700; margin-bottom: 12px; }
+        .footer-logo .maple { color: var(--primary-purple); }
+        .footer-tagline { color: var(--text-secondary); margin-bottom: 16px; font-size: 0.9rem; }
+        .footer-copy { color: #666; font-size: 0.8rem; }
+
+        /* Mobile */
+        @media (max-width: 900px) {
+            .hero h1 { font-size: 2.5rem; }
+            .hero-stats { grid-template-columns: repeat(2, 1fr); }
+            .value-grid { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .matching-grid { grid-template-columns: 1fr 1fr; }
+            .pricing-cards { grid-template-columns: 1fr; max-width: 400px; }
+            .compliance-grid { grid-template-columns: 1fr; }
+            .founder-content { flex-direction: column; text-align: center; }
+            .footer-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero { padding: 120px 20px 80px; }
+            .hero h1 { font-size: 2rem; }
+            .hero p { font-size: 1.05rem; }
+            .hero-stats { grid-template-columns: 1fr 1fr; }
+            .section { padding: 60px 16px; }
+            .section-header h2 { font-size: 2rem; }
+            .steps { grid-template-columns: 1fr; gap: 32px; }
+            .matching-grid { grid-template-columns: 1fr; }
+            .cta-section h2 { font-size: 2rem; }
+            .cta-buttons { flex-direction: column; align-items: center; }
+            .footer-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="/" class="nav-logo"><i class="fas fa-maple-leaf maple"></i> CanadaInvesting<span style="color: var(--primary-purple)">.app</span></a>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="pricing.html">Pricing</a>
+                <a href="why-we-win.html">Why We Win</a>
+                <a href="contact.html">Contact</a>
+                <a href="join-as-advisor.html" class="nav-cta">Apply to Join</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-badge"><i class="fas fa-chart-line"></i> Canada's First AI-Powered Advisor Marketplace</div>
+        <h1>Find the Right Investment Advisor. Instantly.</h1>
+        <p>AI-powered matching connects Canadians with CIRO-registered investment advisors, portfolio managers, and financial planners who fit their exact needs.</p>
+        <div class="hero-ctas">
+            <a href="join-as-advisor.html" class="btn-primary"><i class="fas fa-arrow-right"></i> Join as Advisor</a>
+            <a href="find-advisor.html" class="btn-secondary"><i class="fas fa-search"></i> Find an Advisor</a>
+        </div>
+        <div class="hero-stats">
+            <div class="hero-stat">
+                <div class="value">6-Factor</div>
+                <div class="label">AI Matching Algorithm</div>
+            </div>
+            <div class="hero-stat">
+                <div class="value">CIRO</div>
+                <div class="label">Registered & Verified</div>
+            </div>
+            <div class="hero-stat">
+                <div class="value">0%</div>
+                <div class="label">Commission on AUM</div>
+            </div>
+            <div class="hero-stat">
+                <div class="value">24hr</div>
+                <div class="label">Average Match Time</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Two-Sided Value Proposition -->
+    <section class="section">
+        <div class="section-header">
+            <div class="overline">Two-Sided Marketplace</div>
+            <h2>Built for Advisors and Clients</h2>
+            <p>Whether you manage portfolios or need someone to manage yours, CanadaInvesting connects the right people.</p>
+        </div>
+        <div class="value-grid">
+            <div class="value-card">
+                <div class="value-card-icon"><i class="fas fa-chart-pie" style="color: var(--primary-purple); font-size: 2rem;"></i></div>
+                <h3>For Investment Advisors</h3>
+                <p>Grow your book of business with pre-qualified clients who match your expertise and service model.</p>
+                <ul>
+                    <li>AI matches you with ideal clients</li>
+                    <li>CIRO compliance built into every listing</li>
+                    <li>Transparent, flat-fee pricing</li>
+                    <li>Control your profile, fees, and minimums</li>
+                    <li>CFA, CFP, CIM designations highlighted</li>
+                </ul>
+                <a href="join-as-advisor.html" class="card-link">Apply to Join <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="value-card">
+                <div class="value-card-icon"><i class="fas fa-user-tie" style="color: var(--primary-purple); font-size: 2rem;"></i></div>
+                <h3>For Investors & Clients</h3>
+                <p>Stop guessing. Get matched with a qualified advisor who specializes in exactly what you need.</p>
+                <ul>
+                    <li>AI analyzes your goals, risk tolerance, and timeline</li>
+                    <li>Only CIRO-registered, active professionals</li>
+                    <li>Wealth management to retirement planning</li>
+                    <li>Fee-only, commission, or hybrid — your choice</li>
+                    <li>Free for clients — always</li>
+                </ul>
+                <a href="find-advisor.html" class="card-link">Find an Advisor <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Problem -->
+    <div class="problem-section">
+        <div class="section-header" style="padding-top: 0;">
+            <div class="overline">The Problem We Solve</div>
+            <h2>Finding the Right Advisor Shouldn't Be This Hard</h2>
+            <p>Canadians face real friction when searching for qualified investment advice. Bank referrals, online noise, and opaque fee structures make it worse.</p>
+        </div>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="number">56%</div>
+                <div class="label">of Canadians don't know how their advisor is compensated</div>
+            </div>
+            <div class="stat-card">
+                <div class="number">$47K</div>
+                <div class="label">Average annual cost of poor investment advice</div>
+            </div>
+            <div class="stat-card">
+                <div class="number">71%</div>
+                <div class="label">want independent advice but don't know where to find it</div>
+            </div>
+            <div class="stat-card">
+                <div class="number">8 mo</div>
+                <div class="label">Average time to find a trusted advisor through referrals</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- How It Works -->
+    <section class="section">
+        <div class="section-header">
+            <div class="overline">How It Works</div>
+            <h2>Three Steps to Your Perfect Match</h2>
+            <p>Our AI does the hard work. You make the final call.</p>
+        </div>
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Advisors Join & Get Verified</h3>
+                <p>We verify CIRO registration, designations (CFA, CFP, CIM), specializations, and capacity. Choose your visibility tier.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>Clients Submit Their Profile</h3>
+                <p>Answer 8 questions about your investment goals, risk tolerance, portfolio size, timeline, and preferences. Takes 3 minutes.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>AI Creates Perfect Matches</h3>
+                <p>Our algorithm evaluates all factors and presents the top 3-5 advisors who perfectly align with your needs. Connect directly.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Matching Factors -->
+    <section class="section" style="padding-top: 0;">
+        <div class="section-header">
+            <div class="overline">AI-Powered Matching</div>
+            <h2>6 Factors. One Perfect Match.</h2>
+            <p>Our proprietary algorithm evaluates six critical dimensions to ensure every advisor-client connection is right.</p>
+        </div>
+        <div class="matching-grid">
+            <div class="match-card">
+                <div class="match-icon"><i class="fas fa-bullseye"></i></div>
+                <h4>Investment Specialization</h4>
+                <p>Wealth management, retirement, tax-efficient investing, ESG, corporate pensions — matched to your specific need.</p>
+            </div>
+            <div class="match-card">
+                <div class="match-icon"><i class="fas fa-coins"></i></div>
+                <h4>Portfolio Size Fit</h4>
+                <p>Ensures your advisor works with clients at your asset level — from $50K to $50M+.</p>
+            </div>
+            <div class="match-card">
+                <div class="match-icon"><i class="fas fa-shield-halved"></i></div>
+                <h4>Regulatory Verification</h4>
+                <p>CIRO registration, provincial licensing, and designation credentials verified before listing.</p>
+            </div>
+            <div class="match-card">
+                <div class="match-icon"><i class="fas fa-hand-holding-dollar"></i></div>
+                <h4>Fee Structure Alignment</h4>
+                <p>Fee-only, commission-based, or hybrid — matched to your compensation preference.</p>
+            </div>
+            <div class="match-card">
+                <div class="match-icon"><i class="fas fa-map-marker-alt"></i></div>
+                <h4>Geographic Proximity</h4>
+                <p>Local advisors when you want face-to-face, or virtual-first advisors for remote access.</p>
+            </div>
+            <div class="match-card">
+                <div class="match-icon"><i class="fas fa-calendar-check"></i></div>
+                <h4>Availability & Capacity</h4>
+                <p>Only shows advisors actively accepting new clients with bandwidth to serve you well.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Preview -->
+    <div class="pricing-section">
+        <div class="section-header" style="padding-top: 0;">
+            <div class="overline">Transparent Pricing</div>
+            <h2>Flat Monthly Fee. No AUM Commission.</h2>
+            <p>Higher tiers earn higher search visibility. Your investment directly impacts how many clients find you.</p>
+        </div>
+        <div class="pricing-cards">
+            <div class="pricing-card">
+                <h3>Associate</h3>
+                <div class="price">$199</div>
+                <div class="period">per month</div>
+                <ul>
+                    <li>Up to 3 active client matches</li>
+                    <li>Standard search ranking</li>
+                    <li>Basic profile listing</li>
+                    <li>Email support</li>
+                    <li>Monthly performance reports</li>
+                </ul>
+                <a href="join-as-advisor.html" class="card-btn">Get Started</a>
+            </div>
+            <div class="pricing-card popular">
+                <div class="popular-badge">Most Popular</div>
+                <h3>Professional</h3>
+                <div class="price">$299</div>
+                <div class="period">per month</div>
+                <ul>
+                    <li>Up to 7 active client matches</li>
+                    <li>Enhanced search ranking</li>
+                    <li>Featured profile with specializations</li>
+                    <li>Priority support</li>
+                    <li>Advanced dashboard analytics</li>
+                </ul>
+                <a href="join-as-advisor.html" class="card-btn">Get Started</a>
+            </div>
+            <div class="pricing-card">
+                <h3>Enterprise</h3>
+                <div class="price">$599</div>
+                <div class="period">per month</div>
+                <ul>
+                    <li>Up to 15 active client matches</li>
+                    <li>Premium search ranking (top results)</li>
+                    <li>Showcase profile with case studies</li>
+                    <li>Dedicated account manager</li>
+                    <li>White-glove onboarding</li>
+                </ul>
+                <a href="join-as-advisor.html" class="card-btn">Get Started</a>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 40px;">
+            <a href="pricing.html" class="btn-secondary" style="border-color: var(--border-color);">View Full Pricing & Algorithm Details <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </div>
+
+    <!-- Compliance -->
+    <section class="section">
+        <div class="section-header">
+            <div class="overline">Compliance & Trust</div>
+            <h2>Built on Regulatory Integrity</h2>
+            <p>We respect every CSA and CIRO rule. Advisors maintain full independence. We're a technology platform, not a dealer.</p>
+        </div>
+        <div class="compliance-grid">
+            <div class="compliance-card">
+                <div class="check"><i class="fas fa-check-circle"></i></div>
+                <h4>CIRO Verification</h4>
+                <p>Every advisor is cross-referenced against CIRO's public registry before appearing on the platform.</p>
+            </div>
+            <div class="compliance-card">
+                <div class="check"><i class="fas fa-check-circle"></i></div>
+                <h4>No AUM Commission</h4>
+                <p>Flat subscription fee. We never take a cut of your assets under management or client revenue.</p>
+            </div>
+            <div class="compliance-card">
+                <div class="check"><i class="fas fa-check-circle"></i></div>
+                <h4>PIPEDA Compliant</h4>
+                <p>All client data encrypted, minimal collection, clear privacy policies, Canadian-hosted infrastructure.</p>
+            </div>
+            <div class="compliance-card">
+                <div class="check"><i class="fas fa-check-circle"></i></div>
+                <h4>Professional Autonomy</h4>
+                <p>Advisors control their profiles, fee disclosures, and client acceptance. Zero interference.</p>
+            </div>
+            <div class="compliance-card">
+                <div class="check"><i class="fas fa-check-circle"></i></div>
+                <h4>Designation Verified</h4>
+                <p>CFA, CFP, CIM, FCSI, PFP designations independently verified with issuing bodies.</p>
+            </div>
+            <div class="compliance-card">
+                <div class="check"><i class="fas fa-check-circle"></i></div>
+                <h4>Technology Platform Only</h4>
+                <p>We facilitate connections. We don't provide investment advice, manage assets, or act as a dealer.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Founder -->
+    <section class="founder-section">
+        <div class="founder-content">
+            <div class="founder-avatar">&#128104;&#8205;&#128188;</div>
+            <div class="founder-text">
+                <h2>Built by Someone Who Gets It</h2>
+                <div class="credentials">Arthur Kostaras | Corporate Finance Specialist | 15+ Years International Experience</div>
+                <p>I've spent over a decade as a CFO across Canada, the US, Europe, and the Middle East. I've managed investment portfolios, worked with wealth advisors, and seen the broken referral process firsthand.</p>
+                <p>Finding a qualified, independent investment advisor in Canada shouldn't require months of networking and guesswork. This platform fixes that with AI-powered matching, regulatory verification, and complete transparency.</p>
+                <p><strong>Direct line:</strong> <a href="tel:+16479567290">1.647.956.7290</a> | <a href="mailto:arthur@negotiateandwin.com">arthur@negotiateandwin.com</a></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <h2>Ready to Transform How You Connect?</h2>
+        <p>Join Canada's most advanced investment advisor marketplace. Whether you're an advisor seeking clients or a client seeking advice.</p>
+        <div class="cta-buttons">
+            <a href="join-as-advisor.html" class="btn-primary"><i class="fas fa-arrow-right"></i> Apply to Join as Advisor</a>
+            <a href="find-advisor.html" class="btn-secondary"><i class="fas fa-search"></i> Find an Advisor</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-grid">
+                <div>
+                    <h4>For Advisors</h4>
+                    <ul>
+                        <li><a href="join-as-advisor.html">Apply to Join</a></li>
+                        <li><a href="pricing.html">Pricing & Algorithm</a></li>
+                        <li><a href="advisor-revenue-calculator.html">Revenue Calculator</a></li>
+                        <li><a href="why-we-win.html">Why We Win</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>For Clients</h4>
+                    <ul>
+                        <li><a href="find-advisor.html">Find an Advisor</a></li>
+                        <li><a href="guarantee.html">Our Guarantee</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="terms-of-service.html">Terms of Service</a></li>
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="trust-center.html">Trust Center</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="mailto:arthur@negotiateandwin.com">arthur@negotiateandwin.com</a></li>
+                        <li><a href="tel:+16479567290">1.647.956.7290</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-logo">
+                    <i class="fas fa-maple-leaf maple"></i> CanadaInvesting<span style="color: var(--primary-purple)">.app</span>
+                </div>
+                <p class="footer-tagline">AI-powered investment advisor marketplace built for Canadian financial professionals.</p>
+                <p class="footer-copy">&copy; 2026 CanadaInvesting.app | Technology platform only. Not a registered dealer or investment advisor. Advisors maintain full professional independence.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

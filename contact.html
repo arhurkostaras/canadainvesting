@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="description" content="Contact CanadaInvesting.app - Get in touch with Canada's AI-powered investment advisor marketplace. Reach us by phone, email, or contact form.">
+    <meta name="keywords" content="contact CanadaInvesting, investment advisor marketplace contact, Canadian financial advisor support">
+
+    <title>Contact Us - CanadaInvesting.app | AI-Powered Investment Advisor Marketplace</title>
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://canadainvesting.app/contact.html">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://canadainvesting.app/contact.html">
+    <meta property="og:title" content="Contact Us - CanadaInvesting.app">
+    <meta property="og:description" content="Get in touch with Canada's AI-powered investment advisor marketplace. We're here to help advisors and clients.">
+    <meta property="og:image" content="https://canadainvesting.app/icon-512.png">
+    <meta property="og:site_name" content="CanadaInvesting">
+    <meta property="og:locale" content="en_CA">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <meta name="theme-color" content="#667eea">
+
+    <!-- Google Analytics 4 - placeholder until configured -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script> -->
+
+    <style>
+        :root {
+            --primary-purple: #667eea;
+            --primary-violet: #764ba2;
+            --primary-emerald: #059669;
+            --accent-green: #059669;
+            --dark-bg: #0a0a0a;
+            --card-bg: #1a1a1a;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --border-color: #333333;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Navigation */
+        .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(0,0,0,0.4); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; height: 64px; }
+        .nav-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; color: white; font-weight: 700; font-size: 1.25rem; }
+        .nav-logo .maple { color: var(--primary-purple); font-size: 1.5rem; }
+        .nav-links { display: flex; align-items: center; gap: 24px; list-style: none; }
+        .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.3s; }
+        .nav-links a:hover { color: white; }
+        .nav-cta { background: white !important; color: var(--primary-purple) !important; padding: 10px 24px; border-radius: 8px; font-weight: 700 !important; transition: transform 0.3s, box-shadow 0.3s; }
+        .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 4px 15px rgba(102,126,234,0.3); }
+
+        /* Hero */
+        .hero {
+            padding: 140px 24px 80px;
+            background: linear-gradient(135deg, var(--primary-purple) 0%, var(--primary-violet) 50%, #1e3a5f 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(ellipse at 30% 20%, rgba(255,255,255,0.1) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        .hero h1 {
+            font-size: 3.5rem; font-weight: 900; line-height: 1.1; margin-bottom: 24px;
+            max-width: 900px; margin-left: auto; margin-right: auto;
+            position: relative;
+        }
+        .hero p {
+            font-size: 1.25rem; max-width: 700px; margin: 0 auto; opacity: 0.9; line-height: 1.7;
+            position: relative;
+        }
+
+        /* Sections */
+        .section { padding: 100px 24px; max-width: 1200px; margin: 0 auto; }
+        .section-header { text-align: center; max-width: 700px; margin: 0 auto 60px; }
+        .section-header .overline {
+            display: inline-block; font-size: 0.8rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 2px; color: var(--primary-purple); margin-bottom: 16px;
+        }
+        .section-header h2 { font-size: 2.5rem; font-weight: 900; margin-bottom: 16px; line-height: 1.15; }
+        .section-header p { font-size: 1.1rem; color: var(--text-secondary); line-height: 1.7; }
+
+        /* Contact Layout */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 48px;
+            max-width: 1000px;
+            margin: 0 auto;
+            align-items: start;
+        }
+
+        /* Contact Form */
+        .contact-form-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 40px;
+        }
+        .contact-form-card h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .contact-form-card .form-subtitle {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 32px;
+            line-height: 1.6;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: rgba(255,255,255,0.9);
+        }
+        .form-group label .required {
+            color: #ef4444;
+            margin-left: 2px;
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px 16px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-family: 'Roboto', sans-serif;
+            font-size: 0.95rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            outline: none;
+        }
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: #666;
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--primary-purple);
+            box-shadow: 0 0 0 3px rgba(102,126,234,0.15);
+        }
+        .form-group select {
+            appearance: none;
+            -webkit-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23a0a0a0' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            padding-right: 40px;
+            cursor: pointer;
+        }
+        .form-group select option {
+            background: var(--card-bg);
+            color: var(--text-primary);
+        }
+        .form-group textarea {
+            resize: vertical;
+            min-height: 140px;
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        .form-submit {
+            display: block;
+            width: 100%;
+            padding: 16px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1rem;
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, var(--primary-purple), var(--primary-violet));
+            color: white;
+            transition: all 0.3s;
+            margin-top: 8px;
+        }
+        .form-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102,126,234,0.4);
+        }
+
+        /* Contact Sidebar */
+        .contact-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+        .sidebar-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 32px;
+        }
+        .sidebar-card h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        .contact-item:last-child {
+            margin-bottom: 0;
+        }
+        .contact-item-icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, rgba(102,126,234,0.15), rgba(118,75,162,0.15));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-purple);
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+        .contact-item-text {
+            flex: 1;
+        }
+        .contact-item-text .label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        .contact-item-text a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+        .contact-item-text a:hover {
+            color: var(--primary-purple);
+        }
+        .contact-item-text p {
+            color: var(--text-primary);
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        /* Hours Card */
+        .hours-list {
+            list-style: none;
+        }
+        .hours-list li {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            font-size: 0.9rem;
+        }
+        .hours-list li:last-child {
+            border-bottom: none;
+        }
+        .hours-list .day {
+            color: rgba(255,255,255,0.85);
+            font-weight: 500;
+        }
+        .hours-list .time {
+            color: var(--text-secondary);
+        }
+        .hours-list .closed {
+            color: #ef4444;
+            font-weight: 500;
+        }
+
+        /* Response Time Badge */
+        .response-badge {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(5,150,105,0.1);
+            border: 1px solid rgba(5,150,105,0.2);
+            border-radius: 12px;
+            padding: 16px;
+            margin-top: 20px;
+        }
+        .response-badge i {
+            color: var(--accent-green);
+            font-size: 1.2rem;
+        }
+        .response-badge span {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.85);
+            line-height: 1.5;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 100px 24px; text-align: center;
+            background: linear-gradient(135deg, var(--primary-purple) 0%, var(--primary-violet) 50%, #1e3a5f 100%);
+            position: relative; overflow: hidden;
+        }
+        .cta-section::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(ellipse at 70% 80%, rgba(255,255,255,0.08) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        .cta-section h2 { font-size: 2.5rem; font-weight: 900; margin-bottom: 16px; max-width: 700px; margin-left: auto; margin-right: auto; position: relative; }
+        .cta-section p { font-size: 1.1rem; opacity: 0.9; max-width: 600px; margin: 0 auto 40px; line-height: 1.7; position: relative; }
+        .cta-buttons { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; position: relative; }
+        .btn-primary {
+            background: white; color: var(--primary-purple); padding: 16px 36px;
+            border-radius: 10px; font-weight: 700; font-size: 1rem;
+            text-decoration: none; transition: all 0.3s; display: inline-flex; align-items: center; gap: 8px;
+        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.25); }
+        .btn-secondary {
+            background: rgba(255,255,255,0.15); color: white; padding: 16px 36px;
+            border-radius: 10px; font-weight: 700; font-size: 1rem;
+            text-decoration: none; border: 1px solid rgba(255,255,255,0.3);
+            transition: all 0.3s; display: inline-flex; align-items: center; gap: 8px;
+        }
+        .btn-secondary:hover { background: rgba(255,255,255,0.25); transform: translateY(-2px); }
+
+        /* Footer */
+        .footer { background: #111; padding: 60px 24px; border-top: 1px solid var(--border-color); }
+        .footer-inner { max-width: 1100px; margin: 0 auto; }
+        .footer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; margin-bottom: 40px; }
+        .footer-grid h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 16px; }
+        .footer-grid ul { list-style: none; }
+        .footer-grid li { margin-bottom: 10px; }
+        .footer-grid a { color: var(--text-secondary); text-decoration: none; font-size: 0.85rem; transition: color 0.3s; }
+        .footer-grid a:hover { color: white; }
+        .footer-bottom { border-top: 1px solid var(--border-color); padding-top: 24px; text-align: center; }
+        .footer-logo { display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 1.5rem; font-weight: 700; margin-bottom: 12px; }
+        .footer-logo .maple { color: var(--primary-purple); }
+        .footer-tagline { color: var(--text-secondary); margin-bottom: 16px; font-size: 0.9rem; }
+        .footer-copy { color: #666; font-size: 0.8rem; }
+
+        /* Mobile */
+        @media (max-width: 900px) {
+            .hero h1 { font-size: 2.5rem; }
+            .contact-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero { padding: 120px 20px 60px; }
+            .hero h1 { font-size: 2rem; }
+            .hero p { font-size: 1.05rem; }
+            .section { padding: 60px 16px; }
+            .section-header h2 { font-size: 2rem; }
+            .form-row { grid-template-columns: 1fr; }
+            .cta-section h2 { font-size: 2rem; }
+            .cta-buttons { flex-direction: column; align-items: center; }
+            .footer-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="/" class="nav-logo"><i class="fas fa-maple-leaf maple"></i> CanadaInvesting<span style="color: var(--primary-purple)">.app</span></a>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="pricing.html">Pricing</a>
+                <a href="why-we-win.html">Why We Win</a>
+                <a href="contact.html">Contact</a>
+                <a href="join-as-advisor.html" class="nav-cta">Apply to Join</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <h1>Get in Touch</h1>
+        <p>Have a question about the platform, pricing, or partnership opportunities? We're here to help advisors and clients alike.</p>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section">
+        <div class="contact-grid">
+            <!-- Contact Form -->
+            <div class="contact-form-card">
+                <h3>Send Us a Message</h3>
+                <p class="form-subtitle">Fill out the form below and we'll get back to you within one business day.</p>
+                <form action="#" method="POST">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Full Name <span class="required">*</span></label>
+                            <input type="text" id="name" name="name" placeholder="Your full name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address <span class="required">*</span></label>
+                            <input type="email" id="email" name="email" placeholder="you@example.com" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" placeholder="(123) 456-7890">
+                        </div>
+                        <div class="form-group">
+                            <label for="type">I Am a... <span class="required">*</span></label>
+                            <select id="type" name="type" required>
+                                <option value="" disabled selected>Select one</option>
+                                <option value="advisor">Investment Advisor</option>
+                                <option value="client">Client / Investor</option>
+                                <option value="partnership">Partnership Inquiry</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message <span class="required">*</span></label>
+                        <textarea id="message" name="message" placeholder="Tell us how we can help..." required></textarea>
+                    </div>
+                    <button type="submit" class="form-submit"><i class="fas fa-paper-plane"></i> Send Message</button>
+                </form>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="contact-sidebar">
+                <!-- Contact Info -->
+                <div class="sidebar-card">
+                    <h4>Contact Information</h4>
+                    <div class="contact-item">
+                        <div class="contact-item-icon"><i class="fas fa-phone"></i></div>
+                        <div class="contact-item-text">
+                            <div class="label">Phone</div>
+                            <a href="tel:+16479567290">(647) 956-7290</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-item-icon"><i class="fas fa-envelope"></i></div>
+                        <div class="contact-item-text">
+                            <div class="label">Email</div>
+                            <a href="mailto:arthur@negotiateandwin.com">arthur@negotiateandwin.com</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div class="contact-item-text">
+                            <div class="label">Location</div>
+                            <p>Toronto, Ontario, Canada</p>
+                        </div>
+                    </div>
+                    <div class="response-badge">
+                        <i class="fas fa-bolt"></i>
+                        <span><strong>Typical response time:</strong> Under 24 hours on business days</span>
+                    </div>
+                </div>
+
+                <!-- Office Hours -->
+                <div class="sidebar-card">
+                    <h4>Office Hours</h4>
+                    <ul class="hours-list">
+                        <li>
+                            <span class="day">Monday</span>
+                            <span class="time">9:00 AM - 6:00 PM ET</span>
+                        </li>
+                        <li>
+                            <span class="day">Tuesday</span>
+                            <span class="time">9:00 AM - 6:00 PM ET</span>
+                        </li>
+                        <li>
+                            <span class="day">Wednesday</span>
+                            <span class="time">9:00 AM - 6:00 PM ET</span>
+                        </li>
+                        <li>
+                            <span class="day">Thursday</span>
+                            <span class="time">9:00 AM - 6:00 PM ET</span>
+                        </li>
+                        <li>
+                            <span class="day">Friday</span>
+                            <span class="time">9:00 AM - 6:00 PM ET</span>
+                        </li>
+                        <li>
+                            <span class="day">Saturday</span>
+                            <span class="closed">Closed</span>
+                        </li>
+                        <li>
+                            <span class="day">Sunday</span>
+                            <span class="closed">Closed</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Founder Direct -->
+                <div class="sidebar-card" style="border-color: var(--primary-purple); background: rgba(102,126,234,0.05);">
+                    <h4><i class="fas fa-user-tie" style="color: var(--primary-purple); margin-right: 8px;"></i> Speak Directly with the Founder</h4>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6; margin-bottom: 16px;">Arthur Kostaras personally handles partnership inquiries and high-value advisor onboarding. Don't hesitate to reach out directly.</p>
+                    <a href="tel:+16479567290" style="display: inline-flex; align-items: center; gap: 8px; color: var(--primary-purple); font-weight: 600; text-decoration: none; font-size: 0.9rem;">
+                        <i class="fas fa-phone"></i> Call Arthur Directly
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <h2>Ready to Join the Marketplace?</h2>
+        <p>Whether you're an advisor looking to grow your book or a client searching for the right match, we're here to help.</p>
+        <div class="cta-buttons">
+            <a href="join-as-advisor.html" class="btn-primary"><i class="fas fa-arrow-right"></i> Apply to Join as Advisor</a>
+            <a href="find-advisor.html" class="btn-secondary"><i class="fas fa-search"></i> Find an Advisor</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-grid">
+                <div>
+                    <h4>For Advisors</h4>
+                    <ul>
+                        <li><a href="join-as-advisor.html">Apply to Join</a></li>
+                        <li><a href="pricing.html">Pricing & Algorithm</a></li>
+                        <li><a href="advisor-revenue-calculator.html">Revenue Calculator</a></li>
+                        <li><a href="why-we-win.html">Why We Win</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>For Clients</h4>
+                    <ul>
+                        <li><a href="find-advisor.html">Find an Advisor</a></li>
+                        <li><a href="guarantee.html">Our Guarantee</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="terms-of-service.html">Terms of Service</a></li>
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="trust-center.html">Trust Center</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="mailto:arthur@negotiateandwin.com">arthur@negotiateandwin.com</a></li>
+                        <li><a href="tel:+16479567290">1.647.956.7290</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-logo">
+                    <i class="fas fa-maple-leaf maple"></i> CanadaInvesting<span style="color: var(--primary-purple)">.app</span>
+                </div>
+                <p class="footer-tagline">AI-powered investment advisor marketplace built for Canadian financial professionals.</p>
+                <p class="footer-copy">&copy; 2026 CanadaInvesting.app | Technology platform only. Not a registered dealer or investment advisor. Advisors maintain full professional independence.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="description" content="CanadaInvesting.app Trust Center - Security, privacy, and regulatory compliance measures protecting advisors and clients on Canada's AI-powered investment advisor marketplace.">
+    <meta name="keywords" content="trust center, security, privacy, PIPEDA, CIRO compliance, data protection, investment advisor marketplace">
+
+    <title>Trust Center | CanadaInvesting.app - Security, Privacy & Compliance</title>
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://canadainvesting.app/trust-center.html">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://canadainvesting.app/trust-center.html">
+    <meta property="og:title" content="Trust Center | CanadaInvesting.app">
+    <meta property="og:description" content="Security, privacy, and regulatory compliance measures protecting advisors and clients on Canada's AI-powered investment advisor marketplace.">
+    <meta property="og:image" content="https://canadainvesting.app/icon-512.png">
+    <meta property="og:site_name" content="CanadaInvesting">
+    <meta property="og:locale" content="en_CA">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Trust Center | CanadaInvesting.app">
+    <meta name="twitter:description" content="Security, privacy, and regulatory compliance measures protecting advisors and clients on Canada's AI-powered investment advisor marketplace.">
+    <meta name="twitter:image" content="https://canadainvesting.app/icon-512.png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <meta name="theme-color" content="#667eea">
+
+    <!-- Google Analytics 4 - placeholder until configured -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script> -->
+
+    <style>
+        :root {
+            --primary-purple: #667eea;
+            --primary-violet: #764ba2;
+            --primary-emerald: #059669;
+            --accent-green: #059669;
+            --dark-bg: #0a0a0a;
+            --card-bg: #1a1a1a;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --border-color: #333333;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Navigation */
+        .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(0,0,0,0.4); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; height: 64px; }
+        .nav-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; color: white; font-weight: 700; font-size: 1.25rem; }
+        .nav-logo .maple { color: var(--primary-purple); font-size: 1.5rem; }
+        .nav-links { display: flex; align-items: center; gap: 24px; list-style: none; }
+        .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.3s; }
+        .nav-links a:hover { color: white; }
+        .nav-cta { background: white !important; color: var(--primary-purple) !important; padding: 10px 24px; border-radius: 8px; font-weight: 700 !important; transition: transform 0.3s, box-shadow 0.3s; }
+        .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 4px 15px rgba(102,126,234,0.3); }
+
+        /* Hero */
+        .hero {
+            padding: 140px 24px 80px;
+            background: linear-gradient(135deg, var(--primary-purple) 0%, var(--primary-violet) 50%, #1e3a5f 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(ellipse at 30% 20%, rgba(255,255,255,0.1) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: rgba(255,255,255,0.15); backdrop-filter: blur(10px);
+            padding: 10px 22px; border-radius: 50px; font-size: 0.85rem; font-weight: 500;
+            margin-bottom: 28px; border: 1px solid rgba(255,255,255,0.2);
+            position: relative;
+        }
+        .hero h1 {
+            font-size: 3.2rem; font-weight: 900; line-height: 1.1; margin-bottom: 24px;
+            max-width: 900px; margin-left: auto; margin-right: auto;
+            position: relative;
+        }
+        .hero p {
+            font-size: 1.2rem; max-width: 700px; margin: 0 auto; opacity: 0.9; line-height: 1.7;
+            position: relative;
+        }
+
+        /* Sections */
+        .section { padding: 100px 24px; max-width: 1200px; margin: 0 auto; }
+        .section-header { text-align: center; max-width: 700px; margin: 0 auto 60px; }
+        .section-header .overline {
+            display: inline-block; font-size: 0.8rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 2px; color: var(--primary-purple); margin-bottom: 16px;
+        }
+        .section-header h2 { font-size: 2.5rem; font-weight: 900; margin-bottom: 16px; line-height: 1.15; }
+        .section-header p { font-size: 1.1rem; color: var(--text-secondary); line-height: 1.7; }
+
+        /* Trust Status Banner */
+        .trust-status {
+            max-width: 1000px; margin: -40px auto 0; position: relative; z-index: 10;
+            padding: 0 24px;
+        }
+        .trust-status-inner {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+            background: var(--border-color); border-radius: 16px; overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+        .trust-status-item {
+            background: var(--card-bg); padding: 28px 20px; text-align: center;
+        }
+        .trust-status-item .status-icon {
+            font-size: 1.5rem; margin-bottom: 10px; color: var(--accent-green);
+        }
+        .trust-status-item .status-label {
+            font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+            color: var(--text-secondary); margin-bottom: 4px;
+        }
+        .trust-status-item .status-value {
+            font-size: 0.95rem; font-weight: 700; color: var(--accent-green);
+        }
+
+        /* Trust Cards Grid */
+        .trust-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; max-width: 1000px; margin: 0 auto; }
+        .trust-card {
+            background: var(--card-bg); border: 1px solid var(--border-color);
+            border-radius: 20px; padding: 40px; transition: transform 0.3s, border-color 0.3s;
+        }
+        .trust-card:hover { transform: translateY(-4px); border-color: var(--primary-purple); }
+        .trust-card-icon {
+            width: 56px; height: 56px;
+            background: linear-gradient(135deg, rgba(102,126,234,0.15), rgba(118,75,162,0.15));
+            border-radius: 14px; display: flex; align-items: center; justify-content: center;
+            margin-bottom: 20px; font-size: 1.5rem; color: var(--primary-purple);
+        }
+        .trust-card h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 12px; }
+        .trust-card p { color: var(--text-secondary); line-height: 1.7; font-size: 0.95rem; margin-bottom: 16px; }
+        .trust-card ul { list-style: none; }
+        .trust-card li { padding: 8px 0; padding-left: 28px; position: relative; color: rgba(255,255,255,0.85); font-size: 0.9rem; }
+        .trust-card li::before { content: "\f00c"; font-family: "Font Awesome 6 Free"; font-weight: 900; position: absolute; left: 0; color: var(--accent-green); font-size: 0.8rem; }
+
+        /* Full Width Trust Card */
+        .trust-card.full-width { grid-column: 1 / -1; }
+
+        /* Alternating Section Background */
+        .section-alt {
+            background: var(--card-bg); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);
+            padding: 100px 24px;
+        }
+        .section-alt .section-inner { max-width: 1200px; margin: 0 auto; }
+
+        /* Regulatory Compliance Grid */
+        .compliance-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1000px; margin: 0 auto; }
+        .compliance-card {
+            background: rgba(255,255,255,0.03); border: 1px solid var(--border-color);
+            border-radius: 16px; padding: 32px; transition: transform 0.3s, border-color 0.3s;
+        }
+        .compliance-card:hover { transform: translateY(-3px); border-color: var(--primary-purple); }
+        .compliance-card .check { color: var(--accent-green); font-size: 1.5rem; margin-bottom: 12px; }
+        .compliance-card h4 { font-size: 1.05rem; font-weight: 700; margin-bottom: 8px; }
+        .compliance-card p { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; }
+
+        /* Data Retention Table */
+        .retention-table {
+            max-width: 800px; margin: 0 auto;
+            border: 1px solid var(--border-color); border-radius: 16px; overflow: hidden;
+        }
+        .retention-row {
+            display: grid; grid-template-columns: 1fr 1fr 1fr;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .retention-row:last-child { border-bottom: none; }
+        .retention-row.header {
+            background: rgba(102,126,234,0.1);
+        }
+        .retention-row.header .retention-cell {
+            font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;
+            color: var(--primary-purple);
+        }
+        .retention-cell {
+            padding: 18px 24px; font-size: 0.9rem; color: rgba(255,255,255,0.85);
+        }
+        .retention-cell:not(:last-child) { border-right: 1px solid var(--border-color); }
+
+        /* Technology Cards */
+        .tech-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1000px; margin: 0 auto; }
+        .tech-card {
+            background: var(--card-bg); border: 1px solid var(--border-color);
+            border-radius: 16px; padding: 32px; text-align: center;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+        .tech-card:hover { transform: translateY(-3px); border-color: var(--primary-purple); }
+        .tech-icon {
+            font-size: 2rem; margin-bottom: 16px; width: 56px; height: 56px;
+            background: linear-gradient(135deg, rgba(102,126,234,0.15), rgba(118,75,162,0.15));
+            border-radius: 14px; display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 16px; color: var(--primary-purple);
+        }
+        .tech-card h4 { font-size: 1.05rem; font-weight: 700; margin-bottom: 8px; }
+        .tech-card p { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; }
+
+        /* Contact Box */
+        .contact-box {
+            max-width: 700px; margin: 0 auto;
+            background: var(--card-bg); border: 1px solid var(--border-color);
+            border-radius: 20px; padding: 48px; text-align: center;
+        }
+        .contact-box h3 { font-size: 1.5rem; font-weight: 900; margin-bottom: 12px; }
+        .contact-box p { color: var(--text-secondary); line-height: 1.7; font-size: 0.95rem; margin-bottom: 24px; }
+        .contact-methods { display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; }
+        .contact-method {
+            display: flex; align-items: center; gap: 10px;
+            color: rgba(255,255,255,0.85); text-decoration: none; font-size: 0.95rem; font-weight: 500;
+            transition: color 0.3s;
+        }
+        .contact-method:hover { color: var(--primary-purple); }
+        .contact-method i { color: var(--primary-purple); font-size: 1.1rem; }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 100px 24px; text-align: center;
+            background: linear-gradient(135deg, var(--primary-purple) 0%, var(--primary-violet) 50%, #1e3a5f 100%);
+            position: relative; overflow: hidden;
+        }
+        .cta-section::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(ellipse at 70% 80%, rgba(255,255,255,0.08) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        .cta-section h2 { font-size: 2.5rem; font-weight: 900; margin-bottom: 16px; max-width: 700px; margin-left: auto; margin-right: auto; position: relative; }
+        .cta-section p { font-size: 1.1rem; opacity: 0.9; max-width: 600px; margin: 0 auto 40px; line-height: 1.7; position: relative; }
+        .cta-buttons { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; position: relative; }
+        .btn-primary {
+            background: white; color: var(--primary-purple); padding: 16px 36px;
+            border-radius: 10px; font-weight: 700; font-size: 1rem;
+            text-decoration: none; transition: all 0.3s; display: inline-flex; align-items: center; gap: 8px;
+        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.25); }
+        .btn-secondary {
+            background: rgba(255,255,255,0.15); color: white; padding: 16px 36px;
+            border-radius: 10px; font-weight: 700; font-size: 1rem;
+            text-decoration: none; border: 1px solid rgba(255,255,255,0.3);
+            transition: all 0.3s; display: inline-flex; align-items: center; gap: 8px;
+        }
+        .btn-secondary:hover { background: rgba(255,255,255,0.25); transform: translateY(-2px); }
+
+        /* Footer */
+        .footer { background: #111; padding: 60px 24px; border-top: 1px solid var(--border-color); }
+        .footer-inner { max-width: 1100px; margin: 0 auto; }
+        .footer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; margin-bottom: 40px; }
+        .footer-grid h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 16px; }
+        .footer-grid ul { list-style: none; }
+        .footer-grid li { margin-bottom: 10px; }
+        .footer-grid a { color: var(--text-secondary); text-decoration: none; font-size: 0.85rem; transition: color 0.3s; }
+        .footer-grid a:hover { color: white; }
+        .footer-bottom { border-top: 1px solid var(--border-color); padding-top: 24px; text-align: center; }
+        .footer-logo { display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 1.5rem; font-weight: 700; margin-bottom: 12px; }
+        .footer-logo .maple { color: var(--primary-purple); }
+        .footer-tagline { color: var(--text-secondary); margin-bottom: 16px; font-size: 0.9rem; }
+        .footer-copy { color: #666; font-size: 0.8rem; }
+
+        /* Mobile */
+        @media (max-width: 900px) {
+            .hero h1 { font-size: 2.5rem; }
+            .trust-status-inner { grid-template-columns: repeat(2, 1fr); }
+            .trust-grid { grid-template-columns: 1fr; }
+            .trust-card.full-width { grid-column: 1; }
+            .compliance-grid { grid-template-columns: 1fr; }
+            .tech-grid { grid-template-columns: 1fr; }
+            .retention-row { grid-template-columns: 1fr; }
+            .retention-cell:not(:last-child) { border-right: none; border-bottom: 1px solid var(--border-color); }
+            .retention-row.header { display: none; }
+            .retention-cell::before { content: attr(data-label); display: block; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--primary-purple); margin-bottom: 4px; }
+            .footer-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero { padding: 120px 20px 60px; }
+            .hero h1 { font-size: 2rem; }
+            .hero p { font-size: 1.05rem; }
+            .trust-status-inner { grid-template-columns: 1fr 1fr; }
+            .section { padding: 60px 16px; }
+            .section-alt { padding: 60px 16px; }
+            .section-header h2 { font-size: 2rem; }
+            .contact-methods { flex-direction: column; align-items: center; }
+            .cta-section h2 { font-size: 2rem; }
+            .cta-buttons { flex-direction: column; align-items: center; }
+            .footer-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="/" class="nav-logo"><i class="fas fa-maple-leaf maple"></i> CanadaInvesting<span style="color: var(--primary-purple)">.app</span></a>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="pricing.html">Pricing</a>
+                <a href="why-we-win.html">Why We Win</a>
+                <a href="contact.html">Contact</a>
+                <a href="join-as-advisor.html" class="nav-cta">Apply to Join</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-badge"><i class="fas fa-shield-halved"></i> Security & Compliance</div>
+        <h1>Trust Center</h1>
+        <p>Your data security, privacy, and regulatory compliance are foundational to everything we build. Here is exactly how we protect advisors and clients on the platform.</p>
+    </section>
+
+    <!-- Trust Status Banner -->
+    <div class="trust-status">
+        <div class="trust-status-inner">
+            <div class="trust-status-item">
+                <div class="status-icon"><i class="fas fa-lock"></i></div>
+                <div class="status-label">Encryption</div>
+                <div class="status-value">AES-256 + TLS 1.3</div>
+            </div>
+            <div class="trust-status-item">
+                <div class="status-icon"><i class="fas fa-shield-halved"></i></div>
+                <div class="status-label">Privacy</div>
+                <div class="status-value">PIPEDA Compliant</div>
+            </div>
+            <div class="trust-status-item">
+                <div class="status-icon"><i class="fas fa-building-columns"></i></div>
+                <div class="status-label">Regulatory</div>
+                <div class="status-value">CIRO Verified</div>
+            </div>
+            <div class="trust-status-item">
+                <div class="status-icon"><i class="fas fa-server"></i></div>
+                <div class="status-label">Infrastructure</div>
+                <div class="status-value">Canadian-Hosted</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Security Section -->
+    <section class="section">
+        <div class="section-header">
+            <div class="overline">Security</div>
+            <h2>Enterprise-Grade Data Protection</h2>
+            <p>We apply the same security standards used by major financial institutions to protect every piece of data on the platform.</p>
+        </div>
+        <div class="trust-grid">
+            <div class="trust-card">
+                <div class="trust-card-icon"><i class="fas fa-lock"></i></div>
+                <h3>Encryption Standards</h3>
+                <p>All data is protected with industry-leading encryption both in transit and at rest.</p>
+                <ul>
+                    <li>TLS 1.3 encryption for all data in transit</li>
+                    <li>AES-256 encryption for all data at rest</li>
+                    <li>Encrypted database connections via private network</li>
+                    <li>HTTPS enforced on all endpoints with HSTS headers</li>
+                    <li>API keys and secrets stored in encrypted vaults</li>
+                </ul>
+            </div>
+            <div class="trust-card">
+                <div class="trust-card-icon"><i class="fas fa-shield-halved"></i></div>
+                <h3>Application Security</h3>
+                <p>Security is built into every layer of our application architecture, not bolted on as an afterthought.</p>
+                <ul>
+                    <li>Input validation and sanitization on all endpoints</li>
+                    <li>Rate limiting and DDoS protection</li>
+                    <li>SQL injection and XSS prevention</li>
+                    <li>Secure session management with token rotation</li>
+                    <li>Dependency vulnerability scanning</li>
+                </ul>
+            </div>
+            <div class="trust-card">
+                <div class="trust-card-icon"><i class="fas fa-key"></i></div>
+                <h3>Access Control</h3>
+                <p>Strict access controls ensure only authorized personnel and systems can access sensitive data.</p>
+                <ul>
+                    <li>Role-based access control (RBAC) for all systems</li>
+                    <li>Multi-factor authentication for admin access</li>
+                    <li>Principle of least privilege enforced</li>
+                    <li>Audit logging on all administrative actions</li>
+                    <li>Automated access reviews and revocation</li>
+                </ul>
+            </div>
+            <div class="trust-card">
+                <div class="trust-card-icon"><i class="fas fa-clipboard-check"></i></div>
+                <h3>SOC 2 Roadmap</h3>
+                <p>We are actively building toward SOC 2 Type II certification to formalize our security posture.</p>
+                <ul>
+                    <li>Security policies and procedures documented</li>
+                    <li>Incident response plan established</li>
+                    <li>Change management processes in place</li>
+                    <li>Vendor security assessments conducted</li>
+                    <li>SOC 2 Type II audit targeted for 2027</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Privacy Section -->
+    <div class="section-alt">
+        <div class="section-inner">
+            <div class="section-header">
+                <div class="overline">Privacy</div>
+                <h2>PIPEDA-Compliant Data Practices</h2>
+                <p>We follow Canada's Personal Information Protection and Electronic Documents Act to the letter. Your data is never sold, shared, or used beyond its stated purpose.</p>
+            </div>
+            <div class="trust-grid">
+                <div class="trust-card" style="background: rgba(255,255,255,0.03);">
+                    <div class="trust-card-icon"><i class="fas fa-user-shield"></i></div>
+                    <h3>Data Collection</h3>
+                    <p>We collect only the minimum data required to deliver the matching service and verify regulatory compliance.</p>
+                    <ul>
+                        <li>Advisor data: name, firm, CIRO number, designations, specializations</li>
+                        <li>Client data: investment goals, portfolio range, preferences</li>
+                        <li>No financial account numbers or SIN collected</li>
+                        <li>No credit card data stored on our servers</li>
+                        <li>Consent obtained before any data processing</li>
+                    </ul>
+                </div>
+                <div class="trust-card" style="background: rgba(255,255,255,0.03);">
+                    <div class="trust-card-icon"><i class="fas fa-ban"></i></div>
+                    <h3>What We Never Do</h3>
+                    <p>Clear commitments about what will never happen with your data on this platform.</p>
+                    <ul>
+                        <li>Never sell personal data to third parties</li>
+                        <li>Never share data with advertisers or data brokers</li>
+                        <li>Never use data for purposes beyond advisor matching</li>
+                        <li>Never retain data longer than necessary</li>
+                        <li>Never process data outside of Canada without consent</li>
+                    </ul>
+                </div>
+                <div class="trust-card full-width" style="background: rgba(255,255,255,0.03);">
+                    <div class="trust-card-icon"><i class="fas fa-scale-balanced"></i></div>
+                    <h3>Your Rights Under PIPEDA</h3>
+                    <p>As a user of our platform, Canadian privacy law guarantees you specific rights regarding your personal information. We make exercising these rights straightforward.</p>
+                    <ul>
+                        <li>Right to access all personal data we hold about you</li>
+                        <li>Right to correct inaccurate or incomplete information</li>
+                        <li>Right to withdraw consent and request data deletion</li>
+                        <li>Right to know how your data is being used and disclosed</li>
+                        <li>Right to file a complaint with our Privacy Officer or the Office of the Privacy Commissioner of Canada</li>
+                        <li>All privacy requests processed within 30 days</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Regulatory Compliance Section -->
+    <section class="section">
+        <div class="section-header">
+            <div class="overline">Regulatory Compliance</div>
+            <h2>Built on Canadian Securities Integrity</h2>
+            <p>Our platform is designed from the ground up to respect CIRO rules, provincial securities regulations, and CSA guidelines.</p>
+        </div>
+        <div class="compliance-grid">
+            <div class="compliance-card">
+                <div class="check"><i class="fas fa-check-circle"></i></div>
+                <h4>CIRO Verification</h4>
+                <p>Every advisor is cross-referenced against CIRO's public registry. We verify registration status, firm affiliation, and disciplinary history before any profile goes live.</p>
+            </div>
+            <div class="compliance-card">
+                <div class="check"><i class="fas fa-check-circle"></i></div>
+                <h4>Provincial Licensing</h4>
+                <p>We verify that advisors hold valid registration in the provinces where they claim to operate, ensuring clients only see properly licensed professionals.</p>
+            </div>
+            <div class="compliance-card">
+                <div class="check"><i class="fas fa-check-circle"></i></div>
+                <h4>CSA Alignment</h4>
+                <p>Our platform design aligns with Canadian Securities Administrators guidelines on referral arrangements, fee disclosure, and client-advisor relationships.</p>
+            </div>
+            <div class="compliance-card">
+                <div class="check"><i class="fas fa-check-circle"></i></div>
+                <h4>Designation Verification</h4>
+                <p>CFA, CFP, CIM, FCSI, and PFP designations are independently verified with their respective issuing bodies before being displayed on advisor profiles.</p>
+            </div>
+            <div class="compliance-card">
+                <div class="check"><i class="fas fa-check-circle"></i></div>
+                <h4>No Investment Advice</h4>
+                <p>CanadaInvesting is a technology platform that facilitates connections. We do not provide investment advice, manage assets, or act as a registered dealer.</p>
+            </div>
+            <div class="compliance-card">
+                <div class="check"><i class="fas fa-check-circle"></i></div>
+                <h4>Advisor Autonomy</h4>
+                <p>Advisors maintain full professional independence. We never influence investment recommendations, fee structures, or client acceptance decisions.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology & Infrastructure -->
+    <div class="section-alt">
+        <div class="section-inner">
+            <div class="section-header">
+                <div class="overline">Infrastructure</div>
+                <h2>Secure, Reliable Technology</h2>
+                <p>Our platform runs on modern, secure infrastructure with continuous monitoring and automated incident response.</p>
+            </div>
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <div class="tech-icon"><i class="fas fa-cloud"></i></div>
+                    <h4>Canadian-Hosted Infrastructure</h4>
+                    <p>All data is stored and processed on servers located in Canada, ensuring compliance with Canadian data residency expectations.</p>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon"><i class="fas fa-chart-line"></i></div>
+                    <h4>99.9% Uptime Target</h4>
+                    <p>Redundant infrastructure and automated failover ensure the platform remains available when advisors and clients need it.</p>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon"><i class="fas fa-bell"></i></div>
+                    <h4>24/7 Monitoring</h4>
+                    <p>Automated monitoring detects anomalies, performance degradation, and security events in real time with immediate alerting.</p>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon"><i class="fas fa-database"></i></div>
+                    <h4>Automated Backups</h4>
+                    <p>Continuous database backups with point-in-time recovery ensure no data is lost, even in the event of a system failure.</p>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon"><i class="fas fa-code-branch"></i></div>
+                    <h4>Secure Development</h4>
+                    <p>Code reviews, automated testing, and staged deployment pipelines ensure changes are thoroughly vetted before reaching production.</p>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon"><i class="fas fa-rotate"></i></div>
+                    <h4>Incident Response</h4>
+                    <p>Documented incident response procedures with defined escalation paths, communication templates, and post-mortem processes.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Data Retention & Deletion -->
+    <section class="section">
+        <div class="section-header">
+            <div class="overline">Data Retention</div>
+            <h2>Clear Retention & Deletion Policies</h2>
+            <p>We retain data only as long as necessary to provide the service and meet legal obligations. You can request deletion at any time.</p>
+        </div>
+        <div class="retention-table">
+            <div class="retention-row header">
+                <div class="retention-cell">Data Type</div>
+                <div class="retention-cell">Retention Period</div>
+                <div class="retention-cell">Deletion Policy</div>
+            </div>
+            <div class="retention-row">
+                <div class="retention-cell" data-label="Data Type">Advisor profile information</div>
+                <div class="retention-cell" data-label="Retention Period">Duration of active subscription + 90 days</div>
+                <div class="retention-cell" data-label="Deletion Policy">Automatically purged 90 days after subscription ends</div>
+            </div>
+            <div class="retention-row">
+                <div class="retention-cell" data-label="Data Type">Client matching preferences</div>
+                <div class="retention-cell" data-label="Retention Period">Duration of active engagement + 30 days</div>
+                <div class="retention-cell" data-label="Deletion Policy">Deleted upon request or 30 days after last activity</div>
+            </div>
+            <div class="retention-row">
+                <div class="retention-cell" data-label="Data Type">Application form submissions</div>
+                <div class="retention-cell" data-label="Retention Period">12 months if not approved</div>
+                <div class="retention-cell" data-label="Deletion Policy">Automatically purged after 12 months if application not approved</div>
+            </div>
+            <div class="retention-row">
+                <div class="retention-cell" data-label="Data Type">Communication logs</div>
+                <div class="retention-cell" data-label="Retention Period">6 months</div>
+                <div class="retention-cell" data-label="Deletion Policy">Automatically purged on a rolling 6-month basis</div>
+            </div>
+            <div class="retention-row">
+                <div class="retention-cell" data-label="Data Type">Payment records</div>
+                <div class="retention-cell" data-label="Retention Period">7 years (legal requirement)</div>
+                <div class="retention-cell" data-label="Deletion Policy">Retained for tax and legal compliance, then purged</div>
+            </div>
+            <div class="retention-row">
+                <div class="retention-cell" data-label="Data Type">Analytics data</div>
+                <div class="retention-cell" data-label="Retention Period">Aggregated and anonymized</div>
+                <div class="retention-cell" data-label="Deletion Policy">Personal identifiers stripped within 30 days</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact for Security/Privacy -->
+    <div class="section-alt">
+        <div class="section-inner">
+            <div class="section-header">
+                <div class="overline">Questions?</div>
+                <h2>Security & Privacy Inquiries</h2>
+                <p>If you have questions about our security practices, privacy policies, or need to exercise your data rights, reach out directly.</p>
+            </div>
+            <div class="contact-box" style="background: rgba(255,255,255,0.03);">
+                <h3>Contact Our Team</h3>
+                <p>For security concerns, data access requests, privacy complaints, or general trust-related questions, contact us through any of the following channels. We respond to all security and privacy inquiries within 48 hours.</p>
+                <div class="contact-methods">
+                    <a href="mailto:arthur@negotiateandwin.com" class="contact-method">
+                        <i class="fas fa-envelope"></i> arthur@negotiateandwin.com
+                    </a>
+                    <a href="tel:+16479567290" class="contact-method">
+                        <i class="fas fa-phone"></i> 1.647.956.7290
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <h2>Built on Trust. Backed by Verification.</h2>
+        <p>Join Canada's most transparent investment advisor marketplace. Every advisor verified. Every data point protected. Every connection earned.</p>
+        <div class="cta-buttons">
+            <a href="join-as-advisor.html" class="btn-primary"><i class="fas fa-arrow-right"></i> Apply to Join as Advisor</a>
+            <a href="find-advisor.html" class="btn-secondary"><i class="fas fa-search"></i> Find an Advisor</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-grid">
+                <div>
+                    <h4>For Advisors</h4>
+                    <ul>
+                        <li><a href="join-as-advisor.html">Apply to Join</a></li>
+                        <li><a href="pricing.html">Pricing & Algorithm</a></li>
+                        <li><a href="advisor-revenue-calculator.html">Revenue Calculator</a></li>
+                        <li><a href="why-we-win.html">Why We Win</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>For Clients</h4>
+                    <ul>
+                        <li><a href="find-advisor.html">Find an Advisor</a></li>
+                        <li><a href="guarantee.html">Our Guarantee</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="terms-of-service.html">Terms of Service</a></li>
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="trust-center.html">Trust Center</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="mailto:arthur@negotiateandwin.com">arthur@negotiateandwin.com</a></li>
+                        <li><a href="tel:+16479567290">1.647.956.7290</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-logo">
+                    <i class="fas fa-maple-leaf maple"></i> CanadaInvesting<span style="color: var(--primary-purple)">.app</span>
+                </div>
+                <p class="footer-tagline">AI-powered investment advisor marketplace built for Canadian financial professionals.</p>
+                <p class="footer-copy">&copy; 2026 CanadaInvesting.app | Technology platform only. Not a registered dealer or investment advisor. Advisors maintain full professional independence.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

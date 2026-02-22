@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="description" content="Find your perfect investment advisor in 24 hours. Answer a few questions and our AI matches you with CIRO-registered financial professionals who fit your exact needs.">
+    <meta name="keywords" content="find investment advisor Canada, financial advisor matching, wealth management, retirement planning, portfolio manager, CFA, CFP">
+
+    <title>Find Your Investment Advisor | CanadaInvesting.app</title>
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://canadainvesting.app/find-advisor.html">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://canadainvesting.app/find-advisor.html">
+    <meta property="og:title" content="Find Your Investment Advisor | CanadaInvesting.app">
+    <meta property="og:description" content="AI-powered matching connects you with CIRO-registered investment advisors who fit your exact needs. Free for clients.">
+    <meta property="og:image" content="https://canadainvesting.app/icon-512.png">
+    <meta property="og:site_name" content="CanadaInvesting">
+    <meta property="og:locale" content="en_CA">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Find Your Investment Advisor | CanadaInvesting.app">
+    <meta name="twitter:description" content="AI-powered matching connects you with CIRO-registered investment advisors who fit your exact needs. Free for clients.">
+    <meta name="twitter:image" content="https://canadainvesting.app/icon-512.png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <meta name="theme-color" content="#667eea">
+
+    <!-- Google Analytics 4 - placeholder until configured -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script> -->
+
+    <style>
+        :root {
+            --primary-purple: #667eea;
+            --primary-violet: #764ba2;
+            --primary-emerald: #059669;
+            --accent-green: #059669;
+            --dark-bg: #0a0a0a;
+            --card-bg: #1a1a1a;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --border-color: #333333;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Navigation */
+        .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(0,0,0,0.4); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; height: 64px; }
+        .nav-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; color: white; font-weight: 700; font-size: 1.25rem; }
+        .nav-logo .maple { color: var(--primary-purple); font-size: 1.5rem; }
+        .nav-links { display: flex; align-items: center; gap: 24px; list-style: none; }
+        .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.3s; }
+        .nav-links a:hover { color: white; }
+        .nav-cta { background: white !important; color: var(--primary-purple) !important; padding: 10px 24px; border-radius: 8px; font-weight: 700 !important; transition: transform 0.3s, box-shadow 0.3s; }
+        .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 4px 15px rgba(102,126,234,0.3); }
+
+        /* Hero */
+        .hero {
+            padding: 140px 24px 80px;
+            background: linear-gradient(135deg, var(--primary-purple) 0%, var(--primary-violet) 50%, #1e3a5f 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(ellipse at 30% 20%, rgba(255,255,255,0.1) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: rgba(255,255,255,0.15); backdrop-filter: blur(10px);
+            padding: 10px 22px; border-radius: 50px; font-size: 0.85rem; font-weight: 500;
+            margin-bottom: 28px; border: 1px solid rgba(255,255,255,0.2);
+            position: relative;
+        }
+        .hero h1 {
+            font-size: 3.2rem; font-weight: 900; line-height: 1.1; margin-bottom: 24px;
+            max-width: 900px; margin-left: auto; margin-right: auto;
+            position: relative;
+        }
+        .hero p {
+            font-size: 1.2rem; max-width: 700px; margin: 0 auto 40px; opacity: 0.9; line-height: 1.7;
+            position: relative;
+        }
+        .hero-trust {
+            display: flex; justify-content: center; gap: 32px; flex-wrap: wrap;
+            position: relative;
+        }
+        .hero-trust-item {
+            display: flex; align-items: center; gap: 8px;
+            font-size: 0.9rem; opacity: 0.85;
+        }
+        .hero-trust-item i { color: rgba(255,255,255,0.9); }
+
+        /* Progress Indicator */
+        .progress-section {
+            max-width: 700px; margin: 0 auto; padding: 40px 24px 0;
+        }
+        .progress-bar-outer {
+            background: var(--border-color); border-radius: 10px; height: 8px;
+            overflow: hidden; margin-bottom: 12px;
+        }
+        .progress-bar-inner {
+            height: 100%; border-radius: 10px;
+            background: linear-gradient(90deg, var(--primary-purple), var(--primary-violet));
+            transition: width 0.5s ease;
+            width: 14.28%;
+        }
+        .progress-text {
+            text-align: center; font-size: 0.85rem; color: var(--text-secondary);
+        }
+        .progress-text span { color: var(--primary-purple); font-weight: 700; }
+
+        /* Questionnaire */
+        .questionnaire-section {
+            padding: 40px 24px 100px;
+            max-width: 700px; margin: 0 auto;
+        }
+        .question-card {
+            background: var(--card-bg); border: 1px solid var(--border-color);
+            border-radius: 20px; padding: 48px 40px;
+            display: none;
+            animation: fadeInUp 0.4s ease;
+        }
+        .question-card.active { display: block; }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .question-step-label {
+            display: inline-block; font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 2px; color: var(--primary-purple); margin-bottom: 12px;
+        }
+        .question-card h2 {
+            font-size: 1.6rem; font-weight: 900; margin-bottom: 8px; line-height: 1.3;
+        }
+        .question-card .question-desc {
+            font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 32px; line-height: 1.6;
+        }
+
+        /* Option Cards */
+        .options-grid {
+            display: grid; gap: 12px;
+        }
+        .options-grid.two-col {
+            grid-template-columns: 1fr 1fr;
+        }
+        .option-card {
+            background: rgba(255,255,255,0.03);
+            border: 2px solid var(--border-color);
+            border-radius: 14px; padding: 20px 24px;
+            cursor: pointer; transition: all 0.3s;
+            display: flex; align-items: center; gap: 16px;
+        }
+        .option-card:hover {
+            border-color: rgba(102,126,234,0.5);
+            background: rgba(102,126,234,0.05);
+        }
+        .option-card.selected {
+            border-color: var(--primary-purple);
+            background: rgba(102,126,234,0.1);
+            box-shadow: 0 0 20px rgba(102,126,234,0.15);
+        }
+        .option-icon {
+            width: 44px; height: 44px; border-radius: 12px;
+            background: linear-gradient(135deg, rgba(102,126,234,0.15), rgba(118,75,162,0.15));
+            display: flex; align-items: center; justify-content: center;
+            color: var(--primary-purple); font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+        .option-card.selected .option-icon {
+            background: linear-gradient(135deg, var(--primary-purple), var(--primary-violet));
+            color: white;
+        }
+        .option-text h4 { font-size: 1rem; font-weight: 600; margin-bottom: 2px; }
+        .option-text p { font-size: 0.8rem; color: var(--text-secondary); line-height: 1.4; }
+
+        /* Contact Form */
+        .contact-form { display: grid; gap: 20px; }
+        .form-group { display: flex; flex-direction: column; gap: 6px; }
+        .form-group label {
+            font-size: 0.85rem; font-weight: 600; color: rgba(255,255,255,0.8);
+        }
+        .form-group input {
+            background: rgba(255,255,255,0.05);
+            border: 2px solid var(--border-color);
+            border-radius: 12px; padding: 16px 20px;
+            color: white; font-family: inherit; font-size: 1rem;
+            transition: border-color 0.3s, background 0.3s;
+            outline: none;
+        }
+        .form-group input::placeholder { color: #666; }
+        .form-group input:focus {
+            border-color: var(--primary-purple);
+            background: rgba(102,126,234,0.05);
+        }
+        .form-group input.error {
+            border-color: #ef4444;
+        }
+        .form-error {
+            font-size: 0.8rem; color: #ef4444; display: none;
+        }
+        .form-error.visible { display: block; }
+
+        /* Navigation Buttons */
+        .question-nav {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-top: 36px; gap: 16px;
+        }
+        .btn-back {
+            background: none; border: 1px solid var(--border-color);
+            color: var(--text-secondary); padding: 14px 28px;
+            border-radius: 10px; font-weight: 600; font-size: 0.95rem;
+            cursor: pointer; transition: all 0.3s; font-family: inherit;
+            display: inline-flex; align-items: center; gap: 8px;
+        }
+        .btn-back:hover { border-color: rgba(255,255,255,0.3); color: white; }
+        .btn-next {
+            background: linear-gradient(135deg, var(--primary-purple), var(--primary-violet));
+            border: none; color: white; padding: 14px 32px;
+            border-radius: 10px; font-weight: 700; font-size: 0.95rem;
+            cursor: pointer; transition: all 0.3s; font-family: inherit;
+            display: inline-flex; align-items: center; gap: 8px;
+            margin-left: auto;
+        }
+        .btn-next:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(102,126,234,0.4); }
+        .btn-next:disabled {
+            opacity: 0.4; cursor: not-allowed; transform: none;
+            box-shadow: none;
+        }
+        .btn-submit {
+            background: linear-gradient(135deg, var(--accent-green), #047857);
+            border: none; color: white; padding: 16px 36px;
+            border-radius: 10px; font-weight: 700; font-size: 1rem;
+            cursor: pointer; transition: all 0.3s; font-family: inherit;
+            display: inline-flex; align-items: center; gap: 8px;
+            margin-left: auto;
+        }
+        .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(5,150,105,0.4); }
+        .btn-submit:disabled {
+            opacity: 0.4; cursor: not-allowed; transform: none;
+            box-shadow: none;
+        }
+
+        /* Confirmation */
+        .confirmation-card {
+            background: var(--card-bg); border: 1px solid var(--border-color);
+            border-radius: 20px; padding: 60px 40px;
+            text-align: center; display: none;
+            animation: fadeInUp 0.5s ease;
+        }
+        .confirmation-card.active { display: block; }
+        .confirmation-icon {
+            width: 80px; height: 80px; border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-green), #047857);
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 28px; font-size: 2rem; color: white;
+        }
+        .confirmation-card h2 {
+            font-size: 1.8rem; font-weight: 900; margin-bottom: 16px;
+        }
+        .confirmation-card p {
+            color: var(--text-secondary); font-size: 1rem; line-height: 1.7;
+            max-width: 500px; margin: 0 auto;
+        }
+        .confirmation-card p + p { margin-top: 16px; }
+        .confirmation-steps {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+            margin-top: 40px; max-width: 560px; margin-left: auto; margin-right: auto;
+        }
+        .confirmation-step {
+            text-align: center; padding: 20px 12px;
+            background: rgba(255,255,255,0.03); border: 1px solid var(--border-color);
+            border-radius: 14px;
+        }
+        .confirmation-step .step-num {
+            width: 32px; height: 32px; border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-purple), var(--primary-violet));
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.85rem; font-weight: 700; margin: 0 auto 10px;
+        }
+        .confirmation-step h4 { font-size: 0.85rem; font-weight: 600; margin-bottom: 4px; }
+        .confirmation-step p { font-size: 0.75rem; color: var(--text-secondary); line-height: 1.4; }
+        .confirmation-home {
+            display: inline-flex; align-items: center; gap: 8px;
+            margin-top: 36px; color: var(--primary-purple); font-weight: 600;
+            text-decoration: none; font-size: 0.95rem;
+        }
+        .confirmation-home:hover { text-decoration: underline; }
+
+        /* Footer */
+        .footer { background: #111; padding: 60px 24px; border-top: 1px solid var(--border-color); }
+        .footer-inner { max-width: 1100px; margin: 0 auto; }
+        .footer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; margin-bottom: 40px; }
+        .footer-grid h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 16px; }
+        .footer-grid ul { list-style: none; }
+        .footer-grid li { margin-bottom: 10px; }
+        .footer-grid a { color: var(--text-secondary); text-decoration: none; font-size: 0.85rem; transition: color 0.3s; }
+        .footer-grid a:hover { color: white; }
+        .footer-bottom { border-top: 1px solid var(--border-color); padding-top: 24px; text-align: center; }
+        .footer-logo { display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 1.5rem; font-weight: 700; margin-bottom: 12px; }
+        .footer-logo .maple { color: var(--primary-purple); }
+        .footer-tagline { color: var(--text-secondary); margin-bottom: 16px; font-size: 0.9rem; }
+        .footer-copy { color: #666; font-size: 0.8rem; }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero { padding: 120px 20px 60px; }
+            .hero h1 { font-size: 2rem; }
+            .hero p { font-size: 1.05rem; }
+            .hero-trust { gap: 16px; }
+            .hero-trust-item { font-size: 0.8rem; }
+            .question-card { padding: 32px 24px; }
+            .question-card h2 { font-size: 1.3rem; }
+            .options-grid.two-col { grid-template-columns: 1fr; }
+            .option-card { padding: 16px 18px; }
+            .question-nav { flex-wrap: wrap; }
+            .btn-back, .btn-next, .btn-submit { padding: 12px 24px; font-size: 0.9rem; }
+            .confirmation-steps { grid-template-columns: 1fr; max-width: 300px; }
+            .confirmation-card { padding: 40px 24px; }
+            .footer-grid { grid-template-columns: 1fr; }
+        }
+
+        /* Province select styling */
+        .form-select {
+            background: rgba(255,255,255,0.05);
+            border: 2px solid var(--border-color);
+            border-radius: 12px; padding: 16px 20px;
+            color: white; font-family: inherit; font-size: 1rem;
+            transition: border-color 0.3s, background 0.3s;
+            outline: none; width: 100%;
+            appearance: none; -webkit-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23a0a0a0' d='M1.41 0L6 4.58 10.59 0 12 1.41l-6 6-6-6z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 20px center;
+            cursor: pointer;
+        }
+        .form-select:focus {
+            border-color: var(--primary-purple);
+            background-color: rgba(102,126,234,0.05);
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23667eea' d='M1.41 0L6 4.58 10.59 0 12 1.41l-6 6-6-6z'/%3E%3C/svg%3E");
+        }
+        .form-select option {
+            background: var(--card-bg); color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="/" class="nav-logo"><i class="fas fa-maple-leaf maple"></i> CanadaInvesting<span style="color: var(--primary-purple)">.app</span></a>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="pricing.html">Pricing</a>
+                <a href="why-we-win.html">Why We Win</a>
+                <a href="contact.html">Contact</a>
+                <a href="join-as-advisor.html" class="nav-cta">Apply to Join</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-badge"><i class="fas fa-search"></i> Free for Clients &mdash; Always</div>
+        <h1>Find Your Perfect Investment Advisor in 24 Hours</h1>
+        <p>Answer a few quick questions and our AI matches you with CIRO-registered advisors who specialize in exactly what you need. No cost, no obligation.</p>
+        <div class="hero-trust">
+            <div class="hero-trust-item"><i class="fas fa-shield-halved"></i> CIRO Verified</div>
+            <div class="hero-trust-item"><i class="fas fa-brain"></i> AI-Powered Matching</div>
+            <div class="hero-trust-item"><i class="fas fa-lock"></i> PIPEDA Compliant</div>
+            <div class="hero-trust-item"><i class="fas fa-clock"></i> 24hr Average Match</div>
+        </div>
+    </section>
+
+    <!-- Progress Bar -->
+    <div class="progress-section" id="progressSection">
+        <div class="progress-bar-outer">
+            <div class="progress-bar-inner" id="progressBar"></div>
+        </div>
+        <div class="progress-text">Step <span id="currentStep">1</span> of <span>7</span></div>
+    </div>
+
+    <!-- Questionnaire -->
+    <div class="questionnaire-section">
+
+        <!-- Step 1: Investment Help Type -->
+        <div class="question-card active" data-step="1">
+            <div class="question-step-label">Step 1 of 7</div>
+            <h2>What type of investment help do you need?</h2>
+            <p class="question-desc">Select the area that best describes what you're looking for. This helps us match you with advisors who specialize in your needs.</p>
+            <div class="options-grid two-col">
+                <div class="option-card" data-value="Wealth Management">
+                    <div class="option-icon"><i class="fas fa-gem"></i></div>
+                    <div class="option-text">
+                        <h4>Wealth Management</h4>
+                        <p>Comprehensive wealth strategy and asset allocation</p>
+                    </div>
+                </div>
+                <div class="option-card" data-value="Retirement Planning">
+                    <div class="option-icon"><i class="fas fa-umbrella-beach"></i></div>
+                    <div class="option-text">
+                        <h4>Retirement Planning</h4>
+                        <p>RRSP, RRIF, pension optimization and drawdown</p>
+                    </div>
+                </div>
+                <div class="option-card" data-value="Portfolio Management">
+                    <div class="option-icon"><i class="fas fa-chart-pie"></i></div>
+                    <div class="option-text">
+                        <h4>Portfolio Management</h4>
+                        <p>Active or passive portfolio construction and rebalancing</p>
+                    </div>
+                </div>
+                <div class="option-card" data-value="Tax-Efficient Investing">
+                    <div class="option-icon"><i class="fas fa-receipt"></i></div>
+                    <div class="option-text">
+                        <h4>Tax-Efficient Investing</h4>
+                        <p>TFSA, tax-loss harvesting, corporate investment holdcos</p>
+                    </div>
+                </div>
+                <div class="option-card" data-value="Estate Planning">
+                    <div class="option-icon"><i class="fas fa-landmark"></i></div>
+                    <div class="option-text">
+                        <h4>Estate Planning</h4>
+                        <p>Wealth transfer, trusts, and intergenerational planning</p>
+                    </div>
+                </div>
+                <div class="option-card" data-value="Corporate/Institutional">
+                    <div class="option-icon"><i class="fas fa-building"></i></div>
+                    <div class="option-text">
+                        <h4>Corporate / Institutional</h4>
+                        <p>Corporate treasury, pension funds, institutional mandates</p>
+                    </div>
+                </div>
+            </div>
+            <div class="question-nav">
+                <div></div>
+                <button class="btn-next" disabled onclick="nextStep()">Continue <i class="fas fa-arrow-right"></i></button>
+            </div>
+        </div>
+
+        <!-- Step 2: Asset Range -->
+        <div class="question-card" data-step="2">
+            <div class="question-step-label">Step 2 of 7</div>
+            <h2>What is your approximate investable asset range?</h2>
+            <p class="question-desc">This ensures we match you with advisors who work with clients at your portfolio level. All information is kept confidential.</p>
+            <div class="options-grid">
+                <div class="option-card" data-value="$50K - $250K">
+                    <div class="option-icon"><i class="fas fa-seedling"></i></div>
+                    <div class="option-text">
+                        <h4>$50,000 &ndash; $250,000</h4>
+                        <p>Building your investment foundation</p>
+                    </div>
+                </div>
+                <div class="option-card" data-value="$250K - $500K">
+                    <div class="option-icon"><i class="fas fa-chart-line"></i></div>
+                    <div class="option-text">
+                        <h4>$250,000 &ndash; $500,000</h4>
+                        <p>Growing and diversifying your portfolio</p>
+                    </div>
+                </div>
+                <div class="option-card" data-value="$500K - $1M">
+                    <div class="option-icon"><i class="fas fa-coins"></i></div>
+                    <div class="option-text">
+                        <h4>$500,000 &ndash; $1,000,000</h4>
+                        <p>Sophisticated strategies and optimization</p>
+                    </div>
+                </div>
+                <div class="option-card" data-value="$1M - $5M">
+                    <div class="option-icon"><i class="fas fa-wallet"></i></div>
+                    <div class="option-text">
+                        <h4>$1,000,000 &ndash; $5,000,000</h4>
+                        <p>High-net-worth wealth management</p>
+                    </div>
+                </div>
+                <div class="option-card" data-value="$5M+">
+                    <div class="option-icon"><i class="fas fa-crown"></i></div>
+                    <div class="option-text">
+                        <h4>$5,000,000+</h4>
+                        <p>Ultra-high-net-worth and family office services</p>
+                    </div>
+                </div>
+            </div>
+            <div class="question-nav">
+                <button class="btn-back" onclick="prevStep()"><i class="fas fa-arrow-left"></i> Back</button>
+                <button class="btn-next" disabled onclick="nextStep()">Continue <i class="fas fa-arrow-right"></i></button>
+            </div>
+        </div>
+
+        <!-- Step 3: Investment Goal -->
+        <div class="question-card" data-step="3">
+            <div class="question-step-label">Step 3 of 7</div>
+            <h2>What is your primary investment goal?</h2>
+            <p class="question-desc">Understanding your objective helps us find advisors whose philosophy and track record align with what you want to achieve.</p>
+            <div class="options-grid">
+                <div class="option-card" data-value="Growth">
+                    <div class="option-icon"><i class="fas fa-arrow-trend-up"></i></div>
+                    <div class="option-text">
+                        <h4>Growth</h4>
+                        <p>Long-term capital appreciation; willing to accept moderate risk</p>
+                    </div>
+                </div>
+                <div class="option-card" data-value="Income">
+                    <div class="option-icon"><i class="fas fa-money-bill-wave"></i></div>
+                    <div class="option-text">
+                        <h4>Income</h4>
+                        <p>Steady income through dividends, bonds, and distributions</p>
+                    </div>
+                </div>
+                <div class="option-card" data-value="Preservation">
+                    <div class="option-icon"><i class="fas fa-shield-halved"></i></div>
+                    <div class="option-text">
+                        <h4>Preservation</h4>
+                        <p>Protect capital and maintain purchasing power</p>
+                    </div>
+                </div>
+                <div class="option-card" data-value="Balanced">
+                    <div class="option-icon"><i class="fas fa-scale-balanced"></i></div>
+                    <div class="option-text">
+                        <h4>Balanced</h4>
+                        <p>Mix of growth and income with moderate risk</p>
+                    </div>
+                </div>
+                <div class="option-card" data-value="Aggressive Growth">
+                    <div class="option-icon"><i class="fas fa-rocket"></i></div>
+                    <div class="option-text">
+                        <h4>Aggressive Growth</h4>
+                        <p>Maximum capital appreciation; comfortable with higher volatility</p>
+                    </div>
+                </div>
+            </div>
+            <div class="question-nav">
+                <button class="btn-back" onclick="prevStep()"><i class="fas fa-arrow-left"></i> Back</button>
+                <button class="btn-next" disabled onclick="nextStep()">Continue <i class="fas fa-arrow-right"></i></button>
+            </div>
+        </div>
+
+        <!-- Step 4: Fee Structure -->
+        <div class="question-card" data-step="4">
+            <div class="question-step-label">Step 4 of 7</div>
+            <h2>What fee structure do you prefer?</h2>
+            <p class="question-desc">Different advisors charge differently. Knowing your preference helps us match you with compatible compensation models.</p>
+            <div class="options-grid two-col">
+                <div class="option-card" data-value="Fee-only">
+                    <div class="option-icon"><i class="fas fa-file-invoice-dollar"></i></div>
+                    <div class="option-text">
+                        <h4>Fee-Only</h4>
+                        <p>Flat fee or % of AUM, no commissions</p>
+                    </div>
+                </div>
+                <div class="option-card" data-value="Commission-based">
+                    <div class="option-icon"><i class="fas fa-handshake"></i></div>
+                    <div class="option-text">
+                        <h4>Commission-Based</h4>
+                        <p>Earns commissions on products purchased</p>
+                    </div>
+                </div>
+                <div class="option-card" data-value="Fee-based/Hybrid">
+                    <div class="option-icon"><i class="fas fa-arrows-rotate"></i></div>
+                    <div class="option-text">
+                        <h4>Fee-Based / Hybrid</h4>
+                        <p>Combination of fees and commissions</p>
+                    </div>
+                </div>
+                <div class="option-card" data-value="No preference">
+                    <div class="option-icon"><i class="fas fa-circle-question"></i></div>
+                    <div class="option-text">
+                        <h4>No Preference</h4>
+                        <p>Open to any compensation structure</p>
+                    </div>
+                </div>
+            </div>
+            <div class="question-nav">
+                <button class="btn-back" onclick="prevStep()"><i class="fas fa-arrow-left"></i> Back</button>
+                <button class="btn-next" disabled onclick="nextStep()">Continue <i class="fas fa-arrow-right"></i></button>
+            </div>
+        </div>
+
+        <!-- Step 5: Province -->
+        <div class="question-card" data-step="5">
+            <div class="question-step-label">Step 5 of 7</div>
+            <h2>What province or territory are you in?</h2>
+            <p class="question-desc">Investment advisors are provincially regulated. We'll match you with professionals licensed to operate in your region.</p>
+            <div class="form-group">
+                <select class="form-select" id="provinceSelect" onchange="handleProvinceSelect(this)">
+                    <option value="" disabled selected>Select your province or territory</option>
+                    <option value="Alberta">Alberta</option>
+                    <option value="British Columbia">British Columbia</option>
+                    <option value="Manitoba">Manitoba</option>
+                    <option value="New Brunswick">New Brunswick</option>
+                    <option value="Newfoundland and Labrador">Newfoundland and Labrador</option>
+                    <option value="Northwest Territories">Northwest Territories</option>
+                    <option value="Nova Scotia">Nova Scotia</option>
+                    <option value="Nunavut">Nunavut</option>
+                    <option value="Ontario">Ontario</option>
+                    <option value="Prince Edward Island">Prince Edward Island</option>
+                    <option value="Quebec">Quebec</option>
+                    <option value="Saskatchewan">Saskatchewan</option>
+                    <option value="Yukon">Yukon</option>
+                </select>
+            </div>
+            <div class="question-nav">
+                <button class="btn-back" onclick="prevStep()"><i class="fas fa-arrow-left"></i> Back</button>
+                <button class="btn-next" disabled onclick="nextStep()">Continue <i class="fas fa-arrow-right"></i></button>
+            </div>
+        </div>
+
+        <!-- Step 6: Meeting Preference -->
+        <div class="question-card" data-step="6">
+            <div class="question-step-label">Step 6 of 7</div>
+            <h2>Do you prefer in-person or virtual meetings?</h2>
+            <p class="question-desc">Some advisors offer face-to-face meetings, others work entirely online. Let us know what works best for you.</p>
+            <div class="options-grid">
+                <div class="option-card" data-value="In-person">
+                    <div class="option-icon"><i class="fas fa-people-arrows"></i></div>
+                    <div class="option-text">
+                        <h4>In-Person</h4>
+                        <p>I prefer meeting my advisor face-to-face at their office or locally</p>
+                    </div>
+                </div>
+                <div class="option-card" data-value="Virtual">
+                    <div class="option-icon"><i class="fas fa-video"></i></div>
+                    <div class="option-text">
+                        <h4>Virtual</h4>
+                        <p>Video calls, phone, and online communication work great for me</p>
+                    </div>
+                </div>
+                <div class="option-card" data-value="Either">
+                    <div class="option-icon"><i class="fas fa-shuffle"></i></div>
+                    <div class="option-text">
+                        <h4>Either Works</h4>
+                        <p>I'm flexible and open to both in-person and virtual meetings</p>
+                    </div>
+                </div>
+            </div>
+            <div class="question-nav">
+                <button class="btn-back" onclick="prevStep()"><i class="fas fa-arrow-left"></i> Back</button>
+                <button class="btn-next" disabled onclick="nextStep()">Continue <i class="fas fa-arrow-right"></i></button>
+            </div>
+        </div>
+
+        <!-- Step 7: Contact Info -->
+        <div class="question-card" data-step="7">
+            <div class="question-step-label">Step 7 of 7</div>
+            <h2>How should we reach you with your matches?</h2>
+            <p class="question-desc">We'll send your top advisor matches within 24 hours. Your information is encrypted and never shared without your consent.</p>
+            <div class="contact-form">
+                <div class="form-group">
+                    <label for="clientName"><i class="fas fa-user" style="margin-right: 6px; color: var(--primary-purple);"></i> Full Name</label>
+                    <input type="text" id="clientName" placeholder="e.g. Sarah Thompson" autocomplete="name" required>
+                    <div class="form-error" id="nameError">Please enter your full name.</div>
+                </div>
+                <div class="form-group">
+                    <label for="clientEmail"><i class="fas fa-envelope" style="margin-right: 6px; color: var(--primary-purple);"></i> Email Address</label>
+                    <input type="email" id="clientEmail" placeholder="e.g. sarah@example.com" autocomplete="email" required>
+                    <div class="form-error" id="emailError">Please enter a valid email address.</div>
+                </div>
+                <div class="form-group">
+                    <label for="clientPhone"><i class="fas fa-phone" style="margin-right: 6px; color: var(--primary-purple);"></i> Phone Number <span style="color: var(--text-secondary); font-weight: 400;">(optional)</span></label>
+                    <input type="tel" id="clientPhone" placeholder="e.g. 416-555-1234" autocomplete="tel">
+                </div>
+            </div>
+            <div style="margin-top: 20px; padding: 16px 20px; background: rgba(102,126,234,0.08); border-radius: 12px; border: 1px solid rgba(102,126,234,0.2);">
+                <p style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.6;">
+                    <i class="fas fa-lock" style="color: var(--primary-purple); margin-right: 6px;"></i>
+                    By submitting, you agree to our <a href="privacy-policy.html" style="color: var(--primary-purple);">Privacy Policy</a> and consent to being contacted about your advisor matches. This service is free for clients.
+                </p>
+            </div>
+            <div class="question-nav">
+                <button class="btn-back" onclick="prevStep()"><i class="fas fa-arrow-left"></i> Back</button>
+                <button class="btn-submit" id="submitBtn" onclick="submitForm()"><i class="fas fa-paper-plane"></i> Get My Advisor Matches</button>
+            </div>
+        </div>
+
+        <!-- Confirmation -->
+        <div class="confirmation-card" id="confirmationCard">
+            <div class="confirmation-icon"><i class="fas fa-check"></i></div>
+            <h2>Your Advisor Matches Are Being Prepared</h2>
+            <p>Thank you, <strong id="confirmName"></strong>. Our AI matching algorithm is analyzing your profile against our network of CIRO-registered advisors right now.</p>
+            <p>You'll hear from us within <strong>24 hours</strong> at <strong id="confirmEmail"></strong> with your top advisor matches.</p>
+            <div class="confirmation-steps">
+                <div class="confirmation-step">
+                    <div class="step-num">1</div>
+                    <h4>AI Analysis</h4>
+                    <p>We're analyzing your needs now</p>
+                </div>
+                <div class="confirmation-step">
+                    <div class="step-num">2</div>
+                    <h4>Advisor Match</h4>
+                    <p>Top 3-5 advisors identified</p>
+                </div>
+                <div class="confirmation-step">
+                    <div class="step-num">3</div>
+                    <h4>Email Delivery</h4>
+                    <p>Matches sent within 24hrs</p>
+                </div>
+            </div>
+            <a href="/" class="confirmation-home"><i class="fas fa-arrow-left"></i> Back to CanadaInvesting.app</a>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-grid">
+                <div>
+                    <h4>For Advisors</h4>
+                    <ul>
+                        <li><a href="join-as-advisor.html">Apply to Join</a></li>
+                        <li><a href="pricing.html">Pricing & Algorithm</a></li>
+                        <li><a href="advisor-revenue-calculator.html">Revenue Calculator</a></li>
+                        <li><a href="why-we-win.html">Why We Win</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>For Clients</h4>
+                    <ul>
+                        <li><a href="find-advisor.html">Find an Advisor</a></li>
+                        <li><a href="guarantee.html">Our Guarantee</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="terms-of-service.html">Terms of Service</a></li>
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="trust-center.html">Trust Center</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="mailto:arthur@negotiateandwin.com">arthur@negotiateandwin.com</a></li>
+                        <li><a href="tel:+16479567290">1.647.956.7290</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-logo">
+                    <i class="fas fa-maple-leaf maple"></i> CanadaInvesting<span style="color: var(--primary-purple)">.app</span>
+                </div>
+                <p class="footer-tagline">AI-powered investment advisor marketplace built for Canadian financial professionals.</p>
+                <p class="footer-copy">&copy; 2026 CanadaInvesting.app | Technology platform only. Not a registered dealer or investment advisor. Advisors maintain full professional independence.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // State
+        let currentStep = 1;
+        const totalSteps = 7;
+        const answers = {};
+
+        // DOM refs
+        const progressBar = document.getElementById('progressBar');
+        const currentStepEl = document.getElementById('currentStep');
+        const progressSection = document.getElementById('progressSection');
+        const confirmationCard = document.getElementById('confirmationCard');
+
+        // Initialize: attach click handlers to all option cards
+        document.querySelectorAll('.option-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const parent = this.closest('.question-card');
+                // Deselect siblings
+                parent.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
+                // Select this one
+                this.classList.add('selected');
+                // Store answer
+                const step = parseInt(parent.getAttribute('data-step'));
+                answers[step] = this.getAttribute('data-value');
+                // Enable next button
+                parent.querySelector('.btn-next').disabled = false;
+            });
+        });
+
+        function handleProvinceSelect(sel) {
+            if (sel.value) {
+                answers[5] = sel.value;
+                const card = sel.closest('.question-card');
+                card.querySelector('.btn-next').disabled = false;
+            }
+        }
+
+        function updateProgress() {
+            const pct = (currentStep / totalSteps) * 100;
+            progressBar.style.width = pct + '%';
+            currentStepEl.textContent = currentStep;
+        }
+
+        function showStep(step) {
+            document.querySelectorAll('.question-card').forEach(card => {
+                card.classList.remove('active');
+            });
+            const target = document.querySelector(`.question-card[data-step="${step}"]`);
+            if (target) {
+                target.classList.add('active');
+                // Re-trigger animation
+                target.style.animation = 'none';
+                target.offsetHeight; // force reflow
+                target.style.animation = '';
+            }
+            updateProgress();
+            // Scroll to top of questionnaire
+            progressSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function nextStep() {
+            if (currentStep < totalSteps) {
+                currentStep++;
+                showStep(currentStep);
+            }
+        }
+
+        function prevStep() {
+            if (currentStep > 1) {
+                currentStep--;
+                showStep(currentStep);
+            }
+        }
+
+        function validateContact() {
+            let valid = true;
+            const name = document.getElementById('clientName');
+            const email = document.getElementById('clientEmail');
+            const nameError = document.getElementById('nameError');
+            const emailError = document.getElementById('emailError');
+
+            // Reset
+            name.classList.remove('error');
+            email.classList.remove('error');
+            nameError.classList.remove('visible');
+            emailError.classList.remove('visible');
+
+            if (!name.value.trim() || name.value.trim().length < 2) {
+                name.classList.add('error');
+                nameError.classList.add('visible');
+                valid = false;
+            }
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!email.value.trim() || !emailRegex.test(email.value.trim())) {
+                email.classList.add('error');
+                emailError.classList.add('visible');
+                valid = false;
+            }
+
+            return valid;
+        }
+
+        async function submitForm() {
+            if (!validateContact()) return;
+
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+
+            const payload = {
+                investment_type: answers[1] || '',
+                asset_range: answers[2] || '',
+                investment_goal: answers[3] || '',
+                fee_preference: answers[4] || '',
+                province: answers[5] || '',
+                meeting_preference: answers[6] || '',
+                name: document.getElementById('clientName').value.trim(),
+                email: document.getElementById('clientEmail').value.trim(),
+                phone: document.getElementById('clientPhone').value.trim(),
+                submitted_at: new Date().toISOString()
+            };
+
+            try {
+                // POST to placeholder endpoint
+                await fetch('https://canadainvesting-backend-production.up.railway.app/api/find-advisor', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+            } catch (e) {
+                // Silently handle — show confirmation regardless for now
+                console.log('Submission endpoint not yet configured:', e);
+            }
+
+            // Show confirmation
+            document.querySelectorAll('.question-card').forEach(card => card.classList.remove('active'));
+            progressSection.style.display = 'none';
+            confirmationCard.classList.add('active');
+            document.getElementById('confirmName').textContent = payload.name.split(' ')[0];
+            document.getElementById('confirmEmail').textContent = payload.email;
+
+            // Scroll to confirmation
+            confirmationCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    </script>
+</body>
+</html>
