@@ -300,6 +300,9 @@
             .faq-section { padding: 60px 16px; }
             .algorithm-section { padding: 60px 16px; }
         }
+
+        .match-count { font-size: 3.5rem; font-weight: 900; background: linear-gradient(135deg, #667eea, #764ba2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1; margin-bottom: 4px; }
+        .match-count-label { font-size: 0.85rem; color: #999; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px; }
     </style>
 </head>
 <body>
@@ -337,53 +340,64 @@
         <div class="pricing-cards">
             <div class="pricing-card">
                 <h3>Associate</h3>
+                <div class="match-count">3</div>
+                <div class="match-count-label">Active Matches</div>
                 <div class="price price-monthly">$199</div>
                 <div class="price price-annual" style="display:none;">$167</div>
                 <div class="period">per month</div>
                 <div class="annual-savings">&nbsp;</div>
                 <ul>
                     <li>Up to 3 active client matches per month</li>
-                    <li>Standard search ranking position</li>
-                    <li>Basic profile listing with designations</li>
-                    <li>Email support (48hr response)</li>
-                    <li>Monthly performance reports</li>
-                    <li>CIRO verification badge</li>
-                    <li>Basic analytics dashboard</li>
+                    <li>Standard search ranking</li>
+                    <li>Verified profile with basic listing</li>
+                    <li>Basic dashboard with match stats</li>
+                    <li>1 testimonial display slot</li>
+                    <li>Email support</li>
                 </ul>
                 <a href="join-as-advisor.html" class="card-btn">Get Started</a>
             </div>
             <div class="pricing-card popular">
                 <div class="popular-badge">Most Popular</div>
                 <h3>Professional</h3>
+                <div class="match-count">7</div>
+                <div class="match-count-label">Active Matches</div>
                 <div class="price price-monthly">$299</div>
                 <div class="price price-annual" style="display:none;">$251</div>
                 <div class="period">per month</div>
                 <div class="annual-savings">&nbsp;</div>
                 <ul>
                     <li>Up to 7 active client matches per month</li>
-                    <li>Enhanced search ranking (top 30%)</li>
-                    <li>Featured profile with specializations</li>
-                    <li>Priority support (24hr response)</li>
-                    <li>Advanced dashboard analytics</li>
-                    <li>Client review showcase</li>
-                    <li>Profile performance optimization tips</li>
+                    <li>Enhanced search ranking</li>
+                    <li>Featured profile with specializations highlighted</li>
+                    <li>Profile view & click-through tracking</li>
+                    <li>Featured in weekly client digest emails</li>
+                    <li>Video introduction on profile</li>
+                    <li>CFA/CFP/CIM designation premium badge</li>
+                    <li>Priority new-client alerts</li>
+                    <li>Priority email support</li>
                 </ul>
                 <a href="join-as-advisor.html" class="card-btn">Get Started</a>
             </div>
             <div class="pricing-card">
                 <h3>Enterprise</h3>
+                <div class="match-count">15</div>
+                <div class="match-count-label">Active Matches</div>
                 <div class="price price-monthly">$599</div>
                 <div class="price price-annual" style="display:none;">$503</div>
                 <div class="period">per month</div>
                 <div class="annual-savings">&nbsp;</div>
                 <ul>
                     <li>Up to 15 active client matches per month</li>
-                    <li>Premium search ranking (top results)</li>
-                    <li>Showcase profile with case studies</li>
-                    <li>Dedicated account manager</li>
-                    <li>White-glove onboarding</li>
-                    <li>Direct founder access</li>
-                    <li>Custom analytics & quarterly reviews</li>
+                    <li>Premium search ranking — guaranteed top 3 results</li>
+                    <li>Showcase profile with case studies & unlimited testimonials</li>
+                    <li>Full conversion funnel analytics with source attribution</li>
+                    <li>Automated follow-up sequences for unconverted matches</li>
+                    <li>Quarterly benchmarking report vs. platform averages</li>
+                    <li>Featured spot in client digest emails</li>
+                    <li>Guided setup + profile optimization review</li>
+                    <li>AUM growth tracking dashboard</li>
+                    <li>Investor demographic insights</li>
+                    <li>Priority email + chat support</li>
                 </ul>
                 <a href="join-as-advisor.html" class="card-btn">Get Started</a>
             </div>
@@ -517,34 +531,40 @@
                     <td><i class="fas fa-check check-icon"></i></td>
                 </tr>
                 <tr>
-                    <td>Performance Analytics</td>
+                    <td>Conversion Analytics</td>
                     <td>Basic</td>
                     <td class="highlight-col">Advanced</td>
-                    <td>Custom + Quarterly Reviews</td>
+                    <td>Full Funnel</td>
                 </tr>
                 <tr>
-                    <td>Profile Optimization Tips</td>
+                    <td>Client Digest Emails</td>
+                    <td><i class="fas fa-times x-icon"></i></td>
+                    <td class="highlight-col"><i class="fas fa-check check-icon"></i></td>
+                    <td>Featured</td>
+                </tr>
+                <tr>
+                    <td>Video Introduction</td>
                     <td><i class="fas fa-times x-icon"></i></td>
                     <td class="highlight-col"><i class="fas fa-check check-icon"></i></td>
                     <td><i class="fas fa-check check-icon"></i></td>
                 </tr>
                 <tr>
+                    <td>Follow-up Sequences</td>
+                    <td><i class="fas fa-times x-icon"></i></td>
+                    <td class="highlight-col"><i class="fas fa-times x-icon"></i></td>
+                    <td><i class="fas fa-check check-icon"></i></td>
+                </tr>
+                <tr>
                     <td>Support</td>
-                    <td>Email (48hr)</td>
-                    <td class="highlight-col">Priority (24hr)</td>
-                    <td>Dedicated Account Manager</td>
+                    <td>Email</td>
+                    <td class="highlight-col">Priority email</td>
+                    <td>Priority email + chat</td>
                 </tr>
                 <tr>
                     <td>Onboarding</td>
                     <td>Self-serve</td>
                     <td class="highlight-col">Guided setup</td>
-                    <td>White-glove</td>
-                </tr>
-                <tr>
-                    <td>Direct Founder Access</td>
-                    <td><i class="fas fa-times x-icon"></i></td>
-                    <td class="highlight-col"><i class="fas fa-times x-icon"></i></td>
-                    <td><i class="fas fa-check check-icon"></i></td>
+                    <td>Guided setup + profile optimization</td>
                 </tr>
             </tbody>
         </table>
