@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- GA4 not configured yet -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - CanadaInvesting</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white min-h-screen">
+    <script>
+        (function() {
+            const token = localStorage.getItem('advisor_token');
+            const user = JSON.parse(localStorage.getItem('advisor_user') || '{}');
+            if (!token || user.userType !== 'admin') {
+                window.location.href = '/advisor-login';
+            }
+        })();
+    </script>
+
+    <nav class="bg-gray-800 border-b border-gray-700 px-6 py-4 flex items-center justify-between">
+        <div class="flex items-center gap-4">
+            <span class="text-xl font-bold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">CanadaInvesting Admin</span>
+        </div>
+        <div class="flex items-center gap-4">
+            <span id="adminEmail" class="text-sm text-gray-400"></span>
+            <button onclick="logout()" class="text-sm bg-indigo-600 hover:bg-indigo-700 px-3 py-1.5 rounded">Logout</button>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-6 py-8">
+        <!-- Stats Cards -->
+        <section class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-8">
+            <div class="bg-gray-800 rounded-xl p-5 border border-gray-700">
+                <p class="text-gray-400 text-sm">Registered Users</p>
+                <p id="statUsers" class="text-3xl font-bold mt-1">--</p>
+            </div>
+            <div class="bg-gray-800 rounded-xl p-5 border border-gray-700">
+                <p class="text-gray-400 text-sm">Total Advisors</p>
+                <p id="statProfessionals" class="text-3xl font-bold mt-1">--</p>
+                <p id="statVerified" class="text-xs text-green-400 mt-1"></p>
+            </div>
+            <div class="bg-gray-800 rounded-xl p-5 border border-gray-700">
+                <p class="text-gray-400 text-sm">Total Matches</p>
+                <p id="statMatches" class="text-3xl font-bold mt-1">--</p>
+            </div>
+            <div class="bg-gray-800 rounded-xl p-5 border border-gray-700">
+                <p class="text-gray-400 text-sm">MRR</p>
+                <p id="statMRR" class="text-3xl font-bold mt-1 text-green-400">--</p>
+            </div>
+            <div class="bg-gray-800 rounded-xl p-5 border border-gray-700">
+                <p class="text-gray-400 text-sm">Scraped Advisors</p>
+                <p id="statScraped" class="text-3xl font-bold mt-1">--</p>
+                <p id="statScrapedEmail" class="text-xs text-green-400 mt-1"></p>
+            </div>
+            <div class="bg-gray-800 rounded-xl p-5 border border-gray-700">
+                <p class="text-gray-400 text-sm">Enriched</p>
+                <p id="statEnriched" class="text-3xl font-bold mt-1 text-purple-400">--</p>
+            </div>
+        </section>
+
+        <!-- Tab Navigation -->
+        <div class="flex flex-wrap gap-2 mb-6 border-b border-gray-700 pb-3">
+            <button onclick="switchTab('scrape')" data-tab="scrape" class="tab-btn px-4 py-2 rounded-t text-sm font-medium bg-indigo-600">Scrape & Enrichment</button>
+            <button onclick="switchTab('outreach')" data-tab="outreach" class="tab-btn px-4 py-2 rounded-t text-sm font-medium bg-gray-700 hover:bg-gray-600">Outreach</button>
+            <button onclick="switchTab('campaigns')" data-tab="campaigns" class="tab-btn px-4 py-2 rounded-t text-sm font-medium bg-gray-700 hover:bg-gray-600">Campaigns</button>
+            <button onclick="switchTab('claims')" data-tab="claims" class="tab-btn px-4 py-2 rounded-t text-sm font-medium bg-gray-700 hover:bg-gray-600">Pending Claims</button>
+            <button onclick="switchTab('referrals')" data-tab="referrals" class="tab-btn px-4 py-2 rounded-t text-sm font-medium bg-gray-700 hover:bg-gray-600">Referrals</button>
+            <button onclick="switchTab('professionals')" data-tab="professionals" class="tab-btn px-4 py-2 rounded-t text-sm font-medium bg-gray-700 hover:bg-gray-600">Advisor Management</button>
+        </div>
+
+        <!-- ==================== SCRAPE & ENRICHMENT TAB ==================== -->
+        <section id="tab-scrape">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-xl font-semibold">Scrape & Enrichment Monitor</h2>
+                <div class="flex gap-2">
+                    <select id="scrapeSource" class="bg-gray-800 border border-gray-600 rounded px-3 py-1.5 text-sm">
+                        <option value="all">All Sources</option>
+                        <option value="fpcanada">FP Canada</option>
+                        <option value="osc">OSC Ontario</option>
+                        <option value="pmac">PMAC</option>
+                        <option value="advocis">Advocis</option>
+                        <option value="fsra">FSRA Ontario</option>
+                    </select>
+                    <button onclick="triggerScrape()" class="text-sm bg-green-600 hover:bg-green-700 px-4 py-2 rounded">Trigger Scrape</button>
+                    <button onclick="loadScrapeJobs()" class="text-sm bg-gray-600 hover:bg-gray-500 px-3 py-2 rounded">Refresh</button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                <div class="bg-gray-800 rounded-xl p-4 border border-gray-700">
+                    <p class="text-gray-400 text-xs">Enriched Today</p>
+                    <p id="enrichToday" class="text-2xl font-bold mt-1">--</p>
+                </div>
+                <div class="bg-gray-800 rounded-xl p-4 border border-gray-700">
+                    <p class="text-gray-400 text-xs">Enriched This Week</p>
+                    <p id="enrichWeek" class="text-2xl font-bold mt-1">--</p>
+                </div>
+                <div class="bg-gray-800 rounded-xl p-4 border border-gray-700">
+                    <p class="text-gray-400 text-xs">Hit Rate</p>
+                    <p id="enrichHitRate" class="text-2xl font-bold mt-1 text-green-400">--</p>
+                </div>
+                <div class="bg-gray-800 rounded-xl p-4 border border-gray-700">
+                    <p class="text-gray-400 text-xs">Pending Enrichment</p>
+                    <p id="enrichPending" class="text-2xl font-bold mt-1 text-yellow-400">--</p>
+                </div>
+            </div>
+
+            <div class="bg-gray-800 rounded-xl border border-gray-700 overflow-x-auto">
+                <table class="w-full text-sm">
+                    <thead class="text-gray-400 border-b border-gray-700">
+                        <tr>
+                            <th class="text-left px-4 py-3">Source</th>
+                            <th class="text-left px-4 py-3">Status</th>
+                            <th class="text-left px-4 py-3">Found</th>
+                            <th class="text-left px-4 py-3">Inserted</th>
+                            <th class="text-left px-4 py-3">Skipped</th>
+                            <th class="text-left px-4 py-3">Started</th>
+                            <th class="text-left px-4 py-3">Completed</th>
+                            <th class="text-left px-4 py-3">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="scrapeJobsBody" class="divide-y divide-gray-700"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ==================== OUTREACH TAB ==================== -->
+        <section id="tab-outreach" class="hidden">
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-6">
+                <div class="bg-gray-800 rounded-xl p-5 border border-gray-700">
+                    <p class="text-gray-400 text-sm">Total Sent</p>
+                    <p id="statSent" class="text-3xl font-bold mt-1">--</p>
+                </div>
+                <div class="bg-gray-800 rounded-xl p-5 border border-gray-700">
+                    <p class="text-gray-400 text-sm">Opened</p>
+                    <p id="statOpened" class="text-3xl font-bold mt-1 text-blue-400">--</p>
+                    <p id="statOpenRate" class="text-xs text-gray-500 mt-1"></p>
+                </div>
+                <div class="bg-gray-800 rounded-xl p-5 border border-gray-700">
+                    <p class="text-gray-400 text-sm">Clicked</p>
+                    <p id="statClicked" class="text-3xl font-bold mt-1 text-green-400">--</p>
+                    <p id="statClickRate" class="text-xs text-gray-500 mt-1"></p>
+                </div>
+                <div class="bg-gray-800 rounded-xl p-5 border border-gray-700">
+                    <p class="text-gray-400 text-sm">Bounced</p>
+                    <p id="statBounced" class="text-3xl font-bold mt-1 text-red-400">--</p>
+                    <p id="statBounceRate" class="text-xs text-gray-500 mt-1"></p>
+                </div>
+                <div class="bg-gray-800 rounded-xl p-5 border border-gray-700">
+                    <p class="text-gray-400 text-sm">Unsubscribed</p>
+                    <p id="statUnsub" class="text-3xl font-bold mt-1 text-yellow-400">--</p>
+                </div>
+            </div>
+
+            <h2 class="text-xl font-semibold mb-4">Scraped Data Browser</h2>
+            <div id="advisorsTab">
+                <div class="flex gap-3 mb-3">
+                    <select id="advisorProvFilter" onchange="loadScrapedAdvisors()" class="bg-gray-800 border border-gray-600 rounded px-3 py-1.5 text-sm">
+                        <option value="">All Provinces</option>
+                        <option value="BC">BC</option><option value="AB">AB</option><option value="SK">SK</option>
+                        <option value="MB">MB</option><option value="ON">ON</option><option value="QC">QC</option>
+                        <option value="NS">NS</option><option value="NB">NB</option><option value="PE">PE</option><option value="NL">NL</option>
+                    </select>
+                    <input id="advisorCityFilter" type="text" placeholder="Filter by city..." onchange="loadScrapedAdvisors()" class="bg-gray-800 border border-gray-600 rounded px-3 py-1.5 text-sm">
+                </div>
+                <div class="bg-gray-800 rounded-xl border border-gray-700 overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead class="text-gray-400 border-b border-gray-700">
+                            <tr>
+                                <th class="text-left px-4 py-3">Name</th>
+                                <th class="text-left px-4 py-3">Province</th>
+                                <th class="text-left px-4 py-3">City</th>
+                                <th class="text-left px-4 py-3">Firm</th>
+                                <th class="text-left px-4 py-3">Designations</th>
+                                <th class="text-left px-4 py-3">Source</th>
+                                <th class="text-left px-4 py-3">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="scrapedAdvisorsBody" class="divide-y divide-gray-700"></tbody>
+                    </table>
+                </div>
+                <div id="advisorPag" class="flex items-center justify-between mt-3 text-sm text-gray-400"></div>
+            </div>
+        </section>
+
+        <!-- ==================== CAMPAIGNS TAB ==================== -->
+        <section id="tab-campaigns" class="hidden">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-xl font-semibold">Campaign Management</h2>
+                <button onclick="showCreateForm()" class="text-sm bg-indigo-600 hover:bg-indigo-700 px-4 py-2 rounded">+ New Campaign</button>
+            </div>
+
+            <div id="createForm" class="hidden bg-gray-800 rounded-xl border border-gray-700 p-6 mb-4">
+                <h3 class="text-lg font-semibold mb-4">Create New Campaign</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm text-gray-400 mb-1">Campaign Name</label>
+                        <input id="campName" type="text" placeholder="e.g. ON Advisor Outreach Q1" class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-sm text-gray-400 mb-1">Type</label>
+                        <select id="campType" onchange="updateTemplateDefaults()" class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-sm">
+                            <option value="advisor">Advisor Acquisition</option>
+                            <option value="investor">Investor Acquisition</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm text-gray-400 mb-1">Target Provinces (comma-separated)</label>
+                        <input id="campProvinces" type="text" placeholder="e.g. BC, ON, QC" class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-sm text-gray-400 mb-1">Daily Limit</label>
+                        <input id="campDailyLimit" type="number" value="50" class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-sm">
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-sm text-gray-400 mb-1">Subject Template</label>
+                        <input id="campSubject" type="text" class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-sm">
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-sm text-gray-400 mb-1">Body Template (HTML)</label>
+                        <textarea id="campBody" rows="8" class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-sm font-mono"></textarea>
+                        <p class="text-xs text-gray-500 mt-1">Variables: {{advisor_name}}, {{city}}, {{province}}, {{investor_count}}, {{active_requests}}, {{advisor_count}}, {{platform_url}}</p>
+                    </div>
+                </div>
+                <div class="flex gap-3 mt-4">
+                    <button onclick="createCampaign()" class="bg-green-600 hover:bg-green-700 px-4 py-2 rounded text-sm">Create Campaign</button>
+                    <button onclick="hideCreateForm()" class="bg-gray-600 hover:bg-gray-700 px-4 py-2 rounded text-sm">Cancel</button>
+                </div>
+            </div>
+
+            <div class="bg-gray-800 rounded-xl border border-gray-700 overflow-x-auto">
+                <table class="w-full text-sm">
+                    <thead class="text-gray-400 border-b border-gray-700">
+                        <tr>
+                            <th class="text-left px-4 py-3">Name</th>
+                            <th class="text-left px-4 py-3">Type</th>
+                            <th class="text-left px-4 py-3">Status</th>
+                            <th class="text-left px-4 py-3">Sent</th>
+                            <th class="text-left px-4 py-3">Opened</th>
+                            <th class="text-left px-4 py-3">Clicked</th>
+                            <th class="text-left px-4 py-3">Converted</th>
+                            <th class="text-left px-4 py-3">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="campaignTableBody" class="divide-y divide-gray-700"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ==================== CLAIMS TAB ==================== -->
+        <section id="tab-claims" class="hidden">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-xl font-semibold">Pending Profile Claims</h2>
+                <button onclick="loadClaims()" class="text-sm bg-gray-600 hover:bg-gray-500 px-3 py-2 rounded">Refresh</button>
+            </div>
+            <div class="bg-gray-800 rounded-xl border border-gray-700 overflow-x-auto">
+                <table class="w-full text-sm">
+                    <thead class="text-gray-400 border-b border-gray-700">
+                        <tr>
+                            <th class="text-left px-4 py-3">Date</th>
+                            <th class="text-left px-4 py-3">Advisor Name</th>
+                            <th class="text-left px-4 py-3">Email</th>
+                            <th class="text-left px-4 py-3">Firm</th>
+                            <th class="text-left px-4 py-3">Province</th>
+                            <th class="text-left px-4 py-3">Status</th>
+                            <th class="text-left px-4 py-3">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="claimsTableBody" class="divide-y divide-gray-700"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ==================== REFERRALS TAB ==================== -->
+        <section id="tab-referrals" class="hidden">
+            <h2 class="text-xl font-semibold mb-4">Referral Statistics</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                <div class="bg-gray-800 rounded-xl p-5 border border-gray-700">
+                    <p class="text-gray-400 text-sm">Total Referrals</p>
+                    <p id="refTotal" class="text-3xl font-bold mt-1">--</p>
+                </div>
+                <div class="bg-gray-800 rounded-xl p-5 border border-gray-700">
+                    <p class="text-gray-400 text-sm">Converted</p>
+                    <p id="refConverted" class="text-3xl font-bold mt-1 text-green-400">--</p>
+                </div>
+                <div class="bg-gray-800 rounded-xl p-5 border border-gray-700">
+                    <p class="text-gray-400 text-sm">Conversion Rate</p>
+                    <p id="refConvRate" class="text-3xl font-bold mt-1 text-purple-400">--</p>
+                </div>
+                <div class="bg-gray-800 rounded-xl p-5 border border-gray-700">
+                    <p class="text-gray-400 text-sm">Revenue from Referrals</p>
+                    <p id="refRevenue" class="text-3xl font-bold mt-1 text-green-400">--</p>
+                </div>
+            </div>
+            <div class="bg-gray-800 rounded-xl border border-gray-700 overflow-x-auto">
+                <table class="w-full text-sm">
+                    <thead class="text-gray-400 border-b border-gray-700">
+                        <tr>
+                            <th class="text-left px-4 py-3">Date</th>
+                            <th class="text-left px-4 py-3">Referrer</th>
+                            <th class="text-left px-4 py-3">Referred</th>
+                            <th class="text-left px-4 py-3">Status</th>
+                            <th class="text-left px-4 py-3">Revenue</th>
+                        </tr>
+                    </thead>
+                    <tbody id="referralsTableBody" class="divide-y divide-gray-700"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ==================== PROFESSIONAL MANAGEMENT TAB ==================== -->
+        <section id="tab-professionals" class="hidden">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-xl font-semibold">Advisor Management</h2>
+                <select id="profFilter" onchange="loadProfessionals()" class="bg-gray-800 border border-gray-600 rounded px-3 py-1.5 text-sm">
+                    <option value="">All Advisors</option>
+                    <option value="true">Verified</option>
+                    <option value="false">Unverified</option>
+                </select>
+            </div>
+            <div class="bg-gray-800 rounded-xl border border-gray-700 overflow-x-auto">
+                <table class="w-full text-sm">
+                    <thead class="text-gray-400 border-b border-gray-700">
+                        <tr>
+                            <th class="text-left px-4 py-3">Name</th>
+                            <th class="text-left px-4 py-3">Email</th>
+                            <th class="text-left px-4 py-3">Firm</th>
+                            <th class="text-left px-4 py-3">Province</th>
+                            <th class="text-left px-4 py-3">Verified</th>
+                            <th class="text-left px-4 py-3">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="profTableBody" class="divide-y divide-gray-700"></tbody>
+                </table>
+            </div>
+            <div id="profPagination" class="flex items-center justify-between mt-3 text-sm text-gray-400"></div>
+        </section>
+    </main>
+
+    <script>
+        const API = 'https://canadainvesting-backend-production.up.railway.app';
+        const token = localStorage.getItem('advisor_token');
+        const headers = { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' };
+        const user = JSON.parse(localStorage.getItem('advisor_user') || '{}');
+        document.getElementById('adminEmail').textContent = user.email || '';
+
+        function logout() {
+            localStorage.removeItem('advisor_token');
+            localStorage.removeItem('advisor_user');
+            window.location.href = '/advisor-login';
+        }
+        function fmtDate(d) {
+            if (!d) return '--';
+            return new Date(d).toLocaleDateString('en-CA', { month: 'short', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+        }
+        function fmtShortDate(d) {
+            if (!d) return '--';
+            return new Date(d).toLocaleDateString('en-CA', { month: 'short', day: 'numeric', year: 'numeric' });
+        }
+        function badge(text, color) {
+            const colors = {
+                green: 'bg-green-900 text-green-300', red: 'bg-red-900 text-red-300',
+                yellow: 'bg-yellow-900 text-yellow-300', blue: 'bg-blue-900 text-blue-300',
+                purple: 'bg-purple-900 text-purple-300', gray: 'bg-gray-700 text-gray-300',
+            };
+            return `<span class="px-2 py-0.5 rounded-full text-xs ${colors[color] || colors.gray}">${text}</span>`;
+        }
+        function pct(n, d) { return d > 0 ? ((n / d) * 100).toFixed(1) + '%' : '0%'; }
+        function num(n) { return (n || 0).toLocaleString(); }
+
+        function switchTab(tab) {
+            document.querySelectorAll('[id^="tab-"]').forEach(el => el.classList.add('hidden'));
+            document.getElementById('tab-' + tab).classList.remove('hidden');
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.className = btn.dataset.tab === tab
+                    ? 'tab-btn px-4 py-2 rounded-t text-sm font-medium bg-indigo-600'
+                    : 'tab-btn px-4 py-2 rounded-t text-sm font-medium bg-gray-700 hover:bg-gray-600';
+            });
+            if (tab === 'outreach') { loadOutreachStats(); loadScrapedAdvisors(); }
+            if (tab === 'campaigns') loadCampaigns();
+            if (tab === 'claims') loadClaims();
+            if (tab === 'referrals') loadReferrals();
+            if (tab === 'professionals') loadProfessionals();
+        }
+
+        async function loadStats() {
+            try {
+                const res = await fetch(`${API}/api/admin/dashboard-stats`, { headers });
+                const data = await res.json();
+                if (!data.success) return;
+                const s = data.stats;
+                document.getElementById('statUsers').textContent = num(s.total_users || s.total_sme_requests || 0);
+                document.getElementById('statProfessionals').textContent = num(s.total_advisors);
+                document.getElementById('statVerified').textContent = `${num(s.verified_advisors)} verified`;
+                document.getElementById('statMatches').textContent = num(s.total_matches);
+                document.getElementById('statMRR').textContent = s.mrr ? `$${num(s.mrr)}` : '$0';
+                document.getElementById('statScraped').textContent = num(s.total_scraped || s.total_advisors);
+                document.getElementById('statScrapedEmail').textContent = s.with_email ? `${num(s.with_email)} with email` : '';
+                document.getElementById('statEnriched').textContent = num(s.total_enriched || 0);
+            } catch (e) { console.error('Stats error:', e); }
+        }
+
+        // ---- Scrape & Enrichment (same backend for investing) ----
+        async function loadScrapeJobs() {
+            try {
+                const res = await fetch(`${API}/api/scrape/status`);
+                const data = await res.json();
+                const tbody = document.getElementById('scrapeJobsBody');
+                const jobs = data.jobs || [];
+                if (jobs.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="8" class="px-4 py-6 text-center text-gray-500">No scrape jobs yet</td></tr>';
+                    return;
+                }
+                tbody.innerHTML = jobs.map(j => {
+                    const sc = { running: 'yellow', completed: 'green', failed: 'red', partial: 'blue' };
+                    return `<tr class="hover:bg-gray-750">
+                        <td class="px-4 py-3 font-medium">${j.source}</td>
+                        <td class="px-4 py-3">${badge(j.status, sc[j.status])}</td>
+                        <td class="px-4 py-3">${j.records_found || 0}</td>
+                        <td class="px-4 py-3 text-green-400">${j.records_inserted || 0}</td>
+                        <td class="px-4 py-3 text-gray-500">${j.records_skipped || 0}</td>
+                        <td class="px-4 py-3 text-gray-400">${fmtDate(j.started_at)}</td>
+                        <td class="px-4 py-3 text-gray-400">${fmtDate(j.completed_at)}</td>
+                        <td class="px-4 py-3">
+                            <button onclick="triggerScrape('${j.source}')" class="text-xs px-2 py-1 rounded bg-green-700 hover:bg-green-600">Re-run</button>
+                        </td>
+                    </tr>`;
+                }).join('');
+            } catch (e) {
+                console.error('Scrape jobs error:', e);
+                document.getElementById('scrapeJobsBody').innerHTML = '<tr><td colspan="8" class="px-4 py-6 text-center text-gray-500">Unable to connect to backend</td></tr>';
+            }
+        }
+
+        async function triggerScrape(source) {
+            const src = source || document.getElementById('scrapeSource').value;
+            if (src === 'all' && !confirm('Trigger scrape for ALL sources?')) return;
+            try {
+                const endpoint = `${API}/api/scrape/trigger/${src}`;
+                const res = await fetch(endpoint, { method: 'POST', headers });
+                const data = await res.json();
+                alert(data.status === 'success' || data.success ? `Scrape triggered for ${src}` : 'Error: ' + (data.error || data.message));
+                setTimeout(loadScrapeJobs, 2000);
+            } catch (e) { alert('Failed: ' + e.message); }
+        }
+
+        async function loadEnrichmentStats() {
+            try {
+                const res = await fetch(`${API}/api/enrichment/stats`);
+                const data = await res.json();
+                if (data.status === 'success' || data.success) {
+                    const s = data.stats || data;
+                    document.getElementById('enrichToday').textContent = num(s.enriched_today);
+                    document.getElementById('enrichWeek').textContent = num(s.enriched_this_week);
+                    document.getElementById('enrichHitRate').textContent = s.hit_rate_pct || pct(s.hits, s.attempts) || '--';
+                    document.getElementById('enrichPending').textContent = num(s.pending);
+                }
+            } catch (e) { console.error('Enrichment stats error:', e); }
+        }
+
+        async function loadOutreachStats() {
+            try {
+                const res = await fetch(`${API}/api/admin/outreach/stats`, { headers });
+                const data = await res.json();
+                if (!data.success) return;
+                const s = data.stats;
+                document.getElementById('statSent').textContent = num(s.total_sent);
+                document.getElementById('statOpened').textContent = num(s.total_opened);
+                document.getElementById('statOpenRate').textContent = `${pct(s.total_opened, s.total_delivered)} open rate`;
+                document.getElementById('statClicked').textContent = num(s.total_clicked);
+                document.getElementById('statClickRate').textContent = `${pct(s.total_clicked, s.total_delivered)} click rate`;
+                document.getElementById('statBounced').textContent = num(s.total_bounced);
+                document.getElementById('statBounceRate').textContent = `${pct(s.total_bounced, s.total_sent)} bounce rate`;
+                document.getElementById('statUnsub').textContent = num(s.total_unsubscribes);
+            } catch (e) { console.error('Outreach stats error:', e); }
+        }
+
+        let advisorPage = 1;
+        async function loadScrapedAdvisors(page) {
+            if (page) advisorPage = page;
+            const prov = document.getElementById('advisorProvFilter').value;
+            const city = document.getElementById('advisorCityFilter').value;
+            const qs = `page=${advisorPage}&limit=20${prov ? `&province=${prov}` : ''}${city ? `&city=${city}` : ''}`;
+            try {
+                const res = await fetch(`${API}/api/admin/outreach/scraped-advisors?${qs}`, { headers });
+                const data = await res.json();
+                if (!data.success) return;
+                const tbody = document.getElementById('scrapedAdvisorsBody');
+                const advisors = data.advisors || [];
+                if (advisors.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="7" class="px-4 py-6 text-center text-gray-500">No scraped advisors found</td></tr>';
+                } else {
+                    tbody.innerHTML = advisors.map(c => `<tr class="hover:bg-gray-750">
+                        <td class="px-4 py-3">${c.full_name || `${c.first_name || ''} ${c.last_name || ''}`.trim()}</td>
+                        <td class="px-4 py-3">${c.province || '--'}</td>
+                        <td class="px-4 py-3">${c.city || '--'}</td>
+                        <td class="px-4 py-3 text-gray-400">${c.firm_name || '--'}</td>
+                        <td class="px-4 py-3">${(c.designations || []).join(', ') || '--'}</td>
+                        <td class="px-4 py-3">${badge(c.source, 'blue')}</td>
+                        <td class="px-4 py-3">${badge(c.status, c.status === 'enriched' ? 'green' : c.status === 'contacted' ? 'blue' : 'gray')}</td>
+                    </tr>`).join('');
+                }
+                const tp = Math.ceil((data.total || 0) / 20);
+                document.getElementById('advisorPag').innerHTML = `
+                    <span>Page ${advisorPage} of ${tp} (${num(data.total)} total)</span>
+                    <div class="flex gap-2">
+                        <button onclick="loadScrapedAdvisors(${advisorPage - 1})" ${advisorPage <= 1 ? 'disabled class="opacity-30"' : 'class="hover:text-white"'}>&larr; Prev</button>
+                        <button onclick="loadScrapedAdvisors(${advisorPage + 1})" ${advisorPage >= tp ? 'disabled class="opacity-30"' : 'class="hover:text-white"'}>Next &rarr;</button>
+                    </div>`;
+            } catch (e) { console.error('Scraped advisors error:', e); }
+        }
+
+        // ---- Campaigns ----
+        const DEFAULT_ADVISOR_SUBJECT = 'Investors in {{city}} are looking for advisors like you';
+        const DEFAULT_ADVISOR_BODY = `<div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;color:#333;"><h2 style="color:#1e293b;">Hi {{advisor_name}},</h2><p>Canadians are actively searching for trusted financial advisors in {{province}}.</p><p>CanadaInvesting uses AI to match investors with pre-verified advisors based on their needs, risk tolerance, and investment goals.</p><div style="background:#f8fafc;border-radius:8px;padding:20px;margin:20px 0;"><p style="margin:0 0 12px 0;font-weight:bold;">Why Advisors join CanadaInvesting:</p><ul style="margin:0;padding-left:20px;"><li>AI-matched leads based on your designations (CFA, CFP, CIM)</li><li>Serve clients anywhere in Canada</li><li>Zero marketing spend — clients come to you</li><li>Verified professional profile with trust badge</li></ul></div><p style="text-align:center;margin:30px 0;"><a href="{{platform_url}}/join-as-advisor" style="display:inline-block;background:#667eea;color:#fff;padding:14px 28px;border-radius:8px;text-decoration:none;font-weight:bold;">Claim Your Free Profile</a></p><p style="color:#666;font-size:14px;">Best regards,<br>Arthur Kostaras<br>Founder, CanadaInvesting</p></div>`;
+        const DEFAULT_INVESTOR_SUBJECT = 'Find your ideal financial advisor in minutes';
+        const DEFAULT_INVESTOR_BODY = `<div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;color:#333;"><h2 style="color:#1e293b;">Hi there,</h2><p>Finding the right financial advisor shouldn't be a guessing game.</p><p>CanadaInvesting uses AI to match you with pre-verified advisors in {{province}} based on your investment goals, risk tolerance, and preferences.</p><div style="background:#f8fafc;border-radius:8px;padding:20px;margin:20px 0;"><p style="margin:0 0 12px 0;font-weight:bold;">How it works:</p><ol style="margin:0;padding-left:20px;"><li>Tell us about your investment needs (2 minutes)</li><li>Our AI matches you with the top 3 advisors</li><li>Connect directly — no middleman</li></ol></div><p style="text-align:center;margin:30px 0;"><a href="{{platform_url}}/find-advisor" style="display:inline-block;background:#667eea;color:#fff;padding:14px 28px;border-radius:8px;text-decoration:none;font-weight:bold;">Find My Advisor Match</a></p><p style="color:#666;font-size:14px;">Best regards,<br>Arthur Kostaras<br>Founder, CanadaInvesting</p></div>`;
+
+        function updateTemplateDefaults() {
+            const type = document.getElementById('campType').value;
+            document.getElementById('campSubject').value = type === 'advisor' ? DEFAULT_ADVISOR_SUBJECT : DEFAULT_INVESTOR_SUBJECT;
+            document.getElementById('campBody').value = type === 'advisor' ? DEFAULT_ADVISOR_BODY : DEFAULT_INVESTOR_BODY;
+        }
+        function showCreateForm() { document.getElementById('createForm').classList.remove('hidden'); updateTemplateDefaults(); }
+        function hideCreateForm() { document.getElementById('createForm').classList.add('hidden'); }
+
+        async function loadCampaigns() {
+            try {
+                const res = await fetch(`${API}/api/admin/outreach/campaigns`, { headers });
+                const data = await res.json();
+                if (!data.success) return;
+                const tbody = document.getElementById('campaignTableBody');
+                if (data.campaigns.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="8" class="px-4 py-6 text-center text-gray-500">No campaigns yet</td></tr>';
+                    return;
+                }
+                tbody.innerHTML = data.campaigns.map(c => {
+                    const sc = { draft: 'gray', active: 'green', paused: 'yellow', completed: 'blue' };
+                    const tc = { advisor: 'purple', investor: 'blue' };
+                    return `<tr class="hover:bg-gray-750">
+                        <td class="px-4 py-3 font-medium">${c.name}</td>
+                        <td class="px-4 py-3">${badge(c.type.toUpperCase(), tc[c.type])}</td>
+                        <td class="px-4 py-3">${badge(c.status, sc[c.status])}</td>
+                        <td class="px-4 py-3">${c.total_sent}</td>
+                        <td class="px-4 py-3">${c.total_opened} <span class="text-gray-500 text-xs">(${pct(c.total_opened, c.total_delivered)})</span></td>
+                        <td class="px-4 py-3">${c.total_clicked}</td>
+                        <td class="px-4 py-3">${c.total_converted}</td>
+                        <td class="px-4 py-3">
+                            <div class="flex gap-1">
+                                ${c.status === 'draft' ? `<button onclick="launchCampaign(${c.id})" class="text-xs px-2 py-1 rounded bg-green-700 hover:bg-green-600">Launch</button>` : ''}
+                                ${c.status === 'active' ? `<button onclick="pauseCampaign(${c.id})" class="text-xs px-2 py-1 rounded bg-yellow-700 hover:bg-yellow-600">Pause</button>` : ''}
+                                ${c.status === 'paused' ? `<button onclick="launchCampaign(${c.id})" class="text-xs px-2 py-1 rounded bg-green-700 hover:bg-green-600">Resume</button>` : ''}
+                                <button onclick="previewCampaign(${c.id})" class="text-xs px-2 py-1 rounded bg-gray-600 hover:bg-gray-500">Preview</button>
+                                <button onclick="testSendCampaign(${c.id})" class="text-xs px-2 py-1 rounded bg-indigo-700 hover:bg-indigo-600">Test</button>
+                            </div>
+                        </td>
+                    </tr>`;
+                }).join('');
+            } catch (e) { console.error('Campaigns error:', e); }
+        }
+
+        async function createCampaign() {
+            const provinces = document.getElementById('campProvinces').value.split(',').map(p => p.trim()).filter(Boolean);
+            try {
+                const res = await fetch(`${API}/api/admin/outreach/campaigns`, {
+                    method: 'POST', headers,
+                    body: JSON.stringify({
+                        name: document.getElementById('campName').value,
+                        type: document.getElementById('campType').value,
+                        subjectTemplate: document.getElementById('campSubject').value,
+                        bodyTemplate: document.getElementById('campBody').value,
+                        targetProvinces: provinces.length > 0 ? provinces : null,
+                        dailyLimit: parseInt(document.getElementById('campDailyLimit').value) || 50,
+                    }),
+                });
+                const data = await res.json();
+                if (data.success) { hideCreateForm(); loadCampaigns(); } else { alert('Error: ' + (data.error || 'Unknown')); }
+            } catch (e) { alert('Failed: ' + e.message); }
+        }
+
+        async function launchCampaign(id) {
+            if (!confirm('Launch this campaign? Emails will start sending.')) return;
+            try {
+                const res = await fetch(`${API}/api/admin/outreach/campaigns/${id}/launch`, { method: 'POST', headers });
+                const data = await res.json();
+                alert(data.success ? `Campaign launched! ${data.queued} emails queued.` : 'Error: ' + data.error);
+                loadCampaigns();
+            } catch (e) { alert('Failed: ' + e.message); }
+        }
+
+        async function pauseCampaign(id) {
+            try { await fetch(`${API}/api/admin/outreach/campaigns/${id}/pause`, { method: 'POST', headers }); loadCampaigns(); }
+            catch (e) { alert('Failed: ' + e.message); }
+        }
+
+        async function previewCampaign(id) {
+            try {
+                const res = await fetch(`${API}/api/admin/outreach/campaigns/${id}/preview`, { method: 'POST', headers });
+                const data = await res.json();
+                if (data.success) {
+                    const w = window.open('', '_blank', 'width=700,height=600');
+                    w.document.write(`<html><head><title>Preview: ${data.preview.subject}</title></head><body><h3>${data.preview.subject}</h3><hr>${data.preview.body}</body></html>`);
+                }
+            } catch (e) { alert('Failed: ' + e.message); }
+        }
+
+        async function testSendCampaign(id) {
+            const email = prompt('Send test email to:', user.email);
+            if (!email) return;
+            try {
+                const res = await fetch(`${API}/api/admin/outreach/campaigns/${id}/test-send`, { method: 'POST', headers, body: JSON.stringify({ email }) });
+                const data = await res.json();
+                alert(data.success ? `Test email sent to ${data.sentTo}` : 'Error: ' + data.error);
+            } catch (e) { alert('Failed: ' + e.message); }
+        }
+
+        // ---- Claims ----
+        async function loadClaims() {
+            try {
+                const res = await fetch(`${API}/api/admin/claims/pending`, { headers });
+                const data = await res.json();
+                const tbody = document.getElementById('claimsTableBody');
+                const claims = data.claims || [];
+                if (claims.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="7" class="px-4 py-6 text-center text-gray-500">No pending claims</td></tr>';
+                    return;
+                }
+                tbody.innerHTML = claims.map(c => `<tr class="hover:bg-gray-750">
+                    <td class="px-4 py-3 text-gray-400">${fmtShortDate(c.created_at)}</td>
+                    <td class="px-4 py-3">${c.professional_name || c.advisor_name || '--'}</td>
+                    <td class="px-4 py-3">${c.email || '--'}</td>
+                    <td class="px-4 py-3">${c.firm_name || '--'}</td>
+                    <td class="px-4 py-3">${c.province || '--'}</td>
+                    <td class="px-4 py-3">${badge('Pending', 'yellow')}</td>
+                    <td class="px-4 py-3">
+                        <div class="flex gap-1">
+                            <button onclick="approveClaim(${c.id})" class="text-xs px-2 py-1 rounded bg-green-700 hover:bg-green-600">Approve</button>
+                            <button onclick="rejectClaim(${c.id})" class="text-xs px-2 py-1 rounded bg-red-700 hover:bg-red-600">Reject</button>
+                        </div>
+                    </td>
+                </tr>`).join('');
+            } catch (e) { console.error('Claims error:', e); }
+        }
+
+        async function approveClaim(id) {
+            if (!confirm('Approve this claim?')) return;
+            try { await fetch(`${API}/api/admin/claims/${id}/approve`, { method: 'POST', headers }); loadClaims(); loadStats(); }
+            catch (e) { alert('Failed: ' + e.message); }
+        }
+
+        async function rejectClaim(id) {
+            if (!confirm('Reject this claim?')) return;
+            try { await fetch(`${API}/api/admin/claims/${id}/reject`, { method: 'POST', headers }); loadClaims(); }
+            catch (e) { alert('Failed: ' + e.message); }
+        }
+
+        // ---- Referrals ----
+        async function loadReferrals() {
+            try {
+                const res = await fetch(`${API}/api/admin/referrals`, { headers });
+                const data = await res.json();
+                if (!data.success) return;
+                const s = data.stats || {};
+                document.getElementById('refTotal').textContent = num(s.total_referrals);
+                document.getElementById('refConverted').textContent = num(s.converted);
+                document.getElementById('refConvRate').textContent = pct(s.converted, s.total_referrals);
+                document.getElementById('refRevenue').textContent = s.revenue ? `$${num(s.revenue)}` : '$0';
+                const tbody = document.getElementById('referralsTableBody');
+                const refs = data.referrals || [];
+                if (refs.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="5" class="px-4 py-6 text-center text-gray-500">No referrals yet</td></tr>';
+                    return;
+                }
+                tbody.innerHTML = refs.map(r => `<tr class="hover:bg-gray-750">
+                    <td class="px-4 py-3 text-gray-400">${fmtShortDate(r.created_at)}</td>
+                    <td class="px-4 py-3">${r.referrer_name || r.referrer_email || '--'}</td>
+                    <td class="px-4 py-3">${r.referred_name || r.referred_email || '--'}</td>
+                    <td class="px-4 py-3">${badge(r.status, r.status === 'converted' ? 'green' : r.status === 'pending' ? 'yellow' : 'gray')}</td>
+                    <td class="px-4 py-3">${r.revenue ? `$${r.revenue}` : '--'}</td>
+                </tr>`).join('');
+            } catch (e) { console.error('Referrals error:', e); }
+        }
+
+        // ---- Professional Management ----
+        let profPage = 1;
+        async function loadProfessionals(page) {
+            if (page) profPage = page;
+            const filter = document.getElementById('profFilter').value;
+            const qs = `page=${profPage}&limit=10${filter ? `&verified=${filter}` : ''}`;
+            try {
+                const res = await fetch(`${API}/api/admin/advisors?${qs}`, { headers });
+                const data = await res.json();
+                if (!data.success) return;
+                const tbody = document.getElementById('profTableBody');
+                const advisors = data.advisors || [];
+                if (advisors.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="6" class="px-4 py-6 text-center text-gray-500">No advisors found</td></tr>';
+                } else {
+                    tbody.innerHTML = advisors.map(c => `<tr class="hover:bg-gray-750">
+                        <td class="px-4 py-3">${c.first_name || ''} ${c.last_name || ''}</td>
+                        <td class="px-4 py-3 text-gray-400">${c.email || '--'}</td>
+                        <td class="px-4 py-3">${c.firm_name || '--'}</td>
+                        <td class="px-4 py-3">${c.province || '--'}</td>
+                        <td class="px-4 py-3">${c.verification_status === 'verified' ? badge('Verified', 'green') : badge('Unverified', 'yellow')}</td>
+                        <td class="px-4 py-3">
+                            <button onclick="toggleVerify('${c.id}', ${c.verification_status !== 'verified'})"
+                                class="text-xs px-2 py-1 rounded ${c.verification_status === 'verified' ? 'bg-yellow-700 hover:bg-yellow-600' : 'bg-green-700 hover:bg-green-600'}">
+                                ${c.verification_status === 'verified' ? 'Unverify' : 'Verify'}
+                            </button>
+                        </td>
+                    </tr>`).join('');
+                }
+                const p = data.pagination || { page: 1, totalPages: 1, total: advisors.length };
+                document.getElementById('profPagination').innerHTML = `
+                    <span>Page ${p.page} of ${p.totalPages} (${p.total} total)</span>
+                    <div class="flex gap-2">
+                        <button onclick="loadProfessionals(${p.page - 1})" ${p.page <= 1 ? 'disabled class="opacity-30 cursor-default"' : 'class="hover:text-white"'}>&larr; Prev</button>
+                        <button onclick="loadProfessionals(${p.page + 1})" ${p.page >= p.totalPages ? 'disabled class="opacity-30 cursor-default"' : 'class="hover:text-white"'}>Next &rarr;</button>
+                    </div>`;
+            } catch (e) { console.error('Professionals error:', e); }
+        }
+
+        async function toggleVerify(id, verified) {
+            try {
+                await fetch(`${API}/api/admin/advisors/${id}/verify`, { method: 'POST', headers, body: JSON.stringify({ verified }) });
+                loadProfessionals(); loadStats();
+            } catch (e) { console.error('Verify error:', e); }
+        }
+
+        // ---- Init ----
+        loadStats();
+        loadScrapeJobs();
+        loadEnrichmentStats();
+    </script>
+</body>
+</html>
