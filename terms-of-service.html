@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Terms of Service - CanadaInvesting.app</title>
+    <meta name="description" content="CanadaInvesting Terms of Service - Legal terms and conditions for using our advisor matching platform in Canada.">
+    <link rel="canonical" href="https://canadainvesting.app/terms-of-service">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://canadainvesting.app/terms-of-service">
+    <meta property="og:title" content="Terms of Service | CanadaInvesting.app">
+    <meta property="og:description" content="Legal terms and conditions for using the CanadaInvesting advisor matching platform.">
+    <meta property="og:image" content="https://canadainvesting.app/icon-512.png">
+    <meta property="og:site_name" content="CanadaInvesting">
+    <meta property="og:locale" content="en_CA">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { --primary-purple: #667eea; --primary-violet: #764ba2; --accent-green: #059669; --dark-bg: #0a0a0a; --card-bg: #1a1a1a; --text-primary: #ffffff; --text-secondary: #a0a0a0; --border-color: #333333; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--dark-bg); color: var(--text-primary); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+        .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(0,0,0,0.4); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; height: 64px; }
+        .nav-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; color: white; font-weight: 700; font-size: 1.25rem; }
+        .nav-logo .maple { color: var(--primary-purple); font-size: 1.5rem; }
+        .nav-links { display: flex; align-items: center; gap: 24px; list-style: none; }
+        .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.3s; }
+        .nav-links a:hover { color: white; }
+        .nav-cta { background: white !important; color: var(--primary-purple) !important; padding: 10px 24px; border-radius: 8px; font-weight: 700 !important; }
+        .nav-toggle { display: none; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; padding: 4px; }
+        .nav-links.active { display: flex; }
+        .hero { padding: 140px 24px 60px; background: linear-gradient(135deg, var(--primary-purple) 0%, var(--primary-violet) 50%, #1e3a5f 100%); text-align: center; position: relative; overflow: hidden; }
+        .hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(ellipse at 30% 20%, rgba(255,255,255,0.1) 0%, transparent 60%); pointer-events: none; }
+        .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); padding: 10px 22px; border-radius: 50px; font-size: 0.85rem; font-weight: 500; margin-bottom: 28px; border: 1px solid rgba(255,255,255,0.2); position: relative; }
+        .hero h1 { font-size: 3rem; font-weight: 900; line-height: 1.1; margin-bottom: 16px; position: relative; }
+        .hero p { font-size: 1.15rem; max-width: 700px; margin: 0 auto; opacity: 0.9; line-height: 1.7; position: relative; }
+        .hero .dates { margin-top: 24px; background: rgba(255,255,255,0.15); border-radius: 10px; padding: 16px; display: inline-block; position: relative; }
+        .hero .dates p { font-size: 0.9rem; margin: 0; }
+        .content { max-width: 900px; margin: 0 auto; padding: 60px 24px; }
+        .section-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 16px; padding: 32px; margin-bottom: 24px; }
+        .section-card h2 { font-size: 1.6rem; font-weight: 900; margin-bottom: 20px; }
+        .section-card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 12px; margin-top: 24px; color: var(--primary-purple); }
+        .section-card p, .section-card li { color: var(--text-secondary); line-height: 1.7; font-size: 0.95rem; }
+        .section-card ul { list-style: none; }
+        .section-card ul li { padding: 6px 0 6px 24px; position: relative; }
+        .section-card ul li::before { content: "\f00c"; font-family: "Font Awesome 6 Free"; font-weight: 900; position: absolute; left: 0; color: var(--accent-green); font-size: 0.8rem; }
+        .highlight-box { background: rgba(102,126,234,0.1); border: 1px solid rgba(102,126,234,0.3); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .highlight-box h3 { color: var(--primary-purple); margin-top: 0; }
+        .highlight-box p, .highlight-box li { color: rgba(255,255,255,0.85); }
+        .warning-box { background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.3); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .warning-box h3 { color: #f59e0b; margin-top: 0; }
+        .warning-box p, .warning-box li { color: rgba(255,255,255,0.85); }
+        .danger-box { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .danger-box h3 { color: #ef4444; margin-top: 0; }
+        .danger-box p, .danger-box li { color: rgba(255,255,255,0.85); }
+        .guarantee-box { background: rgba(5,150,105,0.1); border: 1px solid rgba(5,150,105,0.3); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .guarantee-box h3 { color: var(--accent-green); margin-top: 0; }
+        .guarantee-box p, .guarantee-box li { color: rgba(255,255,255,0.85); }
+        .contact-box { background: linear-gradient(135deg, var(--primary-purple) 0%, var(--primary-violet) 100%); border-radius: 16px; padding: 32px; text-align: center; margin: 32px 0; }
+        .contact-box h2 { font-size: 1.5rem; font-weight: 900; margin-bottom: 12px; }
+        .contact-box p { opacity: 0.9; margin-bottom: 16px; }
+        .contact-box a { color: #fbbf24; text-decoration: none; font-weight: 600; }
+        .contact-box a:hover { text-decoration: underline; }
+        .contact-box .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; text-align: left; margin-top: 20px; }
+        .footer { background: #111; padding: 60px 24px; border-top: 1px solid var(--border-color); }
+        .footer-inner { max-width: 1100px; margin: 0 auto; }
+        .footer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; margin-bottom: 40px; }
+        .footer-grid h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 16px; }
+        .footer-grid ul { list-style: none; }
+        .footer-grid li { margin-bottom: 10px; }
+        .footer-grid a { color: var(--text-secondary); text-decoration: none; font-size: 0.85rem; transition: color 0.3s; }
+        .footer-grid a:hover { color: white; }
+        .footer-bottom { border-top: 1px solid var(--border-color); padding-top: 24px; text-align: center; }
+        .footer-logo { display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 1.5rem; font-weight: 700; margin-bottom: 12px; }
+        .footer-logo .maple { color: var(--primary-purple); }
+        .footer-tagline { color: var(--text-secondary); margin-bottom: 16px; font-size: 0.9rem; }
+        .footer-copy { color: #666; font-size: 0.8rem; }
+        @media (max-width: 768px) {
+            .nav-toggle { display: block; }
+            .nav-links { display: none; position: absolute; top: 64px; left: 0; right: 0; flex-direction: column; align-items: center; gap: 0; background: rgba(0,0,0,0.95); backdrop-filter: blur(20px); padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
+            .nav-links.active { display: flex; }
+            .nav-links a { padding: 14px 24px; width: 100%; text-align: center; font-size: 0.95rem; }
+            .nav-cta { margin: 8px 24px; width: auto; padding: 12px 24px; font-size: 0.9rem !important; text-align: center; border-radius: 8px; }
+            .hero { padding: 120px 20px 60px; }
+            .hero h1 { font-size: 2rem; }
+            .content { padding: 40px 16px; }
+            .section-card { padding: 24px; }
+            .contact-box .grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="/" class="nav-logo"><i class="fas fa-maple-leaf maple"></i> CanadaInvesting<span style="color: var(--primary-purple)">.app</span></a>
+            <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('active')" aria-label="Menu"><i class="fas fa-bars"></i></button>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="pricing">Pricing</a>
+                <a href="why-we-win">Why We Win</a>
+                <a href="contact">Contact</a>
+                <a href="join-as-advisor" class="nav-cta">Apply to Join</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-badge"><i class="fas fa-balance-scale"></i> Legal Terms and Conditions</div>
+        <h1>Terms of Service</h1>
+        <p>Legal terms and conditions governing the use of CanadaInvesting platform, services, and advisor matching technology.</p>
+        <div class="dates">
+            <p><strong>Last Updated:</strong> January 20, 2025</p>
+            <p><strong>Effective Date:</strong> January 20, 2025</p>
+        </div>
+    </section>
+
+    <div class="content">
+        <div class="highlight-box">
+            <h3><i class="fas fa-info-circle" style="margin-right: 8px;"></i>Agreement to Terms</h3>
+            <p>By accessing or using CanadaInvesting.app, you agree to be bound by these Terms of Service and our Privacy Policy. If you disagree with any part of these terms, you may not access the service. These terms are governed by Canadian law.</p>
+        </div>
+
+        <div class="section-card">
+            <h2>1. Definitions</h2>
+            <ul>
+                <li><strong>"Service" or "Platform"</strong> -- The CanadaInvesting.app website and all related services provided by CanadaInvesting</li>
+                <li><strong>"Users"</strong> -- All individuals and entities using the Platform, including advisors, investors, and visitors</li>
+                <li><strong>"Advisors"</strong> -- CIRO-registered investment advisors, portfolio managers, and financial planners in good standing</li>
+                <li><strong>"Clients" or "Investors"</strong> -- Individuals and organizations seeking investment advisory services</li>
+                <li><strong>"Content"</strong> -- All text, graphics, user interfaces, trademarks, logos, and computer code on the Platform</li>
+            </ul>
+        </div>
+
+        <div class="section-card">
+            <h2>2. Service Description</h2>
+            <h3>What We Provide</h3>
+            <ul>
+                <li><strong>Advisor Matching Platform:</strong> AI-powered technology to connect investors with qualified advisors based on compatibility factors</li>
+                <li><strong>Verification Services:</strong> CIRO registration and designation verification (CFA, CFP, CIM, FCSI)</li>
+                <li><strong>Communication Tools:</strong> Secure contact facilitation between parties</li>
+                <li><strong>Profile Management:</strong> Professional profiles for advisors and investor requirement profiles</li>
+                <li><strong>Analytics and Reporting:</strong> Performance metrics and matching insights</li>
+            </ul>
+            <h3>What We Do NOT Provide</h3>
+            <div class="danger-box">
+                <ul>
+                    <li><strong>Investment Advice:</strong> We do not provide investment, financial, or tax advice</li>
+                    <li><strong>Asset Management:</strong> We do not manage portfolios or handle client assets</li>
+                    <li><strong>Dealer Services:</strong> We are not a registered dealer and do not execute trades</li>
+                    <li><strong>Service Guarantees:</strong> We do not guarantee the quality or outcome of advisory services</li>
+                    <li><strong>Financial Intermediary:</strong> We do not handle payments between advisors and clients</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section-card">
+            <h2>3. User Accounts and Registration</h2>
+            <h3>Account Requirements</h3>
+            <ul>
+                <li><strong>Age Requirement:</strong> You must be at least 18 years old to create an account</li>
+                <li><strong>Accurate Information:</strong> You must provide accurate, current, and complete information</li>
+                <li><strong>Account Security:</strong> You are responsible for maintaining the confidentiality of your login credentials</li>
+                <li><strong>Single Account:</strong> Each user may maintain only one active account</li>
+            </ul>
+            <h3>Advisor-Specific Requirements</h3>
+            <div class="highlight-box">
+                <ul>
+                    <li><strong>CIRO Registration:</strong> Must hold a current registration with the Canadian Investment Regulatory Organization</li>
+                    <li><strong>Valid Designations:</strong> Any claimed designations (CFA, CFP, CIM, FCSI, PFP, RFP) must be current and verifiable</li>
+                    <li><strong>Professional Insurance:</strong> Must maintain errors and omissions insurance as required by provincial regulations</li>
+                    <li><strong>Ongoing Compliance:</strong> Must notify us immediately of any changes to registration status</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section-card">
+            <h2>4. Platform Guarantee</h2>
+            <div class="guarantee-box">
+                <h3><i class="fas fa-shield-halved" style="margin-right: 8px;"></i>Our 3-Month Guarantee</h3>
+                <p>We guarantee that subscribed advisors will receive at least 3 qualified leads within their first 3 months of active subscription, or we will provide a full refund.</p>
+                <ul style="margin-top: 12px;">
+                    <li>Advisor must maintain an active, complete profile</li>
+                    <li>Must respond to leads within 48 hours</li>
+                    <li>Must maintain professional communication standards</li>
+                    <li>Subscription must remain active for the full 3-month period</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section-card">
+            <h2>5. User Responsibilities</h2>
+            <h3>All Users Must:</h3>
+            <ul>
+                <li>Provide accurate information and maintain professional standards</li>
+                <li>Respect privacy and protect confidential information</li>
+                <li>Follow all applicable federal, provincial, and local laws</li>
+                <li>Report issues, violations, or security concerns</li>
+            </ul>
+            <h3>Advisor Additional Responsibilities:</h3>
+            <ul>
+                <li>Only accept engagements within your area of expertise</li>
+                <li>Respond to client inquiries within 48 hours</li>
+                <li>Maintain all required licenses, registrations, and insurance</li>
+                <li>Identify and appropriately manage conflicts of interest</li>
+            </ul>
+        </div>
+
+        <div class="section-card">
+            <h2>6. Prohibited Activities</h2>
+            <div class="danger-box">
+                <h3><i class="fas fa-ban" style="margin-right: 8px;"></i>Strictly Prohibited:</h3>
+                <ul>
+                    <li>Providing false, misleading, or incomplete information</li>
+                    <li>Misrepresenting your identity, credentials, or registration status</li>
+                    <li>Attempting to access other users' accounts or platform systems</li>
+                    <li>Sending unsolicited communications or promotional materials</li>
+                    <li>Bypassing our matching system or contacting users without authorization</li>
+                    <li>Disrupting or interfering with platform functionality or security</li>
+                    <li>Extracting user data for unauthorized purposes</li>
+                    <li>Using the platform to gather information for competing services</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section-card">
+            <h2>7. Payment Terms and Subscriptions</h2>
+            <ul>
+                <li><strong>Monthly Billing:</strong> All subscriptions are billed monthly in advance</li>
+                <li><strong>Payment Methods:</strong> We accept major credit cards and other payment methods as indicated</li>
+                <li><strong>Automatic Renewal:</strong> Subscriptions automatically renew unless cancelled before the next billing cycle</li>
+                <li><strong>Price Changes:</strong> We reserve the right to modify pricing with 30 days advance notice</li>
+                <li><strong>Cancellation:</strong> You may cancel your subscription at any time through your account settings</li>
+            </ul>
+            <div class="warning-box">
+                <p><strong>Important:</strong> CanadaInvesting subscription fees are for platform access only. All advisory service fees are negotiated and paid directly between advisors and clients. We do not process, hold, or take commission on advisory service payments or assets under management.</p>
+            </div>
+        </div>
+
+        <div class="section-card">
+            <h2>8. Intellectual Property Rights</h2>
+            <ul>
+                <li><strong>Platform Ownership:</strong> We own all rights to the CanadaInvesting platform, including software, algorithms, and technology</li>
+                <li><strong>Trademarks:</strong> CanadaInvesting name, logo, and related marks are our property</li>
+                <li><strong>Limited License:</strong> We grant you a limited, non-exclusive license to use the platform for its intended purpose</li>
+                <li><strong>Your Content:</strong> You retain ownership of content you create or upload</li>
+            </ul>
+        </div>
+
+        <div class="section-card">
+            <h2>9. Disclaimers and Limitation of Liability</h2>
+            <div class="warning-box">
+                <h3><i class="fas fa-exclamation-triangle" style="margin-right: 8px;"></i>Important Disclaimers</h3>
+                <ul>
+                    <li>The platform is provided "as is" without warranties of any kind</li>
+                    <li>We do not guarantee the quality, accuracy, or outcome of advisory services</li>
+                    <li>We are not responsible for the actions or omissions of advisors or clients</li>
+                    <li>We do not warrant uninterrupted or error-free platform operation</li>
+                </ul>
+            </div>
+            <p>To the maximum extent permitted by Canadian law, CanadaInvesting's total liability for any claims arising from or related to the platform shall not exceed the amount you paid to us in the 12 months preceding the claim.</p>
+        </div>
+
+        <div class="section-card">
+            <h2>10. Dispute Resolution</h2>
+            <ul>
+                <li><strong>Direct Contact:</strong> Contact our support team first to resolve any issues</li>
+                <li><strong>Informal Resolution:</strong> We will work with you in good faith to resolve disputes informally</li>
+                <li><strong>Mediation:</strong> If informal resolution fails, disputes may be referred to mediation</li>
+                <li><strong>Arbitration:</strong> Binding arbitration under Canadian commercial arbitration rules</li>
+                <li><strong>Court Proceedings:</strong> As a last resort, disputes will be resolved in Ontario courts</li>
+            </ul>
+            <div class="highlight-box">
+                <h3>Governing Law</h3>
+                <p>These Terms of Service are governed by the laws of Ontario, Canada, and federal Canadian law. Any legal proceedings will be conducted in the courts of Ontario.</p>
+            </div>
+        </div>
+
+        <div class="section-card">
+            <h2>11. Changes to Terms of Service</h2>
+            <p>We reserve the right to modify these Terms of Service at any time. We will provide email notification at least 30 days before changes take effect, clearly indicate the "Last Updated" date, and keep previous versions available for 90 days after changes.</p>
+            <p style="margin-top: 12px;"><strong>Continued use after changes take effect constitutes acceptance of the new terms.</strong></p>
+        </div>
+
+        <div class="contact-box">
+            <h2><i class="fas fa-gavel" style="margin-right: 8px;"></i>Legal Questions or Concerns?</h2>
+            <p>Contact our team for questions about these Terms of Service or to report violations.</p>
+            <div class="grid">
+                <div>
+                    <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 8px;">Legal Department</h3>
+                    <p><a href="mailto:arthur@negotiateandwin.com">arthur@negotiateandwin.com</a></p>
+                    <p>Arthur Kostaras</p>
+                </div>
+                <div>
+                    <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 8px;">Support Team</h3>
+                    <p><a href="tel:6479567290">(647) 956-7290</a></p>
+                    <p><a href="mailto:support@canadainvesting.app">support@canadainvesting.app</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-grid">
+                <div><h4>For Advisors</h4><ul><li><a href="join-as-advisor">Apply to Join</a></li><li><a href="pricing">Pricing & Algorithm</a></li><li><a href="advisor-revenue-calculator">Revenue Calculator</a></li><li><a href="why-we-win">Why We Win</a></li></ul></div>
+                <div><h4>For Clients</h4><ul><li><a href="find-advisor">Find an Advisor</a></li><li><a href="guarantee">Our Guarantee</a></li><li><a href="contact">Contact Us</a></li></ul></div>
+                <div><h4>Legal</h4><ul><li><a href="terms-of-service">Terms of Service</a></li><li><a href="privacy-policy">Privacy Policy</a></li><li><a href="trust-center">Trust Center</a></li></ul></div>
+                <div><h4>Contact</h4><ul><li><a href="mailto:arthur@negotiateandwin.com">arthur@negotiateandwin.com</a></li><li><a href="tel:+16479567290">1.647.956.7290</a></li></ul></div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-logo"><i class="fas fa-maple-leaf maple"></i> CanadaInvesting<span style="color: var(--primary-purple)">.app</span></div>
+                <p class="footer-tagline">AI-powered investment advisor marketplace built for Canadian financial professionals.</p>
+                <p class="footer-copy">&copy; 2026 CanadaInvesting.app | Technology platform only. Not a registered dealer or investment advisor.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

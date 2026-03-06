@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Join Our Advisor Network - CanadaInvesting.app</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.6; color: #333; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; }
+        .container { max-width: 800px; margin: 0 auto; padding: 20px; }
+        .header { text-align: center; color: white; margin-bottom: 30px; }
+        .header h1 { font-size: 2.5rem; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .header p { font-size: 1.2rem; opacity: 0.9; }
+        .questionnaire-container { background: white; border-radius: 20px; padding: 40px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); margin-bottom: 30px; }
+        .progress-bar { width: 100%; height: 8px; background: #e0e7ff; border-radius: 4px; margin-bottom: 30px; overflow: hidden; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #10b981, #059669); border-radius: 4px; transition: width 0.3s ease; width: 12.5%; }
+        .step { display: none; animation: fadeIn 0.5s ease; }
+        .step.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .step-header { text-align: center; margin-bottom: 30px; }
+        .step-number { background: linear-gradient(135deg, #667eea, #764ba2); color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; margin: 0 auto 15px; }
+        .step h2 { color: #1f2937; font-size: 1.8rem; margin-bottom: 10px; }
+        .step p { color: #6b7280; font-size: 1.1rem; }
+        .options-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin: 30px 0; }
+        .option-card { border: 2px solid #e5e7eb; border-radius: 12px; padding: 20px; cursor: pointer; transition: all 0.3s ease; background: white; }
+        .option-card:hover { border-color: #667eea; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15); }
+        .option-card.selected { border-color: #10b981; background: #f0fdf4; }
+        .option-card.multi-select.selected { border-color: #10b981; background: #f0fdf4; }
+        .option-card h3 { color: #1f2937; font-size: 1.2rem; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
+        .option-card p { color: #6b7280; font-size: 0.95rem; }
+        .checkbox-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 10px; margin: 30px 0; }
+        .checkbox-item { display: flex; align-items: center; padding: 15px; border: 2px solid #e5e7eb; border-radius: 8px; cursor: pointer; transition: all 0.3s ease; }
+        .checkbox-item:hover { border-color: #667eea; }
+        .checkbox-item.selected { border-color: #10b981; background: #f0fdf4; }
+        .checkbox-item input[type="checkbox"] { margin-right: 12px; transform: scale(1.2); }
+        .form-group { margin: 20px 0; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: #374151; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 12px; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 1rem; transition: border-color 0.3s ease; font-family: inherit; }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: #667eea; }
+        .form-group textarea { resize: vertical; min-height: 100px; }
+        .navigation { display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding-top: 30px; border-top: 1px solid #e5e7eb; }
+        .btn { padding: 12px 30px; border: none; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; font-family: inherit; }
+        .btn-secondary { background: #f3f4f6; color: #374151; }
+        .btn-secondary:hover { background: #e5e7eb; }
+        .btn-primary { background: linear-gradient(135deg, #667eea, #764ba2); color: white; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3); }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .ai-insight { background: linear-gradient(135deg, #f0f9ff, #e0f2fe); border-left: 4px solid #0ea5e9; padding: 15px; margin: 20px 0; border-radius: 8px; }
+        .ai-insight h4 { color: #0369a1; margin-bottom: 5px; display: flex; align-items: center; gap: 8px; }
+        .ai-insight p { color: #0c4a6e; font-size: 0.9rem; }
+        .step-indicator { text-align: center; color: #6b7280; margin-bottom: 20px; font-size: 0.9rem; }
+        @media (max-width: 768px) {
+            .container { padding: 10px; }
+            .questionnaire-container { padding: 20px; }
+            .header h1 { font-size: 2rem; }
+            .options-grid { grid-template-columns: 1fr; }
+            .checkbox-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-maple-leaf" style="color: rgba(255,255,255,0.9);"></i> Join as a Professional Advisor</h1>
+            <p>Connect with quality investors across Canada and grow your practice</p>
+        </div>
+
+        <div class="questionnaire-container">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+
+            <div class="step-indicator">
+                <span id="currentStep">1</span> of 8 steps
+            </div>
+
+            <!-- Step 1: Advisor Credentials -->
+            <div class="step active" id="step1">
+                <div class="step-header">
+                    <div class="step-number">1</div>
+                    <h2>Professional Credentials</h2>
+                    <p>Tell us about your investment certification and professional background</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="fullName">Full Name *</label>
+                    <input type="text" id="fullName" name="fullName" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="licenseNumber">CIRO Registration Number *</label>
+                    <input type="text" id="licenseNumber" name="licenseNumber" placeholder="e.g., 123456" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="province">Licensed Province/Territory *</label>
+                    <select id="province" name="province" required>
+                        <option value="">Select your province</option>
+                        <option value="BC">British Columbia</option>
+                        <option value="AB">Alberta</option>
+                        <option value="SK">Saskatchewan</option>
+                        <option value="MB">Manitoba</option>
+                        <option value="ON">Ontario</option>
+                        <option value="QC">Quebec</option>
+                        <option value="NB">New Brunswick</option>
+                        <option value="NS">Nova Scotia</option>
+                        <option value="PE">Prince Edward Island</option>
+                        <option value="NL">Newfoundland and Labrador</option>
+                        <option value="YT">Yukon</option>
+                        <option value="NT">Northwest Territories</option>
+                        <option value="NU">Nunavut</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="yearsExperience">Years of Experience *</label>
+                    <select id="yearsExperience" name="yearsExperience" required>
+                        <option value="">Select experience level</option>
+                        <option value="1-2">1-2 years</option>
+                        <option value="3-5">3-5 years</option>
+                        <option value="6-10">6-10 years</option>
+                        <option value="11-15">11-15 years</option>
+                        <option value="16-20">16-20 years</option>
+                        <option value="20+">20+ years</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Professional Designations</label>
+                    <div class="checkbox-grid">
+                        <div class="checkbox-item multi-select" data-value="CFA">
+                            <input type="checkbox" name="designations" value="CFA">
+                            <span>CFA (Chartered Financial Analyst)</span>
+                        </div>
+                        <div class="checkbox-item multi-select" data-value="CFP">
+                            <input type="checkbox" name="designations" value="CFP">
+                            <span>CFP (Certified Financial Planner)</span>
+                        </div>
+                        <div class="checkbox-item multi-select" data-value="CIM">
+                            <input type="checkbox" name="designations" value="CIM">
+                            <span>CIM (Chartered Investment Manager)</span>
+                        </div>
+                        <div class="checkbox-item multi-select" data-value="FCSI">
+                            <input type="checkbox" name="designations" value="FCSI">
+                            <span>FCSI (Fellow of the CSI)</span>
+                        </div>
+                        <div class="checkbox-item multi-select" data-value="PFP">
+                            <input type="checkbox" name="designations" value="PFP">
+                            <span>PFP (Personal Financial Planner)</span>
+                        </div>
+                        <div class="checkbox-item multi-select" data-value="RFP">
+                            <input type="checkbox" name="designations" value="RFP">
+                            <span>RFP (Registered Financial Planner)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ai-insight">
+                    <h4><i class="fas fa-robot"></i> AI Insight</h4>
+                    <p>We verify all advisor credentials through CIRO to ensure our investors connect with legitimate, qualified professionals.</p>
+                </div>
+            </div>
+
+            <!-- Step 2: Practice Information -->
+            <div class="step" id="step2">
+                <div class="step-header">
+                    <div class="step-number">2</div>
+                    <h2>Practice Information</h2>
+                    <p>Help us understand your current practice setup</p>
+                </div>
+
+                <div class="options-grid">
+                    <div class="option-card" data-value="solo">
+                        <h3><i class="fas fa-user"></i> Solo Practice</h3>
+                        <p>Independent advisor running your own practice</p>
+                    </div>
+                    <div class="option-card" data-value="small-firm">
+                        <h3><i class="fas fa-users"></i> Small Firm (2-10 Advisors)</h3>
+                        <p>Part of a small advisory firm</p>
+                    </div>
+                    <div class="option-card" data-value="medium-firm">
+                        <h3><i class="fas fa-building"></i> Medium Firm (11-50 Advisors)</h3>
+                        <p>Regional advisory or wealth management firm</p>
+                    </div>
+                    <div class="option-card" data-value="large-firm">
+                        <h3><i class="fas fa-city"></i> Large Firm / Bank (50+)</h3>
+                        <p>Major financial institution or national firm</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="firmName">Firm/Practice Name *</label>
+                    <input type="text" id="firmName" name="firmName" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="practiceLocation">Primary Practice Location *</label>
+                    <input type="text" id="practiceLocation" name="practiceLocation" placeholder="City, Province" required>
+                </div>
+
+                <div class="ai-insight">
+                    <h4><i class="fas fa-bullseye"></i> Matching Insight</h4>
+                    <p>Practice size helps us match you with investors that fit your capacity and service model.</p>
+                </div>
+            </div>
+
+            <!-- Step 3: Investment Specializations -->
+            <div class="step" id="step3">
+                <div class="step-header">
+                    <div class="step-number">3</div>
+                    <h2>Investment Specializations</h2>
+                    <p>What areas of investing do you specialize in? (Select all that apply)</p>
+                </div>
+
+                <div class="checkbox-grid">
+                    <div class="checkbox-item multi-select" data-value="wealth-management">
+                        <input type="checkbox" name="specializations" value="wealth-management">
+                        <span><i class="fas fa-gem"></i> Wealth Management</span>
+                    </div>
+                    <div class="checkbox-item multi-select" data-value="retirement-planning">
+                        <input type="checkbox" name="specializations" value="retirement-planning">
+                        <span><i class="fas fa-umbrella-beach"></i> Retirement Planning</span>
+                    </div>
+                    <div class="checkbox-item multi-select" data-value="tax-efficient-investing">
+                        <input type="checkbox" name="specializations" value="tax-efficient-investing">
+                        <span><i class="fas fa-receipt"></i> Tax-Efficient Investing</span>
+                    </div>
+                    <div class="checkbox-item multi-select" data-value="esg-investing">
+                        <input type="checkbox" name="specializations" value="esg-investing">
+                        <span><i class="fas fa-leaf"></i> ESG / Responsible Investing</span>
+                    </div>
+                    <div class="checkbox-item multi-select" data-value="estate-planning">
+                        <input type="checkbox" name="specializations" value="estate-planning">
+                        <span><i class="fas fa-scroll"></i> Estate Planning</span>
+                    </div>
+                    <div class="checkbox-item multi-select" data-value="portfolio-management">
+                        <input type="checkbox" name="specializations" value="portfolio-management">
+                        <span><i class="fas fa-chart-pie"></i> Portfolio Management</span>
+                    </div>
+                    <div class="checkbox-item multi-select" data-value="corporate-pensions">
+                        <input type="checkbox" name="specializations" value="corporate-pensions">
+                        <span><i class="fas fa-building"></i> Corporate Pensions</span>
+                    </div>
+                    <div class="checkbox-item multi-select" data-value="insurance-planning">
+                        <input type="checkbox" name="specializations" value="insurance-planning">
+                        <span><i class="fas fa-shield-alt"></i> Insurance Planning</span>
+                    </div>
+                    <div class="checkbox-item multi-select" data-value="financial-planning">
+                        <input type="checkbox" name="specializations" value="financial-planning">
+                        <span><i class="fas fa-clipboard-list"></i> Comprehensive Financial Planning</span>
+                    </div>
+                    <div class="checkbox-item multi-select" data-value="alternative-investments">
+                        <input type="checkbox" name="specializations" value="alternative-investments">
+                        <span><i class="fas fa-coins"></i> Alternative Investments</span>
+                    </div>
+                </div>
+
+                <div class="ai-insight">
+                    <h4><i class="fas fa-bullseye"></i> Smart Matching</h4>
+                    <p>Specialization expertise is our #1 matching factor. Investors strongly prefer advisors with relevant specialization experience.</p>
+                </div>
+            </div>
+
+            <!-- Step 4: Services Offered -->
+            <div class="step" id="step4">
+                <div class="step-header">
+                    <div class="step-number">4</div>
+                    <h2>Services You Offer</h2>
+                    <p>What advisory services do you provide? (Select all that apply)</p>
+                </div>
+
+                <div class="checkbox-grid">
+                    <div class="checkbox-item multi-select" data-value="rrsp-tfsa">
+                        <input type="checkbox" name="services" value="rrsp-tfsa">
+                        <span><i class="fas fa-piggy-bank"></i> RRSP & TFSA Management</span>
+                    </div>
+                    <div class="checkbox-item multi-select" data-value="resp">
+                        <input type="checkbox" name="services" value="resp">
+                        <span><i class="fas fa-graduation-cap"></i> RESP Planning</span>
+                    </div>
+                    <div class="checkbox-item multi-select" data-value="rrif-lif">
+                        <input type="checkbox" name="services" value="rrif-lif">
+                        <span><i class="fas fa-calendar-check"></i> RRIF & LIF Decumulation</span>
+                    </div>
+                    <div class="checkbox-item multi-select" data-value="discretionary">
+                        <input type="checkbox" name="services" value="discretionary">
+                        <span><i class="fas fa-chart-line"></i> Discretionary Portfolio Management</span>
+                    </div>
+                    <div class="checkbox-item multi-select" data-value="financial-plan">
+                        <input type="checkbox" name="services" value="financial-plan">
+                        <span><i class="fas fa-map"></i> Comprehensive Financial Plan</span>
+                    </div>
+                    <div class="checkbox-item multi-select" data-value="tax-planning">
+                        <input type="checkbox" name="services" value="tax-planning">
+                        <span><i class="fas fa-calculator"></i> Tax Planning & Optimization</span>
+                    </div>
+                    <div class="checkbox-item multi-select" data-value="estate-trusts">
+                        <input type="checkbox" name="services" value="estate-trusts">
+                        <span><i class="fas fa-file-contract"></i> Estate & Trust Services</span>
+                    </div>
+                    <div class="checkbox-item multi-select" data-value="corporate-advisory">
+                        <input type="checkbox" name="services" value="corporate-advisory">
+                        <span><i class="fas fa-briefcase"></i> Corporate Advisory</span>
+                    </div>
+                    <div class="checkbox-item multi-select" data-value="insurance">
+                        <input type="checkbox" name="services" value="insurance">
+                        <span><i class="fas fa-shield-alt"></i> Insurance Solutions</span>
+                    </div>
+                    <div class="checkbox-item multi-select" data-value="cross-border">
+                        <input type="checkbox" name="services" value="cross-border">
+                        <span><i class="fas fa-globe-americas"></i> Cross-Border Planning (US/Canada)</span>
+                    </div>
+                </div>
+
+                <div class="ai-insight">
+                    <h4><i class="fas fa-lightbulb"></i> Service Matching</h4>
+                    <p>Investors often need multiple services. Offering comprehensive services increases your match opportunities.</p>
+                </div>
+            </div>
+
+            <!-- Step 5: Client Preferences -->
+            <div class="step" id="step5">
+                <div class="step-header">
+                    <div class="step-number">5</div>
+                    <h2>Client Preferences</h2>
+                    <p>What type of investors do you prefer to work with?</p>
+                </div>
+
+                <div class="checkbox-grid">
+                    <div class="checkbox-item multi-select" data-value="new-investor">
+                        <input type="checkbox" name="client-types" value="new-investor">
+                        <span><i class="fas fa-seedling"></i> New Investors (Just Starting Out)</span>
+                    </div>
+                    <div class="checkbox-item multi-select" data-value="accumulation">
+                        <input type="checkbox" name="client-types" value="accumulation">
+                        <span><i class="fas fa-chart-line"></i> Accumulation Phase (Building Wealth)</span>
+                    </div>
+                    <div class="checkbox-item multi-select" data-value="pre-retirement">
+                        <input type="checkbox" name="client-types" value="pre-retirement">
+                        <span><i class="fas fa-clock"></i> Pre-Retirement (5-10 Years Away)</span>
+                    </div>
+                    <div class="checkbox-item multi-select" data-value="retiree">
+                        <input type="checkbox" name="client-types" value="retiree">
+                        <span><i class="fas fa-umbrella-beach"></i> Retirees (Income & Preservation)</span>
+                    </div>
+                    <div class="checkbox-item multi-select" data-value="hnw">
+                        <input type="checkbox" name="client-types" value="hnw">
+                        <span><i class="fas fa-gem"></i> High Net Worth ($1M+ Portfolio)</span>
+                    </div>
+                </div>
+
+                <div class="options-grid">
+                    <div class="option-card" data-value="under-100k">
+                        <h3><i class="fas fa-dollar-sign"></i> Under $100K Portfolio</h3>
+                        <p>Emerging investors and savers</p>
+                    </div>
+                    <div class="option-card" data-value="100k-500k">
+                        <h3><i class="fas fa-dollar-sign"></i> $100K - $500K Portfolio</h3>
+                        <p>Growing investors</p>
+                    </div>
+                    <div class="option-card" data-value="500k-1m">
+                        <h3><i class="fas fa-dollar-sign"></i> $500K - $1M Portfolio</h3>
+                        <p>Established investors</p>
+                    </div>
+                    <div class="option-card" data-value="1m-5m">
+                        <h3><i class="fas fa-dollar-sign"></i> $1M - $5M Portfolio</h3>
+                        <p>High net worth individuals</p>
+                    </div>
+                    <div class="option-card" data-value="5m-plus">
+                        <h3><i class="fas fa-dollar-sign"></i> $5M+ Portfolio</h3>
+                        <p>Ultra high net worth individuals</p>
+                    </div>
+                </div>
+
+                <div class="ai-insight">
+                    <h4><i class="fas fa-bullseye"></i> Portfolio Matching</h4>
+                    <p>Client portfolio size preferences help us match you with investors that fit your minimum AUM requirements and service capacity.</p>
+                </div>
+            </div>
+
+            <!-- Step 6: Fee Structure & Availability -->
+            <div class="step" id="step6">
+                <div class="step-header">
+                    <div class="step-number">6</div>
+                    <h2>Fee Structure & Availability</h2>
+                    <p>Help us understand your fee model and current availability</p>
+                </div>
+
+                <div class="form-group">
+                    <label>Fee Structure *</label>
+                    <div class="options-grid">
+                        <div class="option-card" data-value="fee-only">
+                            <h3><i class="fas fa-file-invoice-dollar"></i> Fee-Only</h3>
+                            <p>Flat fee, hourly, or percentage of AUM</p>
+                        </div>
+                        <div class="option-card" data-value="commission">
+                            <h3><i class="fas fa-percent"></i> Commission-Based</h3>
+                            <p>Earn commissions on product sales</p>
+                        </div>
+                        <div class="option-card" data-value="hybrid">
+                            <h3><i class="fas fa-balance-scale"></i> Hybrid (Fee + Commission)</h3>
+                            <p>Combination of fees and commissions</p>
+                        </div>
+                        <div class="option-card" data-value="flat-fee">
+                            <h3><i class="fas fa-tag"></i> Flat Fee per Plan</h3>
+                            <p>Fixed price for financial plans</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Current Capacity for New Clients *</label>
+                    <div class="options-grid">
+                        <div class="option-card" data-value="immediate">
+                            <h3><i class="fas fa-rocket"></i> Immediate Availability</h3>
+                            <p>Can onboard new clients right away</p>
+                        </div>
+                        <div class="option-card" data-value="2-4-weeks">
+                            <h3><i class="fas fa-calendar"></i> 2-4 Weeks</h3>
+                            <p>Available for new clients soon</p>
+                        </div>
+                        <div class="option-card" data-value="1-3-months">
+                            <h3><i class="fas fa-hourglass-half"></i> 1-3 Months</h3>
+                            <p>Limited availability, waitlist</p>
+                        </div>
+                        <div class="option-card" data-value="not-available">
+                            <h3><i class="fas fa-lock"></i> Not Currently Available</h3>
+                            <p>At capacity, future opportunities only</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ai-insight">
+                    <h4><i class="fas fa-bolt"></i> Availability Matching</h4>
+                    <p>We prioritize advisors with immediate availability for investors with urgent planning needs.</p>
+                </div>
+            </div>
+
+            <!-- Step 7: Geographic Coverage -->
+            <div class="step" id="step7">
+                <div class="step-header">
+                    <div class="step-number">7</div>
+                    <h2>Geographic Coverage</h2>
+                    <p>Where do you serve clients?</p>
+                </div>
+
+                <div class="options-grid">
+                    <div class="option-card" data-value="local-only">
+                        <h3><i class="fas fa-building"></i> Local Only</h3>
+                        <p>In-person meetings preferred, local clients only</p>
+                    </div>
+                    <div class="option-card" data-value="regional">
+                        <h3><i class="fas fa-map"></i> Regional</h3>
+                        <p>Serve clients within your province/territory</p>
+                    </div>
+                    <div class="option-card" data-value="canada-wide">
+                        <h3><i class="fas fa-flag"></i> Canada-Wide</h3>
+                        <p>Serve clients across Canada remotely</p>
+                    </div>
+                    <div class="option-card" data-value="hybrid">
+                        <h3><i class="fas fa-sync-alt"></i> Hybrid</h3>
+                        <p>Mix of local and remote clients</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="serviceRadius">Service Area Details</label>
+                    <textarea id="serviceRadius" name="serviceRadius" placeholder="Describe your geographic coverage (e.g., 'Greater Toronto Area', 'All of Alberta', 'Remote clients across Canada')"></textarea>
+                </div>
+
+                <div class="ai-insight">
+                    <h4><i class="fas fa-globe-americas"></i> Geographic Matching</h4>
+                    <p>Many investors prefer local advisors for in-person meetings, while others are comfortable with virtual relationships. We match based on preferences.</p>
+                </div>
+            </div>
+
+            <!-- Step 8: Contact & Professional Info -->
+            <div class="step" id="step8">
+                <div class="step-header">
+                    <div class="step-number">8</div>
+                    <h2>Contact & Professional Information</h2>
+                    <p>Final details to complete your professional profile</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Professional Email *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number *</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="website">Website (Optional)</label>
+                    <input type="url" id="website" name="website" placeholder="https://yourfirm.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="linkedIn">LinkedIn Profile (Optional)</label>
+                    <input type="url" id="linkedIn" name="linkedIn" placeholder="https://linkedin.com/in/yourname">
+                </div>
+
+                <div class="form-group">
+                    <label for="professionalBio">Professional Bio (Optional)</label>
+                    <textarea id="professionalBio" name="professionalBio" placeholder="Brief description of your background, specializations, and what makes you unique as a financial advisor..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="termsAccepted" name="termsAccepted" required style="margin-right: 10px;">
+                        I agree to the <a href="terms-of-service" style="color: #667eea;">Terms of Service</a> and understand that my profile will be shared with potential investor clients *
+                    </label>
+                </div>
+
+                <div class="ai-insight">
+                    <h4><i class="fas fa-star"></i> Profile Quality</h4>
+                    <p>Complete profiles with professional bios receive 3x more investor inquiries than basic profiles.</p>
+                </div>
+            </div>
+
+            <div class="navigation">
+                <button type="button" class="btn btn-secondary" onclick="previousStep()" id="prevBtn" style="display: none;">Previous</button>
+                <button type="button" class="btn btn-primary" onclick="nextStep()" id="nextBtn">Next Step</button>
+                <button type="submit" class="btn btn-primary" onclick="submitForm()" id="submitBtn" style="display: none;">Join Advisor Network</button>
+            </div>
+        </div>
+
+        <div style="text-align: center; color: white; opacity: 0.8; margin-top: 20px;">
+            <p><i class="fas fa-lock"></i> Your information is secure and will only be shared with verified investor clients</p>
+        </div>
+    </div>
+
+    <script>
+        let currentStepNum = 1;
+        const totalSteps = 8;
+        let answers = {};
+
+        function updateProgress() {
+            const progress = (currentStepNum / totalSteps) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+            document.getElementById('currentStep').textContent = currentStepNum;
+        }
+
+        function showStep(stepNum) {
+            document.querySelectorAll('.step').forEach(step => {
+                step.classList.remove('active');
+            });
+            document.getElementById('step' + stepNum).classList.add('active');
+            document.getElementById('prevBtn').style.display = stepNum > 1 ? 'block' : 'none';
+            document.getElementById('nextBtn').style.display = stepNum < totalSteps ? 'block' : 'none';
+            document.getElementById('submitBtn').style.display = stepNum === totalSteps ? 'block' : 'none';
+            updateProgress();
+        }
+
+        function nextStep() {
+            if (validateCurrentStep()) {
+                currentStepNum++;
+                showStep(currentStepNum);
+            }
+        }
+
+        function previousStep() {
+            currentStepNum--;
+            showStep(currentStepNum);
+        }
+
+        function validateCurrentStep() {
+            const currentStep = document.getElementById('step' + currentStepNum);
+            const requiredFields = currentStep.querySelectorAll('[required]');
+
+            for (let field of requiredFields) {
+                if (!field.value && field.type !== 'checkbox') {
+                    field.focus();
+                    alert('Please complete all required fields before proceeding.');
+                    return false;
+                }
+                if (field.type === 'checkbox' && !field.checked) {
+                    field.focus();
+                    alert('Please accept the terms to continue.');
+                    return false;
+                }
+            }
+
+            const optionCards = currentStep.querySelectorAll('.option-card');
+            if (optionCards.length > 0) {
+                const hasSelection = Array.from(optionCards).some(card => card.classList.contains('selected'));
+                if (!hasSelection) {
+                    alert('Please select an option before proceeding.');
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        async function submitForm() {
+            if (!validateCurrentStep()) return;
+
+            const formData = collectFormData();
+            const email = document.getElementById('email').value;
+            const API_BASE_URL = 'https://canadainvesting-backend-production.up.railway.app';
+
+            try {
+                const res = await fetch(`${API_BASE_URL}/api/advisor/register`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        first_name: (document.getElementById('fullName').value || '').split(' ')[0],
+                        last_name: (document.getElementById('fullName').value || '').split(' ').slice(1).join(' '),
+                        email: email,
+                        phone: document.getElementById('phone').value,
+                        firm_name: document.getElementById('firmName').value,
+                        province: document.getElementById('province').value,
+                        city: document.getElementById('practiceLocation').value,
+                        years_experience: parseInt(document.getElementById('yearsExperience').value) || 0,
+                        specializations: formData.specializations || [],
+                        services: formData.services || [],
+                        designations: formData.designations || [],
+                        remote_services: true
+                    })
+                });
+
+                const data = await res.json();
+                const profileId = data.advisor_id || '';
+
+                localStorage.setItem('ca_checkout_email', email);
+                window.location.href = `pricing?from=registration&email=${encodeURIComponent(email)}&profileId=${encodeURIComponent(profileId)}`;
+            } catch (err) {
+                console.error('Registration error:', err);
+                localStorage.setItem('ca_checkout_email', email);
+                window.location.href = `pricing?from=registration&email=${encodeURIComponent(email)}`;
+            }
+        }
+
+        function collectFormData() {
+            const data = {};
+
+            document.querySelectorAll('input, select, textarea').forEach(field => {
+                if (field.type === 'checkbox') {
+                    if (!data[field.name]) data[field.name] = [];
+                    if (field.checked) data[field.name].push(field.value);
+                } else if (field.type === 'radio') {
+                    if (field.checked) data[field.name] = field.value;
+                } else {
+                    data[field.name] = field.value;
+                }
+            });
+
+            document.querySelectorAll('.option-card.selected').forEach(card => {
+                const stepElement = card.closest('.step');
+                const stepId = stepElement.id;
+                if (!data[stepId]) data[stepId] = [];
+                data[stepId].push(card.dataset.value);
+            });
+
+            return data;
+        }
+
+        // Handle option card selections
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.option-card')) {
+                const card = e.target.closest('.option-card');
+                const questionCard = card.closest('.step');
+
+                if (card.classList.contains('multi-select')) {
+                    card.classList.toggle('selected');
+                } else {
+                    questionCard.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
+                    card.classList.add('selected');
+                }
+            }
+        });
+
+        // Handle checkbox items
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.checkbox-item')) {
+                const item = e.target.closest('.checkbox-item');
+                const checkbox = item.querySelector('input[type="checkbox"]');
+
+                if (e.target !== checkbox) {
+                    checkbox.checked = !checkbox.checked;
+                }
+
+                if (checkbox.checked) {
+                    item.classList.add('selected');
+                } else {
+                    item.classList.remove('selected');
+                }
+            }
+        });
+
+        // Initialize
+        showStep(1);
+    </script>
+</body>
+</html>

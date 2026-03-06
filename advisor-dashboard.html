@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Advisor Dashboard - CanadaInvesting.app</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { --primary-purple: #667eea; --primary-violet: #764ba2; --accent-green: #059669; --dark-bg: #0a0a0a; --card-bg: #1a1a1a; --text-primary: #ffffff; --text-secondary: #a0a0a0; --border-color: #333333; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--dark-bg); color: var(--text-primary); line-height: 1.6; min-height: 100vh; }
+
+        /* Navigation */
+        .dash-nav { background: var(--card-bg); border-bottom: 2px solid var(--primary-purple); }
+        .dash-nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; height: 64px; }
+        .dash-nav-left { display: flex; align-items: center; gap: 16px; }
+        .dash-nav-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; color: white; font-weight: 700; font-size: 1.25rem; }
+        .dash-nav-logo .maple { color: var(--primary-purple); font-size: 1.5rem; }
+        .dash-nav-sep { color: var(--border-color); }
+        .dash-nav-title { color: var(--text-secondary); font-weight: 500; font-size: 0.9rem; }
+        .dash-nav-right { display: flex; align-items: center; gap: 16px; }
+        .dash-nav-email { color: var(--text-secondary); font-size: 0.85rem; }
+        .logout-btn { background: linear-gradient(135deg, var(--primary-purple), var(--primary-violet)); color: white; border: none; padding: 8px 18px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.3s; font-family: inherit; }
+        .logout-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(102,126,234,0.3); }
+
+        /* Subscription Banners */
+        .sub-banner { border-bottom: 1px solid var(--border-color); }
+        .sub-banner-inner { max-width: 1200px; margin: 0 auto; padding: 16px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; }
+        .sub-info { display: flex; align-items: center; gap: 16px; }
+        .sub-icon { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .sub-icon.active { background: rgba(5,150,105,0.15); color: var(--accent-green); }
+        .sub-icon.warning { background: rgba(245,158,11,0.15); color: #f59e0b; }
+        .sub-icon.error { background: rgba(239,68,68,0.15); color: #ef4444; }
+        .sub-tier { font-weight: 700; font-size: 1rem; }
+        .sub-badge { display: inline-block; font-size: 0.7rem; font-weight: 600; padding: 3px 10px; border-radius: 20px; margin-left: 8px; }
+        .sub-badge.active { background: rgba(5,150,105,0.15); color: var(--accent-green); }
+        .sub-badge.past_due { background: rgba(239,68,68,0.15); color: #ef4444; }
+        .sub-badge.trialing { background: rgba(102,126,234,0.15); color: var(--primary-purple); }
+        .sub-badge.canceled { background: rgba(160,160,160,0.15); color: var(--text-secondary); }
+        .sub-renewal { font-size: 0.85rem; color: var(--text-secondary); }
+        .sub-manage-btn { background: var(--primary-purple); color: white; border: none; padding: 10px 20px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.3s; font-family: inherit; }
+        .sub-manage-btn:hover { background: var(--primary-violet); }
+        .no-sub-banner { background: rgba(245,158,11,0.08); border-bottom: 1px solid rgba(245,158,11,0.2); }
+        .no-sub-inner { max-width: 1200px; margin: 0 auto; padding: 16px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; }
+        .no-sub-text { display: flex; align-items: center; gap: 12px; color: #f59e0b; font-weight: 500; font-size: 0.9rem; }
+        .no-sub-cta { background: linear-gradient(135deg, var(--primary-purple), var(--primary-violet)); color: white; text-decoration: none; padding: 10px 20px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; transition: all 0.3s; }
+        .no-sub-cta:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(102,126,234,0.3); }
+
+        /* Main Content */
+        .dash-main { max-width: 1200px; margin: 0 auto; padding: 32px 24px; }
+        .welcome { margin-bottom: 32px; }
+        .welcome h1 { font-size: 1.75rem; font-weight: 900; margin-bottom: 4px; }
+        .welcome p { color: var(--text-secondary); font-size: 0.95rem; }
+
+        /* Stats Grid */
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 32px; }
+        .stat-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 20px; }
+        .stat-label { color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 4px; }
+        .stat-value { font-size: 2rem; font-weight: 900; }
+        .stat-value.blue { color: var(--primary-purple); }
+        .stat-value.green { color: var(--accent-green); }
+
+        /* Section */
+        .section { margin-bottom: 32px; }
+        .section-title { font-size: 1.25rem; font-weight: 700; margin-bottom: 16px; }
+
+        /* Table */
+        .table-wrap { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; overflow-x: auto; }
+        table { width: 100%; font-size: 0.85rem; border-collapse: collapse; }
+        thead { background: rgba(255,255,255,0.03); }
+        th { text-align: left; padding: 12px 16px; color: var(--text-secondary); font-weight: 500; border-bottom: 1px solid var(--border-color); white-space: nowrap; }
+        td { padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.04); }
+        tr:hover { background: rgba(255,255,255,0.02); }
+        .badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; }
+        .badge-green { background: rgba(5,150,105,0.15); color: var(--accent-green); }
+        .badge-blue { background: rgba(102,126,234,0.15); color: var(--primary-purple); }
+        .badge-yellow { background: rgba(245,158,11,0.15); color: #f59e0b; }
+        .badge-gray { background: rgba(160,160,160,0.15); color: var(--text-secondary); }
+        .no-leads-msg { text-align: center; padding: 40px 16px; color: var(--text-secondary); }
+        .match-score { font-family: 'Roboto Mono', monospace; font-weight: 700; }
+        .match-score.high { color: var(--accent-green); }
+        .match-score.mid { color: var(--primary-purple); }
+
+        /* Profile Form */
+        .profile-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 24px; }
+        .profile-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .profile-group { display: flex; flex-direction: column; }
+        .profile-group label { font-size: 0.85rem; font-weight: 500; color: var(--text-secondary); margin-bottom: 6px; }
+        .profile-group input, .profile-group select { padding: 10px 14px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); font-size: 0.9rem; font-family: inherit; transition: border-color 0.3s; }
+        .profile-group input:focus, .profile-group select:focus { outline: none; border-color: var(--primary-purple); }
+        .profile-group select option { background: var(--card-bg); color: var(--text-primary); }
+        .profile-actions { grid-column: 1 / -1; display: flex; align-items: center; gap: 16px; margin-top: 8px; }
+        .save-btn { background: linear-gradient(135deg, var(--primary-purple), var(--primary-violet)); color: white; border: none; padding: 12px 24px; border-radius: 10px; font-size: 0.9rem; font-weight: 700; cursor: pointer; transition: all 0.3s; font-family: inherit; }
+        .save-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(102,126,234,0.4); }
+        .save-msg { font-size: 0.85rem; color: var(--accent-green); display: none; }
+
+        /* Footer */
+        .dash-footer { background: #111; padding: 32px 24px; margin-top: 48px; text-align: center; }
+        .dash-footer p { color: var(--text-secondary); font-size: 0.85rem; }
+        .dash-footer a { color: var(--primary-purple); text-decoration: none; }
+        .dash-footer a:hover { text-decoration: underline; }
+
+        @media (max-width: 768px) {
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .profile-grid { grid-template-columns: 1fr; }
+            .dash-nav-email { display: none; }
+            .sub-banner-inner, .no-sub-inner { flex-direction: column; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Auth gate -->
+    <script>
+        (function() {
+            const token = localStorage.getItem('advisor_token');
+            const user = JSON.parse(localStorage.getItem('advisor_user') || '{}');
+            if (!token || (user.userType !== 'Advisor' && user.userType !== 'advisor')) {
+                window.location.href = '/advisor-login';
+            }
+        })();
+    </script>
+
+    <!-- Navigation -->
+    <nav class="dash-nav">
+        <div class="dash-nav-inner">
+            <div class="dash-nav-left">
+                <a href="/" class="dash-nav-logo"><i class="fas fa-maple-leaf maple"></i> CanadaInvesting<span style="color: var(--primary-purple)">.app</span></a>
+                <span class="dash-nav-sep">|</span>
+                <span class="dash-nav-title">Advisor Dashboard</span>
+            </div>
+            <div class="dash-nav-right">
+                <span id="userEmail" class="dash-nav-email"></span>
+                <button onclick="logout()" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Subscription Status Banner -->
+    <div id="subscriptionBanner" style="display: none;" class="sub-banner">
+        <div class="sub-banner-inner">
+            <div class="sub-info">
+                <div id="subStatusIcon" class="sub-icon active"><i class="fas fa-check-circle fa-lg"></i></div>
+                <div>
+                    <div>
+                        <span id="subTierDisplay" class="sub-tier">-</span>
+                        <span id="subStatusBadge" class="sub-badge active">Active</span>
+                    </div>
+                    <div id="subRenewalDate" class="sub-renewal"></div>
+                </div>
+            </div>
+            <button onclick="openBillingPortal()" class="sub-manage-btn"><i class="fas fa-cog"></i> Manage Subscription</button>
+        </div>
+    </div>
+
+    <!-- No Subscription Banner -->
+    <div id="noSubscriptionBanner" style="display: none;" class="no-sub-banner">
+        <div class="no-sub-inner">
+            <div class="no-sub-text">
+                <i class="fas fa-info-circle"></i>
+                <span>You don't have an active subscription yet. Subscribe to get algorithm placement and start receiving leads.</span>
+            </div>
+            <a href="pricing" class="no-sub-cta">View Plans</a>
+        </div>
+    </div>
+
+    <main class="dash-main">
+        <!-- Welcome & Stats -->
+        <div class="welcome">
+            <h1>Welcome back, <span id="advisorName">Advisor</span></h1>
+            <p>Here's your dashboard overview.</p>
+        </div>
+
+        <!-- Quick Stats Cards -->
+        <section class="stats-grid">
+            <div class="stat-card">
+                <p class="stat-label">Total Leads</p>
+                <p id="statTotalMatches" class="stat-value">--</p>
+            </div>
+            <div class="stat-card">
+                <p class="stat-label">Contacted</p>
+                <p id="statContacted" class="stat-value blue">--</p>
+            </div>
+            <div class="stat-card">
+                <p class="stat-label">Partnerships</p>
+                <p id="statPartnerships" class="stat-value green">--</p>
+            </div>
+            <div class="stat-card">
+                <p class="stat-label">Verification</p>
+                <p id="statVerification" class="stat-value" style="font-size: 1.1rem;">--</p>
+            </div>
+        </section>
+
+        <!-- My Leads Table -->
+        <section class="section">
+            <h2 class="section-title">My Leads</h2>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Investor</th>
+                            <th>Need</th>
+                            <th>Match Score</th>
+                            <th>Contact</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="leadsTableBody"></tbody>
+                </table>
+            </div>
+            <p id="noLeadsMsg" class="no-leads-msg" style="display: none;">No leads yet. Once investors are matched with your profile, they'll appear here.</p>
+        </section>
+
+        <!-- My Profile Card -->
+        <section class="section">
+            <h2 class="section-title">My Profile</h2>
+            <div class="profile-card">
+                <form id="profileForm" class="profile-grid">
+                    <div class="profile-group">
+                        <label for="profileFirmName">Firm Name</label>
+                        <input type="text" id="profileFirmName">
+                    </div>
+                    <div class="profile-group">
+                        <label for="profileProvince">Province</label>
+                        <select id="profileProvince">
+                            <option value="">Select province</option>
+                            <option value="ON">Ontario</option>
+                            <option value="BC">British Columbia</option>
+                            <option value="AB">Alberta</option>
+                            <option value="QC">Quebec</option>
+                            <option value="MB">Manitoba</option>
+                            <option value="SK">Saskatchewan</option>
+                            <option value="NS">Nova Scotia</option>
+                            <option value="NB">New Brunswick</option>
+                            <option value="NL">Newfoundland</option>
+                            <option value="PE">PEI</option>
+                        </select>
+                    </div>
+                    <div class="profile-group">
+                        <label for="profileCity">City</label>
+                        <input type="text" id="profileCity">
+                    </div>
+                    <div class="profile-group">
+                        <label for="profilePhone">Phone</label>
+                        <input type="text" id="profilePhone">
+                    </div>
+                    <div class="profile-group">
+                        <label for="profileMinAUM">Minimum Portfolio Size (CAD)</label>
+                        <input type="number" id="profileMinAUM" placeholder="e.g., 100000">
+                    </div>
+                    <div class="profile-group">
+                        <label for="profileSpecializations">Specializations (comma-separated)</label>
+                        <input type="text" id="profileSpecializations" placeholder="e.g., Wealth Management, Retirement Planning, Tax Optimization">
+                    </div>
+                    <div class="profile-actions">
+                        <button type="submit" class="save-btn"><i class="fas fa-save"></i> Save Changes</button>
+                        <span id="profileSaveMsg" class="save-msg">Profile updated!</span>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="dash-footer">
+        <p>&copy; 2026 CanadaInvesting.app. All rights reserved.</p>
+        <p style="margin-top: 8px;">Need help? Call us at <a href="tel:6479567290">(647) 956-7290</a></p>
+    </footer>
+
+    <script>
+        const API = 'https://canadainvesting-backend-production.up.railway.app';
+        const token = localStorage.getItem('advisor_token');
+        const headers = { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' };
+        const user = JSON.parse(localStorage.getItem('advisor_user') || '{}');
+
+        document.getElementById('userEmail').textContent = user.email || '';
+        document.getElementById('advisorName').textContent = user.firstName
+            ? `${user.firstName} ${user.lastName || ''}`
+            : (user.email || 'Advisor');
+
+        function logout() {
+            localStorage.removeItem('advisor_token');
+            localStorage.removeItem('advisor_user');
+            window.location.href = '/advisor-login';
+        }
+
+        function fmtDate(d) {
+            if (!d) return '--';
+            return new Date(d).toLocaleDateString('en-CA', { month: 'short', day: 'numeric', year: 'numeric' });
+        }
+
+        function badge(text, color) {
+            return `<span class="badge badge-${color}">${text}</span>`;
+        }
+
+        // Load stats
+        async function loadStats() {
+            try {
+                const res = await fetch(`${API}/api/advisor/my-stats`, { headers });
+                const data = await res.json();
+                if (!data.success) return;
+                const s = data.stats;
+                document.getElementById('statTotalMatches').textContent = s.totalMatches;
+                document.getElementById('statContacted').textContent = s.contacted;
+                document.getElementById('statPartnerships').textContent = s.partnerships;
+                const verEl = document.getElementById('statVerification');
+                if (s.verificationStatus === 'verified') {
+                    verEl.innerHTML = '<span style="color: var(--accent-green);"><i class="fas fa-check-circle"></i> Verified</span>';
+                } else {
+                    verEl.innerHTML = '<span style="color: #f59e0b;"><i class="fas fa-clock"></i> Pending</span>';
+                }
+            } catch (e) {
+                console.error('Stats load error:', e);
+            }
+        }
+
+        // Load leads table
+        async function loadLeads() {
+            try {
+                const res = await fetch(`${API}/api/advisor/my-matches`, { headers });
+                const data = await res.json();
+                if (!data.success) return;
+
+                const tbody = document.getElementById('leadsTableBody');
+                if (data.matches.length === 0) {
+                    tbody.innerHTML = '';
+                    document.getElementById('noLeadsMsg').style.display = 'block';
+                    return;
+                }
+
+                document.getElementById('noLeadsMsg').style.display = 'none';
+                tbody.innerHTML = data.matches.map(m => {
+                    const contact = typeof m.investor_contact === 'string'
+                        ? JSON.parse(m.investor_contact || '{}')
+                        : (m.investor_contact || m.sme_contact || {});
+                    if (typeof contact === 'string') {
+                        try { Object.assign(contact, JSON.parse(contact)); } catch(e) {}
+                    }
+                    const statusColor = m.partnership_formed ? 'green' : (m.status === 'contacted' ? 'blue' : 'gray');
+                    const score = m.match_score ? parseFloat(m.match_score).toFixed(0) : '--';
+                    const scoreClass = parseFloat(m.match_score) >= 80 ? 'high' : 'mid';
+                    return `
+                        <tr>
+                            <td style="color: var(--text-secondary);">${fmtDate(m.created_at)}</td>
+                            <td>
+                                <div style="font-weight: 600;">${contact.company || contact.name || m.investment_need || '--'}</div>
+                                <div style="font-size: 0.75rem; color: var(--text-secondary);">${m.investment_need || m.business_type || ''} - ${m.portfolio_size || m.business_size || ''}</div>
+                            </td>
+                            <td>${badge(m.pain_point || m.investment_need || '--', 'yellow')}</td>
+                            <td><span class="match-score ${scoreClass}">${score}%</span></td>
+                            <td>
+                                <div style="font-size: 0.85rem;">${contact.name || '--'}</div>
+                                ${contact.email ? `<div style="font-size: 0.75rem; color: var(--text-secondary);">${contact.email}</div>` : ''}
+                                ${contact.phone ? `<div style="font-size: 0.75rem; color: var(--text-secondary);">${contact.phone}</div>` : ''}
+                            </td>
+                            <td>${badge(m.partnership_formed ? 'Partnership' : (m.status || 'presented'), statusColor)}</td>
+                        </tr>
+                    `;
+                }).join('');
+            } catch (e) {
+                console.error('Leads load error:', e);
+            }
+        }
+
+        // Load profile
+        async function loadProfile() {
+            try {
+                const res = await fetch(`${API}/api/advisor/my-profile`, { headers });
+                const data = await res.json();
+                if (!data.success || !data.profile) return;
+
+                const p = data.profile;
+                document.getElementById('profileFirmName').value = p.firm_name || '';
+                document.getElementById('profileProvince').value = p.province || '';
+                document.getElementById('profileCity').value = p.city || '';
+                document.getElementById('profilePhone').value = p.phone || '';
+                document.getElementById('profileMinAUM').value = p.minimum_aum || p.hourly_rate_min || '';
+
+                const specs = Array.isArray(p.specializations)
+                    ? p.specializations
+                    : (typeof p.specializations === 'string' ? JSON.parse(p.specializations || '[]') : []);
+                document.getElementById('profileSpecializations').value = specs.join(', ');
+            } catch (e) {
+                console.error('Profile load error:', e);
+            }
+        }
+
+        // Save profile
+        document.getElementById('profileForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const specsStr = document.getElementById('profileSpecializations').value;
+            const specializations = specsStr.split(',').map(s => s.trim()).filter(Boolean);
+
+            try {
+                const res = await fetch(`${API}/api/advisor/my-profile`, {
+                    method: 'PUT',
+                    headers,
+                    body: JSON.stringify({
+                        firmName: document.getElementById('profileFirmName').value,
+                        province: document.getElementById('profileProvince').value,
+                        city: document.getElementById('profileCity').value,
+                        phone: document.getElementById('profilePhone').value,
+                        minimumAUM: parseFloat(document.getElementById('profileMinAUM').value) || null,
+                        specializations: specializations
+                    })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    const msg = document.getElementById('profileSaveMsg');
+                    msg.style.display = 'inline';
+                    setTimeout(() => { msg.style.display = 'none'; }, 3000);
+                }
+            } catch (e) {
+                console.error('Profile save error:', e);
+                alert('Failed to save profile. Please try again.');
+            }
+        });
+
+        // Init
+        loadStats();
+        loadLeads();
+        loadProfile();
+    </script>
+
+    <!-- Subscription Management Script -->
+    <script>
+    (function() {
+        const API_BASE_URL = 'https://canadainvesting-backend-production.up.railway.app';
+        const email = localStorage.getItem('ca_checkout_email') || (JSON.parse(localStorage.getItem('advisor_user') || '{}')).email;
+
+        const TIER_NAMES = {
+            associate: 'Associate ($199/mo)',
+            professional: 'Professional ($299/mo)',
+            enterprise: 'Enterprise ($599/mo)'
+        };
+
+        const STATUS_ICONS = {
+            active:   { cls: 'active',  icon: 'fa-check-circle' },
+            past_due: { cls: 'error',   icon: 'fa-exclamation-circle' },
+            canceled: { cls: 'warning', icon: 'fa-times-circle' },
+            trialing: { cls: 'active',  icon: 'fa-clock' }
+        };
+
+        async function loadSubscription() {
+            if (!email) {
+                document.getElementById('noSubscriptionBanner').style.display = 'block';
+                return;
+            }
+
+            try {
+                const res = await fetch(`${API_BASE_URL}/api/stripe/subscription-status?email=${encodeURIComponent(email)}`);
+                const data = await res.json();
+
+                if (data.subscription && data.subscription.status !== 'canceled') {
+                    const sub = data.subscription;
+                    const iconStyle = STATUS_ICONS[sub.status] || STATUS_ICONS.active;
+
+                    document.getElementById('subTierDisplay').textContent = TIER_NAMES[sub.tier] || sub.tier;
+
+                    const badgeEl = document.getElementById('subStatusBadge');
+                    badgeEl.textContent = sub.status.charAt(0).toUpperCase() + sub.status.slice(1);
+                    badgeEl.className = `sub-badge ${sub.status}`;
+
+                    const iconEl = document.getElementById('subStatusIcon');
+                    iconEl.className = `sub-icon ${iconStyle.cls}`;
+                    iconEl.innerHTML = `<i class="fas ${iconStyle.icon} fa-lg"></i>`;
+
+                    if (sub.current_period_end) {
+                        const renewDate = new Date(sub.current_period_end).toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' });
+                        document.getElementById('subRenewalDate').textContent = `Renews ${renewDate}`;
+                    }
+
+                    document.getElementById('subscriptionBanner').style.display = 'block';
+                } else {
+                    document.getElementById('noSubscriptionBanner').style.display = 'block';
+                }
+            } catch (err) {
+                console.error('Subscription load error:', err);
+                document.getElementById('noSubscriptionBanner').style.display = 'block';
+            }
+        }
+
+        window.openBillingPortal = async function() {
+            if (!email) {
+                alert('Please log in to manage your subscription.');
+                return;
+            }
+
+            try {
+                const res = await fetch(`${API_BASE_URL}/api/stripe/create-portal-session`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: email })
+                });
+
+                const data = await res.json();
+                if (data.url) {
+                    window.location.href = data.url;
+                } else {
+                    alert('Unable to open billing portal. Please call us at (647) 956-7290.');
+                }
+            } catch (err) {
+                console.error('Portal error:', err);
+                alert('Connection error. Please try again.');
+            }
+        };
+
+        loadSubscription();
+    })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Privacy Policy - CanadaInvesting.app</title>
+    <meta name="description" content="CanadaInvesting Privacy Policy - PIPEDA compliant data protection practices for Canadian investors and advisors. Learn how we protect your personal information.">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://canadainvesting.app/privacy-policy">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://canadainvesting.app/privacy-policy">
+    <meta property="og:title" content="Privacy Policy | CanadaInvesting.app">
+    <meta property="og:description" content="CanadaInvesting Privacy Policy - PIPEDA compliant data protection practices for Canadian investors and advisors.">
+    <meta property="og:image" content="https://canadainvesting.app/icon-512.png">
+    <meta property="og:site_name" content="CanadaInvesting">
+    <meta property="og:locale" content="en_CA">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary-purple: #667eea;
+            --primary-violet: #764ba2;
+            --accent-green: #059669;
+            --dark-bg: #0a0a0a;
+            --card-bg: #1a1a1a;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --border-color: #333333;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Navigation */
+        .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(0,0,0,0.4); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; height: 64px; }
+        .nav-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; color: white; font-weight: 700; font-size: 1.25rem; }
+        .nav-logo .maple { color: var(--primary-purple); font-size: 1.5rem; }
+        .nav-links { display: flex; align-items: center; gap: 24px; list-style: none; }
+        .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.3s; }
+        .nav-links a:hover { color: white; }
+        .nav-cta { background: white !important; color: var(--primary-purple) !important; padding: 10px 24px; border-radius: 8px; font-weight: 700 !important; transition: transform 0.3s, box-shadow 0.3s; }
+        .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 4px 15px rgba(102,126,234,0.3); }
+        .nav-toggle { display: none; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; padding: 4px; }
+        .nav-links.active { display: flex; }
+
+        /* Hero */
+        .hero {
+            padding: 140px 24px 60px;
+            background: linear-gradient(135deg, var(--primary-purple) 0%, var(--primary-violet) 50%, #1e3a5f 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(ellipse at 30% 20%, rgba(255,255,255,0.1) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: rgba(255,255,255,0.15); backdrop-filter: blur(10px);
+            padding: 10px 22px; border-radius: 50px; font-size: 0.85rem; font-weight: 500;
+            margin-bottom: 28px; border: 1px solid rgba(255,255,255,0.2);
+            position: relative;
+        }
+        .hero h1 { font-size: 3rem; font-weight: 900; line-height: 1.1; margin-bottom: 16px; position: relative; }
+        .hero p { font-size: 1.15rem; max-width: 700px; margin: 0 auto; opacity: 0.9; line-height: 1.7; position: relative; }
+        .hero .dates { margin-top: 24px; background: rgba(255,255,255,0.15); border-radius: 10px; padding: 16px; display: inline-block; position: relative; }
+        .hero .dates p { font-size: 0.9rem; margin: 0; }
+
+        /* Content */
+        .content { max-width: 900px; margin: 0 auto; padding: 60px 24px; }
+        .section-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 24px;
+        }
+        .section-card h2 { font-size: 1.6rem; font-weight: 900; margin-bottom: 20px; }
+        .section-card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 12px; margin-top: 24px; color: var(--primary-purple); }
+        .section-card p, .section-card li { color: var(--text-secondary); line-height: 1.7; font-size: 0.95rem; }
+        .section-card ul { list-style: none; }
+        .section-card ul li { padding: 6px 0 6px 24px; position: relative; }
+        .section-card ul li::before { content: "\f00c"; font-family: "Font Awesome 6 Free"; font-weight: 900; position: absolute; left: 0; color: var(--accent-green); font-size: 0.8rem; }
+
+        .highlight-box {
+            background: rgba(102,126,234,0.1);
+            border: 1px solid rgba(102,126,234,0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .highlight-box h3 { color: var(--primary-purple); margin-top: 0; }
+        .highlight-box p, .highlight-box li { color: rgba(255,255,255,0.85); }
+
+        .warning-box {
+            background: rgba(239,68,68,0.1);
+            border: 1px solid rgba(239,68,68,0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .warning-box h3 { color: #ef4444; margin-top: 0; }
+        .warning-box p, .warning-box li { color: rgba(255,255,255,0.85); }
+
+        /* Table */
+        .table-responsive { overflow-x: auto; }
+        .privacy-table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+        .privacy-table th, .privacy-table td { border: 1px solid var(--border-color); padding: 12px; text-align: left; font-size: 0.9rem; }
+        .privacy-table th { background: rgba(255,255,255,0.05); font-weight: 600; color: var(--text-primary); }
+        .privacy-table td { color: var(--text-secondary); }
+
+        /* Rights grid */
+        .rights-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin: 20px 0; }
+        .right-item { background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 10px; padding: 20px; }
+        .right-item h4 { color: var(--primary-purple); font-weight: 700; margin-bottom: 8px; font-size: 0.95rem; }
+        .right-item p { color: var(--text-secondary); font-size: 0.85rem; }
+
+        /* Contact box */
+        .contact-box {
+            background: linear-gradient(135deg, var(--primary-purple) 0%, var(--primary-violet) 100%);
+            border-radius: 16px;
+            padding: 32px;
+            text-align: center;
+            margin: 32px 0;
+        }
+        .contact-box h2 { font-size: 1.5rem; font-weight: 900; margin-bottom: 12px; }
+        .contact-box p { opacity: 0.9; margin-bottom: 16px; }
+        .contact-box a { color: #fbbf24; text-decoration: none; font-weight: 600; }
+        .contact-box a:hover { color: #f59e0b; text-decoration: underline; }
+        .contact-box .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; text-align: left; margin-top: 20px; }
+
+        /* Footer */
+        .footer { background: #111; padding: 60px 24px; border-top: 1px solid var(--border-color); }
+        .footer-inner { max-width: 1100px; margin: 0 auto; }
+        .footer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; margin-bottom: 40px; }
+        .footer-grid h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 16px; }
+        .footer-grid ul { list-style: none; }
+        .footer-grid li { margin-bottom: 10px; }
+        .footer-grid a { color: var(--text-secondary); text-decoration: none; font-size: 0.85rem; transition: color 0.3s; }
+        .footer-grid a:hover { color: white; }
+        .footer-bottom { border-top: 1px solid var(--border-color); padding-top: 24px; text-align: center; }
+        .footer-logo { display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 1.5rem; font-weight: 700; margin-bottom: 12px; }
+        .footer-logo .maple { color: var(--primary-purple); }
+        .footer-tagline { color: var(--text-secondary); margin-bottom: 16px; font-size: 0.9rem; }
+        .footer-copy { color: #666; font-size: 0.8rem; }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .nav-toggle { display: block; }
+            .nav-links {
+                display: none;
+                position: absolute; top: 64px; left: 0; right: 0;
+                flex-direction: column; align-items: center; gap: 0;
+                background: rgba(0,0,0,0.95); backdrop-filter: blur(20px);
+                padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.1);
+            }
+            .nav-links.active { display: flex; }
+            .nav-links a { padding: 14px 24px; width: 100%; text-align: center; font-size: 0.95rem; }
+            .nav-links a:hover { background: rgba(255,255,255,0.05); }
+            .nav-cta { margin: 8px 24px; width: auto; padding: 12px 24px; font-size: 0.9rem !important; text-align: center; border-radius: 8px; }
+            .hero { padding: 120px 20px 60px; }
+            .hero h1 { font-size: 2rem; }
+            .content { padding: 40px 16px; }
+            .section-card { padding: 24px; }
+            .contact-box .grid { grid-template-columns: 1fr; }
+            .rights-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="/" class="nav-logo"><i class="fas fa-maple-leaf maple"></i> CanadaInvesting<span style="color: var(--primary-purple)">.app</span></a>
+            <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('active')" aria-label="Menu"><i class="fas fa-bars"></i></button>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="pricing">Pricing</a>
+                <a href="why-we-win">Why We Win</a>
+                <a href="contact">Contact</a>
+                <a href="join-as-advisor" class="nav-cta">Apply to Join</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-badge"><i class="fas fa-shield-halved"></i> PIPEDA Compliant Privacy Protection</div>
+        <h1>Privacy Policy</h1>
+        <p>Your privacy is our priority. Learn how we collect, use, and protect your personal information in compliance with Canadian privacy laws.</p>
+        <div class="dates">
+            <p><strong>Last Updated:</strong> January 20, 2025</p>
+            <p><strong>Effective Date:</strong> January 20, 2025</p>
+        </div>
+    </section>
+
+    <!-- Content -->
+    <div class="content">
+
+        <!-- Important Notice -->
+        <div class="highlight-box">
+            <h3><i class="fas fa-info-circle" style="margin-right: 8px;"></i>Important Information</h3>
+            <p>This Privacy Policy complies with the Personal Information Protection and Electronic Documents Act (PIPEDA) and provincial privacy legislation across Canada. It applies to all personal information collected through canadainvesting.app and related services.</p>
+        </div>
+
+        <!-- Section 1 -->
+        <div class="section-card">
+            <h2>1. Information We Collect</h2>
+
+            <h3>Personal Information You Provide</h3>
+            <div class="table-responsive">
+                <table class="privacy-table">
+                    <thead>
+                        <tr>
+                            <th>Information Type</th>
+                            <th>Examples</th>
+                            <th>Purpose</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Contact Information</strong></td>
+                            <td>Name, email address, phone number, business address</td>
+                            <td>Account creation, communication, service delivery</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Professional Information</strong></td>
+                            <td>CIRO registration, designations (CFA, CFP, CIM), specializations, firm details</td>
+                            <td>Verification, matching, profile creation</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Investor Information</strong></td>
+                            <td>Investment goals, risk tolerance, portfolio size, timeline preferences</td>
+                            <td>Advisor matching, service customization</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Financial Information</strong></td>
+                            <td>Payment details, billing information, subscription data</td>
+                            <td>Payment processing, billing, account management</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Communication Data</strong></td>
+                            <td>Messages, support requests, feedback</td>
+                            <td>Customer support, service improvement</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Automatically Collected Information</h3>
+            <ul>
+                <li><strong>Technical Data:</strong> IP address, browser type, operating system, device information</li>
+                <li><strong>Usage Data:</strong> Pages visited, time spent, click patterns, feature usage</li>
+                <li><strong>Location Data:</strong> General geographic location (city/province level)</li>
+                <li><strong>Cookies and Tracking:</strong> Website functionality, preferences, analytics data</li>
+            </ul>
+        </div>
+
+        <!-- Section 2 -->
+        <div class="section-card">
+            <h2>2. How We Use Your Information</h2>
+
+            <h3>Primary Uses</h3>
+            <ul>
+                <li>Provide advisor matching services</li>
+                <li>Verify professional credentials and CIRO registration</li>
+                <li>Process payments and billing</li>
+                <li>Deliver customer support</li>
+                <li>Send service notifications</li>
+                <li>Maintain platform security</li>
+            </ul>
+
+            <h3>Secondary Uses</h3>
+            <ul>
+                <li>Improve our matching algorithms</li>
+                <li>Analyze usage patterns</li>
+                <li>Develop new features</li>
+                <li>Send marketing communications (with consent)</li>
+                <li>Comply with legal obligations</li>
+                <li>Prevent fraud and abuse</li>
+            </ul>
+
+            <div class="highlight-box">
+                <h3><i class="fas fa-handshake" style="margin-right: 8px;"></i>Consent and Opt-Out</h3>
+                <p>We obtain your consent for all marketing communications and non-essential data processing. You can withdraw consent or opt-out at any time by contacting us or updating your preferences.</p>
+            </div>
+        </div>
+
+        <!-- Section 3 -->
+        <div class="section-card">
+            <h2>3. Information Sharing and Disclosure</h2>
+
+            <h3>We Share Information With:</h3>
+            <ul>
+                <li><strong>Service Providers:</strong> Railway (hosting), Stripe (payments), email service providers -- only as necessary for service delivery</li>
+                <li><strong>Platform Members:</strong> Limited profile information shared between advisors and clients for matching purposes</li>
+                <li><strong>Legal Requirements:</strong> Government authorities when required by Canadian law, court orders, or to protect safety</li>
+                <li><strong>Business Transfers:</strong> In case of merger, acquisition, or sale -- with advance notice and continued privacy protection</li>
+            </ul>
+
+            <div class="warning-box">
+                <h3><i class="fas fa-times-circle" style="margin-right: 8px;"></i>We DO NOT:</h3>
+                <ul>
+                    <li>Sell your personal information to third parties</li>
+                    <li>Share data with advertisers for tracking</li>
+                    <li>Transfer data outside Canada without consent</li>
+                    <li>Use your information for unrelated purposes</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Section 4 -->
+        <div class="section-card">
+            <h2>4. Data Security and Protection</h2>
+            <ul>
+                <li><strong>Encryption:</strong> TLS 1.3 in transit, AES-256 at rest</li>
+                <li><strong>Access Control:</strong> Multi-factor authentication, role-based permissions</li>
+                <li><strong>Monitoring:</strong> 24/7 security monitoring, incident response</li>
+                <li><strong>Regular security audits and penetration testing</strong></li>
+                <li><strong>Employee privacy and security training</strong></li>
+                <li><strong>Secure backup and disaster recovery procedures</strong></li>
+            </ul>
+        </div>
+
+        <!-- Section 5 -->
+        <div class="section-card">
+            <h2>5. Your Privacy Rights Under PIPEDA</h2>
+
+            <div class="rights-grid">
+                <div class="right-item">
+                    <h4><i class="fas fa-eye" style="margin-right: 8px;"></i>Right to Access</h4>
+                    <p>Request copies of your personal information we hold</p>
+                </div>
+                <div class="right-item">
+                    <h4><i class="fas fa-edit" style="margin-right: 8px;"></i>Right to Correction</h4>
+                    <p>Update or correct inaccurate personal information</p>
+                </div>
+                <div class="right-item">
+                    <h4><i class="fas fa-trash" style="margin-right: 8px;"></i>Right to Deletion</h4>
+                    <p>Request deletion of your personal information (with limitations)</p>
+                </div>
+                <div class="right-item">
+                    <h4><i class="fas fa-ban" style="margin-right: 8px;"></i>Right to Object</h4>
+                    <p>Object to certain uses of your personal information</p>
+                </div>
+                <div class="right-item">
+                    <h4><i class="fas fa-download" style="margin-right: 8px;"></i>Data Portability</h4>
+                    <p>Receive your data in a structured, commonly used format</p>
+                </div>
+                <div class="right-item">
+                    <h4><i class="fas fa-question-circle" style="margin-right: 8px;"></i>Right to Information</h4>
+                    <p>Understand how your information is being used</p>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <h3>How to Exercise Your Rights</h3>
+                <p>To exercise any of these rights, contact our Privacy Officer:</p>
+                <ul>
+                    <li>Email: <strong>privacy@canadainvesting.app</strong></li>
+                    <li>Phone: <strong>(647) 956-7290</strong></li>
+                    <li>Mail: <strong>Privacy Officer, CanadaInvesting, Toronto, ON</strong></li>
+                </ul>
+                <p style="margin-top: 12px; font-size: 0.85rem;">We will respond to your request within 30 days as required by PIPEDA.</p>
+            </div>
+        </div>
+
+        <!-- Section 6 -->
+        <div class="section-card">
+            <h2>6. Cookies and Tracking Technologies</h2>
+            <div class="table-responsive">
+                <table class="privacy-table">
+                    <thead>
+                        <tr>
+                            <th>Cookie Type</th>
+                            <th>Purpose</th>
+                            <th>Duration</th>
+                            <th>Control</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Essential Cookies</strong></td>
+                            <td>Platform functionality, security, authentication</td>
+                            <td>Session/1 year</td>
+                            <td>Cannot be disabled</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Analytics Cookies</strong></td>
+                            <td>Usage statistics, performance monitoring</td>
+                            <td>2 years</td>
+                            <td>Can be disabled</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Preference Cookies</strong></td>
+                            <td>User settings, language, customization</td>
+                            <td>1 year</td>
+                            <td>Can be disabled</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Marketing Cookies</strong></td>
+                            <td>Personalized content, campaign tracking</td>
+                            <td>1 year</td>
+                            <td>Requires consent</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p style="color: var(--text-secondary); margin-top: 16px; font-size: 0.9rem;">You can control cookies through your browser settings or our cookie preference center. Disabling certain cookies may affect platform functionality.</p>
+        </div>
+
+        <!-- Section 7 -->
+        <div class="section-card">
+            <h2>7. Data Retention</h2>
+            <ul>
+                <li><strong>Active Account Data:</strong> Retained while your account is active and for 2 years after account closure</li>
+                <li><strong>Financial Records:</strong> Retained for 7 years as required by Canadian tax and business laws</li>
+                <li><strong>Communication Records:</strong> Support tickets and communications retained for 3 years</li>
+                <li><strong>Analytics Data:</strong> Aggregated and anonymized data retained indefinitely for service improvement</li>
+            </ul>
+        </div>
+
+        <!-- Section 8 -->
+        <div class="section-card">
+            <h2>8. International Data Transfers</h2>
+            <div class="highlight-box">
+                <h3>Our Approach to Data Transfers</h3>
+                <p>We primarily process data using Railway's cloud infrastructure. While our service providers may have servers in various locations, we implement appropriate safeguards for any international transfers including contractual data protection clauses, adequacy decisions where available, additional security measures, and regular compliance monitoring.</p>
+            </div>
+        </div>
+
+        <!-- Section 9 -->
+        <div class="section-card">
+            <h2>9. Children's Privacy</h2>
+            <div class="warning-box">
+                <h3><i class="fas fa-child" style="margin-right: 8px;"></i>Age Restriction</h3>
+                <p>CanadaInvesting is intended for investment professionals and adult investors and is not directed at children under 18. We do not knowingly collect personal information from minors. If we discover we have collected information from a child under 18, we will delete it immediately.</p>
+            </div>
+        </div>
+
+        <!-- Section 10 -->
+        <div class="section-card">
+            <h2>10. Changes to This Privacy Policy</h2>
+            <p>We may update this Privacy Policy to reflect changes in our practices, technology, legal requirements, or other factors. We will notify you of significant changes through:</p>
+            <ul>
+                <li>Email notification to registered users</li>
+                <li>Prominent notice on our website</li>
+                <li>In-platform notifications</li>
+                <li>Updated "Last Modified" date at the top of this policy</li>
+            </ul>
+            <p style="margin-top: 16px;"><strong>Your continued use of our services after policy changes constitutes acceptance of the updated policy.</strong> If you disagree with changes, you may close your account before they take effect.</p>
+        </div>
+
+        <!-- Contact -->
+        <div class="contact-box">
+            <h2><i class="fas fa-envelope" style="margin-right: 8px;"></i>Privacy Questions or Concerns?</h2>
+            <p>Contact our Privacy Officer for any questions about this policy or your personal information.</p>
+
+            <div class="grid">
+                <div>
+                    <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 8px;">Privacy Officer</h3>
+                    <p><a href="mailto:privacy@canadainvesting.app">privacy@canadainvesting.app</a></p>
+                    <p>Arthur Kostaras</p>
+                    <p style="font-size: 0.85rem; opacity: 0.75; margin-top: 4px;">Response within 30 days</p>
+                </div>
+                <div>
+                    <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 8px;">Phone & Mail</h3>
+                    <p><a href="tel:6479567290">(647) 956-7290</a></p>
+                    <p>CanadaInvesting</p>
+                    <p style="font-size: 0.85rem; opacity: 0.75; margin-top: 4px;">Toronto, Ontario, Canada</p>
+                </div>
+            </div>
+
+            <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.2);">
+                <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 8px;">Regulatory Contact</h3>
+                <p style="font-size: 0.9rem;">If you're not satisfied with our response, you may contact the Office of the Privacy Commissioner of Canada at <a href="https://www.priv.gc.ca">priv.gc.ca</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-grid">
+                <div>
+                    <h4>For Advisors</h4>
+                    <ul>
+                        <li><a href="join-as-advisor">Apply to Join</a></li>
+                        <li><a href="pricing">Pricing & Algorithm</a></li>
+                        <li><a href="advisor-revenue-calculator">Revenue Calculator</a></li>
+                        <li><a href="why-we-win">Why We Win</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>For Clients</h4>
+                    <ul>
+                        <li><a href="find-advisor">Find an Advisor</a></li>
+                        <li><a href="guarantee">Our Guarantee</a></li>
+                        <li><a href="contact">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="terms-of-service">Terms of Service</a></li>
+                        <li><a href="privacy-policy">Privacy Policy</a></li>
+                        <li><a href="trust-center">Trust Center</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="mailto:arthur@negotiateandwin.com">arthur@negotiateandwin.com</a></li>
+                        <li><a href="tel:+16479567290">1.647.956.7290</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-logo">
+                    <i class="fas fa-maple-leaf maple"></i> CanadaInvesting<span style="color: var(--primary-purple)">.app</span>
+                </div>
+                <p class="footer-tagline">AI-powered investment advisor marketplace built for Canadian financial professionals.</p>
+                <p class="footer-copy">&copy; 2026 CanadaInvesting.app | Technology platform only. Not a registered dealer or investment advisor.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

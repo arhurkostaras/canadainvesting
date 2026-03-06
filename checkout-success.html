@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Subscription Confirmed | CanadaInvesting.app</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { --primary-purple: #667eea; --primary-violet: #764ba2; --accent-green: #059669; --dark-bg: #0a0a0a; --card-bg: #1a1a1a; --text-primary: #ffffff; --text-secondary: #a0a0a0; --border-color: #333333; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--dark-bg); color: var(--text-primary); line-height: 1.6; min-height: 100vh; }
+        .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(0,0,0,0.4); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; height: 64px; }
+        .nav-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; color: white; font-weight: 700; font-size: 1.25rem; }
+        .nav-logo .maple { color: var(--primary-purple); font-size: 1.5rem; }
+        .nav-links { display: flex; align-items: center; gap: 24px; list-style: none; }
+        .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.3s; }
+        .nav-links a:hover { color: white; }
+        .nav-toggle { display: none; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; padding: 4px; }
+        .nav-links.active { display: flex; }
+        .page-content { max-width: 700px; margin: 0 auto; padding: 120px 24px 60px; text-align: center; }
+        .checkmark-circle { display: inline-flex; align-items: center; justify-content: center; width: 96px; height: 96px; background: rgba(5,150,105,0.15); border-radius: 50%; margin-bottom: 32px; animation: scaleIn 0.5s ease-out; }
+        @keyframes scaleIn { 0% { transform: scale(0); opacity: 0; } 50% { transform: scale(1.1); } 100% { transform: scale(1); opacity: 1; } }
+        .fade-in { animation: fadeIn 0.8s ease-out 0.3s both; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .page-content h1 { font-size: 2.5rem; font-weight: 900; margin-bottom: 12px; }
+        .page-content > p { font-size: 1.15rem; color: var(--text-secondary); margin-bottom: 32px; }
+        .sub-details { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 16px; padding: 24px; margin-bottom: 32px; text-align: left; display: none; }
+        .sub-details h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 16px; }
+        .sub-row { display: flex; justify-content: space-between; padding: 8px 0; }
+        .sub-row .label { color: var(--text-secondary); }
+        .sub-row .value { font-weight: 600; }
+        .loading-state { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 16px; padding: 24px; margin-bottom: 32px; }
+        .spinner { width: 32px; height: 32px; border: 3px solid var(--border-color); border-top-color: var(--primary-purple); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 12px; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .next-steps { background: rgba(102,126,234,0.1); border: 1px solid rgba(102,126,234,0.3); border-radius: 16px; padding: 24px; margin-bottom: 32px; text-align: left; }
+        .next-steps h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 16px; }
+        .step-item { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 16px; }
+        .step-num { width: 32px; height: 32px; background: linear-gradient(135deg, var(--primary-purple), var(--primary-violet)); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 700; flex-shrink: 0; }
+        .step-item .step-title { font-weight: 600; margin-bottom: 2px; }
+        .step-item .step-desc { font-size: 0.85rem; color: var(--text-secondary); }
+        .action-buttons { display: flex; flex-direction: column; gap: 12px; align-items: center; }
+        .action-buttons a { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 16px 32px; border-radius: 10px; font-weight: 700; font-size: 1rem; text-decoration: none; transition: all 0.3s; width: 100%; max-width: 400px; }
+        .btn-primary { background: linear-gradient(135deg, var(--primary-purple), var(--primary-violet)); color: white; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(102,126,234,0.4); }
+        .btn-secondary { background: var(--card-bg); border: 1px solid var(--border-color); color: var(--text-primary); }
+        .btn-secondary:hover { border-color: var(--primary-purple); }
+        @media (max-width: 768px) {
+            .nav-toggle { display: block; }
+            .nav-links { display: none; position: absolute; top: 64px; left: 0; right: 0; flex-direction: column; align-items: center; gap: 0; background: rgba(0,0,0,0.95); backdrop-filter: blur(20px); padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
+            .nav-links.active { display: flex; }
+            .nav-links a { padding: 14px 24px; width: 100%; text-align: center; }
+            .page-content { padding: 100px 16px 40px; }
+            .page-content h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="/" class="nav-logo"><i class="fas fa-maple-leaf maple"></i> CanadaInvesting<span style="color: var(--primary-purple)">.app</span></a>
+            <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('active')" aria-label="Menu"><i class="fas fa-bars"></i></button>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="pricing">Pricing</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-content">
+        <div class="checkmark-circle">
+            <i class="fas fa-check" style="color: var(--accent-green); font-size: 2.5rem;"></i>
+        </div>
+
+        <div class="fade-in">
+            <h1>Subscription Confirmed!</h1>
+            <p>Welcome to the CanadaInvesting network. Your algorithm placement is now active.</p>
+
+            <div id="subscriptionDetails" class="sub-details">
+                <h3>Your Subscription</h3>
+                <div class="sub-row">
+                    <span class="label">Plan:</span>
+                    <span id="planName" class="value">-</span>
+                </div>
+                <div class="sub-row">
+                    <span class="label">Status:</span>
+                    <span class="value" style="color: var(--accent-green);">Active</span>
+                </div>
+            </div>
+
+            <div id="loadingState" class="loading-state">
+                <div class="spinner"></div>
+                <p style="color: var(--text-secondary);">Verifying your subscription...</p>
+            </div>
+
+            <div class="next-steps">
+                <h3>What Happens Next</h3>
+                <div class="step-item">
+                    <div class="step-num">1</div>
+                    <div><div class="step-title">Profile Activation</div><div class="step-desc">Your advisor profile is now active and visible to investors seeking advisors.</div></div>
+                </div>
+                <div class="step-item">
+                    <div class="step-num">2</div>
+                    <div><div class="step-title">Algorithm Placement</div><div class="step-desc">Your search position is set based on your tier. Higher tiers get priority placement.</div></div>
+                </div>
+                <div class="step-item">
+                    <div class="step-num">3</div>
+                    <div><div class="step-title">Lead Notifications</div><div class="step-desc">You'll receive email notifications when clients are matched to your profile.</div></div>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <a href="advisor-dashboard" class="btn-primary"><i class="fas fa-tachometer-alt"></i> Go to Dashboard</a>
+                <a href="tel:6479567290" class="btn-secondary"><i class="fas fa-phone"></i> Call us: (647) 956-7290</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE_URL = 'https://canadainvesting-backend-production.up.railway.app';
+
+        async function checkSubscription() {
+            const email = localStorage.getItem('ca_checkout_email');
+            if (!email) {
+                document.getElementById('loadingState').style.display = 'none';
+                return;
+            }
+
+            try {
+                const res = await fetch(`${API_BASE_URL}/api/stripe/subscription-status?email=${encodeURIComponent(email)}`);
+                const data = await res.json();
+
+                document.getElementById('loadingState').style.display = 'none';
+
+                if (data.subscription) {
+                    const tierNames = {
+                        associate: 'Associate ($199/mo)',
+                        professional: 'Professional ($299/mo)',
+                        enterprise: 'Enterprise ($599/mo)'
+                    };
+                    document.getElementById('planName').textContent = tierNames[data.subscription.tier] || data.subscription.tier;
+                    document.getElementById('subscriptionDetails').style.display = 'block';
+                }
+            } catch (err) {
+                document.getElementById('loadingState').style.display = 'none';
+                console.error('Status check error:', err);
+            }
+        }
+
+        setTimeout(checkSubscription, 2000);
+    </script>
+</body>
+</html>

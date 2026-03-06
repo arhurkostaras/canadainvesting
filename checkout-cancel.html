@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Checkout Cancelled | CanadaInvesting.app</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { --primary-purple: #667eea; --primary-violet: #764ba2; --accent-green: #059669; --dark-bg: #0a0a0a; --card-bg: #1a1a1a; --text-primary: #ffffff; --text-secondary: #a0a0a0; --border-color: #333333; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--dark-bg); color: var(--text-primary); line-height: 1.6; min-height: 100vh; }
+        .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(0,0,0,0.4); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; height: 64px; }
+        .nav-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; color: white; font-weight: 700; font-size: 1.25rem; }
+        .nav-logo .maple { color: var(--primary-purple); font-size: 1.5rem; }
+        .nav-links { display: flex; align-items: center; gap: 24px; list-style: none; }
+        .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.3s; }
+        .nav-links a:hover { color: white; }
+        .nav-toggle { display: none; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; padding: 4px; }
+        .nav-links.active { display: flex; }
+        .page-content { max-width: 700px; margin: 0 auto; padding: 120px 24px 60px; text-align: center; }
+        .warning-circle { display: inline-flex; align-items: center; justify-content: center; width: 96px; height: 96px; background: rgba(245,158,11,0.15); border-radius: 50%; margin-bottom: 32px; animation: scaleIn 0.5s ease-out; }
+        @keyframes scaleIn { 0% { transform: scale(0); opacity: 0; } 50% { transform: scale(1.1); } 100% { transform: scale(1); opacity: 1; } }
+        .fade-in { animation: fadeIn 0.8s ease-out 0.3s both; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .page-content h1 { font-size: 2.5rem; font-weight: 900; margin-bottom: 12px; }
+        .page-content > p { font-size: 1.15rem; color: var(--text-secondary); margin-bottom: 32px; }
+        .help-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 16px; padding: 32px; margin-bottom: 32px; }
+        .help-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 12px; }
+        .help-card p { color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 24px; }
+        .contact-buttons { display: flex; flex-direction: column; gap: 12px; align-items: center; }
+        .contact-buttons a { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 14px 28px; border-radius: 10px; font-weight: 700; font-size: 0.95rem; text-decoration: none; transition: all 0.3s; width: 100%; max-width: 320px; }
+        .btn-phone { background: linear-gradient(135deg, var(--primary-purple), var(--primary-violet)); color: white; }
+        .btn-phone:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(102,126,234,0.4); }
+        .btn-email { background: rgba(102,126,234,0.15); border: 1px solid rgba(102,126,234,0.3); color: var(--primary-purple); }
+        .btn-email:hover { background: rgba(102,126,234,0.25); }
+        .action-buttons { display: flex; flex-direction: column; gap: 12px; align-items: center; }
+        .action-buttons a { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 16px 32px; border-radius: 10px; font-weight: 700; font-size: 1rem; text-decoration: none; transition: all 0.3s; width: 100%; max-width: 400px; }
+        .btn-primary { background: linear-gradient(135deg, var(--primary-purple), var(--primary-violet)); color: white; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(102,126,234,0.4); }
+        .btn-secondary { background: var(--card-bg); border: 1px solid var(--border-color); color: var(--text-primary); }
+        .btn-secondary:hover { border-color: var(--primary-purple); }
+        @media (max-width: 768px) {
+            .nav-toggle { display: block; }
+            .nav-links { display: none; position: absolute; top: 64px; left: 0; right: 0; flex-direction: column; align-items: center; gap: 0; background: rgba(0,0,0,0.95); backdrop-filter: blur(20px); padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
+            .nav-links.active { display: flex; }
+            .nav-links a { padding: 14px 24px; width: 100%; text-align: center; }
+            .page-content { padding: 100px 16px 40px; }
+            .page-content h1 { font-size: 2rem; }
+            .contact-buttons { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="/" class="nav-logo"><i class="fas fa-maple-leaf maple"></i> CanadaInvesting<span style="color: var(--primary-purple)">.app</span></a>
+            <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('active')" aria-label="Menu"><i class="fas fa-bars"></i></button>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="pricing">Pricing</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-content">
+        <div class="warning-circle">
+            <i class="fas fa-exclamation-triangle" style="color: #f59e0b; font-size: 2.5rem;"></i>
+        </div>
+
+        <div class="fade-in">
+            <h1>Subscription Not Completed</h1>
+            <p>Your checkout was cancelled and you have not been charged. No worries -- your spot is still available.</p>
+
+            <div class="help-card">
+                <h3>Have Questions?</h3>
+                <p>If you ran into an issue or have questions about which plan is right for you, our team is available to help.</p>
+                <div class="contact-buttons">
+                    <a href="tel:6479567290" class="btn-phone">
+                        <i class="fas fa-phone"></i> Call: (647) 956-7290
+                    </a>
+                    <a href="mailto:arthur@negotiateandwin.com" class="btn-email">
+                        <i class="fas fa-envelope"></i> Email Our Team
+                    </a>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <a href="pricing" class="btn-primary"><i class="fas fa-arrow-left"></i> Back to Pricing</a>
+                <a href="/" class="btn-secondary"><i class="fas fa-home"></i> Home</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Advisor Registration - CanadaInvesting.app</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { --primary-purple: #667eea; --primary-violet: #764ba2; --accent-green: #059669; --dark-bg: #0a0a0a; --card-bg: #1a1a1a; --text-primary: #ffffff; --text-secondary: #a0a0a0; --border-color: #333333; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: linear-gradient(135deg, var(--primary-purple) 0%, var(--primary-violet) 100%); color: var(--text-primary); line-height: 1.6; min-height: 100vh; padding: 20px; }
+        .reg-nav { background: rgba(255,255,255,0.1); backdrop-filter: blur(20px); padding: 0 24px; display: flex; justify-content: space-between; align-items: center; height: 56px; max-width: 800px; margin: 0 auto 20px; border-radius: 12px; position: relative; }
+        .reg-nav a.reg-logo { color: white; font-weight: 700; font-size: 1.2rem; text-decoration: none; }
+        .reg-nav a.reg-logo span { color: rgba(255,255,255,0.7); }
+        .nav-toggle { display: none; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; padding: 4px; }
+        .reg-nav-links { display: flex; align-items: center; gap: 16px; }
+        .reg-nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+        .reg-nav-links a:hover { color: white; }
+        .reg-nav-links.active { display: flex !important; }
+        .container { max-width: 800px; margin: 0 auto; background: var(--card-bg); border-radius: 20px; padding: 32px; border: 1px solid var(--border-color); }
+        .header { text-align: center; margin-bottom: 30px; }
+        .header h1 { font-size: 1.8rem; font-weight: 900; margin-bottom: 10px; }
+        .plan-display { background: rgba(102,126,234,0.1); border: 1px solid rgba(102,126,234,0.3); padding: 12px 16px; border-radius: 10px; margin-bottom: 24px; color: var(--text-secondary); font-size: 0.9rem; }
+        .form-section { margin-bottom: 28px; }
+        .section-title { color: var(--primary-purple); font-size: 1.1rem; font-weight: 700; margin-bottom: 16px; border-bottom: 1px solid var(--border-color); padding-bottom: 8px; }
+        .form-row { display: flex; gap: 16px; margin-bottom: 16px; }
+        .form-group { flex: 1; }
+        .form-group label { display: block; margin-bottom: 6px; color: var(--text-secondary); font-weight: 500; font-size: 0.85rem; }
+        .required { color: #ef4444; }
+        input, select, textarea { width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); border-radius: 8px; font-size: 0.95rem; color: var(--text-primary); font-family: inherit; transition: border-color 0.3s; box-sizing: border-box; }
+        input:focus, select:focus, textarea:focus { outline: none; border-color: var(--primary-purple); }
+        input::placeholder, textarea::placeholder { color: #666; }
+        select option { background: var(--card-bg); color: var(--text-primary); }
+        .checkbox-group { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin-top: 10px; }
+        .checkbox-item { display: flex; align-items: center; gap: 8px; }
+        .checkbox-item input[type="checkbox"] { width: auto; accent-color: var(--primary-purple); }
+        .checkbox-item label { font-size: 0.85rem; color: var(--text-secondary); }
+        .submit-btn { background: linear-gradient(135deg, var(--primary-purple), var(--primary-violet)); color: white; border: none; padding: 16px 40px; font-size: 1rem; font-weight: 700; border-radius: 10px; cursor: pointer; width: 100%; transition: all 0.3s; font-family: inherit; }
+        .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(102,126,234,0.4); }
+        @media (max-width: 768px) {
+            .nav-toggle { display: block; }
+            .reg-nav-links { display: none !important; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: center; gap: 0; background: rgba(0,0,0,0.95); backdrop-filter: blur(20px); padding: 12px 0; border-radius: 0 0 12px 12px; }
+            .reg-nav-links.active { display: flex !important; }
+            .reg-nav-links a { display: block; padding: 14px 24px; text-align: center; width: 100%; }
+            .form-row { flex-direction: column; gap: 12px; }
+            .container { padding: 24px 16px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="reg-nav">
+        <a href="/" class="reg-logo">CanadaInvesting<span>.app</span></a>
+        <button class="nav-toggle" onclick="document.querySelector('.reg-nav-links').classList.toggle('active')" aria-label="Menu"><i class="fas fa-bars"></i></button>
+        <div class="reg-nav-links">
+            <a href="/">Home</a>
+            <a href="pricing">Pricing</a>
+            <a href="advisor-login">Login</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1>Complete Your Advisor Registration</h1>
+            <div class="plan-display">
+                <strong>Selected Plan:</strong> <span id="selectedPlan">Professional - $299/month</span>
+            </div>
+        </div>
+
+        <form id="advisorRegistrationForm">
+            <div class="form-section">
+                <h3 class="section-title">Personal Information</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">First Name <span class="required">*</span></label>
+                        <input type="text" id="firstName" name="firstName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name <span class="required">*</span></label>
+                        <input type="text" id="lastName" name="lastName" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">Email Address <span class="required">*</span></label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number <span class="required">*</span></label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3 class="section-title">Professional Credentials</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="ciroNumber">CIRO Registration Number <span class="required">*</span></label>
+                        <input type="text" id="ciroNumber" name="ciroNumber" placeholder="e.g., 123456" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="province">Primary Province <span class="required">*</span></label>
+                        <select id="province" name="province" required>
+                            <option value="">Select Province</option>
+                            <option value="ontario">Ontario</option>
+                            <option value="quebec">Quebec</option>
+                            <option value="british-columbia">British Columbia</option>
+                            <option value="alberta">Alberta</option>
+                            <option value="manitoba">Manitoba</option>
+                            <option value="saskatchewan">Saskatchewan</option>
+                            <option value="nova-scotia">Nova Scotia</option>
+                            <option value="new-brunswick">New Brunswick</option>
+                            <option value="newfoundland">Newfoundland and Labrador</option>
+                            <option value="pei">Prince Edward Island</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="experience">Years of Experience <span class="required">*</span></label>
+                        <select id="experience" name="experience" required>
+                            <option value="">Select Experience Level</option>
+                            <option value="0-2">0-2 years</option>
+                            <option value="3-5">3-5 years</option>
+                            <option value="6-10">6-10 years</option>
+                            <option value="11-15">11-15 years</option>
+                            <option value="16+">16+ years</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="firmSize">Firm Type</label>
+                        <select id="firmSize" name="firmSize">
+                            <option value="">Select Firm Type</option>
+                            <option value="solo">Independent Practice</option>
+                            <option value="small">Small Firm (2-10 Advisors)</option>
+                            <option value="medium">Medium Firm (11-50)</option>
+                            <option value="large">Large Firm (51+)</option>
+                            <option value="bank">Bank/Financial Institution</option>
+                            <option value="insurance">Insurance Company</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3 class="section-title">Designations</h3>
+                <label style="color: var(--text-secondary); font-size: 0.85rem;">Select your professional designations</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-item"><input type="checkbox" id="cfa" name="designations" value="CFA"><label for="cfa">CFA (Chartered Financial Analyst)</label></div>
+                    <div class="checkbox-item"><input type="checkbox" id="cfp" name="designations" value="CFP"><label for="cfp">CFP (Certified Financial Planner)</label></div>
+                    <div class="checkbox-item"><input type="checkbox" id="cim" name="designations" value="CIM"><label for="cim">CIM (Chartered Investment Manager)</label></div>
+                    <div class="checkbox-item"><input type="checkbox" id="fcsi" name="designations" value="FCSI"><label for="fcsi">FCSI (Fellow of the CSI)</label></div>
+                    <div class="checkbox-item"><input type="checkbox" id="pfp" name="designations" value="PFP"><label for="pfp">PFP (Personal Financial Planner)</label></div>
+                    <div class="checkbox-item"><input type="checkbox" id="rfp" name="designations" value="RFP"><label for="rfp">RFP (Registered Financial Planner)</label></div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3 class="section-title">Specializations</h3>
+                <label style="color: var(--text-secondary); font-size: 0.85rem;">Select the services you specialize in <span class="required">*</span></label>
+                <div class="checkbox-group">
+                    <div class="checkbox-item"><input type="checkbox" id="wealth" name="services" value="wealth-management"><label for="wealth">Wealth Management</label></div>
+                    <div class="checkbox-item"><input type="checkbox" id="retirement" name="services" value="retirement-planning"><label for="retirement">Retirement Planning</label></div>
+                    <div class="checkbox-item"><input type="checkbox" id="taxEfficient" name="services" value="tax-efficient-investing"><label for="taxEfficient">Tax-Efficient Investing</label></div>
+                    <div class="checkbox-item"><input type="checkbox" id="esg" name="services" value="esg-investing"><label for="esg">ESG / Responsible Investing</label></div>
+                    <div class="checkbox-item"><input type="checkbox" id="estate" name="services" value="estate-planning"><label for="estate">Estate Planning</label></div>
+                    <div class="checkbox-item"><input type="checkbox" id="corporate" name="services" value="corporate-pensions"><label for="corporate">Corporate Pensions</label></div>
+                    <div class="checkbox-item"><input type="checkbox" id="portfolio" name="services" value="portfolio-management"><label for="portfolio">Portfolio Management</label></div>
+                    <div class="checkbox-item"><input type="checkbox" id="insurance" name="services" value="insurance-planning"><label for="insurance">Insurance Planning</label></div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3 class="section-title">Professional Profile</h3>
+                <div class="form-row">
+                    <div class="form-group" style="flex: 100%;">
+                        <label for="bio">Professional Bio</label>
+                        <textarea id="bio" name="bio" rows="4" placeholder="Brief description of your professional background, expertise, and investment philosophy..."></textarea>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="minimumAUM">Minimum Portfolio Size</label>
+                        <select id="minimumAUM" name="minimumAUM">
+                            <option value="">Select Minimum</option>
+                            <option value="25k">$25,000+</option>
+                            <option value="50k">$50,000+</option>
+                            <option value="100k">$100,000+</option>
+                            <option value="250k">$250,000+</option>
+                            <option value="500k">$500,000+</option>
+                            <option value="1m">$1,000,000+</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="feeStructure">Fee Structure</label>
+                        <select id="feeStructure" name="feeStructure">
+                            <option value="">Select Fee Type</option>
+                            <option value="fee-only">Fee-Only</option>
+                            <option value="commission">Commission-Based</option>
+                            <option value="hybrid">Hybrid (Fee + Commission)</option>
+                            <option value="hourly">Hourly Rate</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <div class="checkbox-item" style="margin-bottom: 16px;">
+                    <input type="checkbox" id="terms" name="terms" required>
+                    <label for="terms">I agree to the <a href="terms-of-service" style="color: var(--primary-purple);">Terms of Service</a> and confirm all information is accurate <span class="required">*</span></label>
+                </div>
+                <div class="checkbox-item" style="margin-bottom: 20px;">
+                    <input type="checkbox" id="marketing" name="marketing">
+                    <label for="marketing">I would like to receive updates about new client opportunities and platform features</label>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn">Complete Advisor Registration</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('advisorRegistrationForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            const registrationData = {};
+
+            for (let [key, value] of formData.entries()) {
+                if (registrationData[key]) {
+                    if (Array.isArray(registrationData[key])) {
+                        registrationData[key].push(value);
+                    } else {
+                        registrationData[key] = [registrationData[key], value];
+                    }
+                } else {
+                    registrationData[key] = value;
+                }
+            }
+
+            registrationData.selectedPlan = document.getElementById('selectedPlan').textContent;
+            registrationData.registrationType = 'Advisor';
+
+            try {
+                const response = await fetch('https://canadainvesting-backend-production.up.railway.app/api/auth/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(registrationData)
+                });
+
+                if (response.ok) {
+                    alert('Advisor Registration Successful!\n\nYour application has been submitted. You will receive a confirmation email shortly with next steps for profile verification.');
+                } else {
+                    throw new Error('Registration failed');
+                }
+            } catch (error) {
+                console.error('Registration error:', error);
+                alert('Sorry, there was an error submitting your registration. Please try again or contact support.');
+            }
+        });
+    </script>
+</body>
+</html>
