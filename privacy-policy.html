@@ -26,8 +26,8 @@
 
     <style>
         :root {
-            --primary-purple: #667eea;
-            --primary-violet: #764ba2;
+            --primary-blue: #2563eb;
+            --primary-navy: #1e3a8a;
             --accent-green: #059669;
             --dark-bg: #0a0a0a;
             --card-bg: #1a1a1a;
@@ -50,11 +50,11 @@
         .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(0,0,0,0.4); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.1); }
         .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; height: 64px; }
         .nav-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; color: white; font-weight: 700; font-size: 1.25rem; }
-        .nav-logo .maple { color: var(--primary-purple); font-size: 1.5rem; }
+        .nav-logo .maple { color: var(--primary-blue); font-size: 1.5rem; }
         .nav-links { display: flex; align-items: center; gap: 24px; list-style: none; }
         .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.3s; }
         .nav-links a:hover { color: white; }
-        .nav-cta { background: white !important; color: var(--primary-purple) !important; padding: 10px 24px; border-radius: 8px; font-weight: 700 !important; transition: transform 0.3s, box-shadow 0.3s; }
+        .nav-cta { background: white !important; color: var(--primary-blue) !important; padding: 10px 24px; border-radius: 8px; font-weight: 700 !important; transition: transform 0.3s, box-shadow 0.3s; }
         .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 4px 15px rgba(102,126,234,0.3); }
         .nav-toggle { display: none; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; padding: 4px; }
         .nav-links.active { display: flex; }
@@ -62,7 +62,7 @@
         /* Hero */
         .hero {
             padding: 140px 24px 60px;
-            background: linear-gradient(135deg, var(--primary-purple) 0%, var(--primary-violet) 50%, #1e3a5f 100%);
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-navy) 50%, #1e3a5f 100%);
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -95,7 +95,7 @@
             margin-bottom: 24px;
         }
         .section-card h2 { font-size: 1.6rem; font-weight: 900; margin-bottom: 20px; }
-        .section-card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 12px; margin-top: 24px; color: var(--primary-purple); }
+        .section-card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 12px; margin-top: 24px; color: var(--primary-blue); }
         .section-card p, .section-card li { color: var(--text-secondary); line-height: 1.7; font-size: 0.95rem; }
         .section-card ul { list-style: none; }
         .section-card ul li { padding: 6px 0 6px 24px; position: relative; }
@@ -108,7 +108,7 @@
             padding: 20px;
             margin: 20px 0;
         }
-        .highlight-box h3 { color: var(--primary-purple); margin-top: 0; }
+        .highlight-box h3 { color: var(--primary-blue); margin-top: 0; }
         .highlight-box p, .highlight-box li { color: rgba(255,255,255,0.85); }
 
         .warning-box {
@@ -131,12 +131,12 @@
         /* Rights grid */
         .rights-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin: 20px 0; }
         .right-item { background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 10px; padding: 20px; }
-        .right-item h4 { color: var(--primary-purple); font-weight: 700; margin-bottom: 8px; font-size: 0.95rem; }
+        .right-item h4 { color: var(--primary-blue); font-weight: 700; margin-bottom: 8px; font-size: 0.95rem; }
         .right-item p { color: var(--text-secondary); font-size: 0.85rem; }
 
         /* Contact box */
         .contact-box {
-            background: linear-gradient(135deg, var(--primary-purple) 0%, var(--primary-violet) 100%);
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-navy) 100%);
             border-radius: 16px;
             padding: 32px;
             text-align: center;
@@ -159,7 +159,7 @@
         .footer-grid a:hover { color: white; }
         .footer-bottom { border-top: 1px solid var(--border-color); padding-top: 24px; text-align: center; }
         .footer-logo { display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 1.5rem; font-weight: 700; margin-bottom: 12px; }
-        .footer-logo .maple { color: var(--primary-purple); }
+        .footer-logo .maple { color: var(--primary-blue); }
         .footer-tagline { color: var(--text-secondary); margin-bottom: 16px; font-size: 0.9rem; }
         .footer-copy { color: #666; font-size: 0.8rem; }
 
@@ -191,7 +191,7 @@
     <!-- Navigation -->
     <nav class="nav">
         <div class="nav-inner">
-            <a href="/" class="nav-logo"><i class="fas fa-maple-leaf maple"></i> CanadaInvesting<span style="color: var(--primary-purple)">.app</span></a>
+            <a href="/" class="nav-logo"><i class="fas fa-maple-leaf maple"></i> CanadaInvesting<span style="color: var(--primary-blue)">.app</span></a>
             <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('active')" aria-label="Menu"><i class="fas fa-bars"></i></button>
             <div class="nav-links">
                 <a href="/">Home</a>
@@ -537,7 +537,7 @@
             </div>
             <div class="footer-bottom">
                 <div class="footer-logo">
-                    <i class="fas fa-maple-leaf maple"></i> CanadaInvesting<span style="color: var(--primary-purple)">.app</span>
+                    <i class="fas fa-maple-leaf maple"></i> CanadaInvesting<span style="color: var(--primary-blue)">.app</span>
                 </div>
                 <p class="footer-tagline">AI-powered investment advisor marketplace built for Canadian financial professionals.</p>
                 <p class="footer-copy">&copy; 2026 CanadaInvesting.app | Technology platform only. Not a registered dealer or investment advisor.</p>

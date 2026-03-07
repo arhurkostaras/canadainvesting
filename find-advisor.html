@@ -32,15 +32,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <meta name="theme-color" content="#667eea">
+    <meta name="theme-color" content="#2563eb">
 
     <!-- Google Analytics 4 - placeholder until configured -->
     <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script> -->
 
     <style>
         :root {
-            --primary-purple: #667eea;
-            --primary-violet: #764ba2;
+            --primary-blue: #2563eb;
+            --primary-navy: #1e3a8a;
             --primary-emerald: #059669;
             --accent-green: #059669;
             --dark-bg: #0a0a0a;
@@ -64,11 +64,11 @@
         .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(0,0,0,0.4); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.1); }
         .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; height: 64px; }
         .nav-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; color: white; font-weight: 700; font-size: 1.25rem; }
-        .nav-logo .maple { color: var(--primary-purple); font-size: 1.5rem; }
+        .nav-logo .maple { color: var(--primary-blue); font-size: 1.5rem; }
         .nav-links { display: flex; align-items: center; gap: 24px; list-style: none; }
         .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.3s; }
         .nav-links a:hover { color: white; }
-        .nav-cta { background: white !important; color: var(--primary-purple) !important; padding: 10px 24px; border-radius: 8px; font-weight: 700 !important; transition: transform 0.3s, box-shadow 0.3s; }
+        .nav-cta { background: white !important; color: var(--primary-blue) !important; padding: 10px 24px; border-radius: 8px; font-weight: 700 !important; transition: transform 0.3s, box-shadow 0.3s; }
         .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 4px 15px rgba(102,126,234,0.3); }
         .nav-toggle { display: none; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; padding: 4px; }
         .nav-links.active { display: flex; }
@@ -76,7 +76,7 @@
         /* Hero */
         .hero {
             padding: 140px 24px 80px;
-            background: linear-gradient(135deg, var(--primary-purple) 0%, var(--primary-violet) 50%, #1e3a5f 100%);
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-navy) 50%, #1e3a5f 100%);
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -123,14 +123,14 @@
         }
         .progress-bar-inner {
             height: 100%; border-radius: 10px;
-            background: linear-gradient(90deg, var(--primary-purple), var(--primary-violet));
+            background: linear-gradient(90deg, var(--primary-blue), var(--primary-navy));
             transition: width 0.5s ease;
             width: 14.28%;
         }
         .progress-text {
             text-align: center; font-size: 0.85rem; color: var(--text-secondary);
         }
-        .progress-text span { color: var(--primary-purple); font-weight: 700; }
+        .progress-text span { color: var(--primary-blue); font-weight: 700; }
 
         /* Questionnaire */
         .questionnaire-section {
@@ -152,7 +152,7 @@
 
         .question-step-label {
             display: inline-block; font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
-            letter-spacing: 2px; color: var(--primary-purple); margin-bottom: 12px;
+            letter-spacing: 2px; color: var(--primary-blue); margin-bottom: 12px;
         }
         .question-card h2 {
             font-size: 1.6rem; font-weight: 900; margin-bottom: 8px; line-height: 1.3;
@@ -180,7 +180,7 @@
             background: rgba(102,126,234,0.05);
         }
         .option-card.selected {
-            border-color: var(--primary-purple);
+            border-color: var(--primary-blue);
             background: rgba(102,126,234,0.1);
             box-shadow: 0 0 20px rgba(102,126,234,0.15);
         }
@@ -188,11 +188,11 @@
             width: 44px; height: 44px; border-radius: 12px;
             background: linear-gradient(135deg, rgba(102,126,234,0.15), rgba(118,75,162,0.15));
             display: flex; align-items: center; justify-content: center;
-            color: var(--primary-purple); font-size: 1.1rem;
+            color: var(--primary-blue); font-size: 1.1rem;
             flex-shrink: 0;
         }
         .option-card.selected .option-icon {
-            background: linear-gradient(135deg, var(--primary-purple), var(--primary-violet));
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-navy));
             color: white;
         }
         .option-text h4 { font-size: 1rem; font-weight: 600; margin-bottom: 2px; }
@@ -214,7 +214,7 @@
         }
         .form-group input::placeholder { color: #666; }
         .form-group input:focus {
-            border-color: var(--primary-purple);
+            border-color: var(--primary-blue);
             background: rgba(102,126,234,0.05);
         }
         .form-group input.error {
@@ -239,7 +239,7 @@
         }
         .btn-back:hover { border-color: rgba(255,255,255,0.3); color: white; }
         .btn-next {
-            background: linear-gradient(135deg, var(--primary-purple), var(--primary-violet));
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-navy));
             border: none; color: white; padding: 14px 32px;
             border-radius: 10px; font-weight: 700; font-size: 0.95rem;
             cursor: pointer; transition: all 0.3s; font-family: inherit;
@@ -298,7 +298,7 @@
         }
         .confirmation-step .step-num {
             width: 32px; height: 32px; border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary-purple), var(--primary-violet));
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-navy));
             display: flex; align-items: center; justify-content: center;
             font-size: 0.85rem; font-weight: 700; margin: 0 auto 10px;
         }
@@ -306,7 +306,7 @@
         .confirmation-step p { font-size: 0.75rem; color: var(--text-secondary); line-height: 1.4; }
         .confirmation-home {
             display: inline-flex; align-items: center; gap: 8px;
-            margin-top: 36px; color: var(--primary-purple); font-weight: 600;
+            margin-top: 36px; color: var(--primary-blue); font-weight: 600;
             text-decoration: none; font-size: 0.95rem;
         }
         .confirmation-home:hover { text-decoration: underline; }
@@ -322,7 +322,7 @@
         .footer-grid a:hover { color: white; }
         .footer-bottom { border-top: 1px solid var(--border-color); padding-top: 24px; text-align: center; }
         .footer-logo { display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 1.5rem; font-weight: 700; margin-bottom: 12px; }
-        .footer-logo .maple { color: var(--primary-purple); }
+        .footer-logo .maple { color: var(--primary-blue); }
         .footer-tagline { color: var(--text-secondary); margin-bottom: 16px; font-size: 0.9rem; }
         .footer-copy { color: #666; font-size: 0.8rem; }
 
@@ -371,7 +371,7 @@
             cursor: pointer;
         }
         .form-select:focus {
-            border-color: var(--primary-purple);
+            border-color: var(--primary-blue);
             background-color: rgba(102,126,234,0.05);
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23667eea' d='M1.41 0L6 4.58 10.59 0 12 1.41l-6 6-6-6z'/%3E%3C/svg%3E");
         }
@@ -384,7 +384,7 @@
     <!-- Navigation -->
     <nav class="nav">
         <div class="nav-inner">
-            <a href="/" class="nav-logo"><i class="fas fa-maple-leaf maple"></i> CanadaInvesting<span style="color: var(--primary-purple)">.app</span></a>
+            <a href="/" class="nav-logo"><i class="fas fa-maple-leaf maple"></i> CanadaInvesting<span style="color: var(--primary-blue)">.app</span></a>
             <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('active')" aria-label="Menu"><i class="fas fa-bars"></i></button>
             <div class="nav-links">
                 <a href="/">Home</a>
@@ -682,24 +682,24 @@
             <p class="question-desc">We'll send your top advisor matches within 24 hours. Your information is encrypted and never shared without your consent.</p>
             <div class="contact-form">
                 <div class="form-group">
-                    <label for="clientName"><i class="fas fa-user" style="margin-right: 6px; color: var(--primary-purple);"></i> Full Name</label>
+                    <label for="clientName"><i class="fas fa-user" style="margin-right: 6px; color: var(--primary-blue);"></i> Full Name</label>
                     <input type="text" id="clientName" placeholder="e.g. Sarah Thompson" autocomplete="name" required>
                     <div class="form-error" id="nameError">Please enter your full name.</div>
                 </div>
                 <div class="form-group">
-                    <label for="clientEmail"><i class="fas fa-envelope" style="margin-right: 6px; color: var(--primary-purple);"></i> Email Address</label>
+                    <label for="clientEmail"><i class="fas fa-envelope" style="margin-right: 6px; color: var(--primary-blue);"></i> Email Address</label>
                     <input type="email" id="clientEmail" placeholder="e.g. sarah@example.com" autocomplete="email" required>
                     <div class="form-error" id="emailError">Please enter a valid email address.</div>
                 </div>
                 <div class="form-group">
-                    <label for="clientPhone"><i class="fas fa-phone" style="margin-right: 6px; color: var(--primary-purple);"></i> Phone Number <span style="color: var(--text-secondary); font-weight: 400;">(optional)</span></label>
+                    <label for="clientPhone"><i class="fas fa-phone" style="margin-right: 6px; color: var(--primary-blue);"></i> Phone Number <span style="color: var(--text-secondary); font-weight: 400;">(optional)</span></label>
                     <input type="tel" id="clientPhone" placeholder="e.g. 416-555-1234" autocomplete="tel">
                 </div>
             </div>
             <div style="margin-top: 20px; padding: 16px 20px; background: rgba(102,126,234,0.08); border-radius: 12px; border: 1px solid rgba(102,126,234,0.2);">
                 <p style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.6;">
-                    <i class="fas fa-lock" style="color: var(--primary-purple); margin-right: 6px;"></i>
-                    By submitting, you agree to our <a href="privacy-policy" style="color: var(--primary-purple);">Privacy Policy</a> and consent to being contacted about your advisor matches. This service is free for clients.
+                    <i class="fas fa-lock" style="color: var(--primary-blue); margin-right: 6px;"></i>
+                    By submitting, you agree to our <a href="privacy-policy" style="color: var(--primary-blue);">Privacy Policy</a> and consent to being contacted about your advisor matches. This service is free for clients.
                 </p>
             </div>
             <div class="question-nav">
@@ -775,7 +775,7 @@
             </div>
             <div class="footer-bottom">
                 <div class="footer-logo">
-                    <i class="fas fa-maple-leaf maple"></i> CanadaInvesting<span style="color: var(--primary-purple)">.app</span>
+                    <i class="fas fa-maple-leaf maple"></i> CanadaInvesting<span style="color: var(--primary-blue)">.app</span>
                 </div>
                 <p class="footer-tagline">AI-powered investment advisor marketplace built for Canadian financial professionals.</p>
                 <p class="footer-copy">&copy; 2026 CanadaInvesting.app | Technology platform only. Not a registered dealer or investment advisor. Advisors maintain full professional independence.</p>

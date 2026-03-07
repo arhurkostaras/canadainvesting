@@ -32,7 +32,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <meta name="theme-color" content="#667eea">
+    <meta name="theme-color" content="#2563eb">
 
     <!-- Google Analytics 4 - placeholder until configured -->
     <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script> -->
@@ -67,8 +67,8 @@
 
     <style>
         :root {
-            --primary-purple: #667eea;
-            --primary-violet: #764ba2;
+            --primary-blue: #2563eb;
+            --primary-navy: #1e3a8a;
             --primary-emerald: #059669;
             --accent-green: #059669;
             --dark-bg: #0a0a0a;
@@ -92,11 +92,11 @@
         .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(0,0,0,0.4); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.1); }
         .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; height: 64px; }
         .nav-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; color: white; font-weight: 700; font-size: 1.25rem; }
-        .nav-logo .maple { color: var(--primary-purple); font-size: 1.5rem; }
+        .nav-logo .maple { color: var(--primary-blue); font-size: 1.5rem; }
         .nav-links { display: flex; align-items: center; gap: 24px; list-style: none; }
         .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.3s; }
         .nav-links a:hover { color: white; }
-        .nav-cta { background: white !important; color: var(--primary-purple) !important; padding: 10px 24px; border-radius: 8px; font-weight: 700 !important; transition: transform 0.3s, box-shadow 0.3s; }
+        .nav-cta { background: white !important; color: var(--primary-blue) !important; padding: 10px 24px; border-radius: 8px; font-weight: 700 !important; transition: transform 0.3s, box-shadow 0.3s; }
         .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 4px 15px rgba(102,126,234,0.3); }
         .nav-toggle { display: none; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; padding: 4px; }
         .nav-links.active { display: flex; }
@@ -104,7 +104,7 @@
         /* Hero */
         .hero {
             padding: 140px 24px 100px;
-            background: linear-gradient(135deg, var(--primary-purple) 0%, var(--primary-violet) 50%, #1e3a5f 100%);
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-navy) 50%, #1e3a5f 100%);
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -136,7 +136,7 @@
             margin-bottom: 60px; position: relative;
         }
         .btn-primary {
-            background: white; color: var(--primary-purple); padding: 16px 36px;
+            background: white; color: var(--primary-blue); padding: 16px 36px;
             border-radius: 10px; font-weight: 700; font-size: 1rem;
             text-decoration: none; transition: all 0.3s; display: inline-flex; align-items: center; gap: 8px;
         }
@@ -166,7 +166,7 @@
         .section-header { text-align: center; max-width: 700px; margin: 0 auto 60px; }
         .section-header .overline {
             display: inline-block; font-size: 0.8rem; font-weight: 700; text-transform: uppercase;
-            letter-spacing: 2px; color: var(--primary-purple); margin-bottom: 16px;
+            letter-spacing: 2px; color: var(--primary-blue); margin-bottom: 16px;
         }
         .section-header h2 { font-size: 2.5rem; font-weight: 900; margin-bottom: 16px; line-height: 1.15; }
         .section-header p { font-size: 1.1rem; color: var(--text-secondary); line-height: 1.7; }
@@ -177,28 +177,28 @@
             background: var(--card-bg); border: 1px solid var(--border-color);
             border-radius: 20px; padding: 40px; transition: transform 0.3s, border-color 0.3s;
         }
-        .value-card:hover { transform: translateY(-4px); border-color: var(--primary-purple); }
+        .value-card:hover { transform: translateY(-4px); border-color: var(--primary-blue); }
         .value-card-icon { font-size: 2.5rem; margin-bottom: 20px; }
         .value-card h3 { font-size: 1.4rem; font-weight: 700; margin-bottom: 12px; }
         .value-card p { color: var(--text-secondary); margin-bottom: 20px; line-height: 1.6; }
         .value-card ul { list-style: none; }
         .value-card li { padding: 8px 0; padding-left: 28px; position: relative; color: rgba(255,255,255,0.85); font-size: 0.95rem; }
         .value-card li::before { content: "\f00c"; font-family: "Font Awesome 6 Free"; font-weight: 900; position: absolute; left: 0; color: var(--accent-green); font-size: 0.85rem; }
-        .value-card .card-link { display: inline-block; margin-top: 20px; color: var(--primary-purple); font-weight: 600; text-decoration: none; font-size: 0.95rem; }
+        .value-card .card-link { display: inline-block; margin-top: 20px; color: var(--primary-blue); font-weight: 600; text-decoration: none; font-size: 0.95rem; }
         .value-card .card-link:hover { text-decoration: underline; }
 
         /* Problem Stats */
         .problem-section { background: var(--card-bg); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); padding: 100px 24px; }
         .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; max-width: 1000px; margin: 0 auto; }
         .stat-card { text-align: center; padding: 24px; }
-        .stat-card .number { font-size: 2.5rem; font-weight: 900; color: var(--primary-purple); margin-bottom: 8px; }
+        .stat-card .number { font-size: 2.5rem; font-weight: 900; color: var(--primary-blue); margin-bottom: 8px; }
         .stat-card .label { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.5; }
 
         /* How It Works */
         .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; max-width: 1000px; margin: 0 auto; }
         .step { text-align: center; }
         .step-number {
-            width: 56px; height: 56px; background: linear-gradient(135deg, var(--primary-purple), var(--primary-violet));
+            width: 56px; height: 56px; background: linear-gradient(135deg, var(--primary-blue), var(--primary-navy));
             color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center;
             font-size: 1.4rem; font-weight: 900; margin: 0 auto 20px;
         }
@@ -212,8 +212,8 @@
             border-radius: 16px; padding: 32px; text-align: center;
             transition: transform 0.3s, border-color 0.3s;
         }
-        .match-card:hover { transform: translateY(-3px); border-color: var(--primary-purple); }
-        .match-icon { font-size: 2rem; margin-bottom: 16px; width: 56px; height: 56px; background: linear-gradient(135deg, rgba(102,126,234,0.15), rgba(118,75,162,0.15)); border-radius: 14px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; color: var(--primary-purple); }
+        .match-card:hover { transform: translateY(-3px); border-color: var(--primary-blue); }
+        .match-icon { font-size: 2rem; margin-bottom: 16px; width: 56px; height: 56px; background: linear-gradient(135deg, rgba(102,126,234,0.15), rgba(118,75,162,0.15)); border-radius: 14px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; color: var(--primary-blue); }
         .match-card h4 { font-size: 1.05rem; font-weight: 700; margin-bottom: 8px; }
         .match-card p { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; }
 
@@ -225,11 +225,11 @@
             border-radius: 20px; padding: 40px 32px; text-align: center;
             transition: transform 0.3s, border-color 0.3s; position: relative;
         }
-        .pricing-card:hover { transform: translateY(-4px); border-color: var(--primary-purple); }
-        .pricing-card.popular { border-color: var(--primary-purple); box-shadow: 0 0 30px rgba(102,126,234,0.15); }
+        .pricing-card:hover { transform: translateY(-4px); border-color: var(--primary-blue); }
+        .pricing-card.popular { border-color: var(--primary-blue); box-shadow: 0 0 30px rgba(102,126,234,0.15); }
         .popular-badge {
             position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
-            background: linear-gradient(135deg, var(--primary-purple), var(--primary-violet));
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-navy));
             color: white; padding: 6px 20px; border-radius: 20px;
             font-size: 0.7rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
         }
@@ -242,7 +242,7 @@
         .pricing-card .card-btn {
             display: block; width: 100%; padding: 14px; border-radius: 10px;
             text-decoration: none; font-weight: 700; font-size: 0.95rem; transition: all 0.3s;
-            background: linear-gradient(135deg, var(--primary-purple), var(--primary-violet));
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-navy));
             color: white; border: none; cursor: pointer;
         }
         .pricing-card .card-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(102,126,234,0.4); }
@@ -252,12 +252,12 @@
         .founder-content { max-width: 900px; margin: 0 auto; display: flex; gap: 48px; align-items: center; }
         .founder-avatar {
             flex: 0 0 180px; width: 180px; height: 180px; border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary-purple), var(--primary-violet));
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-navy));
             display: flex; align-items: center; justify-content: center; font-size: 72px;
         }
         .founder-text { flex: 1; }
         .founder-text h2 { font-size: 2rem; font-weight: 900; margin-bottom: 8px; }
-        .founder-text .credentials { color: var(--primary-purple); font-weight: 600; font-size: 0.9rem; margin-bottom: 20px; }
+        .founder-text .credentials { color: var(--primary-blue); font-weight: 600; font-size: 0.9rem; margin-bottom: 20px; }
         .founder-text p { color: var(--text-secondary); line-height: 1.7; margin-bottom: 16px; font-size: 0.95rem; }
         .founder-text a { color: white; }
 
@@ -271,7 +271,7 @@
         /* CTA Section */
         .cta-section {
             padding: 100px 24px; text-align: center;
-            background: linear-gradient(135deg, var(--primary-purple) 0%, var(--primary-violet) 50%, #1e3a5f 100%);
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-navy) 50%, #1e3a5f 100%);
             position: relative; overflow: hidden;
         }
         .cta-section::before {
@@ -294,7 +294,7 @@
         .footer-grid a:hover { color: white; }
         .footer-bottom { border-top: 1px solid var(--border-color); padding-top: 24px; text-align: center; }
         .footer-logo { display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 1.5rem; font-weight: 700; margin-bottom: 12px; }
-        .footer-logo .maple { color: var(--primary-purple); }
+        .footer-logo .maple { color: var(--primary-blue); }
         .footer-tagline { color: var(--text-secondary); margin-bottom: 16px; font-size: 0.9rem; }
         .footer-copy { color: #666; font-size: 0.8rem; }
 
@@ -341,7 +341,7 @@
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background: linear-gradient(135deg, var(--primary-purple), var(--primary-violet));
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-navy));
             color: white;
             padding: 12px 20px;
             border-radius: 25px;
@@ -380,7 +380,7 @@
     <!-- Navigation -->
     <nav class="nav">
         <div class="nav-inner">
-            <a href="/" class="nav-logo"><i class="fas fa-maple-leaf maple"></i> CanadaInvesting<span style="color: var(--primary-purple)">.app</span></a>
+            <a href="/" class="nav-logo"><i class="fas fa-maple-leaf maple"></i> CanadaInvesting<span style="color: var(--primary-blue)">.app</span></a>
             <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('active')" aria-label="Menu"><i class="fas fa-bars"></i></button>
             <div class="nav-links">
                 <a href="/">Home</a>
@@ -430,7 +430,7 @@
         </div>
         <div class="value-grid">
             <div class="value-card">
-                <div class="value-card-icon"><i class="fas fa-chart-pie" style="color: var(--primary-purple); font-size: 2rem;"></i></div>
+                <div class="value-card-icon"><i class="fas fa-chart-pie" style="color: var(--primary-blue); font-size: 2rem;"></i></div>
                 <h3>For Investment Advisors</h3>
                 <p>Grow your book of business with pre-qualified clients who match your expertise and service model.</p>
                 <ul>
@@ -443,7 +443,7 @@
                 <a href="join-as-advisor" class="card-link">Apply to Join <i class="fas fa-arrow-right"></i></a>
             </div>
             <div class="value-card">
-                <div class="value-card-icon"><i class="fas fa-user-tie" style="color: var(--primary-purple); font-size: 2rem;"></i></div>
+                <div class="value-card-icon"><i class="fas fa-user-tie" style="color: var(--primary-blue); font-size: 2rem;"></i></div>
                 <h3>For Investors & Clients</h3>
                 <p>Stop guessing. Get matched with a qualified advisor who specializes in exactly what you need.</p>
                 <ul>
@@ -656,7 +656,7 @@
                 <div class="credentials">Our team brings 15+ years of corporate finance experience across Canada and internationally</div>
                 <p>Our founding team spent over a decade in corporate finance across Canada, the US, Europe, and the Middle East. We have managed investment portfolios, worked with wealth advisors, and seen the broken referral process firsthand.</p>
                 <p>Finding a qualified, independent investment advisor in Canada shouldn't require months of networking and guesswork. We built this platform to fix that with AI-powered matching, regulatory verification, and complete transparency.</p>
-                <p><a href="contact" style="color: var(--primary-purple); font-weight: 600;">Contact our team</a> to learn more about how we can help.</p>
+                <p><a href="contact" style="color: var(--primary-blue); font-weight: 600;">Contact our team</a> to learn more about how we can help.</p>
             </div>
         </div>
     </section>
@@ -710,7 +710,7 @@
             </div>
             <div class="footer-bottom">
                 <div class="footer-logo">
-                    <i class="fas fa-maple-leaf maple"></i> CanadaInvesting<span style="color: var(--primary-purple)">.app</span>
+                    <i class="fas fa-maple-leaf maple"></i> CanadaInvesting<span style="color: var(--primary-blue)">.app</span>
                 </div>
                 <p class="footer-tagline">AI-powered investment advisor marketplace built for Canadian financial professionals.</p>
                 <p class="footer-copy">&copy; 2026 CanadaInvesting.app | Technology platform only. Not a registered dealer or investment advisor. Advisors maintain full professional independence.</p>

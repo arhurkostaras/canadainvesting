@@ -18,20 +18,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root { --primary-purple: #667eea; --primary-violet: #764ba2; --accent-green: #059669; --dark-bg: #0a0a0a; --card-bg: #1a1a1a; --text-primary: #ffffff; --text-secondary: #a0a0a0; --border-color: #333333; }
+        :root { --primary-blue: #2563eb; --primary-navy: #1e3a8a; --accent-green: #059669; --dark-bg: #0a0a0a; --card-bg: #1a1a1a; --text-primary: #ffffff; --text-secondary: #a0a0a0; --border-color: #333333; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--dark-bg); color: var(--text-primary); line-height: 1.6; -webkit-font-smoothing: antialiased; }
         .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(0,0,0,0.4); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.1); }
         .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; height: 64px; }
         .nav-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; color: white; font-weight: 700; font-size: 1.25rem; }
-        .nav-logo .maple { color: var(--primary-purple); font-size: 1.5rem; }
+        .nav-logo .maple { color: var(--primary-blue); font-size: 1.5rem; }
         .nav-links { display: flex; align-items: center; gap: 24px; list-style: none; }
         .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.3s; }
         .nav-links a:hover { color: white; }
-        .nav-cta { background: white !important; color: var(--primary-purple) !important; padding: 10px 24px; border-radius: 8px; font-weight: 700 !important; }
+        .nav-cta { background: white !important; color: var(--primary-blue) !important; padding: 10px 24px; border-radius: 8px; font-weight: 700 !important; }
         .nav-toggle { display: none; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; padding: 4px; }
         .nav-links.active { display: flex; }
-        .hero { padding: 140px 24px 60px; background: linear-gradient(135deg, var(--primary-purple) 0%, var(--primary-violet) 50%, #1e3a5f 100%); text-align: center; position: relative; overflow: hidden; }
+        .hero { padding: 140px 24px 60px; background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-navy) 50%, #1e3a5f 100%); text-align: center; position: relative; overflow: hidden; }
         .hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(ellipse at 30% 20%, rgba(255,255,255,0.1) 0%, transparent 60%); pointer-events: none; }
         .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); padding: 10px 22px; border-radius: 50px; font-size: 0.85rem; font-weight: 500; margin-bottom: 28px; border: 1px solid rgba(255,255,255,0.2); position: relative; }
         .hero h1 { font-size: 3rem; font-weight: 900; line-height: 1.1; margin-bottom: 16px; position: relative; }
@@ -41,13 +41,13 @@
         .content { max-width: 900px; margin: 0 auto; padding: 60px 24px; }
         .section-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 16px; padding: 32px; margin-bottom: 24px; }
         .section-card h2 { font-size: 1.6rem; font-weight: 900; margin-bottom: 20px; }
-        .section-card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 12px; margin-top: 24px; color: var(--primary-purple); }
+        .section-card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 12px; margin-top: 24px; color: var(--primary-blue); }
         .section-card p, .section-card li { color: var(--text-secondary); line-height: 1.7; font-size: 0.95rem; }
         .section-card ul { list-style: none; }
         .section-card ul li { padding: 6px 0 6px 24px; position: relative; }
         .section-card ul li::before { content: "\f00c"; font-family: "Font Awesome 6 Free"; font-weight: 900; position: absolute; left: 0; color: var(--accent-green); font-size: 0.8rem; }
         .highlight-box { background: rgba(102,126,234,0.1); border: 1px solid rgba(102,126,234,0.3); border-radius: 12px; padding: 20px; margin: 20px 0; }
-        .highlight-box h3 { color: var(--primary-purple); margin-top: 0; }
+        .highlight-box h3 { color: var(--primary-blue); margin-top: 0; }
         .highlight-box p, .highlight-box li { color: rgba(255,255,255,0.85); }
         .warning-box { background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.3); border-radius: 12px; padding: 20px; margin: 20px 0; }
         .warning-box h3 { color: #f59e0b; margin-top: 0; }
@@ -58,7 +58,7 @@
         .guarantee-box { background: rgba(5,150,105,0.1); border: 1px solid rgba(5,150,105,0.3); border-radius: 12px; padding: 20px; margin: 20px 0; }
         .guarantee-box h3 { color: var(--accent-green); margin-top: 0; }
         .guarantee-box p, .guarantee-box li { color: rgba(255,255,255,0.85); }
-        .contact-box { background: linear-gradient(135deg, var(--primary-purple) 0%, var(--primary-violet) 100%); border-radius: 16px; padding: 32px; text-align: center; margin: 32px 0; }
+        .contact-box { background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-navy) 100%); border-radius: 16px; padding: 32px; text-align: center; margin: 32px 0; }
         .contact-box h2 { font-size: 1.5rem; font-weight: 900; margin-bottom: 12px; }
         .contact-box p { opacity: 0.9; margin-bottom: 16px; }
         .contact-box a { color: #fbbf24; text-decoration: none; font-weight: 600; }
@@ -74,7 +74,7 @@
         .footer-grid a:hover { color: white; }
         .footer-bottom { border-top: 1px solid var(--border-color); padding-top: 24px; text-align: center; }
         .footer-logo { display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 1.5rem; font-weight: 700; margin-bottom: 12px; }
-        .footer-logo .maple { color: var(--primary-purple); }
+        .footer-logo .maple { color: var(--primary-blue); }
         .footer-tagline { color: var(--text-secondary); margin-bottom: 16px; font-size: 0.9rem; }
         .footer-copy { color: #666; font-size: 0.8rem; }
         @media (max-width: 768px) {
@@ -95,7 +95,7 @@
 <body>
     <nav class="nav">
         <div class="nav-inner">
-            <a href="/" class="nav-logo"><i class="fas fa-maple-leaf maple"></i> CanadaInvesting<span style="color: var(--primary-purple)">.app</span></a>
+            <a href="/" class="nav-logo"><i class="fas fa-maple-leaf maple"></i> CanadaInvesting<span style="color: var(--primary-blue)">.app</span></a>
             <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('active')" aria-label="Menu"><i class="fas fa-bars"></i></button>
             <div class="nav-links">
                 <a href="/">Home</a>
@@ -311,7 +311,7 @@
                 <div><h4>Contact</h4><ul><li><a href="mailto:arthur@negotiateandwin.com">arthur@negotiateandwin.com</a></li><li><a href="tel:+16479567290">1.647.956.7290</a></li></ul></div>
             </div>
             <div class="footer-bottom">
-                <div class="footer-logo"><i class="fas fa-maple-leaf maple"></i> CanadaInvesting<span style="color: var(--primary-purple)">.app</span></div>
+                <div class="footer-logo"><i class="fas fa-maple-leaf maple"></i> CanadaInvesting<span style="color: var(--primary-blue)">.app</span></div>
                 <p class="footer-tagline">AI-powered investment advisor marketplace built for Canadian financial professionals.</p>
                 <p class="footer-copy">&copy; 2026 CanadaInvesting.app | Technology platform only. Not a registered dealer or investment advisor.</p>
             </div>

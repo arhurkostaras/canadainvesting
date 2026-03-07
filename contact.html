@@ -26,15 +26,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <meta name="theme-color" content="#667eea">
+    <meta name="theme-color" content="#2563eb">
 
     <!-- Google Analytics 4 - placeholder until configured -->
     <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script> -->
 
     <style>
         :root {
-            --primary-purple: #667eea;
-            --primary-violet: #764ba2;
+            --primary-blue: #2563eb;
+            --primary-navy: #1e3a8a;
             --primary-emerald: #059669;
             --accent-green: #059669;
             --dark-bg: #0a0a0a;
@@ -58,11 +58,11 @@
         .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(0,0,0,0.4); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.1); }
         .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; height: 64px; }
         .nav-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; color: white; font-weight: 700; font-size: 1.25rem; }
-        .nav-logo .maple { color: var(--primary-purple); font-size: 1.5rem; }
+        .nav-logo .maple { color: var(--primary-blue); font-size: 1.5rem; }
         .nav-links { display: flex; align-items: center; gap: 24px; list-style: none; }
         .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.3s; }
         .nav-links a:hover { color: white; }
-        .nav-cta { background: white !important; color: var(--primary-purple) !important; padding: 10px 24px; border-radius: 8px; font-weight: 700 !important; transition: transform 0.3s, box-shadow 0.3s; }
+        .nav-cta { background: white !important; color: var(--primary-blue) !important; padding: 10px 24px; border-radius: 8px; font-weight: 700 !important; transition: transform 0.3s, box-shadow 0.3s; }
         .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 4px 15px rgba(102,126,234,0.3); }
         .nav-toggle { display: none; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; padding: 4px; }
         .nav-links.active { display: flex; }
@@ -70,7 +70,7 @@
         /* Hero */
         .hero {
             padding: 140px 24px 80px;
-            background: linear-gradient(135deg, var(--primary-purple) 0%, var(--primary-violet) 50%, #1e3a5f 100%);
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-navy) 50%, #1e3a5f 100%);
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -96,7 +96,7 @@
         .section-header { text-align: center; max-width: 700px; margin: 0 auto 60px; }
         .section-header .overline {
             display: inline-block; font-size: 0.8rem; font-weight: 700; text-transform: uppercase;
-            letter-spacing: 2px; color: var(--primary-purple); margin-bottom: 16px;
+            letter-spacing: 2px; color: var(--primary-blue); margin-bottom: 16px;
         }
         .section-header h2 { font-size: 2.5rem; font-weight: 900; margin-bottom: 16px; line-height: 1.15; }
         .section-header p { font-size: 1.1rem; color: var(--text-secondary); line-height: 1.7; }
@@ -164,7 +164,7 @@
         .form-group input:focus,
         .form-group select:focus,
         .form-group textarea:focus {
-            border-color: var(--primary-purple);
+            border-color: var(--primary-blue);
             box-shadow: 0 0 0 3px rgba(102,126,234,0.15);
         }
         .form-group select {
@@ -199,7 +199,7 @@
             font-weight: 700;
             font-size: 1rem;
             font-family: 'Roboto', sans-serif;
-            background: linear-gradient(135deg, var(--primary-purple), var(--primary-violet));
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-navy));
             color: white;
             transition: all 0.3s;
             margin-top: 8px;
@@ -243,7 +243,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--primary-purple);
+            color: var(--primary-blue);
             font-size: 1.1rem;
             flex-shrink: 0;
         }
@@ -266,7 +266,7 @@
             transition: color 0.3s;
         }
         .contact-item-text a:hover {
-            color: var(--primary-purple);
+            color: var(--primary-blue);
         }
         .contact-item-text p {
             color: var(--text-primary);
@@ -324,7 +324,7 @@
         /* CTA Section */
         .cta-section {
             padding: 100px 24px; text-align: center;
-            background: linear-gradient(135deg, var(--primary-purple) 0%, var(--primary-violet) 50%, #1e3a5f 100%);
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-navy) 50%, #1e3a5f 100%);
             position: relative; overflow: hidden;
         }
         .cta-section::before {
@@ -336,7 +336,7 @@
         .cta-section p { font-size: 1.1rem; opacity: 0.9; max-width: 600px; margin: 0 auto 40px; line-height: 1.7; position: relative; }
         .cta-buttons { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; position: relative; }
         .btn-primary {
-            background: white; color: var(--primary-purple); padding: 16px 36px;
+            background: white; color: var(--primary-blue); padding: 16px 36px;
             border-radius: 10px; font-weight: 700; font-size: 1rem;
             text-decoration: none; transition: all 0.3s; display: inline-flex; align-items: center; gap: 8px;
         }
@@ -360,7 +360,7 @@
         .footer-grid a:hover { color: white; }
         .footer-bottom { border-top: 1px solid var(--border-color); padding-top: 24px; text-align: center; }
         .footer-logo { display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 1.5rem; font-weight: 700; margin-bottom: 12px; }
-        .footer-logo .maple { color: var(--primary-purple); }
+        .footer-logo .maple { color: var(--primary-blue); }
         .footer-tagline { color: var(--text-secondary); margin-bottom: 16px; font-size: 0.9rem; }
         .footer-copy { color: #666; font-size: 0.8rem; }
 
@@ -399,7 +399,7 @@
     <!-- Navigation -->
     <nav class="nav">
         <div class="nav-inner">
-            <a href="/" class="nav-logo"><i class="fas fa-maple-leaf maple"></i> CanadaInvesting<span style="color: var(--primary-purple)">.app</span></a>
+            <a href="/" class="nav-logo"><i class="fas fa-maple-leaf maple"></i> CanadaInvesting<span style="color: var(--primary-blue)">.app</span></a>
             <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('active')" aria-label="Menu"><i class="fas fa-bars"></i></button>
             <div class="nav-links">
                 <a href="/">Home</a>
@@ -527,10 +527,10 @@
                 </div>
 
                 <!-- Founder Direct -->
-                <div class="sidebar-card" style="border-color: var(--primary-purple); background: rgba(102,126,234,0.05);">
-                    <h4><i class="fas fa-user-tie" style="color: var(--primary-purple); margin-right: 8px;"></i> Speak with Our Team</h4>
+                <div class="sidebar-card" style="border-color: var(--primary-blue); background: rgba(102,126,234,0.05);">
+                    <h4><i class="fas fa-user-tie" style="color: var(--primary-blue); margin-right: 8px;"></i> Speak with Our Team</h4>
                     <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6; margin-bottom: 16px;">Our team handles partnership inquiries and high-value advisor onboarding. Don't hesitate to reach out.</p>
-                    <a href="tel:+16479567290" style="display: inline-flex; align-items: center; gap: 8px; color: var(--primary-purple); font-weight: 600; text-decoration: none; font-size: 0.9rem;">
+                    <a href="tel:+16479567290" style="display: inline-flex; align-items: center; gap: 8px; color: var(--primary-blue); font-weight: 600; text-decoration: none; font-size: 0.9rem;">
                         <i class="fas fa-phone"></i> Call Us Directly
                     </a>
                 </div>
@@ -587,7 +587,7 @@
             </div>
             <div class="footer-bottom">
                 <div class="footer-logo">
-                    <i class="fas fa-maple-leaf maple"></i> CanadaInvesting<span style="color: var(--primary-purple)">.app</span>
+                    <i class="fas fa-maple-leaf maple"></i> CanadaInvesting<span style="color: var(--primary-blue)">.app</span>
                 </div>
                 <p class="footer-tagline">AI-powered investment advisor marketplace built for Canadian financial professionals.</p>
                 <p class="footer-copy">&copy; 2026 CanadaInvesting.app | Technology platform only. Not a registered dealer or investment advisor. Advisors maintain full professional independence.</p>

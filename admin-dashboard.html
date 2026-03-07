@@ -20,11 +20,11 @@
 
     <nav class="bg-gray-800 border-b border-gray-700 px-6 py-4 flex items-center justify-between">
         <div class="flex items-center gap-4">
-            <span class="text-xl font-bold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">CanadaInvesting Admin</span>
+            <span class="text-xl font-bold bg-gradient-to-r from-blue-500 to-blue-800 bg-clip-text text-transparent">CanadaInvesting Admin</span>
         </div>
         <div class="flex items-center gap-4">
             <span id="adminEmail" class="text-sm text-gray-400"></span>
-            <button onclick="logout()" class="text-sm bg-indigo-600 hover:bg-indigo-700 px-3 py-1.5 rounded">Logout</button>
+            <button onclick="logout()" class="text-sm bg-blue-700 hover:bg-indigo-700 px-3 py-1.5 rounded">Logout</button>
         </div>
     </nav>
 
@@ -61,7 +61,7 @@
 
         <!-- Tab Navigation -->
         <div class="flex flex-wrap gap-2 mb-6 border-b border-gray-700 pb-3">
-            <button onclick="switchTab('scrape')" data-tab="scrape" class="tab-btn px-4 py-2 rounded-t text-sm font-medium bg-indigo-600">Scrape & Enrichment</button>
+            <button onclick="switchTab('scrape')" data-tab="scrape" class="tab-btn px-4 py-2 rounded-t text-sm font-medium bg-blue-700">Scrape & Enrichment</button>
             <button onclick="switchTab('outreach')" data-tab="outreach" class="tab-btn px-4 py-2 rounded-t text-sm font-medium bg-gray-700 hover:bg-gray-600">Outreach</button>
             <button onclick="switchTab('campaigns')" data-tab="campaigns" class="tab-btn px-4 py-2 rounded-t text-sm font-medium bg-gray-700 hover:bg-gray-600">Campaigns</button>
             <button onclick="switchTab('claims')" data-tab="claims" class="tab-btn px-4 py-2 rounded-t text-sm font-medium bg-gray-700 hover:bg-gray-600">Pending Claims</button>
@@ -188,7 +188,7 @@
         <section id="tab-campaigns" class="hidden">
             <div class="flex items-center justify-between mb-4">
                 <h2 class="text-xl font-semibold">Campaign Management</h2>
-                <button onclick="showCreateForm()" class="text-sm bg-indigo-600 hover:bg-indigo-700 px-4 py-2 rounded">+ New Campaign</button>
+                <button onclick="showCreateForm()" class="text-sm bg-blue-700 hover:bg-indigo-700 px-4 py-2 rounded">+ New Campaign</button>
             </div>
 
             <div id="createForm" class="hidden bg-gray-800 rounded-xl border border-gray-700 p-6 mb-4">
@@ -374,7 +374,7 @@
             document.getElementById('tab-' + tab).classList.remove('hidden');
             document.querySelectorAll('.tab-btn').forEach(btn => {
                 btn.className = btn.dataset.tab === tab
-                    ? 'tab-btn px-4 py-2 rounded-t text-sm font-medium bg-indigo-600'
+                    ? 'tab-btn px-4 py-2 rounded-t text-sm font-medium bg-blue-700'
                     : 'tab-btn px-4 py-2 rounded-t text-sm font-medium bg-gray-700 hover:bg-gray-600';
             });
             if (tab === 'outreach') { loadOutreachStats(); loadScrapedAdvisors(); }
@@ -513,9 +513,9 @@
 
         // ---- Campaigns ----
         const DEFAULT_ADVISOR_SUBJECT = 'Investors in {{city}} are looking for advisors like you';
-        const DEFAULT_ADVISOR_BODY = `<div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;color:#333;"><h2 style="color:#1e293b;">Hi {{advisor_name}},</h2><p>Canadians are actively searching for trusted financial advisors in {{province}}.</p><p>CanadaInvesting uses AI to match investors with pre-verified advisors based on their needs, risk tolerance, and investment goals.</p><div style="background:#f8fafc;border-radius:8px;padding:20px;margin:20px 0;"><p style="margin:0 0 12px 0;font-weight:bold;">Why Advisors join CanadaInvesting:</p><ul style="margin:0;padding-left:20px;"><li>AI-matched leads based on your designations (CFA, CFP, CIM)</li><li>Serve clients anywhere in Canada</li><li>Zero marketing spend — clients come to you</li><li>Verified professional profile with trust badge</li></ul></div><p style="text-align:center;margin:30px 0;"><a href="{{platform_url}}/join-as-advisor" style="display:inline-block;background:#667eea;color:#fff;padding:14px 28px;border-radius:8px;text-decoration:none;font-weight:bold;">Claim Your Free Profile</a></p><p style="color:#666;font-size:14px;">Best regards,<br>Arthur Kostaras<br>Founder, CanadaInvesting</p></div>`;
+        const DEFAULT_ADVISOR_BODY = `<div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;color:#333;"><h2 style="color:#1e293b;">Hi {{advisor_name}},</h2><p>Canadians are actively searching for trusted financial advisors in {{province}}.</p><p>CanadaInvesting uses AI to match investors with pre-verified advisors based on their needs, risk tolerance, and investment goals.</p><div style="background:#f8fafc;border-radius:8px;padding:20px;margin:20px 0;"><p style="margin:0 0 12px 0;font-weight:bold;">Why Advisors join CanadaInvesting:</p><ul style="margin:0;padding-left:20px;"><li>AI-matched leads based on your designations (CFA, CFP, CIM)</li><li>Serve clients anywhere in Canada</li><li>Zero marketing spend — clients come to you</li><li>Verified professional profile with trust badge</li></ul></div><p style="text-align:center;margin:30px 0;"><a href="{{platform_url}}/join-as-advisor" style="display:inline-block;background:#2563eb;color:#fff;padding:14px 28px;border-radius:8px;text-decoration:none;font-weight:bold;">Claim Your Free Profile</a></p><p style="color:#666;font-size:14px;">Best regards,<br>Arthur Kostaras<br>Founder, CanadaInvesting</p></div>`;
         const DEFAULT_INVESTOR_SUBJECT = 'Find your ideal financial advisor in minutes';
-        const DEFAULT_INVESTOR_BODY = `<div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;color:#333;"><h2 style="color:#1e293b;">Hi there,</h2><p>Finding the right financial advisor shouldn't be a guessing game.</p><p>CanadaInvesting uses AI to match you with pre-verified advisors in {{province}} based on your investment goals, risk tolerance, and preferences.</p><div style="background:#f8fafc;border-radius:8px;padding:20px;margin:20px 0;"><p style="margin:0 0 12px 0;font-weight:bold;">How it works:</p><ol style="margin:0;padding-left:20px;"><li>Tell us about your investment needs (2 minutes)</li><li>Our AI matches you with the top 3 advisors</li><li>Connect directly — no middleman</li></ol></div><p style="text-align:center;margin:30px 0;"><a href="{{platform_url}}/find-advisor" style="display:inline-block;background:#667eea;color:#fff;padding:14px 28px;border-radius:8px;text-decoration:none;font-weight:bold;">Find My Advisor Match</a></p><p style="color:#666;font-size:14px;">Best regards,<br>Arthur Kostaras<br>Founder, CanadaInvesting</p></div>`;
+        const DEFAULT_INVESTOR_BODY = `<div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;color:#333;"><h2 style="color:#1e293b;">Hi there,</h2><p>Finding the right financial advisor shouldn't be a guessing game.</p><p>CanadaInvesting uses AI to match you with pre-verified advisors in {{province}} based on your investment goals, risk tolerance, and preferences.</p><div style="background:#f8fafc;border-radius:8px;padding:20px;margin:20px 0;"><p style="margin:0 0 12px 0;font-weight:bold;">How it works:</p><ol style="margin:0;padding-left:20px;"><li>Tell us about your investment needs (2 minutes)</li><li>Our AI matches you with the top 3 advisors</li><li>Connect directly — no middleman</li></ol></div><p style="text-align:center;margin:30px 0;"><a href="{{platform_url}}/find-advisor" style="display:inline-block;background:#2563eb;color:#fff;padding:14px 28px;border-radius:8px;text-decoration:none;font-weight:bold;">Find My Advisor Match</a></p><p style="color:#666;font-size:14px;">Best regards,<br>Arthur Kostaras<br>Founder, CanadaInvesting</p></div>`;
 
         function updateTemplateDefaults() {
             const type = document.getElementById('campType').value;
@@ -552,7 +552,7 @@
                                 ${c.status === 'active' ? `<button onclick="pauseCampaign(${c.id})" class="text-xs px-2 py-1 rounded bg-yellow-700 hover:bg-yellow-600">Pause</button>` : ''}
                                 ${c.status === 'paused' ? `<button onclick="launchCampaign(${c.id})" class="text-xs px-2 py-1 rounded bg-green-700 hover:bg-green-600">Resume</button>` : ''}
                                 <button onclick="previewCampaign(${c.id})" class="text-xs px-2 py-1 rounded bg-gray-600 hover:bg-gray-500">Preview</button>
-                                <button onclick="testSendCampaign(${c.id})" class="text-xs px-2 py-1 rounded bg-indigo-700 hover:bg-indigo-600">Test</button>
+                                <button onclick="testSendCampaign(${c.id})" class="text-xs px-2 py-1 rounded bg-indigo-700 hover:bg-blue-700">Test</button>
                             </div>
                         </td>
                     </tr>`;
