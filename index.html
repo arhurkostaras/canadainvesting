@@ -65,6 +65,32 @@
     }
     </script>
 
+    <!-- WebSite Schema with SearchAction -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "CanadaInvesting",
+        "url": "https://canadainvesting.app",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://canadainvesting.app/find-advisor.html",
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
+
+    <!-- BreadcrumbList Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://canadainvesting.app/" }
+        ]
+    }
+    </script>
+
     <style>
         :root {
             --primary-blue: #2563eb;

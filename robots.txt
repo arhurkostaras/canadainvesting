@@ -1,0 +1,33 @@
+User-agent: *
+Allow: /
+
+# Public pages
+Allow: /index.html
+Allow: /find-advisor.html
+Allow: /join-as-advisor.html
+Allow: /pricing.html
+Allow: /advisor-revenue-calculator.html
+Allow: /contact.html
+Allow: /guarantee.html
+Allow: /why-we-win.html
+Allow: /market-trends-report.html
+Allow: /trust-center.html
+Allow: /privacy-policy.html
+Allow: /terms-of-service.html
+
+# App pages (disallow)
+Disallow: /advisor-dashboard.html
+Disallow: /advisor-login.html
+Disallow: /advisor-onboarding.html
+Disallow: /advisor-matches.html
+Disallow: /admin-dashboard.html
+Disallow: /checkout-success.html
+Disallow: /checkout-cancel.html
+Disallow: /register.html
+Disallow: /forgot-password.html
+Disallow: /reset-password.html
+Disallow: /analytics-dashboard.html
+Disallow: /ai-demo.html
+Disallow: /data-processing-agreement.html
+
+Sitemap: https://canadainvesting.app/sitemap.xml

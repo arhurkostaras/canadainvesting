@@ -37,6 +37,53 @@
     <!-- Google Analytics 4 - placeholder until configured -->
     <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script> -->
 
+    <!-- ProfessionalService Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        "name": "CanadaInvesting - Find Your Investment Advisor",
+        "url": "https://canadainvesting.app/find-advisor.html",
+        "description": "AI-powered matching connects you with CIRO-registered investment advisors who fit your exact needs. Free for clients.",
+        "serviceType": "Investment Advisor Matching",
+        "areaServed": {
+            "@type": "Country",
+            "name": "Canada"
+        },
+        "provider": {
+            "@type": "Organization",
+            "name": "CanadaInvesting",
+            "url": "https://canadainvesting.app"
+        },
+        "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Advisor Matching Services",
+            "itemListElement": [
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Service",
+                        "name": "AI-Powered Advisor Matching",
+                        "description": "Free matching service connecting investors with qualified, CIRO-registered financial advisors"
+                    }
+                }
+            ]
+        }
+    }
+    </script>
+
+    <!-- BreadcrumbList Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://canadainvesting.app/" },
+            { "@type": "ListItem", "position": 2, "name": "Find an Advisor", "item": "https://canadainvesting.app/find-advisor.html" }
+        ]
+    }
+    </script>
+
     <style>
         :root {
             --primary-blue: #2563eb;

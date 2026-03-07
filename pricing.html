@@ -37,6 +37,92 @@
     <!-- Google Analytics 4 - placeholder until configured -->
     <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script> -->
 
+    <!-- FAQPage Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "Why flat-fee pricing instead of AUM commission?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "AUM-based commissions create misaligned incentives. They penalize advisors who grow client portfolios and reward platforms for doing nothing after the initial match. Our flat-fee model means you keep 100% of your client revenue. Your success is your success. We earn our fee by continuously delivering qualified matches and platform value."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How does the algorithm position actually work?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "When a client searches for an advisor, our AI evaluates six factors: specialization match, portfolio size fit, geographic proximity, fee structure alignment, advisor capacity, and subscription tier. Your tier acts as a ranking boost. Enterprise advisors get maximum visibility, Professional advisors get enhanced placement, and Associate advisors appear in standard rotation. Crucially, even at lower tiers, you only receive matches where your expertise genuinely fits the client's needs."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Can I upgrade or downgrade my plan?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes. Monthly plan holders can upgrade instantly or downgrade at the end of their billing cycle. Annual plan holders can upgrade at any time with prorated billing. Downgrades on annual plans take effect at renewal. Your algorithm position adjusts immediately upon upgrade."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What is the annual billing discount?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Annual billing saves you 16% compared to monthly. Associate drops from $199/mo to $167/mo ($2,004/yr instead of $2,388/yr). Professional drops from $299/mo to $251/mo ($3,012/yr instead of $3,588/yr). Enterprise drops from $599/mo to $503/mo ($6,036/yr instead of $7,188/yr). Annual plans require a 12-month commitment."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What happens if I don't get any client matches?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "We stand behind our platform. If you receive zero qualified matches in your first 90 days, we will refund your subscription in full. This is our launch guarantee, and it applies to all tiers. We also provide profile optimization assistance to ensure your listing attracts the right clients."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Is there a setup fee or hidden cost?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "No. The subscription price is the only cost. There is no setup fee, no onboarding charge, no per-lead fee, and absolutely no commission on your AUM or client revenue. What you see on this page is what you pay."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Do clients pay anything?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "No. CanadaInvesting is completely free for clients seeking an advisor. Our revenue comes entirely from advisor subscriptions. This two-sided model ensures clients have zero friction in finding qualified professionals, which means more qualified leads flowing to you."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What designations and registrations do you verify?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "We verify CIRO (Canadian Investment Regulatory Organization) registration status, provincial securities licensing, and professional designations including CFA (Chartered Financial Analyst), CFP (Certified Financial Planner), CIM (Chartered Investment Manager), FCSI (Fellow of the Canadian Securities Institute), and PFP (Personal Financial Planner). Verification happens before your profile goes live and is re-checked periodically."
+                }
+            }
+        ]
+    }
+    </script>
+
+    <!-- BreadcrumbList Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://canadainvesting.app/" },
+            { "@type": "ListItem", "position": 2, "name": "Pricing", "item": "https://canadainvesting.app/pricing.html" }
+        ]
+    }
+    </script>
+
     <style>
         :root {
             --primary-blue: #2563eb;
