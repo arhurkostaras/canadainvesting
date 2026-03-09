@@ -720,6 +720,10 @@
                 }
             });
 
+            // Read ref token from URL for conversion tracking
+            const urlParams = new URLSearchParams(window.location.search);
+            data.ref = urlParams.get('ref') || '';
+
             // POST to backend
             fetch(this.action, {
                 method: 'POST',
