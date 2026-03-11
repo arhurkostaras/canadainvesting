@@ -948,17 +948,15 @@
 
         async function loadCrmPipeline() {
             try {
-                const [funnelRes, dashRes, convRes] = await Promise.all([
+                const [funnelRes, dashRes] = await Promise.all([
                     fetch(`${API}/api/admin/crm/funnel`, { headers }),
-                    fetch(`${API}/api/admin/crm/dashboard`, { headers }),
-                    fetch(`${API}/api/admin/crm/funnel-conversions`, { headers })
+                    fetch(`${API}/api/admin/crm/dashboard`, { headers })
                 ]);
                 const funnel = await funnelRes.json();
                 const dash = await dashRes.json();
-                const conv = await convRes.json();
 
                 if (funnel.success) {
-                    const stages = funnel.funnel || [];
+                    const stages = funnel.stages || [];
                     const stageColors = {
                         raw_import: 'gray', enriched: 'purple', validated: 'blue',
                         contacted: 'yellow', engaged: 'green', claimed: 'blue', subscriber: 'green',
@@ -980,12 +978,12 @@
                     document.getElementById('crmSubscribers').textContent = num(d.subscribers);
                 }
 
-                if (conv.success) {
-                    const c = conv.conversions || [];
-                    document.getElementById('crmConversionBars').innerHTML = c.map(r => {
-                        const pctVal = r.rate ? parseFloat(r.rate).toFixed(1) : 0;
+                if (funnel.conversions) {
+                    const c = funnel.conversions || [];
+                    document.getElementById('crmConversionBars').innerHTML = c.filter(r => r.conversion_from_prev !== null).map(r => {
+                        const pctVal = parseFloat(r.conversion_from_prev) || 0;
                         return `<div class="flex items-center gap-3 mb-2">
-                            <span class="text-xs text-gray-400 w-40">${r.from_status} &rarr; ${r.to_status}</span>
+                            <span class="text-xs text-gray-400 w-40">${r.stage.replace(/_/g,' ')}</span>
                             <div class="flex-1 bg-gray-700 rounded-full h-4">
                                 <div class="bg-blue-600 rounded-full h-4" style="width: ${Math.min(pctVal, 100)}%"></div>
                             </div>
@@ -1113,16 +1111,16 @@
             const ids = Array.from(crmSelected).map(Number);
             try {
                 if (action === 'transition') {
-                    await fetch(`${API}/api/admin/crm/bulk-transition`, {
-                        method: 'POST', headers, body: JSON.stringify({ ids, toStatus: target.value, reason: 'Bulk action from dashboard' })
+                    await fetch(`${API}/api/admin/crm/bulk/transition`, {
+                        method: 'POST', headers, body: JSON.stringify({ ids, to_status: target.value, metadata: { reason: 'Bulk action from dashboard' } })
                     });
                 } else if (action === 'tag') {
-                    await fetch(`${API}/api/admin/crm/bulk-tag`, {
+                    await fetch(`${API}/api/admin/crm/bulk/tag`, {
                         method: 'POST', headers, body: JSON.stringify({ ids, tag: target.value })
                     });
                 } else if (action === 'enroll') {
-                    await fetch(`${API}/api/admin/crm/sequences/${target.value}/bulk-enroll`, {
-                        method: 'POST', headers, body: JSON.stringify({ professionalIds: ids })
+                    await fetch(`${API}/api/admin/crm/sequences/${target.value}/enroll`, {
+                        method: 'POST', headers, body: JSON.stringify({ professional_ids: ids })
                     });
                 }
                 loadCrmSegment();
@@ -1134,8 +1132,8 @@
             crmDetailId = id;
             try {
                 const [profRes, histRes] = await Promise.all([
-                    fetch(`${API}/api/admin/crm/professional/${id}`, { headers }),
-                    fetch(`${API}/api/admin/crm/history/${id}`, { headers })
+                    fetch(`${API}/api/admin/crm/professionals/${id}`, { headers }),
+                    fetch(`${API}/api/admin/crm/professionals/${id}/history`, { headers })
                 ]);
                 const prof = await profRes.json();
                 const hist = await histRes.json();
@@ -1179,8 +1177,8 @@
         async function transitionCrm(id) {
             const to = document.getElementById('crmTransitionTo').value;
             try {
-                const res = await fetch(`${API}/api/admin/crm/transition`, {
-                    method: 'POST', headers, body: JSON.stringify({ professionalId: id, toStatus: to, reason: 'Manual from dashboard' })
+                const res = await fetch(`${API}/api/admin/crm/professionals/${id}/transition`, {
+                    method: 'POST', headers, body: JSON.stringify({ to_status: to, metadata: { reason: 'Manual from dashboard' } })
                 });
                 const data = await res.json();
                 if (!data.success) alert('Transition failed: ' + (data.error || 'unknown'));
@@ -1192,7 +1190,7 @@
             const tag = document.getElementById('crmTagInput').value.trim();
             if (!tag) return;
             try {
-                await fetch(`${API}/api/admin/crm/tag`, { method: 'POST', headers, body: JSON.stringify({ professionalId: id, tag }) });
+                await fetch(`${API}/api/admin/crm/professionals/${id}/tags`, { method: 'POST', headers, body: JSON.stringify({ tag }) });
                 viewCrmDetail(id);
             } catch (e) { alert('Error: ' + e.message); }
         }
@@ -1201,7 +1199,7 @@
             const text = document.getElementById('crmNoteInput').value.trim();
             if (!text || !crmDetailId) return;
             try {
-                await fetch(`${API}/api/admin/crm/note`, { method: 'POST', headers, body: JSON.stringify({ professionalId: crmDetailId, note: text }) });
+                await fetch(`${API}/api/admin/crm/professionals/${crmDetailId}/notes`, { method: 'POST', headers, body: JSON.stringify({ note: text }) });
                 document.getElementById('crmNoteInput').value = '';
                 viewCrmDetail(crmDetailId);
             } catch (e) { alert('Error: ' + e.message); }
@@ -1241,7 +1239,7 @@
         async function saveSequence() {
             const name = document.getElementById('seqName').value.trim();
             if (!name) return alert('Enter a name');
-            const triggerStage = document.getElementById('seqTrigger').value || null;
+            const trigger_status = document.getElementById('seqTrigger').value || null;
             const stepEls = document.querySelectorAll('#seqSteps > div');
             const steps = Array.from(stepEls).map((el, i) => ({
                 step_number: i + 1,
@@ -1253,7 +1251,7 @@
             }));
             try {
                 const res = await fetch(`${API}/api/admin/crm/sequences`, {
-                    method: 'POST', headers, body: JSON.stringify({ name, triggerStage, steps })
+                    method: 'POST', headers, body: JSON.stringify({ name, trigger_status, steps })
                 });
                 const data = await res.json();
                 if (data.success) {
@@ -1304,13 +1302,13 @@
             const el = document.getElementById(`seqStats-${id}`);
             if (!el.classList.contains('hidden')) { el.classList.add('hidden'); return; }
             try {
-                const [statsRes, enrollRes] = await Promise.all([
-                    fetch(`${API}/api/admin/crm/sequences/${id}/stats`, { headers }),
+                const [seqRes, enrollRes] = await Promise.all([
+                    fetch(`${API}/api/admin/crm/sequences/${id}`, { headers }),
                     fetch(`${API}/api/admin/crm/sequences/${id}/enrollments`, { headers })
                 ]);
-                const stats = await statsRes.json();
+                const seqData = await seqRes.json();
                 const enroll = await enrollRes.json();
-                const s = stats.stats || {};
+                const s = seqData.stats || {};
                 const enrollments = enroll.enrollments || [];
                 el.innerHTML = `
                     <div class="grid grid-cols-4 gap-3 mb-2">
@@ -1328,19 +1326,17 @@
         // ---- Intelligence ----
         async function loadIntelligence() {
             try {
-                const [distRes, topRes, churnRes, bounceRes] = await Promise.all([
-                    fetch(`${API}/api/admin/crm/intelligence/engagement-distribution`, { headers }),
-                    fetch(`${API}/api/admin/crm/intelligence/top-engaged`, { headers }),
-                    fetch(`${API}/api/admin/crm/intelligence/churn-risk`, { headers }),
+                const [engRes, churnRes, bounceRes] = await Promise.all([
+                    fetch(`${API}/api/admin/crm/intelligence/engagement`, { headers }),
+                    fetch(`${API}/api/admin/crm/intelligence/churn`, { headers }),
                     fetch(`${API}/api/admin/crm/intelligence/bounce-report`, { headers })
                 ]);
-                const dist = await distRes.json();
-                const top = await topRes.json();
+                const eng = await engRes.json();
                 const churn = await churnRes.json();
                 const bounce = await bounceRes.json();
 
-                if (dist.success) {
-                    const d = dist.distribution || {};
+                if (eng.success) {
+                    const d = eng.distribution || {};
                     const tiers = [
                         { name: 'Hot (70+)', count: d.hot || 0, color: 'green' },
                         { name: 'Warm (40-69)', count: d.warm || 0, color: 'yellow' },
@@ -1355,8 +1351,8 @@
                     `).join('');
                 }
 
-                if (top.success) {
-                    document.getElementById('topEngaged').innerHTML = (top.professionals || []).map(p => `
+                if (eng.success) {
+                    document.getElementById('topEngaged').innerHTML = (eng.topEngaged || []).map(p => `
                         <div class="flex justify-between items-center py-1">
                             <span class="text-sm">${p.name || p.email || 'ID: ' + p.id}</span>
                             <span class="text-sm font-bold text-green-400">${p.engagement_score}</span>
@@ -1365,7 +1361,7 @@
                 }
 
                 if (churn.success) {
-                    document.getElementById('churnRisk').innerHTML = (churn.professionals || []).map(p => `
+                    document.getElementById('churnRisk').innerHTML = (churn.atRisk || []).map(p => `
                         <div class="flex justify-between items-center py-1">
                             <span class="text-sm">${p.name || p.email || 'ID: ' + p.id}</span>
                             <span class="text-sm font-bold text-red-400">${p.churn_score}%</span>
@@ -1374,7 +1370,7 @@
                 }
 
                 if (bounce.success) {
-                    const clusters = bounce.clusters || [];
+                    const clusters = bounce.domains || [];
                     document.getElementById('bounceReport').innerHTML = clusters.length
                         ? clusters.map(c => `
                             <div class="flex justify-between items-center py-2 border-b border-gray-700">
