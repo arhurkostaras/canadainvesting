@@ -67,6 +67,7 @@
             <button onclick="switchTab('claims')" data-tab="claims" class="tab-btn px-4 py-2 rounded-t text-sm font-medium bg-gray-700 hover:bg-gray-600">Pending Claims</button>
             <button onclick="switchTab('referrals')" data-tab="referrals" class="tab-btn px-4 py-2 rounded-t text-sm font-medium bg-gray-700 hover:bg-gray-600">Referrals</button>
             <button onclick="switchTab('professionals')" data-tab="professionals" class="tab-btn px-4 py-2 rounded-t text-sm font-medium bg-gray-700 hover:bg-gray-600">Advisor Management</button>
+            <button onclick="switchTab('crm')" data-tab="crm" class="tab-btn px-4 py-2 rounded-t text-sm font-medium bg-gray-700 hover:bg-gray-600">CRM</button>
         </div>
 
         <!-- ==================== SCRAPE & ENRICHMENT TAB ==================== -->
@@ -336,6 +337,204 @@
             </div>
             <div id="profPagination" class="flex items-center justify-between mt-3 text-sm text-gray-400"></div>
         </section>
+
+        <!-- ==================== CRM TAB ==================== -->
+        <section id="tab-crm" class="hidden">
+            <!-- CRM Sub-tabs -->
+            <div class="flex gap-2 mb-6">
+                <button onclick="switchCrmTab('pipeline')" data-crmtab="pipeline" class="crm-tab-btn px-3 py-1.5 rounded text-sm font-medium bg-blue-700">Pipeline</button>
+                <button onclick="switchCrmTab('sequences')" data-crmtab="sequences" class="crm-tab-btn px-3 py-1.5 rounded text-sm font-medium bg-gray-700 hover:bg-gray-600">Sequences</button>
+                <button onclick="switchCrmTab('intelligence')" data-crmtab="intelligence" class="crm-tab-btn px-3 py-1.5 rounded text-sm font-medium bg-gray-700 hover:bg-gray-600">Intelligence</button>
+            </div>
+
+            <!-- ---- Pipeline Sub-tab ---- -->
+            <div id="crm-pipeline">
+                <!-- Funnel -->
+                <h3 class="text-lg font-semibold mb-3">Pipeline Funnel</h3>
+                <div id="crmFunnel" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3 mb-6"></div>
+
+                <!-- Dashboard Stats -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                    <div class="bg-gray-800 rounded-xl p-4 border border-gray-700">
+                        <p class="text-gray-400 text-xs">Total Professionals</p>
+                        <p id="crmTotal" class="text-2xl font-bold mt-1">--</p>
+                    </div>
+                    <div class="bg-gray-800 rounded-xl p-4 border border-gray-700">
+                        <p class="text-gray-400 text-xs">With Email</p>
+                        <p id="crmWithEmail" class="text-2xl font-bold mt-1 text-green-400">--</p>
+                    </div>
+                    <div class="bg-gray-800 rounded-xl p-4 border border-gray-700">
+                        <p class="text-gray-400 text-xs">Contacted</p>
+                        <p id="crmContacted" class="text-2xl font-bold mt-1 text-blue-400">--</p>
+                    </div>
+                    <div class="bg-gray-800 rounded-xl p-4 border border-gray-700">
+                        <p class="text-gray-400 text-xs">Subscribers</p>
+                        <p id="crmSubscribers" class="text-2xl font-bold mt-1 text-purple-400">--</p>
+                    </div>
+                </div>
+
+                <!-- Conversion Rates -->
+                <div id="crmConversions" class="bg-gray-800 rounded-xl border border-gray-700 p-5 mb-6">
+                    <h4 class="text-sm font-semibold text-gray-400 mb-3">Stage Conversion Rates</h4>
+                    <div id="crmConversionBars"></div>
+                </div>
+
+                <!-- Segment Browser -->
+                <h3 class="text-lg font-semibold mb-3">Segment Browser</h3>
+                <div class="flex flex-wrap gap-3 mb-3">
+                    <select id="crmStatusFilter" onchange="loadCrmSegment()" class="bg-gray-800 border border-gray-600 rounded px-3 py-1.5 text-sm">
+                        <option value="">All Statuses</option>
+                        <option value="raw_import">Raw Import</option>
+                        <option value="enriched">Enriched</option>
+                        <option value="validated">Validated</option>
+                        <option value="contacted">Contacted</option>
+                        <option value="engaged">Engaged</option>
+                        <option value="claimed">Claimed</option>
+                        <option value="subscriber">Subscriber</option>
+                        <option value="enrichment_failed">Enrichment Failed</option>
+                        <option value="invalid">Invalid</option>
+                        <option value="churned">Churned</option>
+                    </select>
+                    <select id="crmProvFilter" onchange="loadCrmSegment()" class="bg-gray-800 border border-gray-600 rounded px-3 py-1.5 text-sm">
+                        <option value="">All Provinces</option>
+                        <option value="BC">BC</option><option value="AB">AB</option><option value="SK">SK</option>
+                        <option value="MB">MB</option><option value="ON">ON</option><option value="QC">QC</option>
+                        <option value="NS">NS</option><option value="NB">NB</option><option value="PE">PE</option><option value="NL">NL</option>
+                    </select>
+                    <select id="crmEmailFilter" onchange="loadCrmSegment()" class="bg-gray-800 border border-gray-600 rounded px-3 py-1.5 text-sm">
+                        <option value="">Email: Any</option>
+                        <option value="true">Has Email</option>
+                        <option value="false">No Email</option>
+                    </select>
+                    <input id="crmTagFilter" type="text" placeholder="Tag filter..." onchange="loadCrmSegment()" class="bg-gray-800 border border-gray-600 rounded px-3 py-1.5 text-sm w-40">
+                </div>
+
+                <!-- Bulk Actions -->
+                <div class="flex gap-2 mb-3">
+                    <select id="crmBulkAction" class="bg-gray-800 border border-gray-600 rounded px-3 py-1.5 text-sm">
+                        <option value="">Bulk Action...</option>
+                        <option value="transition">Transition Selected</option>
+                        <option value="tag">Tag Selected</option>
+                        <option value="enroll">Enroll in Sequence</option>
+                    </select>
+                    <select id="crmBulkTarget" class="bg-gray-800 border border-gray-600 rounded px-3 py-1.5 text-sm hidden"></select>
+                    <button onclick="executeBulkAction()" class="text-sm bg-blue-700 hover:bg-indigo-700 px-3 py-1.5 rounded">Apply</button>
+                    <span id="crmSelectedCount" class="text-xs text-gray-500 self-center ml-2">0 selected</span>
+                </div>
+
+                <div class="bg-gray-800 rounded-xl border border-gray-700 overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead class="text-gray-400 border-b border-gray-700">
+                            <tr>
+                                <th class="px-3 py-3"><input type="checkbox" id="crmSelectAll" onchange="toggleAllCrm(this)"></th>
+                                <th class="text-left px-3 py-3">Name</th>
+                                <th class="text-left px-3 py-3">Email</th>
+                                <th class="text-left px-3 py-3">Province</th>
+                                <th class="text-left px-3 py-3">CRM Status</th>
+                                <th class="text-left px-3 py-3">Engagement</th>
+                                <th class="text-left px-3 py-3">Tags</th>
+                                <th class="text-left px-3 py-3">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="crmSegmentBody" class="divide-y divide-gray-700"></tbody>
+                    </table>
+                </div>
+                <div id="crmSegmentPag" class="flex items-center justify-between mt-3 text-sm text-gray-400"></div>
+
+                <!-- Professional Detail Modal -->
+                <div id="crmDetailModal" class="hidden fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4">
+                    <div class="bg-gray-800 rounded-xl border border-gray-700 w-full max-w-2xl max-h-[80vh] overflow-y-auto p-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 id="crmDetailName" class="text-lg font-bold"></h3>
+                            <button onclick="closeCrmDetail()" class="text-gray-400 hover:text-white text-xl">&times;</button>
+                        </div>
+                        <div id="crmDetailContent"></div>
+                        <!-- Notes -->
+                        <div class="mt-4 border-t border-gray-700 pt-4">
+                            <h4 class="text-sm font-semibold text-gray-400 mb-2">Add Note</h4>
+                            <div class="flex gap-2">
+                                <input id="crmNoteInput" type="text" placeholder="Type a note..." class="flex-1 bg-gray-700 border border-gray-600 rounded px-3 py-2 text-sm">
+                                <button onclick="addCrmNote()" class="text-sm bg-blue-700 hover:bg-indigo-700 px-3 py-1.5 rounded">Add</button>
+                            </div>
+                        </div>
+                        <!-- History -->
+                        <div class="mt-4 border-t border-gray-700 pt-4">
+                            <h4 class="text-sm font-semibold text-gray-400 mb-2">Status History</h4>
+                            <div id="crmDetailHistory" class="space-y-1 text-xs"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ---- Sequences Sub-tab ---- -->
+            <div id="crm-sequences" class="hidden">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-semibold">Email Sequences</h3>
+                    <button onclick="showSeqForm()" class="text-sm bg-blue-700 hover:bg-indigo-700 px-4 py-2 rounded">+ New Sequence</button>
+                </div>
+
+                <!-- Create Sequence Form -->
+                <div id="seqCreateForm" class="hidden bg-gray-800 rounded-xl border border-gray-700 p-6 mb-4">
+                    <h4 class="text-md font-semibold mb-3">Create Sequence</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                        <div>
+                            <label class="block text-sm text-gray-400 mb-1">Name</label>
+                            <input id="seqName" type="text" class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-sm text-gray-400 mb-1">Trigger Stage</label>
+                            <select id="seqTrigger" class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-sm">
+                                <option value="">Manual Only</option>
+                                <option value="enriched">On Enriched</option>
+                                <option value="validated">On Validated</option>
+                                <option value="contacted">On Contacted</option>
+                                <option value="engaged">On Engaged</option>
+                                <option value="claimed">On Claimed</option>
+                            </select>
+                        </div>
+                    </div>
+                    <h5 class="text-sm text-gray-400 mb-2">Steps</h5>
+                    <div id="seqSteps" class="space-y-3 mb-4"></div>
+                    <button onclick="addSeqStep()" class="text-xs bg-gray-700 hover:bg-gray-600 px-3 py-1.5 rounded mb-4">+ Add Step</button>
+                    <div class="flex gap-2">
+                        <button onclick="saveSequence()" class="text-sm bg-green-600 hover:bg-green-700 px-4 py-2 rounded">Save Sequence</button>
+                        <button onclick="document.getElementById('seqCreateForm').classList.add('hidden')" class="text-sm bg-gray-600 hover:bg-gray-500 px-4 py-2 rounded">Cancel</button>
+                    </div>
+                </div>
+
+                <!-- Sequences List -->
+                <div id="seqList" class="space-y-4"></div>
+            </div>
+
+            <!-- ---- Intelligence Sub-tab ---- -->
+            <div id="crm-intelligence" class="hidden">
+                <h3 class="text-lg font-semibold mb-4">CRM Intelligence</h3>
+
+                <!-- Engagement Distribution -->
+                <div class="bg-gray-800 rounded-xl border border-gray-700 p-5 mb-6">
+                    <h4 class="text-sm font-semibold text-gray-400 mb-3">Engagement Distribution</h4>
+                    <div id="engagementDist" class="grid grid-cols-2 md:grid-cols-4 gap-4"></div>
+                </div>
+
+                <!-- Top Engaged -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div class="bg-gray-800 rounded-xl border border-gray-700 p-5">
+                        <h4 class="text-sm font-semibold text-gray-400 mb-3">Top Engaged</h4>
+                        <div id="topEngaged" class="space-y-2"></div>
+                    </div>
+                    <div class="bg-gray-800 rounded-xl border border-gray-700 p-5">
+                        <h4 class="text-sm font-semibold text-gray-400 mb-3">Churn Risk</h4>
+                        <div id="churnRisk" class="space-y-2"></div>
+                    </div>
+                </div>
+
+                <!-- Bounce Report -->
+                <div class="bg-gray-800 rounded-xl border border-gray-700 p-5">
+                    <h4 class="text-sm font-semibold text-gray-400 mb-3">Bounce Clusters</h4>
+                    <div id="bounceReport"></div>
+                </div>
+            </div>
+        </section>
     </main>
 
     <script>
@@ -382,6 +581,7 @@
             if (tab === 'claims') loadClaims();
             if (tab === 'referrals') loadReferrals();
             if (tab === 'professionals') loadProfessionals();
+            if (tab === 'crm') loadCrmData();
         }
 
         async function loadStats() {
@@ -726,6 +926,468 @@
                 await fetch(`${API}/api/admin/advisors/${id}/verify`, { method: 'POST', headers, body: JSON.stringify({ verified }) });
                 loadProfessionals(); loadStats();
             } catch (e) { console.error('Verify error:', e); }
+        }
+
+        // ---- CRM ----
+        function switchCrmTab(tab) {
+            ['crm-pipeline', 'crm-sequences', 'crm-intelligence'].forEach(id => document.getElementById(id).classList.add('hidden'));
+            document.getElementById('crm-' + tab).classList.remove('hidden');
+            document.querySelectorAll('.crm-tab-btn').forEach(btn => {
+                btn.className = btn.dataset.crmtab === tab
+                    ? 'crm-tab-btn px-3 py-1.5 rounded text-sm font-medium bg-blue-700'
+                    : 'crm-tab-btn px-3 py-1.5 rounded text-sm font-medium bg-gray-700 hover:bg-gray-600';
+            });
+            if (tab === 'pipeline') loadCrmPipeline();
+            if (tab === 'sequences') loadSequences();
+            if (tab === 'intelligence') loadIntelligence();
+        }
+
+        async function loadCrmData() {
+            loadCrmPipeline();
+        }
+
+        async function loadCrmPipeline() {
+            try {
+                const [funnelRes, dashRes, convRes] = await Promise.all([
+                    fetch(`${API}/api/admin/crm/funnel`, { headers }),
+                    fetch(`${API}/api/admin/crm/dashboard`, { headers }),
+                    fetch(`${API}/api/admin/crm/funnel-conversions`, { headers })
+                ]);
+                const funnel = await funnelRes.json();
+                const dash = await dashRes.json();
+                const conv = await convRes.json();
+
+                if (funnel.success) {
+                    const stages = funnel.funnel || [];
+                    const stageColors = {
+                        raw_import: 'gray', enriched: 'purple', validated: 'blue',
+                        contacted: 'yellow', engaged: 'green', claimed: 'blue', subscriber: 'green',
+                        enrichment_failed: 'red', invalid: 'red', churned: 'red'
+                    };
+                    document.getElementById('crmFunnel').innerHTML = stages.map(s => `
+                        <div class="bg-gray-800 rounded-xl p-4 border border-gray-700 text-center cursor-pointer hover:border-gray-500" onclick="document.getElementById('crmStatusFilter').value='${s.crm_status}';loadCrmSegment()">
+                            <p class="text-3xl font-bold text-${stageColors[s.crm_status] || 'gray'}-400">${num(s.count)}</p>
+                            <p class="text-xs text-gray-400 mt-1">${s.crm_status.replace(/_/g, ' ')}</p>
+                        </div>
+                    `).join('');
+                }
+
+                if (dash.success) {
+                    const d = dash.stats || {};
+                    document.getElementById('crmTotal').textContent = num(d.total);
+                    document.getElementById('crmWithEmail').textContent = num(d.with_email);
+                    document.getElementById('crmContacted').textContent = num(d.contacted);
+                    document.getElementById('crmSubscribers').textContent = num(d.subscribers);
+                }
+
+                if (conv.success) {
+                    const c = conv.conversions || [];
+                    document.getElementById('crmConversionBars').innerHTML = c.map(r => {
+                        const pctVal = r.rate ? parseFloat(r.rate).toFixed(1) : 0;
+                        return `<div class="flex items-center gap-3 mb-2">
+                            <span class="text-xs text-gray-400 w-40">${r.from_status} &rarr; ${r.to_status}</span>
+                            <div class="flex-1 bg-gray-700 rounded-full h-4">
+                                <div class="bg-blue-600 rounded-full h-4" style="width: ${Math.min(pctVal, 100)}%"></div>
+                            </div>
+                            <span class="text-xs text-gray-300 w-16 text-right">${pctVal}%</span>
+                        </div>`;
+                    }).join('') || '<p class="text-gray-500 text-xs">No conversion data yet</p>';
+                }
+
+                loadCrmSegment();
+            } catch (e) { console.error('CRM pipeline error:', e); }
+        }
+
+        let crmPage = 1;
+        let crmSelected = new Set();
+        async function loadCrmSegment(page) {
+            if (page) crmPage = page;
+            const status = document.getElementById('crmStatusFilter').value;
+            const province = document.getElementById('crmProvFilter').value;
+            const hasEmail = document.getElementById('crmEmailFilter').value;
+            const tag = document.getElementById('crmTagFilter').value;
+            let qs = `page=${crmPage}&limit=20`;
+            if (status) qs += `&status=${status}`;
+            if (province) qs += `&province=${province}`;
+            if (hasEmail) qs += `&hasEmail=${hasEmail}`;
+            if (tag) qs += `&tag=${tag}`;
+            try {
+                const res = await fetch(`${API}/api/admin/crm/segment?${qs}`, { headers });
+                const data = await res.json();
+                if (!data.success) return;
+                const rows = data.professionals || [];
+                const tbody = document.getElementById('crmSegmentBody');
+                crmSelected.clear();
+                updateSelectedCount();
+                if (rows.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="8" class="px-4 py-6 text-center text-gray-500">No results</td></tr>';
+                } else {
+                    tbody.innerHTML = rows.map(r => `<tr class="hover:bg-gray-750">
+                        <td class="px-3 py-3"><input type="checkbox" value="${r.id}" onchange="toggleCrmSelect(this)"></td>
+                        <td class="px-3 py-3">${r.name || r.first_name && r.last_name ? (r.first_name + ' ' + r.last_name) : '--'}</td>
+                        <td class="px-3 py-3 text-xs">${r.email || '<span class=text-gray-600>none</span>'}</td>
+                        <td class="px-3 py-3">${r.province || '--'}</td>
+                        <td class="px-3 py-3">${crmBadge(r.crm_status)}</td>
+                        <td class="px-3 py-3">${r.engagement_score != null ? engageBadge(r.engagement_score) : '--'}</td>
+                        <td class="px-3 py-3 text-xs">${(r.crm_tags || []).map(t => `<span class="bg-gray-700 px-1.5 py-0.5 rounded text-xs mr-1">${t}</span>`).join('') || '--'}</td>
+                        <td class="px-3 py-3">
+                            <button onclick="viewCrmDetail(${r.id})" class="text-xs px-2 py-1 rounded bg-gray-700 hover:bg-gray-600">View</button>
+                        </td>
+                    </tr>`).join('');
+                }
+                const total = data.total || 0;
+                const totalPages = Math.ceil(total / 20);
+                document.getElementById('crmSegmentPag').innerHTML = `
+                    <span>${num(total)} results</span>
+                    <div class="flex gap-1">
+                        ${crmPage > 1 ? `<button onclick="loadCrmSegment(${crmPage-1})" class="px-2 py-1 bg-gray-700 rounded text-xs">Prev</button>` : ''}
+                        <span class="px-2 py-1 text-xs">Page ${crmPage} of ${totalPages || 1}</span>
+                        ${crmPage < totalPages ? `<button onclick="loadCrmSegment(${crmPage+1})" class="px-2 py-1 bg-gray-700 rounded text-xs">Next</button>` : ''}
+                    </div>
+                `;
+            } catch (e) { console.error('CRM segment error:', e); }
+        }
+
+        function crmBadge(status) {
+            const m = {
+                raw_import: 'gray', enriched: 'purple', validated: 'blue',
+                contacted: 'yellow', engaged: 'green', claimed: 'blue', subscriber: 'green',
+                enrichment_failed: 'red', invalid: 'red', churned: 'red'
+            };
+            return badge(status ? status.replace(/_/g, ' ') : 'unknown', m[status] || 'gray');
+        }
+
+        function engageBadge(score) {
+            const s = parseInt(score);
+            if (s >= 70) return `<span class="text-green-400 font-bold">${s}</span>`;
+            if (s >= 40) return `<span class="text-yellow-400">${s}</span>`;
+            if (s >= 15) return `<span class="text-blue-400">${s}</span>`;
+            return `<span class="text-gray-500">${s}</span>`;
+        }
+
+        function toggleCrmSelect(cb) {
+            if (cb.checked) crmSelected.add(cb.value); else crmSelected.delete(cb.value);
+            updateSelectedCount();
+        }
+        function toggleAllCrm(cb) {
+            document.querySelectorAll('#crmSegmentBody input[type=checkbox]').forEach(el => {
+                el.checked = cb.checked;
+                if (cb.checked) crmSelected.add(el.value); else crmSelected.delete(el.value);
+            });
+            updateSelectedCount();
+        }
+        function updateSelectedCount() {
+            document.getElementById('crmSelectedCount').textContent = crmSelected.size + ' selected';
+            const action = document.getElementById('crmBulkAction').value;
+            updateBulkTarget(action);
+        }
+
+        document.getElementById('crmBulkAction').addEventListener('change', function() {
+            updateBulkTarget(this.value);
+        });
+        function updateBulkTarget(action) {
+            const sel = document.getElementById('crmBulkTarget');
+            if (action === 'transition') {
+                sel.classList.remove('hidden');
+                sel.innerHTML = ['enriched','validated','contacted','engaged','claimed','subscriber','invalid','churned']
+                    .map(s => `<option value="${s}">${s.replace(/_/g,' ')}</option>`).join('');
+            } else if (action === 'tag') {
+                sel.classList.remove('hidden');
+                sel.innerHTML = '<option value="">Enter tag below</option>';
+                sel.outerHTML = `<input id="crmBulkTarget" type="text" placeholder="Tag name..." class="bg-gray-800 border border-gray-600 rounded px-3 py-1.5 text-sm">`;
+            } else if (action === 'enroll') {
+                sel.classList.remove('hidden');
+                sel.innerHTML = '<option value="">Loading...</option>';
+                fetch(`${API}/api/admin/crm/sequences`, { headers }).then(r => r.json()).then(d => {
+                    sel.innerHTML = (d.sequences || []).map(s => `<option value="${s.id}">${s.name}</option>`).join('');
+                });
+            } else {
+                sel.classList.add('hidden');
+            }
+        }
+
+        async function executeBulkAction() {
+            if (crmSelected.size === 0) return alert('Select at least one professional');
+            const action = document.getElementById('crmBulkAction').value;
+            const target = document.getElementById('crmBulkTarget');
+            const ids = Array.from(crmSelected).map(Number);
+            try {
+                if (action === 'transition') {
+                    await fetch(`${API}/api/admin/crm/bulk-transition`, {
+                        method: 'POST', headers, body: JSON.stringify({ ids, toStatus: target.value, reason: 'Bulk action from dashboard' })
+                    });
+                } else if (action === 'tag') {
+                    await fetch(`${API}/api/admin/crm/bulk-tag`, {
+                        method: 'POST', headers, body: JSON.stringify({ ids, tag: target.value })
+                    });
+                } else if (action === 'enroll') {
+                    await fetch(`${API}/api/admin/crm/sequences/${target.value}/bulk-enroll`, {
+                        method: 'POST', headers, body: JSON.stringify({ professionalIds: ids })
+                    });
+                }
+                loadCrmSegment();
+            } catch (e) { alert('Bulk action failed: ' + e.message); }
+        }
+
+        let crmDetailId = null;
+        async function viewCrmDetail(id) {
+            crmDetailId = id;
+            try {
+                const [profRes, histRes] = await Promise.all([
+                    fetch(`${API}/api/admin/crm/professional/${id}`, { headers }),
+                    fetch(`${API}/api/admin/crm/history/${id}`, { headers })
+                ]);
+                const prof = await profRes.json();
+                const hist = await histRes.json();
+                if (!prof.success) return;
+                const p = prof.professional;
+                document.getElementById('crmDetailName').textContent = p.name || `${p.first_name || ''} ${p.last_name || ''}`.trim() || 'Unknown';
+                document.getElementById('crmDetailContent').innerHTML = `
+                    <div class="grid grid-cols-2 gap-4 text-sm">
+                        <div><span class="text-gray-400">Email:</span> ${p.email || 'none'}</div>
+                        <div><span class="text-gray-400">Province:</span> ${p.province || '--'}</div>
+                        <div><span class="text-gray-400">Firm:</span> ${p.firm_name || '--'}</div>
+                        <div><span class="text-gray-400">Status:</span> ${crmBadge(p.crm_status)}</div>
+                        <div><span class="text-gray-400">Engagement:</span> ${p.engagement_score != null ? engageBadge(p.engagement_score) : '--'}</div>
+                        <div><span class="text-gray-400">Tags:</span> ${(p.crm_tags || []).join(', ') || 'none'}</div>
+                    </div>
+                    <div class="mt-4 flex gap-2 flex-wrap">
+                        <select id="crmTransitionTo" class="bg-gray-700 border border-gray-600 rounded px-2 py-1 text-xs">
+                            ${['enriched','validated','contacted','engaged','claimed','subscriber','invalid','churned']
+                                .filter(s => s !== p.crm_status)
+                                .map(s => `<option value="${s}">${s.replace(/_/g,' ')}</option>`).join('')}
+                        </select>
+                        <button onclick="transitionCrm(${id})" class="text-xs bg-blue-700 hover:bg-indigo-700 px-2 py-1 rounded">Transition</button>
+                        <input id="crmTagInput" type="text" placeholder="Add tag..." class="bg-gray-700 border border-gray-600 rounded px-2 py-1 text-xs w-28">
+                        <button onclick="addCrmTag(${id})" class="text-xs bg-green-700 hover:bg-green-600 px-2 py-1 rounded">Tag</button>
+                    </div>
+                    ${p.crm_notes && p.crm_notes.length ? '<div class="mt-3 text-xs"><span class="text-gray-400">Notes:</span><ul class="list-disc ml-4 mt-1">' + p.crm_notes.map(n => `<li class="text-gray-300">${typeof n === 'string' ? n : (n.text || JSON.stringify(n))}</li>`).join('') + '</ul></div>' : ''}
+                `;
+                document.getElementById('crmDetailHistory').innerHTML = (hist.history || []).map(h => `
+                    <div class="flex gap-2 text-gray-400">
+                        <span>${fmtDate(h.changed_at || h.created_at)}</span>
+                        <span>${h.from_status || '?'} &rarr; <span class="text-white">${h.to_status}</span></span>
+                        ${h.reason ? `<span class="text-gray-600">- ${h.reason}</span>` : ''}
+                    </div>
+                `).join('') || '<p class="text-gray-600">No history yet</p>';
+                document.getElementById('crmDetailModal').classList.remove('hidden');
+            } catch (e) { console.error('Detail error:', e); }
+        }
+
+        function closeCrmDetail() { document.getElementById('crmDetailModal').classList.add('hidden'); }
+
+        async function transitionCrm(id) {
+            const to = document.getElementById('crmTransitionTo').value;
+            try {
+                const res = await fetch(`${API}/api/admin/crm/transition`, {
+                    method: 'POST', headers, body: JSON.stringify({ professionalId: id, toStatus: to, reason: 'Manual from dashboard' })
+                });
+                const data = await res.json();
+                if (!data.success) alert('Transition failed: ' + (data.error || 'unknown'));
+                else { viewCrmDetail(id); loadCrmPipeline(); }
+            } catch (e) { alert('Error: ' + e.message); }
+        }
+
+        async function addCrmTag(id) {
+            const tag = document.getElementById('crmTagInput').value.trim();
+            if (!tag) return;
+            try {
+                await fetch(`${API}/api/admin/crm/tag`, { method: 'POST', headers, body: JSON.stringify({ professionalId: id, tag }) });
+                viewCrmDetail(id);
+            } catch (e) { alert('Error: ' + e.message); }
+        }
+
+        async function addCrmNote() {
+            const text = document.getElementById('crmNoteInput').value.trim();
+            if (!text || !crmDetailId) return;
+            try {
+                await fetch(`${API}/api/admin/crm/note`, { method: 'POST', headers, body: JSON.stringify({ professionalId: crmDetailId, note: text }) });
+                document.getElementById('crmNoteInput').value = '';
+                viewCrmDetail(crmDetailId);
+            } catch (e) { alert('Error: ' + e.message); }
+        }
+
+        // ---- Sequences ----
+        let seqStepCount = 0;
+        function showSeqForm() {
+            seqStepCount = 0;
+            document.getElementById('seqSteps').innerHTML = '';
+            document.getElementById('seqName').value = '';
+            document.getElementById('seqTrigger').value = '';
+            addSeqStep();
+            document.getElementById('seqCreateForm').classList.remove('hidden');
+        }
+
+        function addSeqStep() {
+            seqStepCount++;
+            const div = document.createElement('div');
+            div.className = 'bg-gray-700 rounded p-3 border border-gray-600';
+            div.innerHTML = `
+                <div class="flex gap-2 items-center mb-2">
+                    <span class="text-xs text-gray-400">Step ${seqStepCount}</span>
+                    <input type="number" placeholder="Delay (days)" class="seq-delay bg-gray-800 border border-gray-600 rounded px-2 py-1 text-xs w-24" value="${seqStepCount === 1 ? 0 : 3}">
+                    <select class="seq-type bg-gray-800 border border-gray-600 rounded px-2 py-1 text-xs">
+                        <option value="email">Email</option>
+                        <option value="conditional">Conditional</option>
+                    </select>
+                </div>
+                <input type="text" placeholder="Subject line" class="seq-subject w-full bg-gray-800 border border-gray-600 rounded px-2 py-1 text-xs mb-2">
+                <input type="text" placeholder="Subject B (optional, for A/B test)" class="seq-subject-b w-full bg-gray-800 border border-gray-600 rounded px-2 py-1 text-xs mb-2">
+                <textarea placeholder="Email body template (use {{name}}, {{firm}}, etc.)" class="seq-body w-full bg-gray-800 border border-gray-600 rounded px-2 py-1 text-xs h-20"></textarea>
+            `;
+            document.getElementById('seqSteps').appendChild(div);
+        }
+
+        async function saveSequence() {
+            const name = document.getElementById('seqName').value.trim();
+            if (!name) return alert('Enter a name');
+            const triggerStage = document.getElementById('seqTrigger').value || null;
+            const stepEls = document.querySelectorAll('#seqSteps > div');
+            const steps = Array.from(stepEls).map((el, i) => ({
+                step_number: i + 1,
+                delay_days: parseInt(el.querySelector('.seq-delay').value) || 0,
+                type: el.querySelector('.seq-type').value,
+                subject: el.querySelector('.seq-subject').value,
+                subject_b: el.querySelector('.seq-subject-b').value || null,
+                body: el.querySelector('.seq-body').value
+            }));
+            try {
+                const res = await fetch(`${API}/api/admin/crm/sequences`, {
+                    method: 'POST', headers, body: JSON.stringify({ name, triggerStage, steps })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    document.getElementById('seqCreateForm').classList.add('hidden');
+                    loadSequences();
+                } else alert('Error: ' + (data.error || 'unknown'));
+            } catch (e) { alert('Error: ' + e.message); }
+        }
+
+        async function loadSequences() {
+            try {
+                const res = await fetch(`${API}/api/admin/crm/sequences`, { headers });
+                const data = await res.json();
+                const list = document.getElementById('seqList');
+                const seqs = data.sequences || [];
+                if (seqs.length === 0) {
+                    list.innerHTML = '<p class="text-gray-500 text-sm">No sequences created yet</p>';
+                    return;
+                }
+                list.innerHTML = seqs.map(s => `
+                    <div class="bg-gray-800 rounded-xl border border-gray-700 p-5">
+                        <div class="flex justify-between items-center mb-3">
+                            <div>
+                                <h4 class="font-semibold">${s.name}</h4>
+                                <p class="text-xs text-gray-400">Trigger: ${s.trigger_stage || 'Manual'} | ${s.steps ? s.steps.length : 0} steps | Status: ${badge(s.active ? 'Active' : 'Paused', s.active ? 'green' : 'yellow')}</p>
+                            </div>
+                            <div class="flex gap-2">
+                                <button onclick="toggleSequence(${s.id}, ${!s.active})" class="text-xs px-2 py-1 rounded ${s.active ? 'bg-yellow-700 hover:bg-yellow-600' : 'bg-green-700 hover:bg-green-600'}">${s.active ? 'Pause' : 'Activate'}</button>
+                                <button onclick="viewSeqStats(${s.id})" class="text-xs px-2 py-1 rounded bg-gray-700 hover:bg-gray-600">Stats</button>
+                            </div>
+                        </div>
+                        <div id="seqStats-${s.id}" class="hidden text-xs text-gray-400 mt-2"></div>
+                    </div>
+                `).join('');
+            } catch (e) { console.error('Sequences error:', e); }
+        }
+
+        async function toggleSequence(id, active) {
+            try {
+                await fetch(`${API}/api/admin/crm/sequences/${id}`, {
+                    method: 'PUT', headers, body: JSON.stringify({ active })
+                });
+                loadSequences();
+            } catch (e) { alert('Error: ' + e.message); }
+        }
+
+        async function viewSeqStats(id) {
+            const el = document.getElementById(`seqStats-${id}`);
+            if (!el.classList.contains('hidden')) { el.classList.add('hidden'); return; }
+            try {
+                const [statsRes, enrollRes] = await Promise.all([
+                    fetch(`${API}/api/admin/crm/sequences/${id}/stats`, { headers }),
+                    fetch(`${API}/api/admin/crm/sequences/${id}/enrollments`, { headers })
+                ]);
+                const stats = await statsRes.json();
+                const enroll = await enrollRes.json();
+                const s = stats.stats || {};
+                const enrollments = enroll.enrollments || [];
+                el.innerHTML = `
+                    <div class="grid grid-cols-4 gap-3 mb-2">
+                        <div>Enrolled: <span class="text-white font-bold">${num(s.total_enrolled)}</span></div>
+                        <div>Active: <span class="text-green-400 font-bold">${num(s.active)}</span></div>
+                        <div>Completed: <span class="text-blue-400 font-bold">${num(s.completed)}</span></div>
+                        <div>Paused: <span class="text-yellow-400">${num(s.paused)}</span></div>
+                    </div>
+                    ${enrollments.length ? '<p class="mt-2 mb-1">Recent enrollments:</p><div class="max-h-32 overflow-y-auto">' + enrollments.slice(0, 10).map(e => `<div class="flex justify-between py-0.5"><span>${e.name || e.email || 'ID: ' + e.professional_id}</span><span>${e.status} - step ${e.current_step}</span></div>`).join('') + '</div>' : ''}
+                `;
+                el.classList.remove('hidden');
+            } catch (e) { console.error('Seq stats error:', e); }
+        }
+
+        // ---- Intelligence ----
+        async function loadIntelligence() {
+            try {
+                const [distRes, topRes, churnRes, bounceRes] = await Promise.all([
+                    fetch(`${API}/api/admin/crm/intelligence/engagement-distribution`, { headers }),
+                    fetch(`${API}/api/admin/crm/intelligence/top-engaged`, { headers }),
+                    fetch(`${API}/api/admin/crm/intelligence/churn-risk`, { headers }),
+                    fetch(`${API}/api/admin/crm/intelligence/bounce-report`, { headers })
+                ]);
+                const dist = await distRes.json();
+                const top = await topRes.json();
+                const churn = await churnRes.json();
+                const bounce = await bounceRes.json();
+
+                if (dist.success) {
+                    const d = dist.distribution || {};
+                    const tiers = [
+                        { name: 'Hot (70+)', count: d.hot || 0, color: 'green' },
+                        { name: 'Warm (40-69)', count: d.warm || 0, color: 'yellow' },
+                        { name: 'Active (15-39)', count: d.active || 0, color: 'blue' },
+                        { name: 'Cold (0-14)', count: d.cold || 0, color: 'gray' }
+                    ];
+                    document.getElementById('engagementDist').innerHTML = tiers.map(t => `
+                        <div class="text-center">
+                            <p class="text-2xl font-bold text-${t.color}-400">${num(t.count)}</p>
+                            <p class="text-xs text-gray-400">${t.name}</p>
+                        </div>
+                    `).join('');
+                }
+
+                if (top.success) {
+                    document.getElementById('topEngaged').innerHTML = (top.professionals || []).map(p => `
+                        <div class="flex justify-between items-center py-1">
+                            <span class="text-sm">${p.name || p.email || 'ID: ' + p.id}</span>
+                            <span class="text-sm font-bold text-green-400">${p.engagement_score}</span>
+                        </div>
+                    `).join('') || '<p class="text-gray-500 text-xs">No data yet</p>';
+                }
+
+                if (churn.success) {
+                    document.getElementById('churnRisk').innerHTML = (churn.professionals || []).map(p => `
+                        <div class="flex justify-between items-center py-1">
+                            <span class="text-sm">${p.name || p.email || 'ID: ' + p.id}</span>
+                            <span class="text-sm font-bold text-red-400">${p.churn_score}%</span>
+                        </div>
+                    `).join('') || '<p class="text-gray-500 text-xs">No churn data yet</p>';
+                }
+
+                if (bounce.success) {
+                    const clusters = bounce.clusters || [];
+                    document.getElementById('bounceReport').innerHTML = clusters.length
+                        ? clusters.map(c => `
+                            <div class="flex justify-between items-center py-2 border-b border-gray-700">
+                                <span class="text-sm">${c.domain}</span>
+                                <div>
+                                    <span class="text-red-400 text-sm font-bold">${c.bounce_count} bounces</span>
+                                    <span class="text-gray-500 text-xs ml-2">${pct(c.bounce_count, c.total_sent)} rate</span>
+                                </div>
+                            </div>
+                        `).join('')
+                        : '<p class="text-gray-500 text-xs">No bounce clusters detected</p>';
+                }
+            } catch (e) { console.error('Intelligence error:', e); }
         }
 
         // ---- Init ----
