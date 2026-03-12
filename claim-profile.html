@@ -353,6 +353,8 @@
         var API_BASE = 'https://canadainvesting-backend-production.up.railway.app';
         var refToken = '';
 
+        var emailFocusTracked = false;
+
         document.addEventListener('DOMContentLoaded', function() {
             var params = new URLSearchParams(window.location.search);
             refToken = params.get('ref') || '';
@@ -362,7 +364,18 @@
                 return;
             }
 
+            // Funnel event 1: page loaded with valid ref token
+            gtag('event', 'claim_page_load', { ref_token: refToken });
+
             fetchProfile(refToken);
+
+            // Funnel event 3: email input focused
+            document.getElementById('claimEmail').addEventListener('focus', function() {
+                if (!emailFocusTracked) {
+                    emailFocusTracked = true;
+                    gtag('event', 'claim_email_focused');
+                }
+            });
         });
 
         function fetchProfile(token) {
@@ -425,6 +438,13 @@
 
             document.getElementById('profileCard').style.display = 'block';
             document.getElementById('claimForm').style.display = 'block';
+
+            // Funnel event 2: profile data fetched and displayed
+            gtag('event', 'claim_profile_viewed', {
+                profile_name: name,
+                profile_province: province,
+                profile_city: city
+            });
         }
 
         function submitClaim(e) {
@@ -436,6 +456,9 @@
 
             btn.disabled = true;
             btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Claiming...';
+
+            // Funnel event 4: form submitted
+            gtag('event', 'claim_form_submitted');
 
             fetch(API_BASE + '/api/claim/instant', {
                 method: 'POST',
@@ -449,10 +472,14 @@
                 return res.json();
             })
             .then(function(data) {
+                // Funnel event 5: claim succeeded
+                gtag('event', 'claim_success');
                 showSuccess();
             })
             .catch(function(err) {
                 var msg = (err && err.message) || 'Something went wrong. Please try again.';
+                // Funnel event 6: claim failed
+                gtag('event', 'claim_error', { error_message: msg });
                 if (msg.toLowerCase().indexOf('already claimed') !== -1) {
                     showError('Profile Already Claimed', 'This profile has already been claimed. If you own this profile, please log in to your dashboard.');
                     document.getElementById('profileCard').style.display = 'none';
