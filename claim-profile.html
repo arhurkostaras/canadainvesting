@@ -418,7 +418,8 @@
             }
             badgesEl.innerHTML += '<span class="badge badge-status"><i class="fas fa-clock"></i> Unclaimed — Basic Listing</span>';
 
-            if (email) {
+            // Show masked email as context, don't pre-fill (masked emails confuse the form)
+            if (email && email.indexOf('*') === -1) {
                 document.getElementById('claimEmail').value = email;
             }
 
