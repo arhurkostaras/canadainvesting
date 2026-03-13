@@ -225,6 +225,7 @@
                 <a href="why-we-win">Why We Win</a>
                 <a href="pricing">Pricing</a>
                 <a href="contact">Contact</a>
+                <a href="advisor-login">Login</a>
                 <a href="join-as-advisor" class="nav-cta">Apply to Join</a>
             </div>
         </div>
@@ -249,6 +250,10 @@
             <div class="error-icon"><i class="fas fa-exclamation-triangle"></i></div>
             <h3 id="errorTitle">Invalid Claim Link</h3>
             <p id="errorMessage">This claim link has expired or is invalid. If you believe this is an error, please contact us.</p>
+            <div id="errorRecoveryLinks" style="margin-top: 20px; display: flex; flex-direction: column; align-items: center; gap: 12px;">
+                <a href="advisor-login" style="color: var(--primary-blue); text-decoration: none; font-weight: 600; font-size: 0.95rem;"><i class="fas fa-sign-in-alt"></i> Already have an account? Log in here</a>
+                <a href="contact" style="color: var(--text-secondary); text-decoration: none; font-size: 0.9rem;"><i class="fas fa-headset"></i> Need help? Contact us</a>
+            </div>
         </div>
 
         <!-- Profile Card -->
@@ -279,8 +284,9 @@
         <div class="success-state" id="successState">
             <div class="success-icon"><i class="fas fa-check"></i></div>
             <h3>Profile Claimed Successfully!</h3>
-            <p>Your temporary password has been sent to your email. Check your inbox to log in.</p>
+            <p style="font-size: 1.1rem; color: #fbbf24; font-weight: 600; margin-bottom: 8px;"><i class="fas fa-envelope"></i> Check your email for your temporary password, then log in to access your dashboard.</p>
             <p>Log in to customize your profile and start receiving client leads.</p>
+            <a href="advisor-login" style="display: inline-flex; align-items: center; gap: 8px; margin-top: 20px; background: var(--accent-green); color: white; padding: 14px 32px; border-radius: 10px; font-size: 1rem; font-weight: 700; text-decoration: none; transition: all 0.3s;"><i class="fas fa-sign-in-alt"></i> Go to Login</a>
         </div>
 
         <!-- Upsell Box -->

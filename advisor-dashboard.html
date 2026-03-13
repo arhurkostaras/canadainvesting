@@ -22,6 +22,7 @@
         .dash-nav-sep { color: var(--border-color); }
         .dash-nav-title { color: var(--text-secondary); font-weight: 500; font-size: 0.9rem; }
         .dash-nav-right { display: flex; align-items: center; gap: 16px; }
+        .dash-nav-right a:hover { color: white !important; }
         .dash-nav-email { color: var(--text-secondary); font-size: 0.85rem; }
         .logout-btn { background: linear-gradient(135deg, var(--primary-blue), var(--primary-navy)); color: white; border: none; padding: 8px 18px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.3s; font-family: inherit; }
         .logout-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(37,99,235,0.3); }
@@ -107,6 +108,7 @@
             .stats-grid { grid-template-columns: repeat(2, 1fr); }
             .profile-grid { grid-template-columns: 1fr; }
             .dash-nav-email { display: none; }
+            .dash-nav-right a { display: none; }
             .sub-banner-inner, .no-sub-inner { flex-direction: column; align-items: flex-start; }
         }
     </style>
@@ -132,6 +134,9 @@
                 <span class="dash-nav-title">Advisor Dashboard</span>
             </div>
             <div class="dash-nav-right">
+                <a href="/" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: color 0.3s;">Home</a>
+                <a href="find-advisor" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: color 0.3s;">Find an Advisor</a>
+                <a href="contact" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: color 0.3s;">Contact</a>
                 <span id="userEmail" class="dash-nav-email"></span>
                 <button onclick="logout()" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</button>
             </div>
