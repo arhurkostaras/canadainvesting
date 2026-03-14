@@ -241,6 +241,192 @@
         .step h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 10px; }
         .step p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; }
 
+        /* AI Tools Showcase */
+        .ai-tools-section {
+            background: linear-gradient(180deg, #0a0a0a 0%, #111 50%, #0a0a0a 100%);
+            padding: 100px 24px;
+            position: relative;
+            overflow: hidden;
+        }
+        .ai-tools-section::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(ellipse at 50% 0%, rgba(37,99,235,0.08) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        .ai-tools-inner { max-width: 1200px; margin: 0 auto; position: relative; }
+        .ai-tools-intro {
+            text-align: center;
+            margin-bottom: 16px;
+            font-size: 1rem;
+            color: var(--accent-green);
+            font-weight: 600;
+        }
+        .ai-tools-intro i { margin-right: 6px; }
+        .ai-tools-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .ai-tool-card {
+            background: linear-gradient(160deg, #1a1a1a 0%, #141414 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 36px 28px 32px;
+            position: relative;
+            transition: transform 0.4s, border-color 0.4s, box-shadow 0.4s;
+            overflow: hidden;
+        }
+        .ai-tool-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-blue), var(--accent-green));
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+        .ai-tool-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--primary-blue);
+            box-shadow: 0 12px 40px rgba(37,99,235,0.15), 0 0 60px rgba(37,99,235,0.05);
+        }
+        .ai-tool-card:hover::before { opacity: 1; }
+        .ai-tool-icon {
+            width: 60px; height: 60px;
+            background: linear-gradient(135deg, rgba(37,99,235,0.2), rgba(5,150,105,0.15));
+            border-radius: 16px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+            border: 1px solid rgba(37,99,235,0.15);
+        }
+        .ai-tool-card h4 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .ai-tool-card > p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        .ai-tool-preview {
+            background: #111;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px;
+            padding: 16px;
+            font-size: 0.82rem;
+            line-height: 1.6;
+            position: relative;
+        }
+        .ai-tool-preview::before {
+            content: 'PREVIEW';
+            position: absolute;
+            top: -9px; left: 16px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-navy));
+            color: white;
+            font-size: 0.6rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            padding: 2px 10px;
+            border-radius: 4px;
+        }
+        .ai-tool-preview .preview-label {
+            color: #666;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+        .ai-tool-preview .preview-text {
+            color: rgba(255,255,255,0.8);
+            font-style: italic;
+        }
+        .ai-tool-preview .score-bar {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 8px 0;
+        }
+        .ai-tool-preview .score-track {
+            flex: 1;
+            height: 8px;
+            background: #222;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .ai-tool-preview .score-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ef4444, #f59e0b, var(--accent-green));
+            border-radius: 4px;
+            width: 72%;
+        }
+        .ai-tool-preview .score-value {
+            font-weight: 700;
+            color: #f59e0b;
+            font-size: 1.1rem;
+            min-width: 40px;
+        }
+        .ai-tool-preview .rec-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 4px 0;
+            color: rgba(255,255,255,0.7);
+            font-size: 0.78rem;
+        }
+        .ai-tool-preview .rec-item i {
+            color: var(--accent-green);
+            font-size: 0.7rem;
+            width: 14px;
+        }
+        .ai-tool-preview .email-line {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 4px 0;
+            color: rgba(255,255,255,0.7);
+        }
+        .ai-tool-preview .email-line .field {
+            color: #666;
+            font-size: 0.7rem;
+            min-width: 50px;
+        }
+        .ai-tools-cta {
+            text-align: center;
+            margin-top: 48px;
+        }
+        .ai-tools-cta .btn-ai {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-navy));
+            color: white;
+            padding: 16px 40px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(37,99,235,0.3);
+        }
+        .ai-tools-cta .btn-ai:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(37,99,235,0.5);
+        }
+        @media (max-width: 900px) {
+            .ai-tools-grid { grid-template-columns: 1fr; max-width: 500px; }
+        }
+        @media (max-width: 768px) {
+            .ai-tools-section { padding: 60px 16px; }
+        }
+
         /* AI Matching Grid */
         .matching-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1000px; margin: 0 auto; }
         .match-card {
@@ -476,6 +662,8 @@
                     <li>Transparent, flat-fee pricing</li>
                     <li>Control your profile, fees, and minimums</li>
                     <li>CFA, CFP, CIM designations highlighted</li>
+                    <li>AI Bio Generator & SEO Score tools</li>
+                    <li>Personalized outreach email templates</li>
                 </ul>
                 <a href="join-as-advisor" class="card-link">Apply to Join <i class="fas fa-arrow-right"></i></a>
             </div>
@@ -547,6 +735,60 @@
             </div>
         </div>
     </section>
+
+    <!-- AI-Powered Tools Showcase -->
+    <div class="ai-tools-section">
+        <div class="ai-tools-inner">
+            <div class="section-header" style="padding-top: 0;">
+                <div class="overline">Exclusive AI Tools</div>
+                <h2>Your AI-Powered Competitive Edge</h2>
+                <p>Every claimed profile unlocks three powerful AI tools — built to help you stand out, attract clients, and grow faster. Included free with every tier.</p>
+            </div>
+            <p class="ai-tools-intro"><i class="fas fa-gift"></i> Included FREE with every claimed profile — no paid tier required</p>
+            <div class="ai-tools-grid">
+                <!-- AI Bio Generator -->
+                <div class="ai-tool-card">
+                    <div class="ai-tool-icon"><i class="fas fa-wand-magic-sparkles"></i></div>
+                    <h4>AI Bio Generator</h4>
+                    <p>Generates a professionally written biography from your credentials, designations, and specializations — in seconds, not hours.</p>
+                    <div class="ai-tool-preview">
+                        <div class="preview-label">Generated Bio</div>
+                        <div class="preview-text">"Sarah Chen, CFA, CFP, brings 12 years of portfolio management expertise to high-net-worth clients across Ontario. Specializing in tax-efficient retirement strategies and ESG-focused investing, she has helped over 200 families build sustainable wealth..."</div>
+                    </div>
+                </div>
+                <!-- Profile SEO Score -->
+                <div class="ai-tool-card">
+                    <div class="ai-tool-icon"><i class="fas fa-gauge-high"></i></div>
+                    <h4>Profile SEO Score</h4>
+                    <p>See exactly how visible your profile is to potential clients — and get actionable recommendations to improve your ranking and discoverability.</p>
+                    <div class="ai-tool-preview">
+                        <div class="preview-label">Your Visibility Score</div>
+                        <div class="score-bar">
+                            <div class="score-track"><div class="score-fill"></div></div>
+                            <div class="score-value">72/100</div>
+                        </div>
+                        <div class="rec-item"><i class="fas fa-circle-check"></i> Add a professional headshot (+8 pts)</div>
+                        <div class="rec-item"><i class="fas fa-circle-check"></i> List 3+ specializations (+5 pts)</div>
+                        <div class="rec-item"><i class="fas fa-circle-check"></i> Add client testimonials (+10 pts)</div>
+                    </div>
+                </div>
+                <!-- Outreach Email Template -->
+                <div class="ai-tool-card">
+                    <div class="ai-tool-icon"><i class="fas fa-envelope-open-text"></i></div>
+                    <h4>Outreach Email Template</h4>
+                    <p>Creates a personalized announcement email you can send to your network — letting clients, colleagues, and referral partners know you are listed.</p>
+                    <div class="ai-tool-preview">
+                        <div class="preview-label">Generated Email</div>
+                        <div class="email-line"><span class="field">Subject:</span> <span style="color: rgba(255,255,255,0.85);">I'm Now Listed on CanadaInvesting.app</span></div>
+                        <div class="email-line"><span class="field">Body:</span> <span class="preview-text">"I'm pleased to share that my practice is now featured on Canada's AI-powered advisor marketplace. You can view my verified profile, designations, and specializations at..."</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="ai-tools-cta">
+                <a href="join-as-advisor" class="btn-ai"><i class="fas fa-rocket"></i> Claim Your Profile & Access AI Tools</a>
+            </div>
+        </div>
+    </div>
 
     <!-- AI Matching Factors -->
     <section class="section" style="padding-top: 0;">
