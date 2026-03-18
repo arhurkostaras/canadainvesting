@@ -377,6 +377,13 @@
             // Funnel event 1: page loaded with valid ref token
             gtag('event', 'claim_page_load', { ref_token: refToken });
 
+            // Real human visit beacon (bots don't execute JS)
+            fetch(API_BASE + '/api/claim/real-visit', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ ref: refToken })
+            }).catch(function() {});
+
             fetchProfile(refToken);
 
             // Funnel event 3: email input focused
