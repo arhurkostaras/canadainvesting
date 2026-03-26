@@ -476,6 +476,7 @@
 
             var aiBio = profile.aiBio;
             if (aiBio && aiBio.indexOf('being generated') === -1) {
+                aiBio = aiBio.replace(/^#+\s+.*\n?/gm, '').replace(/\*\*(.*?)\*\*/g, '$1').replace(/\*(.*?)\*/g, '$1').trim();
                 document.getElementById('aiBioText').textContent = aiBio;
                 document.getElementById('aiBioPreview').style.display = 'block';
             }
