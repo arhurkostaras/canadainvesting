@@ -266,15 +266,31 @@
             <div class="profile-badges" id="profileBadges"></div>
         </div>
 
+        <!-- AI Bio Preview -->
+        <div id="aiBioPreview" style="display:none; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border-radius: 16px; padding: 32px; margin: 24px auto; max-width: 640px; border: 1px solid #334155;">
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px;">
+                <div style="background: linear-gradient(135deg, #2563eb, #7c3aed); width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center;"><i class="fas fa-robot" style="color: white; font-size: 16px;"></i></div>
+                <div>
+                    <div style="color: #f1f5f9; font-weight: 700; font-size: 1.05rem;">Your AI-Generated Bio</div>
+                    <div style="color: #94a3b8; font-size: 0.8rem;">Written by AI in 12 seconds from your regulatory data</div>
+                </div>
+            </div>
+            <div id="aiBioText" style="color: #e2e8f0; font-size: 0.95rem; line-height: 1.8; padding: 20px; background: rgba(255,255,255,0.04); border-radius: 10px; border: 1px solid #334155; font-style: italic;"></div>
+            <div style="margin-top: 16px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
+                <div id="seoScoreBadge" style="display:none; background: rgba(37,99,235,0.15); color: #60a5fa; padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 600;"><i class="fas fa-chart-line"></i> Profile Score: <span id="seoScoreVal"></span>/100</div>
+                <div style="color: #64748b; font-size: 0.8rem;"><i class="fas fa-lock"></i> Claim to edit, customize, and publish</div>
+            </div>
+        </div>
+
         <!-- Claim Form -->
         <div class="claim-form" id="claimForm">
-            <h3>Confirm your email to claim this profile</h3>
+            <h3>Claim your profile to publish this bio and unlock all AI tools</h3>
             <form id="claimFormEl" onsubmit="submitClaim(event)">
                 <div class="form-row">
                     <input type="email" id="claimEmail" class="claim-input" placeholder="your@email.com" required>
                 </div>
                 <button type="submit" class="claim-btn" id="claimBtn">
-                    <i class="fas fa-check-circle"></i> Claim This Profile (Free)
+                    <i class="fas fa-check-circle"></i> Confirm & Claim My Profile
                 </button>
             </form>
             <p class="claim-note">No credit card required. Upgrade anytime.</p>
@@ -456,6 +472,17 @@
             // Show masked email as context, don't pre-fill (masked emails confuse the form)
             if (email) {
                 document.getElementById('claimEmail').value = email;
+            }
+
+            var aiBio = profile.aiBio;
+            if (aiBio && aiBio.indexOf('being generated') === -1) {
+                document.getElementById('aiBioText').textContent = aiBio;
+                document.getElementById('aiBioPreview').style.display = 'block';
+            }
+            var seoScore = profile.seoScore;
+            if (seoScore && seoScore.score !== undefined) {
+                document.getElementById('seoScoreVal').textContent = seoScore.score;
+                document.getElementById('seoScoreBadge').style.display = 'inline-block';
             }
 
             document.getElementById('profileCard').style.display = 'block';
