@@ -420,7 +420,12 @@
         function renderProfile(profile) {
             document.getElementById('loadingState').style.display = 'none';
 
-            var name = profile.name || profile.full_name || ((profile.first_name || '') + ' ' + (profile.last_name || '')).trim() || 'Investment Advisor';
+            var rawName = profile.name || profile.full_name || '';
+            if (rawName.indexOf(',') !== -1) {
+                var parts = rawName.split(',');
+                rawName = parts.slice(1).join(' ').trim() + ' ' + parts[0].trim();
+            }
+            var name = rawName || ((profile.first_name || '') + ' ' + (profile.last_name || '')).trim() || 'Investment Advisor';
             var firm = profile.firm_name || profile.firm || '';
             var city = profile.city || '';
             var province = profile.province || '';
@@ -428,7 +433,7 @@
             var email = profile.email || '';
 
             document.getElementById('profileName').textContent = name;
-            document.getElementById('profileFirm').textContent = firm || 'Independent Advisor';
+            document.getElementById('profileFirm').textContent = firm || (province ? 'Listed in ' + province + ' regulatory directory' : 'Independent Advisor');
 
             var locationParts = [];
             if (city) locationParts.push(city);
@@ -449,7 +454,7 @@
             badgesEl.innerHTML += '<span class="badge badge-status"><i class="fas fa-clock"></i> Unclaimed — Basic Listing</span>';
 
             // Show masked email as context, don't pre-fill (masked emails confuse the form)
-            if (email && email.indexOf('*') === -1) {
+            if (email) {
                 document.getElementById('claimEmail').value = email;
             }
 
