@@ -304,6 +304,19 @@
             <p>One click and you're in. No password needed.</p>
         </div>
 
+        <!-- Referral Box -->
+        <div id="referralBox" style="display: none; margin-top: 32px; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border: 1px solid #334155; border-radius: 16px; padding: 32px; text-align: center;">
+            <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 16px;">
+                <i class="fas fa-user-plus" style="color: #60a5fa; font-size: 1.3rem;"></i>
+                <span style="font-weight: 700; font-size: 1.1rem;">Refer a Colleague</span>
+            </div>
+            <p style="color: #94a3b8; font-size: 0.95rem; line-height: 1.7; margin-bottom: 20px;">Know a colleague who should be here? Share your referral link — they get a verified profile, you get priority search placement.</p>
+            <div style="display: flex; gap: 8px; max-width: 480px; margin: 0 auto;">
+                <input type="text" id="referralLinkInput" readonly style="flex: 1; background: rgba(255,255,255,0.05); border: 1px solid #334155; border-radius: 8px; padding: 12px 14px; color: #e2e8f0; font-size: 0.85rem; font-family: 'Roboto', sans-serif; outline: none;">
+                <button onclick="navigator.clipboard.writeText(document.getElementById('referralLinkInput').value); this.innerHTML='<i class=\'fas fa-check\'></i> Copied'; setTimeout(function(){ document.querySelector('#referralBox button').innerHTML='<i class=\'fas fa-copy\'></i> Copy'; }, 2000);" style="background: #2563eb; color: white; border: none; padding: 12px 20px; border-radius: 8px; font-weight: 700; font-size: 0.85rem; cursor: pointer; white-space: nowrap; font-family: 'Roboto', sans-serif;"><i class="fas fa-copy"></i> Copy</button>
+            </div>
+        </div>
+
         <!-- Upsell Box -->
         <div class="upsell-box" id="upsellBox">
             <h3>Upgrade to Premium</h3>
@@ -377,12 +390,14 @@
     <script>
         var API_BASE = 'https://canadainvesting-backend-production.up.railway.app';
         var refToken = '';
+        var refCode = '';
 
         var emailFocusTracked = false;
 
         document.addEventListener('DOMContentLoaded', function() {
             var params = new URLSearchParams(window.location.search);
             refToken = params.get('ref') || '';
+            refCode = params.get('refCode') || '';
 
             if (!refToken) {
                 showError('Invalid Claim Link', 'This claim link is missing the required reference token. Please check the link in your email and try again.');
@@ -512,7 +527,7 @@
             fetch(API_BASE + '/api/claim/instant', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ refToken: refToken, email: emailVal })
+                body: JSON.stringify({ refToken: refToken, email: emailVal, refCode: refCode })
             })
             .then(function(res) {
                 if (!res.ok) {
@@ -523,7 +538,7 @@
             .then(function(data) {
                 // Funnel event 5: claim succeeded
                 gtag('event', 'claim_success');
-                showSuccess();
+                showSuccess(data.referralLink);
             })
             .catch(function(err) {
                 var msg = (err && err.message) || 'Something went wrong. Please try again.';
@@ -541,10 +556,15 @@
             });
         }
 
-        function showSuccess() {
+        function showSuccess(referralLink) {
             document.getElementById('claimForm').style.display = 'none';
             document.getElementById('successState').style.display = 'block';
             document.getElementById('upsellBox').style.display = 'block';
+            if (referralLink) {
+                var referralBox = document.getElementById('referralBox');
+                document.getElementById('referralLinkInput').value = referralLink;
+                referralBox.style.display = 'block';
+            }
             window.scrollTo({ top: document.getElementById('successState').offsetTop - 100, behavior: 'smooth' });
         }
 
