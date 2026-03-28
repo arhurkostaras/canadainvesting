@@ -98,6 +98,41 @@
         .save-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(37,99,235,0.4); }
         .save-msg { font-size: 0.85rem; color: var(--accent-green); display: none; }
 
+        /* Upgrade Gate / SME Matches */
+        .upgrade-section { margin-bottom: 32px; }
+        .upgrade-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 12px; }
+        .upgrade-header h2 { font-size: 1.25rem; font-weight: 700; }
+        .upgrade-header .match-count { color: var(--accent-green); font-weight: 600; font-size: 0.9rem; }
+        .match-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 24px; }
+        .match-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 20px; position: relative; transition: all 0.3s; }
+        .match-card:hover { border-color: var(--primary-blue); transform: translateY(-2px); }
+        .match-card.locked { opacity: 0.85; }
+        .match-card .biz-name { font-weight: 700; font-size: 1rem; margin-bottom: 4px; }
+        .match-card .biz-meta { color: var(--text-secondary); font-size: 0.85rem; display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 12px; }
+        .match-card .biz-meta span { display: flex; align-items: center; gap: 4px; }
+        .match-contact { font-size: 0.85rem; }
+        .match-contact a { color: var(--primary-blue); text-decoration: none; }
+        .match-contact a:hover { text-decoration: underline; }
+        .lock-overlay { display: flex; align-items: center; gap: 8px; color: #f59e0b; font-size: 0.85rem; font-weight: 600; padding: 10px 14px; background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.2); border-radius: 8px; }
+        .lock-overlay i { font-size: 1rem; }
+        .upgrade-cta-box { background: linear-gradient(135deg, rgba(37,99,235,0.08), rgba(5,150,105,0.08)); border: 1px solid rgba(37,99,235,0.3); border-radius: 16px; padding: 32px; text-align: center; }
+        .upgrade-cta-box h3 { font-size: 1.25rem; font-weight: 900; margin-bottom: 8px; }
+        .upgrade-cta-box p { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 24px; max-width: 600px; margin-left: auto; margin-right: auto; }
+        .tier-buttons { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+        .tier-btn { padding: 14px 28px; border-radius: 10px; font-size: 0.9rem; font-weight: 700; cursor: pointer; border: 2px solid var(--border-color); background: var(--card-bg); color: var(--text-primary); transition: all 0.3s; font-family: inherit; min-width: 180px; }
+        .tier-btn:hover { border-color: var(--primary-blue); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(37,99,235,0.2); }
+        .tier-btn.popular { border-color: var(--primary-blue); background: linear-gradient(135deg, var(--primary-blue), var(--primary-navy)); }
+        .tier-btn .tier-name { display: block; margin-bottom: 2px; }
+        .tier-btn .tier-price { display: block; font-size: 0.8rem; color: var(--text-secondary); font-weight: 400; }
+        .tier-btn.popular .tier-price { color: rgba(255,255,255,0.8); }
+        .tier-btn .popular-tag { display: block; font-size: 0.65rem; color: var(--accent-green); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+
+        @media (max-width: 768px) {
+            .match-grid { grid-template-columns: 1fr; }
+            .tier-buttons { flex-direction: column; align-items: center; }
+            .tier-btn { width: 100%; max-width: 300px; }
+        }
+
         /* Footer */
         .dash-footer { background: #111; padding: 32px 24px; margin-top: 48px; text-align: center; }
         .dash-footer p { color: var(--text-secondary); font-size: 0.85rem; }
@@ -264,6 +299,34 @@
                     <div class="ai-actions" id="outreachActions" style="display: none;">
                         <button class="copy-btn" onclick="copyToClipboard('outreachResult')"><i class="fas fa-copy"></i> Copy Email</button>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SME Matches / Upgrade Gate -->
+        <section class="upgrade-section" id="upgradeSection" style="display: none;">
+            <div class="upgrade-header">
+                <h2><i class="fas fa-building" style="color: var(--primary-blue);"></i> Investor Matches in Your Area</h2>
+                <span class="match-count" id="matchCountLabel"></span>
+            </div>
+            <div class="match-grid" id="matchGrid"></div>
+            <div class="upgrade-cta-box" id="upgradeCTA" style="display: none;">
+                <h3>Unlock Full Contact Details</h3>
+                <p>Subscribe to connect directly with investors searching for advisors in your province. Full contact info, email, phone, and website for every match.</p>
+                <div class="tier-buttons">
+                    <button class="tier-btn" onclick="startCheckout('associate')">
+                        <span class="tier-name">Associate</span>
+                        <span class="tier-price">$199/month</span>
+                    </button>
+                    <button class="tier-btn popular" onclick="startCheckout('professional')">
+                        <span class="popular-tag">Most Popular</span>
+                        <span class="tier-name">Professional</span>
+                        <span class="tier-price">$299/month</span>
+                    </button>
+                    <button class="tier-btn" onclick="startCheckout('enterprise')">
+                        <span class="tier-name">Enterprise</span>
+                        <span class="tier-price">$599/month</span>
+                    </button>
                 </div>
             </div>
         </section>
@@ -592,10 +655,92 @@
             });
         }
 
+        // Load SME matches (upgrade gate)
+        async function loadMatches() {
+            try {
+                const res = await fetch(`${API}/api/dashboard/matches`, { headers });
+                const data = await res.json();
+                if (!data.success) return;
+
+                document.getElementById('upgradeSection').style.display = 'block';
+                document.getElementById('matchCountLabel').innerHTML = `<i class="fas fa-chart-line"></i> ${data.totalAvailable.toLocaleString()} investors in your province`;
+
+                const grid = document.getElementById('matchGrid');
+                grid.innerHTML = data.matches.map(m => {
+                    if (data.subscribed) {
+                        return `
+                            <div class="match-card">
+                                <div class="biz-name">${m.business_name}</div>
+                                <div class="biz-meta">
+                                    <span><i class="fas fa-briefcase"></i> ${m.industry}</span>
+                                    <span><i class="fas fa-map-marker-alt"></i> ${m.city || 'N/A'}</span>
+                                </div>
+                                <div class="match-contact">
+                                    ${m.contact_name ? `<div><i class="fas fa-user" style="color: var(--text-secondary); width: 16px;"></i> ${m.contact_name}</div>` : ''}
+                                    ${m.contact_email ? `<div><i class="fas fa-envelope" style="color: var(--text-secondary); width: 16px;"></i> <a href="mailto:${m.contact_email}">${m.contact_email}</a></div>` : ''}
+                                    ${m.phone ? `<div><i class="fas fa-phone" style="color: var(--text-secondary); width: 16px;"></i> <a href="tel:${m.phone}">${m.phone}</a></div>` : ''}
+                                    ${m.website ? `<div><i class="fas fa-globe" style="color: var(--text-secondary); width: 16px;"></i> <a href="${m.website}" target="_blank">${m.website.replace(/^https?:\/\//, '')}</a></div>` : ''}
+                                </div>
+                            </div>
+                        `;
+                    } else {
+                        return `
+                            <div class="match-card locked">
+                                <div class="biz-name">${m.business_name}</div>
+                                <div class="biz-meta">
+                                    <span><i class="fas fa-briefcase"></i> ${m.industry}</span>
+                                    <span><i class="fas fa-map-marker-alt"></i> ${m.city || 'N/A'}</span>
+                                </div>
+                                <div class="lock-overlay">
+                                    <i class="fas fa-lock"></i> Subscribe to unlock contact details
+                                </div>
+                            </div>
+                        `;
+                    }
+                }).join('');
+
+                // Show upgrade CTA for free users
+                if (!data.subscribed) {
+                    document.getElementById('upgradeCTA').style.display = 'block';
+                }
+            } catch (e) {
+                console.error('Matches load error:', e);
+            }
+        }
+
+        // Stripe checkout redirect
+        async function startCheckout(tier) {
+            const btn = event.target.closest('button');
+            const origHTML = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Redirecting...';
+            try {
+                const res = await fetch(`${API}/api/stripe/create-checkout-session`, {
+                    method: 'POST',
+                    headers,
+                    body: JSON.stringify({ tier, email: user.email })
+                });
+                const data = await res.json();
+                if (data.url) {
+                    window.location.href = data.url;
+                } else {
+                    alert(data.error || 'Failed to start checkout. Please try again.');
+                    btn.disabled = false;
+                    btn.innerHTML = origHTML;
+                }
+            } catch (e) {
+                console.error('Checkout error:', e);
+                alert('Connection error. Please try again.');
+                btn.disabled = false;
+                btn.innerHTML = origHTML;
+            }
+        }
+
         // Init
         loadStats();
         loadLeads();
         loadProfile();
+        loadMatches();
     </script>
 
     <!-- Subscription Management Script -->
