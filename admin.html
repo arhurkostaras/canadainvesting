@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Advisor Dashboard - CanadaInvesting.app</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { --primary-blue: #2563eb; --primary-navy: #1e3a8a; --accent-green: #059669; --dark-bg: #0a0a0a; --card-bg: #1a1a1a; --text-primary: #ffffff; --text-secondary: #a0a0a0; --border-color: #333333; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--dark-bg); color: var(--text-primary); line-height: 1.6; min-height: 100vh; }
+
+        /* Navigation */
+        .dash-nav { background: var(--card-bg); border-bottom: 2px solid var(--primary-blue); }
+        .dash-nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; height: 64px; }
+        .dash-nav-left { display: flex; align-items: center; gap: 16px; }
+        .dash-nav-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; color: white; font-weight: 700; font-size: 1.25rem; }
+        .dash-nav-logo .maple { color: var(--primary-blue); font-size: 1.5rem; }
+        .dash-nav-sep { color: var(--border-color); }
+        .dash-nav-title { color: var(--text-secondary); font-weight: 500; font-size: 0.9rem; }
+        .dash-nav-right { display: flex; align-items: center; gap: 16px; }
+        .dash-nav-right a:hover { color: white !important; }
+        .dash-nav-email { color: var(--text-secondary); font-size: 0.85rem; }
+        .logout-btn { background: linear-gradient(135deg, var(--primary-blue), var(--primary-navy)); color: white; border: none; padding: 8px 18px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.3s; font-family: inherit; }
+        .logout-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(37,99,235,0.3); }
+
+        /* Subscription Banners */
+        .sub-banner { border-bottom: 1px solid var(--border-color); }
+        .sub-banner-inner { max-width: 1200px; margin: 0 auto; padding: 16px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; }
+        .sub-info { display: flex; align-items: center; gap: 16px; }
+        .sub-icon { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .sub-icon.active { background: rgba(5,150,105,0.15); color: var(--accent-green); }
+        .sub-icon.warning { background: rgba(245,158,11,0.15); color: #f59e0b; }
+        .sub-icon.error { background: rgba(239,68,68,0.15); color: #ef4444; }
+        .sub-tier { font-weight: 700; font-size: 1rem; }
+        .sub-badge { display: inline-block; font-size: 0.7rem; font-weight: 600; padding: 3px 10px; border-radius: 20px; margin-left: 8px; }
+        .sub-badge.active { background: rgba(5,150,105,0.15); color: var(--accent-green); }
+        .sub-badge.past_due { background: rgba(239,68,68,0.15); color: #ef4444; }
+        .sub-badge.trialing { background: rgba(37,99,235,0.15); color: var(--primary-blue); }
+        .sub-badge.canceled { background: rgba(160,160,160,0.15); color: var(--text-secondary); }
+        .sub-renewal { font-size: 0.85rem; color: var(--text-secondary); }
+        .sub-manage-btn { background: var(--primary-blue); color: white; border: none; padding: 10px 20px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.3s; font-family: inherit; }
+        .sub-manage-btn:hover { background: var(--primary-navy); }
+        .no-sub-banner { background: rgba(245,158,11,0.08); border-bottom: 1px solid rgba(245,158,11,0.2); }
+        .no-sub-inner { max-width: 1200px; margin: 0 auto; padding: 16px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; }
+        .no-sub-text { display: flex; align-items: center; gap: 12px; color: #f59e0b; font-weight: 500; font-size: 0.9rem; }
+        .no-sub-cta { background: linear-gradient(135deg, var(--primary-blue), var(--primary-navy)); color: white; text-decoration: none; padding: 10px 20px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; transition: all 0.3s; }
+        .no-sub-cta:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(37,99,235,0.3); }
+
+        /* Main Content */
+        .dash-main { max-width: 1200px; margin: 0 auto; padding: 32px 24px; }
+        .welcome { margin-bottom: 32px; }
+        .welcome h1 { font-size: 1.75rem; font-weight: 900; margin-bottom: 4px; }
+        .welcome p { color: var(--text-secondary); font-size: 0.95rem; }
+
+        /* Stats Grid */
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 32px; }
+        .stat-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 20px; }
+        .stat-label { color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 4px; }
+        .stat-value { font-size: 2rem; font-weight: 900; }
+        .stat-value.blue { color: var(--primary-blue); }
+        .stat-value.green { color: var(--accent-green); }
+
+        /* Section */
+        .section { margin-bottom: 32px; }
+        .section-title { font-size: 1.25rem; font-weight: 700; margin-bottom: 16px; }
+
+        /* Table */
+        .table-wrap { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; overflow-x: auto; }
+        table { width: 100%; font-size: 0.85rem; border-collapse: collapse; }
+        thead { background: rgba(255,255,255,0.03); }
+        th { text-align: left; padding: 12px 16px; color: var(--text-secondary); font-weight: 500; border-bottom: 1px solid var(--border-color); white-space: nowrap; }
+        td { padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.04); }
+        tr:hover { background: rgba(255,255,255,0.02); }
+        .badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; }
+        .badge-green { background: rgba(5,150,105,0.15); color: var(--accent-green); }
+        .badge-blue { background: rgba(37,99,235,0.15); color: var(--primary-blue); }
+        .badge-yellow { background: rgba(245,158,11,0.15); color: #f59e0b; }
+        .badge-gray { background: rgba(160,160,160,0.15); color: var(--text-secondary); }
+        .no-leads-msg { text-align: center; padding: 40px 16px; color: var(--text-secondary); }
+        .match-score { font-family: 'Roboto Mono', monospace; font-weight: 700; }
+        .match-score.high { color: var(--accent-green); }
+        .match-score.mid { color: var(--primary-blue); }
+
+        /* Profile Form */
+        .profile-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 24px; }
+        .profile-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .profile-group { display: flex; flex-direction: column; }
+        .profile-group label { font-size: 0.85rem; font-weight: 500; color: var(--text-secondary); margin-bottom: 6px; }
+        .profile-group input, .profile-group select { padding: 10px 14px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); font-size: 0.9rem; font-family: inherit; transition: border-color 0.3s; }
+        .profile-group input:focus, .profile-group select:focus { outline: none; border-color: var(--primary-blue); }
+        .profile-group select option { background: var(--card-bg); color: var(--text-primary); }
+        .profile-actions { grid-column: 1 / -1; display: flex; align-items: center; gap: 16px; margin-top: 8px; }
+        .save-btn { background: linear-gradient(135deg, var(--primary-blue), var(--primary-navy)); color: white; border: none; padding: 12px 24px; border-radius: 10px; font-size: 0.9rem; font-weight: 700; cursor: pointer; transition: all 0.3s; font-family: inherit; }
+        .save-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(37,99,235,0.4); }
+        .save-msg { font-size: 0.85rem; color: var(--accent-green); display: none; }
+
+        /* AI Profile Analysis & Upgrade Section */
+        .ai-upgrade-section { margin-bottom: 32px; }
+        .ai-analysis-box { background: var(--card-bg); border: 1px solid var(--primary-blue); border-radius: 16px; padding: 32px; margin-bottom: 24px; position: relative; overflow: hidden; }
+        .ai-analysis-box::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--primary-blue), #ef4444, var(--primary-blue)); }
+        .ai-analysis-title { font-size: 1.15rem; font-weight: 900; margin-bottom: 4px; display: flex; align-items: center; gap: 10px; }
+        .ai-analysis-title i { color: var(--primary-blue); }
+        .ai-score-row { display: flex; align-items: center; gap: 16px; margin: 16px 0 8px; flex-wrap: wrap; }
+        .ai-score-badge { font-size: 1.5rem; font-weight: 900; color: #ef4444; }
+        .ai-score-grade { font-size: 1rem; font-weight: 700; color: #ef4444; background: rgba(239,68,68,0.12); padding: 4px 14px; border-radius: 20px; }
+        .ai-score-context { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 20px; }
+        .ai-score-context strong { color: var(--accent-green); }
+        .ai-diagnostic-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+        .ai-diagnostic-item { display: flex; align-items: center; gap: 12px; font-size: 0.9rem; padding: 12px 16px; background: rgba(239,68,68,0.06); border: 1px solid rgba(239,68,68,0.15); border-radius: 10px; }
+        .ai-diagnostic-item i { color: #ef4444; font-size: 1rem; flex-shrink: 0; }
+        .ai-cta-box { background: linear-gradient(135deg, rgba(37,99,235,0.1), rgba(30,58,138,0.15)); border: 1px solid rgba(37,99,235,0.3); border-radius: 16px; padding: 32px; text-align: center; margin-bottom: 24px; }
+        .ai-cta-box h3 { font-size: 1.35rem; font-weight: 900; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .ai-cta-box h3 i { color: var(--primary-blue); }
+        .ai-cta-box p { color: var(--text-secondary); font-size: 0.9rem; max-width: 680px; margin: 0 auto 28px; line-height: 1.7; }
+        .tier-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .tier-card { background: var(--card-bg); border: 2px solid var(--border-color); border-radius: 14px; padding: 28px 24px; text-align: left; position: relative; transition: all 0.3s; display: flex; flex-direction: column; }
+        .tier-card:hover { border-color: var(--primary-blue); transform: translateY(-3px); box-shadow: 0 8px 30px rgba(37,99,235,0.15); }
+        .tier-card.popular { border-color: var(--primary-blue); box-shadow: 0 0 30px rgba(37,99,235,0.15); }
+        .tier-popular-tag { position: absolute; top: -1px; left: 50%; transform: translateX(-50%); background: var(--primary-blue); color: white; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; padding: 4px 16px; border-radius: 0 0 8px 8px; }
+        .tier-card-label { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--primary-blue); margin-bottom: 4px; }
+        .tier-card-name { font-size: 1.1rem; font-weight: 900; margin-bottom: 2px; }
+        .tier-card-price { font-size: 1.75rem; font-weight: 900; margin-bottom: 16px; }
+        .tier-card-price span { font-size: 0.85rem; font-weight: 400; color: var(--text-secondary); }
+        .tier-card-features { list-style: none; margin-bottom: 24px; flex: 1; }
+        .tier-card-features li { font-size: 0.82rem; color: var(--text-secondary); padding: 5px 0; display: flex; align-items: flex-start; gap: 8px; line-height: 1.4; }
+        .tier-card-features li i { color: var(--accent-green); margin-top: 3px; flex-shrink: 0; }
+        .tier-card-btn { width: 100%; padding: 12px; border-radius: 10px; font-size: 0.9rem; font-weight: 700; cursor: pointer; border: none; font-family: inherit; transition: all 0.3s; }
+        .tier-card-btn.outline { background: transparent; border: 2px solid var(--primary-blue); color: var(--primary-blue); }
+        .tier-card-btn.outline:hover { background: var(--primary-blue); color: white; }
+        .tier-card-btn.filled { background: linear-gradient(135deg, var(--primary-blue), var(--primary-navy)); color: white; }
+        .tier-card-btn.filled:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(37,99,235,0.4); }
+        .subscribed-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(5,150,105,0.12); border: 1px solid rgba(5,150,105,0.3); color: var(--accent-green); font-weight: 700; font-size: 1rem; padding: 12px 24px; border-radius: 12px; }
+        .subscribed-badge i { font-size: 1.1rem; }
+
+        @media (max-width: 768px) {
+            .tier-cards { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+        }
+
+        /* Footer */
+        .dash-footer { background: #111; padding: 32px 24px; margin-top: 48px; text-align: center; }
+        .dash-footer p { color: var(--text-secondary); font-size: 0.85rem; }
+        .dash-footer a { color: var(--primary-blue); text-decoration: none; }
+        .dash-footer a:hover { text-decoration: underline; }
+
+        /* AI Tools */
+        .ai-tools { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 32px; }
+        .ai-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 24px; position: relative; overflow: hidden; }
+        .ai-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--primary-blue), var(--accent-green)); }
+        .ai-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+        .ai-card p { color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 16px; line-height: 1.5; }
+        .ai-btn { background: linear-gradient(135deg, var(--primary-blue), var(--primary-navy)); color: white; border: none; padding: 10px 20px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.3s; font-family: inherit; width: 100%; }
+        .ai-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(37,99,235,0.3); }
+        .ai-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+        .ai-result { margin-top: 16px; padding: 16px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 8px; font-size: 0.85rem; line-height: 1.6; display: none; white-space: pre-wrap; }
+        .ai-result.visible { display: block; }
+        .ai-actions { display: flex; gap: 8px; margin-top: 12px; }
+        .ai-actions button { padding: 6px 14px; border-radius: 6px; font-size: 0.8rem; font-weight: 600; cursor: pointer; border: none; font-family: inherit; }
+        .copy-btn { background: var(--accent-green); color: white; }
+        .save-bio-btn { background: var(--primary-blue); color: white; }
+        .seo-meter { margin-top: 16px; }
+        .seo-bar-bg { height: 12px; background: rgba(255,255,255,0.1); border-radius: 6px; overflow: hidden; margin-bottom: 8px; }
+        .seo-bar { height: 100%; border-radius: 6px; transition: width 0.8s ease; }
+        .seo-score-display { font-size: 2rem; font-weight: 900; margin-bottom: 4px; }
+        .seo-grade { font-size: 0.85rem; color: var(--text-secondary); }
+        .seo-recs { list-style: none; margin-top: 12px; }
+        .seo-recs li { padding: 6px 0; font-size: 0.8rem; color: var(--text-secondary); border-bottom: 1px solid rgba(255,255,255,0.04); display: flex; align-items: center; gap: 8px; }
+        .seo-recs li .impact { font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; font-weight: 600; }
+        .impact-high { background: rgba(239,68,68,0.15); color: #ef4444; }
+        .impact-medium { background: rgba(245,158,11,0.15); color: #f59e0b; }
+        .impact-low { background: rgba(37,99,235,0.15); color: var(--primary-blue); }
+
+        @media (max-width: 768px) {
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .ai-tools { grid-template-columns: 1fr; }
+            .profile-grid { grid-template-columns: 1fr; }
+            .dash-nav-email { display: none; }
+            .dash-nav-right a { display: none; }
+            .sub-banner-inner, .no-sub-inner { flex-direction: column; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Auth gate -->
+    <script>
+        (function() {
+            const token = localStorage.getItem('advisor_token');
+            const user = JSON.parse(localStorage.getItem('advisor_user') || '{}');
+            if (!token || (user.userType !== 'Advisor' && user.userType !== 'advisor')) {
+                window.location.href = '/advisor-login';
+            }
+        })();
+    </script>
+
+    <!-- Navigation -->
+    <nav class="dash-nav">
+        <div class="dash-nav-inner">
+            <div class="dash-nav-left">
+                <a href="/" class="dash-nav-logo"><i class="fas fa-maple-leaf maple"></i> CanadaInvesting<span style="color: var(--primary-blue)">.app</span></a>
+                <span class="dash-nav-sep">|</span>
+                <span class="dash-nav-title">Advisor Dashboard</span>
+            </div>
+            <div class="dash-nav-right">
+                <a href="/" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: color 0.3s;">Home</a>
+                <a href="find-advisor" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: color 0.3s;">Find an Advisor</a>
+                <a href="contact" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: color 0.3s;">Contact</a>
+                <span id="userEmail" class="dash-nav-email"></span>
+                <button onclick="logout()" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Subscription Status Banner -->
+    <div id="subscriptionBanner" style="display: none;" class="sub-banner">
+        <div class="sub-banner-inner">
+            <div class="sub-info">
+                <div id="subStatusIcon" class="sub-icon active"><i class="fas fa-check-circle fa-lg"></i></div>
+                <div>
+                    <div>
+                        <span id="subTierDisplay" class="sub-tier">-</span>
+                        <span id="subStatusBadge" class="sub-badge active">Active</span>
+                    </div>
+                    <div id="subRenewalDate" class="sub-renewal"></div>
+                </div>
+            </div>
+            <button onclick="openBillingPortal()" class="sub-manage-btn"><i class="fas fa-cog"></i> Manage Subscription</button>
+        </div>
+    </div>
+
+    <!-- No Subscription Banner -->
+    <div id="noSubscriptionBanner" style="display: none;" class="no-sub-banner">
+        <div class="no-sub-inner">
+            <div class="no-sub-text">
+                <i class="fas fa-info-circle"></i>
+                <span>You don't have an active subscription yet. Subscribe to get algorithm placement and start receiving leads.</span>
+            </div>
+            <a href="pricing" class="no-sub-cta">View Plans</a>
+        </div>
+    </div>
+
+    <main class="dash-main">
+        <!-- Welcome & Stats -->
+        <div class="welcome">
+            <h1>Welcome back, <span id="advisorName">Advisor</span></h1>
+            <p>Here's your dashboard overview.</p>
+        </div>
+
+        <!-- Quick Stats Cards -->
+        <section class="stats-grid">
+            <div class="stat-card">
+                <p class="stat-label">Total Leads</p>
+                <p id="statTotalMatches" class="stat-value">--</p>
+            </div>
+            <div class="stat-card">
+                <p class="stat-label">Contacted</p>
+                <p id="statContacted" class="stat-value blue">--</p>
+            </div>
+            <div class="stat-card">
+                <p class="stat-label">Partnerships</p>
+                <p id="statPartnerships" class="stat-value green">--</p>
+            </div>
+            <div class="stat-card">
+                <p class="stat-label">Verification</p>
+                <p id="statVerification" class="stat-value" style="font-size: 1.1rem;">--</p>
+            </div>
+        </section>
+
+        <!-- AI-Powered Tools -->
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-wand-magic-sparkles" style="color: var(--primary-blue);"></i> AI-Powered Tools</h2>
+            <div class="ai-tools">
+                <!-- AI Bio Generator -->
+                <div class="ai-card">
+                    <h3><i class="fas fa-pen-fancy" style="color: var(--primary-blue);"></i> AI Bio Generator</h3>
+                    <p>Generate a professional bio based on your profile data. Use it on your listing or website.</p>
+                    <button class="ai-btn" id="generateBioBtn" onclick="generateBio()"><i class="fas fa-sparkles"></i> Generate My Bio</button>
+                    <div class="ai-result" id="bioResult"></div>
+                    <div class="ai-actions" id="bioActions" style="display: none;">
+                        <button class="copy-btn" onclick="copyToClipboard('bioResult')"><i class="fas fa-copy"></i> Copy</button>
+                        <button class="save-bio-btn" onclick="saveBio()"><i class="fas fa-save"></i> Save to Profile</button>
+                    </div>
+                </div>
+
+                <!-- SEO Score -->
+                <div class="ai-card">
+                    <h3><i class="fas fa-chart-line" style="color: var(--accent-green);"></i> Profile SEO Score</h3>
+                    <p>See how your profile ranks for visibility. Higher scores mean more investor inquiries.</p>
+                    <button class="ai-btn" id="seoScoreBtn" onclick="loadSEOScore()"><i class="fas fa-magnifying-glass-chart"></i> Check My Score</button>
+                    <div class="seo-meter" id="seoMeter" style="display: none;">
+                        <div class="seo-score-display" id="seoScoreValue">--</div>
+                        <div class="seo-grade" id="seoGrade"></div>
+                        <div class="seo-bar-bg"><div class="seo-bar" id="seoBar" style="width: 0%;"></div></div>
+                        <ul class="seo-recs" id="seoRecs"></ul>
+                    </div>
+                </div>
+
+                <!-- Outreach Template -->
+                <div class="ai-card">
+                    <h3><i class="fas fa-envelope-open-text" style="color: #f59e0b;"></i> Outreach Template</h3>
+                    <p>Get a personalized email to announce your verified profile to clients and contacts.</p>
+                    <button class="ai-btn" id="outreachBtn" onclick="generateOutreach()"><i class="fas fa-paper-plane"></i> Generate Email</button>
+                    <div class="ai-result" id="outreachResult"></div>
+                    <div class="ai-actions" id="outreachActions" style="display: none;">
+                        <button class="copy-btn" onclick="copyToClipboard('outreachResult')"><i class="fas fa-copy"></i> Copy Email</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI Profile Analysis & Upgrade Gate -->
+        <section class="ai-upgrade-section" id="upgradeSection" style="display: none;">
+
+            <!-- Subscribed users: green badge -->
+            <div id="subscribedBadge" style="display: none; margin-bottom: 24px;">
+                <div class="subscribed-badge">
+                    <i class="fas fa-check-circle"></i>
+                    <span id="subscribedTierLabel">Active Subscriber</span>
+                </div>
+            </div>
+
+            <!-- AI Profile Analysis (free users only) -->
+            <div id="aiAnalysisBlock">
+                <div class="ai-analysis-box">
+                    <div class="ai-analysis-title"><i class="fas fa-brain"></i> Your AI Profile Analysis</div>
+                    <div class="ai-score-row">
+                        <span class="ai-score-badge">Your Score: 50/100</span>
+                        <span class="ai-score-grade">Grade C</span>
+                    </div>
+                    <p class="ai-score-context">Top advisors in <strong id="aiProvince">your province</strong> score <strong>85+</strong>. Here's what's costing you visibility:</p>
+                    <ul class="ai-diagnostic-list">
+                        <li class="ai-diagnostic-item"><i class="fas fa-times-circle"></i> Your bio lacks designation-specific keywords</li>
+                        <li class="ai-diagnostic-item"><i class="fas fa-times-circle"></i> No specializations listed on your profile</li>
+                        <li class="ai-diagnostic-item"><i class="fas fa-times-circle"></i> Missing contact details and fee structure</li>
+                    </ul>
+                </div>
+
+                <!-- AI Upgrade CTA -->
+                <div class="ai-cta-box">
+                    <h3><i class="fas fa-wand-magic-sparkles"></i> Let AI Fix This Automatically</h3>
+                    <p>Upgrade and our AI optimizes your profile weekly — rewriting your bio with the right keywords, boosting your search ranking, and keeping you ahead of competitors.</p>
+
+                    <!-- Three Tier Cards -->
+                    <div class="tier-cards">
+                        <!-- Associate -->
+                        <div class="tier-card">
+                            <div class="tier-card-label">AI Profile Optimization</div>
+                            <div class="tier-card-name">Associate</div>
+                            <div class="tier-card-price">$199<span>/mo</span></div>
+                            <ul class="tier-card-features">
+                                <li><i class="fas fa-check"></i> AI rewrites your bio weekly with ranking keywords</li>
+                                <li><i class="fas fa-check"></i> SEO keyword injection for your designations</li>
+                                <li><i class="fas fa-check"></i> Priority ranking in investor searches</li>
+                                <li><i class="fas fa-check"></i> Profile performance analytics</li>
+                            </ul>
+                            <button class="tier-card-btn outline" onclick="startCheckout('associate')">Get Started</button>
+                        </div>
+
+                        <!-- Professional -->
+                        <div class="tier-card popular">
+                            <div class="tier-popular-tag">Most Popular</div>
+                            <div class="tier-card-label">AI Investor Matching</div>
+                            <div class="tier-card-name">Professional</div>
+                            <div class="tier-card-price">$299<span>/mo</span></div>
+                            <ul class="tier-card-features">
+                                <li><i class="fas fa-check"></i> Everything in Associate</li>
+                                <li><i class="fas fa-check"></i> AI-matched investor leads in your area</li>
+                                <li><i class="fas fa-check"></i> AI-written outreach emails to prospects</li>
+                                <li><i class="fas fa-check"></i> Lead scoring and prioritization</li>
+                            </ul>
+                            <button class="tier-card-btn filled" onclick="startCheckout('professional')">Get Started</button>
+                        </div>
+
+                        <!-- Enterprise -->
+                        <div class="tier-card">
+                            <div class="tier-card-label">AI Working For You</div>
+                            <div class="tier-card-name">Enterprise</div>
+                            <div class="tier-card-price">$599<span>/mo</span></div>
+                            <ul class="tier-card-features">
+                                <li><i class="fas fa-check"></i> Everything in Professional</li>
+                                <li><i class="fas fa-check"></i> AI emails investors on your behalf</li>
+                                <li><i class="fas fa-check"></i> Competitive monitoring and alerts</li>
+                                <li><i class="fas fa-check"></i> Dedicated account support</li>
+                            </ul>
+                            <button class="tier-card-btn outline" onclick="startCheckout('enterprise')">Get Started</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- My Leads Table -->
+        <section class="section">
+            <h2 class="section-title">My Leads</h2>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Investor</th>
+                            <th>Need</th>
+                            <th>Match Score</th>
+                            <th>Contact</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="leadsTableBody"></tbody>
+                </table>
+            </div>
+            <p id="noLeadsMsg" class="no-leads-msg" style="display: none;">No leads yet. Once investors are matched with your profile, they'll appear here.</p>
+        </section>
+
+        <!-- My Profile Card -->
+        <section class="section">
+            <h2 class="section-title">My Profile</h2>
+            <div class="profile-card">
+                <form id="profileForm" class="profile-grid">
+                    <div class="profile-group">
+                        <label for="profileFirmName">Firm Name</label>
+                        <input type="text" id="profileFirmName">
+                    </div>
+                    <div class="profile-group">
+                        <label for="profileProvince">Province</label>
+                        <select id="profileProvince">
+                            <option value="">Select province</option>
+                            <option value="ON">Ontario</option>
+                            <option value="BC">British Columbia</option>
+                            <option value="AB">Alberta</option>
+                            <option value="QC">Quebec</option>
+                            <option value="MB">Manitoba</option>
+                            <option value="SK">Saskatchewan</option>
+                            <option value="NS">Nova Scotia</option>
+                            <option value="NB">New Brunswick</option>
+                            <option value="NL">Newfoundland</option>
+                            <option value="PE">PEI</option>
+                        </select>
+                    </div>
+                    <div class="profile-group">
+                        <label for="profileCity">City</label>
+                        <input type="text" id="profileCity">
+                    </div>
+                    <div class="profile-group">
+                        <label for="profilePhone">Phone</label>
+                        <input type="text" id="profilePhone">
+                    </div>
+                    <div class="profile-group">
+                        <label for="profileMinAUM">Minimum Portfolio Size (CAD)</label>
+                        <input type="number" id="profileMinAUM" placeholder="e.g., 100000">
+                    </div>
+                    <div class="profile-group">
+                        <label for="profileSpecializations">Specializations (comma-separated)</label>
+                        <input type="text" id="profileSpecializations" placeholder="e.g., Wealth Management, Retirement Planning, Tax Optimization">
+                    </div>
+                    <div class="profile-actions">
+                        <button type="submit" class="save-btn"><i class="fas fa-save"></i> Save Changes</button>
+                        <span id="profileSaveMsg" class="save-msg">Profile updated!</span>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="dash-footer">
+        <p>&copy; 2026 CanadaInvesting.app. All rights reserved.</p>
+        <p style="margin-top: 8px;">Need help? Call us at <a href="tel:+16479567290">(647) 956-7290</a></p>
+    </footer>
+
+    <script>
+        const API = 'https://canadainvesting-backend-production.up.railway.app';
+        const token = localStorage.getItem('advisor_token');
+        const headers = { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' };
+        const user = JSON.parse(localStorage.getItem('advisor_user') || '{}');
+
+        document.getElementById('userEmail').textContent = user.email || '';
+        document.getElementById('advisorName').textContent = user.firstName
+            ? `${user.firstName} ${user.lastName || ''}`
+            : (user.email || 'Advisor');
+
+        function logout() {
+            localStorage.removeItem('advisor_token');
+            localStorage.removeItem('advisor_user');
+            window.location.href = '/advisor-login';
+        }
+
+        function fmtDate(d) {
+            if (!d) return '--';
+            return new Date(d).toLocaleDateString('en-CA', { month: 'short', day: 'numeric', year: 'numeric' });
+        }
+
+        function badge(text, color) {
+            return `<span class="badge badge-${color}">${text}</span>`;
+        }
+
+        // Load stats
+        async function loadStats() {
+            try {
+                const res = await fetch(`${API}/api/advisor/my-stats`, { headers });
+                const data = await res.json();
+                if (!data.success) return;
+                const s = data.stats;
+                document.getElementById('statTotalMatches').textContent = s.totalMatches;
+                document.getElementById('statContacted').textContent = s.contacted;
+                document.getElementById('statPartnerships').textContent = s.partnerships;
+                const verEl = document.getElementById('statVerification');
+                if (s.verificationStatus === 'verified') {
+                    verEl.innerHTML = '<span style="color: var(--accent-green);"><i class="fas fa-check-circle"></i> Verified</span>';
+                } else {
+                    verEl.innerHTML = '<span style="color: #f59e0b;"><i class="fas fa-clock"></i> Pending</span>';
+                }
+            } catch (e) {
+                console.error('Stats load error:', e);
+            }
+        }
+
+        // Load leads table
+        async function loadLeads() {
+            try {
+                const res = await fetch(`${API}/api/advisor/my-matches`, { headers });
+                const data = await res.json();
+                if (!data.success) return;
+
+                const tbody = document.getElementById('leadsTableBody');
+                if (data.matches.length === 0) {
+                    tbody.innerHTML = '';
+                    document.getElementById('noLeadsMsg').style.display = 'block';
+                    return;
+                }
+
+                document.getElementById('noLeadsMsg').style.display = 'none';
+                tbody.innerHTML = data.matches.map(m => {
+                    const contact = typeof m.investor_contact === 'string'
+                        ? JSON.parse(m.investor_contact || '{}')
+                        : (m.investor_contact || m.sme_contact || {});
+                    if (typeof contact === 'string') {
+                        try { Object.assign(contact, JSON.parse(contact)); } catch(e) {}
+                    }
+                    const statusColor = m.partnership_formed ? 'green' : (m.status === 'contacted' ? 'blue' : 'gray');
+                    const score = m.match_score ? parseFloat(m.match_score).toFixed(0) : '--';
+                    const scoreClass = parseFloat(m.match_score) >= 80 ? 'high' : 'mid';
+                    return `
+                        <tr>
+                            <td style="color: var(--text-secondary);">${fmtDate(m.created_at)}</td>
+                            <td>
+                                <div style="font-weight: 600;">${contact.company || contact.name || m.investment_need || '--'}</div>
+                                <div style="font-size: 0.75rem; color: var(--text-secondary);">${m.investment_need || m.business_type || ''} - ${m.portfolio_size || m.business_size || ''}</div>
+                            </td>
+                            <td>${badge(m.pain_point || m.investment_need || '--', 'yellow')}</td>
+                            <td><span class="match-score ${scoreClass}">${score}%</span></td>
+                            <td>
+                                <div style="font-size: 0.85rem;">${contact.name || '--'}</div>
+                                ${contact.email ? `<div style="font-size: 0.75rem; color: var(--text-secondary);">${contact.email}</div>` : ''}
+                                ${contact.phone ? `<div style="font-size: 0.75rem; color: var(--text-secondary);">${contact.phone}</div>` : ''}
+                            </td>
+                            <td>${badge(m.partnership_formed ? 'Partnership' : (m.status || 'presented'), statusColor)}</td>
+                        </tr>
+                    `;
+                }).join('');
+            } catch (e) {
+                console.error('Leads load error:', e);
+            }
+        }
+
+        // Load profile
+        async function loadProfile() {
+            try {
+                const res = await fetch(`${API}/api/advisor/my-profile`, { headers });
+                const data = await res.json();
+                if (!data.success || !data.profile) return;
+
+                const p = data.profile;
+                document.getElementById('profileFirmName').value = p.firm_name || '';
+                document.getElementById('profileProvince').value = p.province || '';
+                document.getElementById('profileCity').value = p.city || '';
+                document.getElementById('profilePhone').value = p.phone || '';
+                document.getElementById('profileMinAUM').value = p.minimum_aum || p.hourly_rate_min || '';
+
+                const specs = Array.isArray(p.specializations)
+                    ? p.specializations
+                    : (typeof p.specializations === 'string' ? JSON.parse(p.specializations || '[]') : []);
+                document.getElementById('profileSpecializations').value = specs.join(', ');
+            } catch (e) {
+                console.error('Profile load error:', e);
+            }
+        }
+
+        // Save profile
+        document.getElementById('profileForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const specsStr = document.getElementById('profileSpecializations').value;
+            const specializations = specsStr.split(',').map(s => s.trim()).filter(Boolean);
+
+            try {
+                const res = await fetch(`${API}/api/advisor/my-profile`, {
+                    method: 'PUT',
+                    headers,
+                    body: JSON.stringify({
+                        firmName: document.getElementById('profileFirmName').value,
+                        province: document.getElementById('profileProvince').value,
+                        city: document.getElementById('profileCity').value,
+                        phone: document.getElementById('profilePhone').value,
+                        minimumAUM: parseFloat(document.getElementById('profileMinAUM').value) || null,
+                        specializations: specializations
+                    })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    const msg = document.getElementById('profileSaveMsg');
+                    msg.style.display = 'inline';
+                    setTimeout(() => { msg.style.display = 'none'; }, 3000);
+                }
+            } catch (e) {
+                console.error('Profile save error:', e);
+                alert('Failed to save profile. Please try again.');
+            }
+        });
+
+        // AI Bio Generator
+        async function generateBio() {
+            const btn = document.getElementById('generateBioBtn');
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating...';
+            try {
+                const res = await fetch(`${API}/api/advisor/ai-bio`, { method: 'POST', headers });
+                const data = await res.json();
+                if (data.success) {
+                    document.getElementById('bioResult').textContent = data.bio;
+                    document.getElementById('bioResult').classList.add('visible');
+                    document.getElementById('bioActions').style.display = 'flex';
+                } else {
+                    alert(data.error || 'Failed to generate bio');
+                }
+            } catch (e) {
+                alert('Connection error. Please try again.');
+            }
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fas fa-sparkles"></i> Regenerate Bio';
+        }
+
+        // Save Bio to Profile
+        async function saveBio() {
+            const bio = document.getElementById('bioResult').textContent;
+            try {
+                const res = await fetch(`${API}/api/advisor/bio`, {
+                    method: 'PUT', headers,
+                    body: JSON.stringify({ bio })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    alert('Bio saved to your profile!');
+                }
+            } catch (e) {
+                alert('Failed to save bio.');
+            }
+        }
+
+        // SEO Score
+        async function loadSEOScore() {
+            const btn = document.getElementById('seoScoreBtn');
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Analyzing...';
+            try {
+                const res = await fetch(`${API}/api/advisor/seo-score`, { headers });
+                const data = await res.json();
+                if (data.success) {
+                    document.getElementById('seoMeter').style.display = 'block';
+                    document.getElementById('seoScoreValue').textContent = data.score + '/100';
+                    document.getElementById('seoGrade').textContent = 'Grade: ' + data.grade;
+                    const bar = document.getElementById('seoBar');
+                    bar.style.width = data.score + '%';
+                    bar.style.background = data.score >= 70 ? 'var(--accent-green)' : data.score >= 50 ? '#f59e0b' : '#ef4444';
+                    const recs = document.getElementById('seoRecs');
+                    recs.innerHTML = data.recommendations.slice(0, 5).map(r =>
+                        `<li><span class="impact impact-${r.impact}">+${r.points}</span> ${r.action}</li>`
+                    ).join('');
+                }
+            } catch (e) {
+                alert('Failed to load SEO score.');
+            }
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fas fa-magnifying-glass-chart"></i> Refresh Score';
+        }
+
+        // Outreach Template
+        async function generateOutreach() {
+            const btn = document.getElementById('outreachBtn');
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating...';
+            try {
+                const res = await fetch(`${API}/api/advisor/outreach-template`, { method: 'POST', headers });
+                const data = await res.json();
+                if (data.success) {
+                    const display = (data.subject ? 'Subject: ' + data.subject + '\n\n' : '') + data.body;
+                    document.getElementById('outreachResult').textContent = display;
+                    document.getElementById('outreachResult').classList.add('visible');
+                    document.getElementById('outreachActions').style.display = 'flex';
+                }
+            } catch (e) {
+                alert('Failed to generate template.');
+            }
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fas fa-paper-plane"></i> Regenerate';
+        }
+
+        // Copy to clipboard
+        function copyToClipboard(elementId) {
+            const text = document.getElementById(elementId).textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = event.target.closest('button');
+                const orig = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                setTimeout(() => btn.innerHTML = orig, 2000);
+            });
+        }
+
+        // Load AI upgrade gate
+        async function loadMatches() {
+            try {
+                const res = await fetch(`${API}/api/dashboard/matches`, { headers });
+                const data = await res.json();
+                if (!data.success) return;
+
+                document.getElementById('upgradeSection').style.display = 'block';
+
+                // Set province in AI analysis
+                const province = user.province || data.province || 'your province';
+                const provinceNames = { ON: 'Ontario', BC: 'British Columbia', AB: 'Alberta', QC: 'Quebec', MB: 'Manitoba', SK: 'Saskatchewan', NS: 'Nova Scotia', NB: 'New Brunswick', NL: 'Newfoundland', PE: 'PEI' };
+                document.getElementById('aiProvince').textContent = provinceNames[province] || province;
+
+                if (data.subscribed) {
+                    // Subscribed: hide analysis, show green badge
+                    document.getElementById('aiAnalysisBlock').style.display = 'none';
+                    const badgeEl = document.getElementById('subscribedBadge');
+                    badgeEl.style.display = 'block';
+                    const tierName = data.tier ? data.tier.charAt(0).toUpperCase() + data.tier.slice(1) : 'Active';
+                    document.getElementById('subscribedTierLabel').textContent = tierName + ' Subscriber — AI Optimization Active';
+                }
+            } catch (e) {
+                console.error('Matches load error:', e);
+                // Still show the upgrade section even on error
+                document.getElementById('upgradeSection').style.display = 'block';
+            }
+        }
+
+        // Stripe checkout redirect
+        async function startCheckout(tier) {
+            const btn = event.target.closest('button');
+            const origHTML = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Redirecting...';
+            try {
+                const res = await fetch(`${API}/api/stripe/create-checkout-session`, {
+                    method: 'POST',
+                    headers,
+                    body: JSON.stringify({ tier, email: user.email })
+                });
+                const data = await res.json();
+                if (data.url) {
+                    window.location.href = data.url;
+                } else {
+                    alert(data.error || 'Failed to start checkout. Please try again.');
+                    btn.disabled = false;
+                    btn.innerHTML = origHTML;
+                }
+            } catch (e) {
+                console.error('Checkout error:', e);
+                alert('Connection error. Please try again.');
+                btn.disabled = false;
+                btn.innerHTML = origHTML;
+            }
+        }
+
+        // Init
+        loadStats();
+        loadLeads();
+        loadProfile();
+        loadMatches();
+    </script>
+
+    <!-- Subscription Management Script -->
+    <script>
+    (function() {
+        const API_BASE_URL = 'https://canadainvesting-backend-production.up.railway.app';
+        const email = localStorage.getItem('ca_checkout_email') || (JSON.parse(localStorage.getItem('advisor_user') || '{}')).email;
+
+        const TIER_NAMES = {
+            associate: 'Associate ($199/mo)',
+            professional: 'Professional ($299/mo)',
+            enterprise: 'Enterprise ($599/mo)'
+        };
+
+        const STATUS_ICONS = {
+            active:   { cls: 'active',  icon: 'fa-check-circle' },
+            past_due: { cls: 'error',   icon: 'fa-exclamation-circle' },
+            canceled: { cls: 'warning', icon: 'fa-times-circle' },
+            trialing: { cls: 'active',  icon: 'fa-clock' }
+        };
+
+        async function loadSubscription() {
+            if (!email) {
+                document.getElementById('noSubscriptionBanner').style.display = 'block';
+                return;
+            }
+
+            try {
+                const res = await fetch(`${API_BASE_URL}/api/stripe/subscription-status?email=${encodeURIComponent(email)}`);
+                const data = await res.json();
+
+                if (data.subscription && data.subscription.status !== 'canceled') {
+                    const sub = data.subscription;
+                    const iconStyle = STATUS_ICONS[sub.status] || STATUS_ICONS.active;
+
+                    document.getElementById('subTierDisplay').textContent = TIER_NAMES[sub.tier] || sub.tier;
+
+                    const badgeEl = document.getElementById('subStatusBadge');
+                    badgeEl.textContent = sub.status.charAt(0).toUpperCase() + sub.status.slice(1);
+                    badgeEl.className = `sub-badge ${sub.status}`;
+
+                    const iconEl = document.getElementById('subStatusIcon');
+                    iconEl.className = `sub-icon ${iconStyle.cls}`;
+                    iconEl.innerHTML = `<i class="fas ${iconStyle.icon} fa-lg"></i>`;
+
+                    if (sub.current_period_end) {
+                        const renewDate = new Date(sub.current_period_end).toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' });
+                        document.getElementById('subRenewalDate').textContent = `Renews ${renewDate}`;
+                    }
+
+                    document.getElementById('subscriptionBanner').style.display = 'block';
+                } else {
+                    document.getElementById('noSubscriptionBanner').style.display = 'block';
+                }
+            } catch (err) {
+                console.error('Subscription load error:', err);
+                document.getElementById('noSubscriptionBanner').style.display = 'block';
+            }
+        }
+
+        window.openBillingPortal = async function() {
+            if (!email) {
+                alert('Please log in to manage your subscription.');
+                return;
+            }
+
+            try {
+                const res = await fetch(`${API_BASE_URL}/api/stripe/create-portal-session`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: email })
+                });
+
+                const data = await res.json();
+                if (data.url) {
+                    window.location.href = data.url;
+                } else {
+                    alert('Unable to open billing portal. Please call us at (647) 956-7290.');
+                }
+            } catch (err) {
+                console.error('Portal error:', err);
+                alert('Connection error. Please try again.');
+            }
+        };
+
+        loadSubscription();
+    })();
+    </script>
+</body>
+</html>
