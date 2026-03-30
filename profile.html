@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="description" content="View this investment advisor's verified profile on CanadaInvesting.app — credentials, specializations, and AI-generated bio.">
+
+    <title>Advisor Profile | CanadaInvesting.app</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/icon-512.png">
+    <link rel="apple-touch-icon" href="/icon-512.png">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://canadainvesting.app/profile">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="profile">
+    <meta property="og:url" content="https://canadainvesting.app/profile">
+    <meta property="og:title" content="Advisor Profile | CanadaInvesting.app">
+    <meta property="og:description" content="View this investment advisor's verified profile on CanadaInvesting.app.">
+    <meta property="og:image" content="https://canadainvesting.app/icon-512.png">
+    <meta property="og:site_name" content="CanadaInvesting">
+    <meta property="og:locale" content="en_CA">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Advisor Profile | CanadaInvesting.app">
+    <meta name="twitter:description" content="View this investment advisor's verified profile on CanadaInvesting.app.">
+    <meta name="twitter:image" content="https://canadainvesting.app/icon-512.png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <meta name="theme-color" content="#2563eb">
+
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YVD0B8RF20"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-YVD0B8RF20');
+    </script>
+
+    <!-- BreadcrumbList Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://canadainvesting.app/" },
+            { "@type": "ListItem", "position": 2, "name": "Find an Advisor", "item": "https://canadainvesting.app/find-advisor" },
+            { "@type": "ListItem", "position": 3, "name": "Advisor Profile" }
+        ]
+    }
+    </script>
+
+    <!-- Dynamic Person schema injected by JS -->
+    <script id="person-schema" type="application/ld+json">{}</script>
+
+    <style>
+        :root {
+            --primary-blue: #2563eb;
+            --primary-navy: #1e3a8a;
+            --primary-emerald: #059669;
+            --accent-green: #059669;
+            --dark-bg: #0a0a0a;
+            --card-bg: #1a1a1a;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --border-color: #333333;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Navigation */
+        .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(0,0,0,0.4); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; height: 64px; }
+        .nav-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; color: white; font-weight: 700; font-size: 1.25rem; }
+        .nav-logo .maple { color: var(--primary-blue); font-size: 1.5rem; }
+        .nav-links { display: flex; align-items: center; gap: 24px; list-style: none; }
+        .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.3s; }
+        .nav-links a:hover { color: white; }
+        .nav-cta { background: white !important; color: var(--primary-blue) !important; padding: 10px 24px; border-radius: 8px; font-weight: 700 !important; transition: transform 0.3s, box-shadow 0.3s; }
+        .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 4px 15px rgba(37,99,235,0.3); }
+        .nav-toggle { display: none; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; padding: 4px; }
+        .nav-links.active { display: flex; }
+
+        /* Profile Hero */
+        .profile-hero {
+            padding: 140px 24px 60px;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-navy) 50%, #1e3a5f 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .profile-hero::before {
+            content: '';
+            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(ellipse at 30% 20%, rgba(255,255,255,0.1) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        .profile-avatar {
+            width: 100px; height: 100px; border-radius: 50%;
+            background: rgba(255,255,255,0.15); backdrop-filter: blur(10px);
+            border: 3px solid rgba(255,255,255,0.3);
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 20px; font-size: 2.2rem; font-weight: 700;
+            position: relative;
+        }
+        .profile-hero h1 {
+            font-size: 2.8rem; font-weight: 900; line-height: 1.1; margin-bottom: 12px;
+            position: relative;
+        }
+        .profile-subtitle {
+            font-size: 1.15rem; opacity: 0.9; margin-bottom: 8px; position: relative;
+        }
+        .profile-location {
+            font-size: 1rem; opacity: 0.75; margin-bottom: 24px; position: relative;
+        }
+        .profile-location i { margin-right: 6px; }
+        .designation-badges {
+            display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;
+            position: relative;
+        }
+        .badge {
+            display: inline-flex; align-items: center; gap: 6px;
+            background: rgba(255,255,255,0.15); backdrop-filter: blur(10px);
+            padding: 8px 18px; border-radius: 50px; font-size: 0.85rem; font-weight: 600;
+            border: 1px solid rgba(255,255,255,0.25);
+        }
+        .badge i { font-size: 0.75rem; }
+        .badge-claimed {
+            background: rgba(5,150,105,0.3); border-color: rgba(5,150,105,0.5);
+        }
+
+        /* Content Sections */
+        .profile-content {
+            max-width: 800px; margin: 0 auto; padding: 48px 24px 80px;
+        }
+
+        .profile-section {
+            background: var(--card-bg); border: 1px solid var(--border-color);
+            border-radius: 20px; padding: 36px 32px; margin-bottom: 28px;
+        }
+        .profile-section h2 {
+            font-size: 1.3rem; font-weight: 700; margin-bottom: 20px;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .profile-section h2 i { color: var(--primary-blue); font-size: 1.1rem; }
+
+        /* Bio */
+        .bio-text {
+            font-size: 1.05rem; line-height: 1.8; color: rgba(255,255,255,0.9);
+        }
+        .bio-text p { margin-bottom: 16px; }
+        .bio-text p:last-child { margin-bottom: 0; }
+        .bio-disclaimer {
+            margin-top: 16px; padding-top: 16px;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.8rem; color: var(--text-secondary);
+            display: flex; align-items: center; gap: 8px;
+        }
+        .bio-disclaimer i { color: var(--primary-blue); }
+
+        /* SEO Score */
+        .score-container {
+            display: flex; align-items: center; gap: 32px;
+        }
+        .score-circle {
+            width: 120px; height: 120px; flex-shrink: 0; position: relative;
+        }
+        .score-circle svg { width: 120px; height: 120px; transform: rotate(-90deg); }
+        .score-circle .track { fill: none; stroke: var(--border-color); stroke-width: 8; }
+        .score-circle .fill { fill: none; stroke-width: 8; stroke-linecap: round; transition: stroke-dashoffset 1s ease; }
+        .score-value {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            text-align: center;
+        }
+        .score-value .number { font-size: 2rem; font-weight: 900; line-height: 1; }
+        .score-value .grade { font-size: 0.85rem; color: var(--text-secondary); font-weight: 500; }
+        .score-details { flex: 1; }
+        .score-details h3 { font-size: 1rem; font-weight: 600; margin-bottom: 12px; }
+        .recommendation {
+            display: flex; align-items: center; gap: 10px;
+            padding: 8px 0; font-size: 0.9rem; color: var(--text-secondary);
+        }
+        .recommendation i { font-size: 0.75rem; }
+        .rec-high i { color: #ef4444; }
+        .rec-medium i { color: #f59e0b; }
+        .rec-low i { color: #6b7280; }
+        .recommendation .points {
+            margin-left: auto; font-size: 0.8rem; font-weight: 600;
+            color: var(--primary-blue);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, rgba(37,99,235,0.1), rgba(30,58,138,0.15));
+            border: 1px solid rgba(37,99,235,0.3);
+            border-radius: 20px; padding: 48px 32px; text-align: center;
+            margin-bottom: 28px;
+        }
+        .cta-section h2 {
+            font-size: 1.5rem; font-weight: 800; margin-bottom: 12px;
+        }
+        .cta-section p {
+            font-size: 1.05rem; color: var(--text-secondary); margin-bottom: 28px;
+            max-width: 500px; margin-left: auto; margin-right: auto;
+        }
+        .cta-btn {
+            display: inline-flex; align-items: center; gap: 10px;
+            background: white; color: var(--primary-blue);
+            padding: 16px 36px; border-radius: 12px;
+            font-size: 1.05rem; font-weight: 700; text-decoration: none;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(37,99,235,0.3);
+        }
+        .cta-features {
+            display: flex; justify-content: center; gap: 28px; flex-wrap: wrap;
+            margin-top: 24px;
+        }
+        .cta-feature {
+            font-size: 0.85rem; color: var(--text-secondary);
+            display: flex; align-items: center; gap: 6px;
+        }
+        .cta-feature i { color: var(--accent-green); }
+
+        /* Loading / Error */
+        .loading-state, .error-state {
+            text-align: center; padding: 200px 24px;
+        }
+        .loading-state i { font-size: 3rem; color: var(--primary-blue); margin-bottom: 16px; animation: spin 1s linear infinite; }
+        .error-state i { font-size: 3rem; color: #ef4444; margin-bottom: 16px; }
+        .error-state h2 { margin-bottom: 12px; }
+        .error-state a { color: var(--primary-blue); text-decoration: none; font-weight: 600; }
+        .error-state a:hover { text-decoration: underline; }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-in { animation: fadeInUp 0.5s ease forwards; }
+
+        /* Footer */
+        .footer { background: #111; padding: 60px 24px; border-top: 1px solid var(--border-color); }
+        .footer-inner { max-width: 1100px; margin: 0 auto; }
+        .footer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; margin-bottom: 40px; }
+        .footer-grid h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 16px; }
+        .footer-grid ul { list-style: none; }
+        .footer-grid li { margin-bottom: 10px; }
+        .footer-grid a { color: var(--text-secondary); text-decoration: none; font-size: 0.85rem; transition: color 0.3s; }
+        .footer-grid a:hover { color: white; }
+        .footer-bottom { border-top: 1px solid var(--border-color); padding-top: 24px; text-align: center; }
+        .footer-logo { display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 1.5rem; font-weight: 700; margin-bottom: 12px; }
+        .footer-logo .maple { color: var(--primary-blue); }
+        .footer-tagline { color: var(--text-secondary); margin-bottom: 16px; font-size: 0.9rem; }
+        .footer-copy { color: #666; font-size: 0.8rem; }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .nav-toggle { display: block; }
+            .nav-links {
+                display: none;
+                position: absolute; top: 64px; left: 0; right: 0;
+                flex-direction: column; align-items: center; gap: 0;
+                background: rgba(0,0,0,0.95); backdrop-filter: blur(20px);
+                padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.1);
+            }
+            .nav-links.active { display: flex; }
+            .nav-links a { padding: 14px 24px; width: 100%; text-align: center; font-size: 0.95rem; }
+            .nav-links a:hover { background: rgba(255,255,255,0.05); }
+            .nav-cta { margin: 8px 24px; width: auto; padding: 12px 24px; font-size: 0.9rem !important; text-align: center; border-radius: 8px; }
+            .profile-hero { padding: 120px 20px 48px; }
+            .profile-hero h1 { font-size: 2rem; }
+            .profile-avatar { width: 80px; height: 80px; font-size: 1.8rem; }
+            .profile-section { padding: 28px 20px; }
+            .score-container { flex-direction: column; text-align: center; }
+            .score-details { text-align: left; }
+            .cta-features { flex-direction: column; align-items: center; gap: 12px; }
+            .footer-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="/" class="nav-logo"><i class="fas fa-maple-leaf maple"></i> CanadaInvesting<span style="color: var(--primary-blue)">.app</span></a>
+            <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('active')" aria-label="Menu"><i class="fas fa-bars"></i></button>
+            <div class="nav-links">
+                <a href="find-advisor">Find Advisor</a>
+                <a href="why-we-win">Why We Win</a>
+                <a href="pricing">Pricing</a>
+                <a href="contact">Contact</a>
+                <a href="advisor-login">Login</a>
+                <a href="join-as-advisor" class="nav-cta">Apply to Join</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Loading State -->
+    <div id="loadingState" class="loading-state">
+        <i class="fas fa-spinner"></i>
+        <p>Loading advisor profile...</p>
+    </div>
+
+    <!-- Error State -->
+    <div id="errorState" class="error-state" style="display:none;">
+        <i class="fas fa-exclamation-circle"></i>
+        <h2>Profile Not Found</h2>
+        <p style="color: var(--text-secondary); margin-bottom: 20px;">This advisor profile doesn't exist or may have been removed.</p>
+        <a href="find-advisor"><i class="fas fa-search"></i> Find an Advisor Instead</a>
+    </div>
+
+    <!-- Profile Content (hidden until loaded) -->
+    <div id="profileContent" style="display:none;">
+        <!-- Hero -->
+        <section class="profile-hero">
+            <div class="profile-avatar" id="avatarInitials"></div>
+            <h1 id="profileName"></h1>
+            <p class="profile-subtitle" id="profileSubtitle"></p>
+            <p class="profile-location" id="profileLocation"></p>
+            <div class="designation-badges" id="designationBadges"></div>
+        </section>
+
+        <div class="profile-content">
+            <!-- AI Bio Section -->
+            <section class="profile-section animate-in" id="bioSection">
+                <h2><i class="fas fa-user-pen"></i> About</h2>
+                <div class="bio-text" id="bioText"></div>
+                <div class="bio-disclaimer">
+                    <i class="fas fa-robot"></i>
+                    Generated by AI from regulatory data. Claim your profile to write your own bio.
+                </div>
+            </section>
+
+            <!-- Profile Score -->
+            <section class="profile-section animate-in" id="scoreSection">
+                <h2><i class="fas fa-chart-line"></i> Profile Score</h2>
+                <div class="score-container">
+                    <div class="score-circle">
+                        <svg viewBox="0 0 120 120">
+                            <circle class="track" cx="60" cy="60" r="52"></circle>
+                            <circle class="fill" id="scoreArc" cx="60" cy="60" r="52"
+                                stroke-dasharray="326.73" stroke-dashoffset="326.73"></circle>
+                        </svg>
+                        <div class="score-value">
+                            <div class="number" id="scoreNumber">--</div>
+                            <div class="grade" id="scoreGrade"></div>
+                        </div>
+                    </div>
+                    <div class="score-details">
+                        <h3>How to improve this profile</h3>
+                        <div id="recommendations"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CTA Section -->
+            <section class="cta-section animate-in">
+                <h2>Take Control of Your Profile</h2>
+                <p>Edit your bio, add specializations, and manage what investors see.</p>
+                <a href="claim-profile" class="cta-btn" id="ctaBtn">
+                    <i class="fas fa-user-check"></i> Claim This Profile
+                </a>
+                <div class="cta-features">
+                    <div class="cta-feature"><i class="fas fa-check"></i> Custom bio</div>
+                    <div class="cta-feature"><i class="fas fa-check"></i> Add specializations</div>
+                    <div class="cta-feature"><i class="fas fa-check"></i> SEO boost</div>
+                    <div class="cta-feature"><i class="fas fa-check"></i> Client leads</div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-grid">
+                <div>
+                    <h4>For Advisors</h4>
+                    <ul>
+                        <li><a href="join-as-advisor">Apply to Join</a></li>
+                        <li><a href="pricing">Pricing & Algorithm</a></li>
+                        <li><a href="advisor-revenue-calculator">Revenue Calculator</a></li>
+                        <li><a href="why-we-win">Why We Win</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>For Clients</h4>
+                    <ul>
+                        <li><a href="find-advisor">Find an Advisor</a></li>
+                        <li><a href="guarantee">Our Guarantee</a></li>
+                        <li><a href="contact">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="terms-of-service">Terms of Service</a></li>
+                        <li><a href="privacy-policy">Privacy Policy</a></li>
+                        <li><a href="trust-center">Trust Center</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="mailto:support@canadainvesting.app">support@canadainvesting.app</a></li>
+                        <li><a href="tel:+16479567290">1.647.956.7290</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-logo">
+                    <i class="fas fa-maple-leaf maple"></i> CanadaInvesting<span style="color: var(--primary-blue)">.app</span>
+                </div>
+                <p class="footer-tagline">AI-powered investment advisor marketplace built for Canadian financial professionals.</p>
+                <p class="footer-copy">&copy; 2026 CanadaInvesting.app | Technology platform only. Not a registered dealer or investment advisor. Advisors maintain full professional independence.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const API_BASE = 'https://canadainvesting-backend-production.up.railway.app';
+
+        (async function loadProfile() {
+            const params = new URLSearchParams(window.location.search);
+            const id = params.get('id');
+
+            if (!id) {
+                showError();
+                return;
+            }
+
+            try {
+                const resp = await fetch(`${API_BASE}/api/profiles/${encodeURIComponent(id)}`);
+                if (!resp.ok) {
+                    showError();
+                    return;
+                }
+
+                const data = await resp.json();
+                renderProfile(data);
+            } catch (err) {
+                console.error('Failed to load profile:', err);
+                showError();
+            }
+        })();
+
+        function showError() {
+            document.getElementById('loadingState').style.display = 'none';
+            document.getElementById('errorState').style.display = 'block';
+        }
+
+        function renderProfile(data) {
+            const { profile, seo_score, structured_data } = data;
+
+            // Update page title and meta
+            document.title = `${profile.name} — Investment Advisor | CanadaInvesting.app`;
+            document.querySelector('meta[name="description"]').content =
+                `View ${profile.name}'s verified investment advisor profile. ${profile.designation || 'Financial Advisor'} in ${profile.city || profile.province || 'Canada'}.`;
+
+            // Inject structured data
+            document.getElementById('person-schema').textContent = JSON.stringify(structured_data);
+
+            // Avatar initials
+            const initials = (profile.first_name?.[0] || '') + (profile.last_name?.[0] || '');
+            document.getElementById('avatarInitials').textContent = initials.toUpperCase() || '?';
+
+            // Name
+            document.getElementById('profileName').textContent = profile.name;
+
+            // Subtitle: firm or regulatory listing
+            const subtitle = profile.firm_name
+                ? profile.firm_name
+                : `Listed in ${profile.province || 'Canadian'} regulatory directory`;
+            document.getElementById('profileSubtitle').textContent = subtitle;
+
+            // Location
+            const location = [profile.city, profile.province].filter(Boolean).join(', ');
+            const locationEl = document.getElementById('profileLocation');
+            if (location) {
+                locationEl.innerHTML = `<i class="fas fa-map-marker-alt"></i> ${location}`;
+            } else {
+                locationEl.style.display = 'none';
+            }
+
+            // Designation badges
+            const badgeContainer = document.getElementById('designationBadges');
+            const designations = (profile.designation || '').split(/[,;\/]/).map(d => d.trim()).filter(Boolean);
+            if (designations.length) {
+                designations.forEach(d => {
+                    const badge = document.createElement('span');
+                    badge.className = 'badge';
+                    badge.innerHTML = `<i class="fas fa-award"></i> ${escapeHtml(d)}`;
+                    badgeContainer.appendChild(badge);
+                });
+            }
+            if (profile.claimed) {
+                const claimed = document.createElement('span');
+                claimed.className = 'badge badge-claimed';
+                claimed.innerHTML = '<i class="fas fa-circle-check"></i> Verified';
+                badgeContainer.appendChild(claimed);
+            }
+
+            // Bio section
+            const bioSection = document.getElementById('bioSection');
+            const bioText = document.getElementById('bioText');
+            if (profile.bio) {
+                const paragraphs = profile.bio.split('\n\n').filter(Boolean);
+                bioText.innerHTML = paragraphs.map(p => `<p>${escapeHtml(p)}</p>`).join('');
+            } else {
+                bioSection.style.display = 'none';
+            }
+
+            // SEO Score
+            if (seo_score) {
+                const { score, grade, recommendations } = seo_score;
+
+                document.getElementById('scoreNumber').textContent = score;
+                document.getElementById('scoreGrade').textContent = `Grade: ${grade}`;
+
+                // Animate arc
+                const circumference = 326.73;
+                const offset = circumference - (circumference * score / 100);
+                const arc = document.getElementById('scoreArc');
+                let strokeColor = '#ef4444';
+                if (score >= 70) strokeColor = '#059669';
+                else if (score >= 50) strokeColor = '#f59e0b';
+                arc.style.stroke = strokeColor;
+                setTimeout(() => { arc.style.strokeDashoffset = offset; }, 100);
+
+                // Recommendations
+                const recContainer = document.getElementById('recommendations');
+                const topRecs = recommendations.slice(0, 5);
+                if (topRecs.length === 0) {
+                    recContainer.innerHTML = '<p style="color: var(--accent-green); font-size: 0.9rem;"><i class="fas fa-check-circle"></i> Profile is fully optimized.</p>';
+                } else {
+                    recContainer.innerHTML = topRecs.map(r => `
+                        <div class="recommendation rec-${r.impact}">
+                            <i class="fas fa-circle"></i>
+                            <span>${escapeHtml(r.action)}</span>
+                            <span class="points">+${r.points} pts</span>
+                        </div>
+                    `).join('');
+                }
+            } else {
+                document.getElementById('scoreSection').style.display = 'none';
+            }
+
+            // CTA link with profile ID
+            document.getElementById('ctaBtn').href = `claim-profile?id=${profile.id}`;
+
+            // Show content
+            document.getElementById('loadingState').style.display = 'none';
+            document.getElementById('profileContent').style.display = 'block';
+        }
+
+        function escapeHtml(text) {
+            const d = document.createElement('div');
+            d.textContent = text;
+            return d.innerHTML;
+        }
+    </script>
+</body>
+</html>
