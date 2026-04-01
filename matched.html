@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Matched Advisors | CanadaInvesting.app</title>
+    <link rel="icon" type="image/png" href="/icon-512.png">
+    <link rel="canonical" href="https://canadainvesting.app/matched">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: #f8fafc; color: #1e293b; }
+        .header { background: linear-gradient(135deg, #1e3a8a, #2563eb); color: #fff; padding: 32px 24px; text-align: center; }
+        .header h1 { font-size: 24px; margin-bottom: 8px; }
+        .header p { font-size: 14px; opacity: 0.85; }
+        .container { max-width: 720px; margin: 0 auto; padding: 24px 16px; }
+        .match-info { background: #eff6ff; border-left: 4px solid #2563eb; padding: 16px 20px; border-radius: 0 8px 8px 0; margin-bottom: 24px; }
+        .match-info p { font-size: 14px; color: #1e40af; }
+        .card { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; margin-bottom: 16px; transition: box-shadow 0.2s; }
+        .card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+        .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+        .card-name { font-size: 18px; font-weight: 700; color: #1e293b; }
+        .card-meta { font-size: 13px; color: #64748b; margin-top: 4px; }
+        .score-badge { background: #2563eb; color: #fff; font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 20px; white-space: nowrap; }
+        .score-badge.unclaimed { background: #94a3b8; }
+        .bio-excerpt { font-size: 14px; color: #475569; line-height: 1.6; margin-bottom: 16px; }
+        .unverified { font-size: 12px; color: #f59e0b; font-weight: 600; margin-bottom: 8px; }
+        .cta-btn { display: inline-block; background: linear-gradient(135deg, #2563eb, #1e3a8a); color: #fff; padding: 12px 28px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 14px; }
+        .cta-btn:hover { opacity: 0.9; }
+        .loading { text-align: center; padding: 60px 0; }
+        .spinner { width: 40px; height: 40px; border: 4px solid #e2e8f0; border-top-color: #2563eb; border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 16px; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .footer { text-align: center; padding: 32px 16px; font-size: 12px; color: #94a3b8; }
+        .footer a { color: #64748b; }
+        @media (max-width: 600px) { .card { padding: 16px; } .card-header { flex-direction: column; } .score-badge { margin-top: 8px; } }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>CanadaInvesting</h1>
+        <p>AI-Powered Advisor Matching</p>
+    </div>
+    <div class="container">
+        <div id="loadingState" class="loading">
+            <div class="spinner"></div>
+            <p>Finding your best advisor matches...</p>
+        </div>
+        <div id="matchInfo" class="match-info" style="display:none;"></div>
+        <div id="results"></div>
+        <div id="errorState" style="display:none; text-align:center; padding:40px;"></div>
+    </div>
+    <div class="footer">
+        <p>&copy; 2026 <a href="https://canadainvesting.app">CanadaInvesting.app</a> &mdash; AI-Powered Advisor Matching</p>
+    </div>
+    <script>
+    (function() {
+        var params = new URLSearchParams(window.location.search);
+        var province = params.get('province') || '';
+        var specialty = params.get('specialty') || '';
+
+        if (!province) {
+            document.getElementById('loadingState').style.display = 'none';
+            document.getElementById('errorState').style.display = 'block';
+            document.getElementById('errorState').innerHTML = '<p style="color:#64748b;font-size:16px;">No province specified. Please use the link from your email.</p>';
+            return;
+        }
+
+        var API = 'https://canadainvesting-backend-production.up.railway.app';
+        fetch(API + '/api/matched-professionals?province=' + encodeURIComponent(province) + '&specialty=' + encodeURIComponent(specialty))
+            .then(function(r) { return r.json(); })
+            .then(function(data) {
+                document.getElementById('loadingState').style.display = 'none';
+                if (!data.success || !data.professionals || data.professionals.length === 0) {
+                    document.getElementById('errorState').style.display = 'block';
+                    document.getElementById('errorState').innerHTML = '<p style="color:#64748b;">No matches found in ' + province + ' yet. Check back soon.</p>';
+                    return;
+                }
+
+                var info = document.getElementById('matchInfo');
+                info.style.display = 'block';
+                var specText = specialty ? specialty + ' ' : '';
+                info.innerHTML = '<p><strong>' + data.professionals.length + ' ' + specText + 'advisors matched</strong> in ' + province + ' based on your search criteria</p>';
+
+                var container = document.getElementById('results');
+                data.professionals.forEach(function(p) {
+                    var verified = p.claimed ? '' : '<div class="unverified">Profile not yet verified</div>';
+                    var badgeClass = p.claimed ? 'score-badge' : 'score-badge unclaimed';
+                    var bio = p.bio_excerpt || 'This advisor has not yet added a bio. Click to view their full profile.';
+                    var designation = p.designation ? p.designation + ' &mdash; ' : '';
+                    var location = [p.city, p.province].filter(Boolean).join(', ');
+                    var firm = p.firm_name ? ' at ' + p.firm_name : '';
+
+                    container.innerHTML += '<div class="card">' + verified +
+                        '<div class="card-header"><div><div class="card-name">' + p.name + '</div>' +
+                        '<div class="card-meta">' + designation + location + firm + '</div></div>' +
+                        '<div class="' + badgeClass + '">Score: ' + p.seo_score + '/100</div></div>' +
+                        '<div class="bio-excerpt">' + bio + '</div>' +
+                        '<a href="https://canadainvesting.app/profile?id=' + p.id + '" class="cta-btn">View Full Profile &rarr;</a></div>';
+                });
+            })
+            .catch(function() {
+                document.getElementById('loadingState').style.display = 'none';
+                document.getElementById('errorState').style.display = 'block';
+                document.getElementById('errorState').innerHTML = '<p style="color:#dc2626;">Unable to load matches. Please try again.</p>';
+            });
+    })();
+    </script>
+</body>
+</html>
