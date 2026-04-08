@@ -64,7 +64,6 @@
             <button onclick="switchTab('scrape')" data-tab="scrape" class="tab-btn px-4 py-2 rounded-t text-sm font-medium bg-blue-700">Scrape & Enrichment</button>
             <button onclick="switchTab('outreach')" data-tab="outreach" class="tab-btn px-4 py-2 rounded-t text-sm font-medium bg-gray-700 hover:bg-gray-600">Outreach</button>
             <button onclick="switchTab('campaigns')" data-tab="campaigns" class="tab-btn px-4 py-2 rounded-t text-sm font-medium bg-gray-700 hover:bg-gray-600">Campaigns</button>
-            <button onclick="switchTab('claims')" data-tab="claims" class="tab-btn px-4 py-2 rounded-t text-sm font-medium bg-gray-700 hover:bg-gray-600">Pending Claims</button>
             <button onclick="switchTab('referrals')" data-tab="referrals" class="tab-btn px-4 py-2 rounded-t text-sm font-medium bg-gray-700 hover:bg-gray-600">Referrals</button>
             <button onclick="switchTab('professionals')" data-tab="professionals" class="tab-btn px-4 py-2 rounded-t text-sm font-medium bg-gray-700 hover:bg-gray-600">Advisor Management</button>
             <button onclick="switchTab('crm')" data-tab="crm" class="tab-btn px-4 py-2 rounded-t text-sm font-medium bg-gray-700 hover:bg-gray-600">CRM</button>
@@ -245,30 +244,6 @@
                         </tr>
                     </thead>
                     <tbody id="campaignTableBody" class="divide-y divide-gray-700"></tbody>
-                </table>
-            </div>
-        </section>
-
-        <!-- ==================== CLAIMS TAB ==================== -->
-        <section id="tab-claims" class="hidden">
-            <div class="flex items-center justify-between mb-4">
-                <h2 class="text-xl font-semibold">Pending Profile Claims</h2>
-                <button onclick="loadClaims()" class="text-sm bg-gray-600 hover:bg-gray-500 px-3 py-2 rounded">Refresh</button>
-            </div>
-            <div class="bg-gray-800 rounded-xl border border-gray-700 overflow-x-auto">
-                <table class="w-full text-sm">
-                    <thead class="text-gray-400 border-b border-gray-700">
-                        <tr>
-                            <th class="text-left px-4 py-3">Date</th>
-                            <th class="text-left px-4 py-3">Advisor Name</th>
-                            <th class="text-left px-4 py-3">Email</th>
-                            <th class="text-left px-4 py-3">Firm</th>
-                            <th class="text-left px-4 py-3">Province</th>
-                            <th class="text-left px-4 py-3">Status</th>
-                            <th class="text-left px-4 py-3">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody id="claimsTableBody" class="divide-y divide-gray-700"></tbody>
                 </table>
             </div>
         </section>
@@ -578,7 +553,6 @@
             });
             if (tab === 'outreach') { loadOutreachStats(); loadScrapedAdvisors(); }
             if (tab === 'campaigns') loadCampaigns();
-            if (tab === 'claims') loadClaims();
             if (tab === 'referrals') loadReferrals();
             if (tab === 'professionals') loadProfessionals();
             if (tab === 'crm') loadCrmData();
@@ -813,46 +787,6 @@
                 const data = await res.json();
                 alert(data.success ? `Test email sent to ${data.sentTo}` : 'Error: ' + data.error);
             } catch (e) { alert('Failed: ' + e.message); }
-        }
-
-        // ---- Claims ----
-        async function loadClaims() {
-            try {
-                const res = await fetch(`${API}/api/admin/claims/pending`, { headers });
-                const data = await res.json();
-                const tbody = document.getElementById('claimsTableBody');
-                const claims = data.claims || [];
-                if (claims.length === 0) {
-                    tbody.innerHTML = '<tr><td colspan="7" class="px-4 py-6 text-center text-gray-500">No pending claims</td></tr>';
-                    return;
-                }
-                tbody.innerHTML = claims.map(c => `<tr class="hover:bg-gray-750">
-                    <td class="px-4 py-3 text-gray-400">${fmtShortDate(c.created_at)}</td>
-                    <td class="px-4 py-3">${c.professional_name || c.advisor_name || '--'}</td>
-                    <td class="px-4 py-3">${c.email || '--'}</td>
-                    <td class="px-4 py-3">${c.firm_name || '--'}</td>
-                    <td class="px-4 py-3">${c.province || '--'}</td>
-                    <td class="px-4 py-3">${badge('Pending', 'yellow')}</td>
-                    <td class="px-4 py-3">
-                        <div class="flex gap-1">
-                            <button onclick="approveClaim(${c.id})" class="text-xs px-2 py-1 rounded bg-green-700 hover:bg-green-600">Approve</button>
-                            <button onclick="rejectClaim(${c.id})" class="text-xs px-2 py-1 rounded bg-red-700 hover:bg-red-600">Reject</button>
-                        </div>
-                    </td>
-                </tr>`).join('');
-            } catch (e) { console.error('Claims error:', e); }
-        }
-
-        async function approveClaim(id) {
-            if (!confirm('Approve this claim?')) return;
-            try { await fetch(`${API}/api/admin/claims/${id}/approve`, { method: 'POST', headers }); loadClaims(); loadStats(); }
-            catch (e) { alert('Failed: ' + e.message); }
-        }
-
-        async function rejectClaim(id) {
-            if (!confirm('Reject this claim?')) return;
-            try { await fetch(`${API}/api/admin/claims/${id}/reject`, { method: 'POST', headers }); loadClaims(); }
-            catch (e) { alert('Failed: ' + e.message); }
         }
 
         // ---- Referrals ----
