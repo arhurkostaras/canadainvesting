@@ -729,23 +729,34 @@
             const urlParams = new URLSearchParams(window.location.search);
             data.ref = urlParams.get('ref') || '';
 
-            // POST to backend
+            // POST to backend — only show success on actual 2xx response
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalBtnHtml = submitBtn.innerHTML;
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+
             fetch(this.action, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)
             })
             .then(function(response) {
-                // Show confirmation regardless (placeholder endpoint may not exist yet)
+                if (!response.ok) {
+                    return response.json().catch(function() { return {}; }).then(function(body) {
+                        throw new Error(body.error || ('Server returned HTTP ' + response.status));
+                    });
+                }
+                return response.json();
+            })
+            .then(function(data) {
                 document.getElementById('advisorApplicationForm').style.display = 'none';
                 document.getElementById('confirmationMessage').classList.add('show');
                 window.scrollTo({ top: document.querySelector('.form-section').offsetTop - 80, behavior: 'smooth' });
             })
-            .catch(function() {
-                // Show confirmation even on network error (backend not deployed yet)
-                document.getElementById('advisorApplicationForm').style.display = 'none';
-                document.getElementById('confirmationMessage').classList.add('show');
-                window.scrollTo({ top: document.querySelector('.form-section').offsetTop - 80, behavior: 'smooth' });
+            .catch(function(err) {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnHtml;
+                alert('Sorry, your application could not be submitted: ' + (err.message || 'unknown error') + '. Please try again or email support@canadainvesting.app directly.');
             });
         });
     </script>
