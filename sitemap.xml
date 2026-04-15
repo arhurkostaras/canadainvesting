@@ -51,6 +51,61 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://canadainvesting.app/directory.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://canadainvesting.app/directory.html?province=ON</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://canadainvesting.app/directory.html?province=BC</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://canadainvesting.app/directory.html?province=AB</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://canadainvesting.app/directory.html?province=QC</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://canadainvesting.app/directory.html?province=SK</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://canadainvesting.app/directory.html?province=MB</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://canadainvesting.app/directory.html?province=NS</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://canadainvesting.app/directory.html?province=NB</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://canadainvesting.app/directory.html?province=NL</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://canadainvesting.app/directory.html?province=PE</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://canadainvesting.app/privacy-policy</loc>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>

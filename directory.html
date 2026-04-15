@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="description" id="meta-description" content="Find verified investment advisors across Canada. Browse CFA, CFP, CIM, FCSI, PFP, and RFP professionals by province.">
+    <meta name="keywords" content="investment advisor directory, Canadian financial advisors, CFA, CFP, CIM, FCSI, PFP, RFP">
+
+    <title id="page-title">Investment Advisor Directory | CanadaInvesting.app</title>
+
+    <link rel="icon" type="image/png" href="/icon-512.png">
+    <link rel="apple-touch-icon" href="/icon-512.png">
+    <link rel="canonical" id="canonical-url" href="https://canadainvesting.app/directory.html">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" id="og-url" content="https://canadainvesting.app/directory.html">
+    <meta property="og:title" id="og-title" content="Investment Advisor Directory | CanadaInvesting.app">
+    <meta property="og:description" id="og-description" content="Find verified investment advisors across Canada.">
+    <meta property="og:image" content="https://canadainvesting.app/icon-512.png">
+    <meta property="og:site_name" content="CanadaInvesting">
+    <meta property="og:locale" content="en_CA">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <meta name="theme-color" content="#2563eb">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YVD0B8RF20"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-YVD0B8RF20');
+    </script>
+
+    <script type="application/ld+json" id="schema-breadcrumb">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://canadainvesting.app/" },
+            { "@type": "ListItem", "position": 2, "name": "Directory", "item": "https://canadainvesting.app/directory.html" }
+        ]
+    }
+    </script>
+
+    <style>
+        :root {
+            --primary-blue: #2563eb;
+            --primary-navy: #1e3a8a;
+            --accent-green: #059669;
+            --dark-bg: #0a0a0a;
+            --card-bg: #1a1a1a;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --border-color: #333333;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(0,0,0,0.4); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; height: 64px; }
+        .nav-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; color: white; font-weight: 700; font-size: 1.25rem; }
+        .nav-logo .maple { color: var(--primary-blue); font-size: 1.5rem; }
+        .nav-links { display: flex; align-items: center; gap: 24px; list-style: none; }
+        .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.3s; }
+        .nav-links a:hover { color: white; }
+        .nav-cta { background: white !important; color: var(--primary-blue) !important; padding: 10px 24px; border-radius: 8px; font-weight: 700 !important; }
+        .nav-toggle { display: none; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; padding: 4px; }
+
+        .page-header {
+            padding: 120px 24px 60px;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-navy) 50%, #1e3a5f 100%);
+            text-align: center;
+            position: relative;
+        }
+        .page-header::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(ellipse at 30% 20%, rgba(255,255,255,0.1) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        .page-header h1 { font-size: 2.8rem; font-weight: 900; margin-bottom: 16px; position: relative; }
+        .page-header p { font-size: 1.15rem; opacity: 0.9; max-width: 600px; margin: 0 auto; position: relative; }
+
+        .breadcrumbs {
+            max-width: 1200px; margin: 0 auto; padding: 20px 24px;
+            font-size: 0.85rem; color: var(--text-secondary);
+        }
+        .breadcrumbs a { color: var(--primary-blue); text-decoration: none; }
+        .breadcrumbs a:hover { text-decoration: underline; }
+        .breadcrumbs span { margin: 0 8px; }
+
+        .count-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: rgba(37,99,235,0.15); border: 1px solid rgba(37,99,235,0.3);
+            padding: 8px 20px; border-radius: 50px; font-size: 0.9rem; font-weight: 600;
+            color: var(--primary-blue); margin-bottom: 24px; position: relative;
+        }
+
+        .directory-content { max-width: 1200px; margin: 0 auto; padding: 0 24px 60px; }
+
+        .designation-pills { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 32px; }
+        .designation-pill {
+            background: var(--card-bg); border: 1px solid var(--border-color);
+            padding: 8px 18px; border-radius: 50px; font-size: 0.85rem;
+            color: var(--text-secondary); text-decoration: none; transition: all 0.3s;
+        }
+        .designation-pill:hover, .designation-pill.active {
+            background: var(--primary-blue); color: white; border-color: var(--primary-blue);
+        }
+        .designation-pill .pill-count { font-weight: 700; margin-left: 4px; }
+
+        .professionals-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 40px;
+        }
+        .professional-card {
+            background: var(--card-bg); border: 1px solid var(--border-color);
+            border-radius: 16px; padding: 28px; transition: transform 0.3s, border-color 0.3s;
+        }
+        .professional-card:hover { transform: translateY(-4px); border-color: var(--primary-blue); }
+        .professional-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; }
+        .professional-card .firm { color: var(--primary-blue); font-size: 0.9rem; font-weight: 500; margin-bottom: 6px; }
+        .professional-card .location { color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 4px; }
+        .professional-card .designation-tag {
+            display: inline-block; background: rgba(5,150,105,0.15); color: var(--accent-green);
+            padding: 3px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .professional-card .bio { color: var(--text-secondary); font-size: 0.85rem; line-height: 1.5; }
+
+        .cta-section {
+            background: var(--card-bg); border: 1px solid var(--border-color);
+            border-radius: 20px; padding: 48px; text-align: center; margin: 40px 0;
+        }
+        .cta-section h2 { font-size: 1.8rem; font-weight: 900; margin-bottom: 12px; }
+        .cta-section p { color: var(--text-secondary); margin-bottom: 24px; max-width: 500px; margin-left: auto; margin-right: auto; }
+        .cta-button {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: var(--primary-blue); color: white; padding: 14px 32px;
+            border-radius: 10px; font-weight: 700; text-decoration: none;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .cta-button:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(37,99,235,0.3); }
+
+        .pagination { display: flex; justify-content: center; gap: 8px; margin-top: 32px; }
+        .pagination button {
+            background: var(--card-bg); border: 1px solid var(--border-color);
+            color: var(--text-primary); padding: 10px 18px; border-radius: 8px;
+            cursor: pointer; font-size: 0.9rem; transition: all 0.3s;
+        }
+        .pagination button:hover, .pagination button.active {
+            background: var(--primary-blue); border-color: var(--primary-blue);
+        }
+        .pagination button:disabled { opacity: 0.4; cursor: not-allowed; }
+
+        .loading { text-align: center; padding: 60px; color: var(--text-secondary); }
+        .loading i { font-size: 2rem; margin-bottom: 16px; display: block; }
+        .error-state { text-align: center; padding: 60px; color: var(--text-secondary); }
+
+        .province-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; max-width: 800px; margin: 0 auto; }
+        .province-link {
+            background: var(--card-bg); border: 1px solid var(--border-color);
+            border-radius: 12px; padding: 20px 24px; text-decoration: none;
+            color: var(--text-primary); transition: all 0.3s; display: flex;
+            justify-content: space-between; align-items: center;
+        }
+        .province-link:hover { border-color: var(--primary-blue); transform: translateY(-2px); }
+        .province-link i { color: var(--primary-blue); }
+
+        .footer { background: #111; padding: 60px 24px; border-top: 1px solid var(--border-color); }
+        .footer-inner { max-width: 1100px; margin: 0 auto; }
+        .footer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; margin-bottom: 40px; }
+        .footer-grid h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 16px; }
+        .footer-grid ul { list-style: none; }
+        .footer-grid li { margin-bottom: 10px; }
+        .footer-grid a { color: var(--text-secondary); text-decoration: none; font-size: 0.85rem; transition: color 0.3s; }
+        .footer-grid a:hover { color: white; }
+        .footer-bottom { border-top: 1px solid var(--border-color); padding-top: 24px; text-align: center; }
+        .footer-logo { display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 1.5rem; font-weight: 700; margin-bottom: 12px; }
+        .footer-logo .maple { color: var(--primary-blue); }
+        .footer-tagline { color: var(--text-secondary); margin-bottom: 16px; font-size: 0.9rem; }
+        .footer-copy { color: #666; font-size: 0.8rem; }
+
+        @media (max-width: 900px) {
+            .professionals-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-grid { grid-template-columns: repeat(2, 1fr); }
+            .page-header h1 { font-size: 2rem; }
+        }
+        @media (max-width: 600px) {
+            .professionals-grid { grid-template-columns: 1fr; }
+            .province-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .nav-links { display: none; flex-direction: column; position: absolute; top: 64px; left: 0; right: 0; background: rgba(0,0,0,0.95); padding: 24px; gap: 16px; }
+            .nav-links.active { display: flex; }
+            .nav-toggle { display: block; }
+            .page-header h1 { font-size: 1.6rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="/" class="nav-logo"><i class="fas fa-maple-leaf maple"></i> CanadaInvesting<span style="color: var(--primary-blue)">.app</span></a>
+            <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('active')" aria-label="Menu"><i class="fas fa-bars"></i></button>
+            <div class="nav-links">
+                <a href="find-advisor">Find Advisor</a>
+                <a href="why-we-win">Why We Win</a>
+                <a href="pricing">Pricing</a>
+                <a href="contact">Contact</a>
+                <a href="advisor-login">Login</a>
+                <a href="join-as-advisor" class="nav-cta">Apply to Join</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="page-header">
+        <h1 id="directory-title">Investment Advisor Directory</h1>
+        <p id="directory-subtitle">Browse verified investment advisors across Canada</p>
+    </header>
+
+    <div class="breadcrumbs" id="breadcrumbs">
+        <a href="/">Home</a><span>&rsaquo;</span><span>Directory</span>
+    </div>
+
+    <div class="directory-content">
+        <div id="loading" class="loading">
+            <i class="fas fa-spinner fa-spin"></i>
+            Loading directory...
+        </div>
+
+        <div id="province-index" style="display:none;">
+            <h2 style="text-align:center; font-size:1.6rem; margin-bottom:32px;">Browse by Province</h2>
+            <div class="province-grid" id="province-list"></div>
+        </div>
+
+        <div id="directory-results" style="display:none;">
+            <div id="count-badge-container" style="text-align:center;"></div>
+            <div id="designation-pills" class="designation-pills"></div>
+            <div id="professionals-grid" class="professionals-grid"></div>
+            <div id="pagination" class="pagination"></div>
+        </div>
+
+        <div id="error-state" class="error-state" style="display:none;">
+            <i class="fas fa-exclamation-circle" style="font-size:2rem; margin-bottom:16px; display:block; color:var(--primary-blue);"></i>
+            <p>Could not load directory data. Please try again later.</p>
+        </div>
+
+        <div class="cta-section">
+            <h2>Are You an Investment Advisor?</h2>
+            <p>Claim your profile and get matched with qualified clients looking for your services.</p>
+            <a href="join-as-advisor" class="cta-button"><i class="fas fa-arrow-right"></i> Claim Your Profile</a>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-grid">
+                <div>
+                    <h4>For Advisors</h4>
+                    <ul>
+                        <li><a href="join-as-advisor">Apply to Join</a></li>
+                        <li><a href="pricing">Pricing & Algorithm</a></li>
+                        <li><a href="advisor-revenue-calculator">Revenue Calculator</a></li>
+                        <li><a href="why-we-win">Why We Win</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>For Clients</h4>
+                    <ul>
+                        <li><a href="find-advisor">Find an Advisor</a></li>
+                        <li><a href="guarantee">Our Guarantee</a></li>
+                        <li><a href="contact">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="terms-of-service">Terms of Service</a></li>
+                        <li><a href="privacy-policy">Privacy Policy</a></li>
+                        <li><a href="trust-center">Trust Center</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="mailto:support@canadainvesting.app">support@canadainvesting.app</a></li>
+                        <li><a href="tel:+16479567290">1.647.956.7290</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-logo">
+                    <i class="fas fa-maple-leaf maple"></i> CanadaInvesting<span style="color: var(--primary-blue)">.app</span>
+                </div>
+                <p class="footer-tagline">AI-powered investment advisor marketplace built for Canadian financial professionals.</p>
+                <p class="footer-copy">&copy; 2026 CanadaInvesting.app | Technology platform only. Not a registered dealer or investment advisor.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function() {
+        const API_BASE = 'https://canadainvesting-backend-production.up.railway.app';
+        const SITE_URL = 'https://canadainvesting.app';
+        const PROVINCES = {
+            ON: 'Ontario', BC: 'British Columbia', AB: 'Alberta', QC: 'Quebec',
+            SK: 'Saskatchewan', MB: 'Manitoba', NS: 'Nova Scotia', NB: 'New Brunswick',
+            NL: 'Newfoundland and Labrador', PE: 'Prince Edward Island'
+        };
+        const PROFESSIONAL_LABEL = 'Investment Advisor';
+        const PROFESSIONAL_LABEL_PLURAL = 'Investment Advisors';
+        const JOIN_PAGE = 'join-as-advisor';
+
+        const params = new URLSearchParams(window.location.search);
+        const province = params.get('province')?.toUpperCase();
+        const designation = params.get('designation');
+        const page = parseInt(params.get('page')) || 1;
+
+        function init() {
+            if (!province) {
+                showProvinceIndex();
+                return;
+            }
+            if (!PROVINCES[province]) {
+                showError();
+                return;
+            }
+            if (designation) {
+                loadDesignation(province, designation, page);
+            } else {
+                loadProvince(province, page);
+            }
+        }
+
+        function showProvinceIndex() {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('province-index').style.display = 'block';
+            var list = document.getElementById('province-list');
+            Object.keys(PROVINCES).forEach(function(code) {
+                var a = document.createElement('a');
+                a.href = 'directory.html?province=' + code;
+                a.className = 'province-link';
+                a.innerHTML = '<span>' + PROVINCES[code] + '</span><i class="fas fa-chevron-right"></i>';
+                list.appendChild(a);
+            });
+        }
+
+        function showError() {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('error-state').style.display = 'block';
+        }
+
+        function setMeta(provinceName, desig, total) {
+            var title, desc;
+            if (desig) {
+                title = desig.toUpperCase() + ' ' + PROFESSIONAL_LABEL_PLURAL + ' in ' + provinceName;
+                desc = 'Browse ' + total + ' verified ' + desig.toUpperCase() + ' ' + PROFESSIONAL_LABEL_PLURAL.toLowerCase() + ' in ' + provinceName + '. Find qualified financial professionals on CanadaInvesting.app.';
+            } else {
+                title = PROFESSIONAL_LABEL_PLURAL + ' in ' + provinceName;
+                desc = 'Browse ' + total + ' verified ' + PROFESSIONAL_LABEL_PLURAL.toLowerCase() + ' in ' + provinceName + '. Find qualified financial professionals on CanadaInvesting.app.';
+            }
+            document.title = title + ' | CanadaInvesting.app';
+            document.getElementById('page-title').textContent = title + ' | CanadaInvesting.app';
+            document.getElementById('meta-description').setAttribute('content', desc);
+            document.getElementById('directory-title').textContent = title;
+            document.getElementById('directory-subtitle').textContent = desc;
+            document.getElementById('og-title').setAttribute('content', title);
+            document.getElementById('og-description').setAttribute('content', desc);
+
+            var canonicalPath = SITE_URL + '/directory.html?province=' + province;
+            if (desig) canonicalPath += '&designation=' + desig;
+            document.getElementById('canonical-url').setAttribute('href', canonicalPath);
+            document.getElementById('og-url').setAttribute('content', canonicalPath);
+        }
+
+        function setBreadcrumbs(provinceName, desig) {
+            var bc = document.getElementById('breadcrumbs');
+            var html = '<a href="/">Home</a><span>&rsaquo;</span>';
+            html += '<a href="directory.html">Directory</a><span>&rsaquo;</span>';
+            if (desig) {
+                html += '<a href="directory.html?province=' + province + '">' + provinceName + '</a>';
+                html += '<span>&rsaquo;</span><span>' + desig.toUpperCase() + '</span>';
+            } else {
+                html += '<span>' + provinceName + '</span>';
+            }
+            bc.innerHTML = html;
+
+            var schema = {
+                "@context": "https://schema.org",
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    { "@type": "ListItem", "position": 1, "name": "Home", "item": SITE_URL + "/" },
+                    { "@type": "ListItem", "position": 2, "name": "Directory", "item": SITE_URL + "/directory.html" },
+                    { "@type": "ListItem", "position": 3, "name": provinceName, "item": SITE_URL + "/directory.html?province=" + province }
+                ]
+            };
+            if (desig) {
+                schema.itemListElement.push({
+                    "@type": "ListItem", "position": 4,
+                    "name": desig.toUpperCase(),
+                    "item": SITE_URL + "/directory.html?province=" + province + "&designation=" + desig
+                });
+            }
+            document.getElementById('schema-breadcrumb').textContent = JSON.stringify(schema);
+        }
+
+        function renderResults(data, desig) {
+            var provinceName = data.province_name;
+            setMeta(provinceName, desig, data.total);
+            setBreadcrumbs(provinceName, desig);
+
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('directory-results').style.display = 'block';
+
+            var badgeLabel = desig ? desig.toUpperCase() + ' ' + PROFESSIONAL_LABEL_PLURAL.toLowerCase() : PROFESSIONAL_LABEL_PLURAL.toLowerCase();
+            document.getElementById('count-badge-container').innerHTML =
+                '<div class="count-badge"><i class="fas fa-check-circle"></i> ' +
+                data.total.toLocaleString() + ' verified ' + badgeLabel + ' in ' + provinceName + '</div>';
+
+            if (data.designation_counts && data.designation_counts.length > 0) {
+                var pills = document.getElementById('designation-pills');
+                var allPill = document.createElement('a');
+                allPill.href = 'directory.html?province=' + province;
+                allPill.className = 'designation-pill' + (!desig ? ' active' : '');
+                allPill.textContent = 'All';
+                pills.appendChild(allPill);
+                data.designation_counts.forEach(function(d) {
+                    var a = document.createElement('a');
+                    a.href = 'directory.html?province=' + province + '&designation=' + encodeURIComponent(d.designation);
+                    a.className = 'designation-pill' + (desig && desig.toUpperCase() === d.designation.toUpperCase() ? ' active' : '');
+                    a.innerHTML = d.designation + '<span class="pill-count">(' + parseInt(d.count).toLocaleString() + ')</span>';
+                    pills.appendChild(a);
+                });
+            }
+
+            renderCards(data.professionals);
+            renderPagination(data.page, data.total_pages, desig);
+            injectItemListSchema(data.professionals, provinceName, desig);
+        }
+
+        function renderCards(professionals) {
+            var grid = document.getElementById('professionals-grid');
+            grid.innerHTML = '';
+            if (professionals.length === 0) {
+                grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:var(--text-secondary);padding:40px;">No professionals found matching your criteria.</p>';
+                return;
+            }
+            professionals.forEach(function(p) {
+                var card = document.createElement('div');
+                card.className = 'professional-card';
+                var html = '<h3>' + escapeHtml(p.full_name || ((p.first_name || '') + ' ' + (p.last_name || '')).trim()) + '</h3>';
+                if (p.firm_name) html += '<div class="firm"><i class="fas fa-building"></i> ' + escapeHtml(p.firm_name) + '</div>';
+                if (p.city) html += '<div class="location"><i class="fas fa-map-marker-alt"></i> ' + escapeHtml(p.city) + ', ' + escapeHtml(p.province) + '</div>';
+                if (p.designation) html += '<span class="designation-tag">' + escapeHtml(p.designation) + '</span>';
+                if (p.bio_snippet) html += '<p class="bio">' + escapeHtml(p.bio_snippet) + '</p>';
+                card.innerHTML = html;
+                grid.appendChild(card);
+            });
+        }
+
+        function renderPagination(currentPage, totalPages, desig) {
+            if (totalPages <= 1) return;
+            var container = document.getElementById('pagination');
+            container.innerHTML = '';
+
+            function makeBtn(label, pg, disabled) {
+                var btn = document.createElement('button');
+                btn.textContent = label;
+                btn.disabled = disabled;
+                if (pg === currentPage) btn.className = 'active';
+                if (!disabled) {
+                    btn.onclick = function() {
+                        var url = 'directory.html?province=' + province + '&page=' + pg;
+                        if (desig) url += '&designation=' + encodeURIComponent(desig);
+                        window.location.href = url;
+                    };
+                }
+                return btn;
+            }
+
+            container.appendChild(makeBtn('Prev', currentPage - 1, currentPage <= 1));
+            var start = Math.max(1, currentPage - 2);
+            var end = Math.min(totalPages, currentPage + 2);
+            for (var i = start; i <= end; i++) {
+                container.appendChild(makeBtn(String(i), i, false));
+            }
+            container.appendChild(makeBtn('Next', currentPage + 1, currentPage >= totalPages));
+        }
+
+        function injectItemListSchema(professionals, provinceName, desig) {
+            var items = professionals.map(function(p, i) {
+                return {
+                    "@type": "ListItem",
+                    "position": i + 1,
+                    "item": {
+                        "@type": "Person",
+                        "name": p.full_name || ((p.first_name || '') + ' ' + (p.last_name || '')).trim(),
+                        "jobTitle": p.designation || PROFESSIONAL_LABEL,
+                        "worksFor": p.firm_name ? { "@type": "Organization", "name": p.firm_name } : undefined,
+                        "address": p.city ? { "@type": "PostalAddress", "addressLocality": p.city, "addressRegion": provinceName, "addressCountry": "CA" } : undefined
+                    }
+                };
+            });
+            var schema = { "@context": "https://schema.org", "@type": "ItemList", "itemListElement": items };
+            var script = document.createElement('script');
+            script.type = 'application/ld+json';
+            script.textContent = JSON.stringify(schema);
+            document.head.appendChild(script);
+        }
+
+        function loadProvince(prov, pg) {
+            fetch(API_BASE + '/api/directory/' + prov + '?page=' + pg)
+                .then(function(r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+                .then(function(data) { renderResults(data, null); })
+                .catch(function() { showError(); });
+        }
+
+        function loadDesignation(prov, desig, pg) {
+            fetch(API_BASE + '/api/directory/' + prov + '/' + encodeURIComponent(desig) + '?page=' + pg)
+                .then(function(r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+                .then(function(data) { renderResults(data, desig); })
+                .catch(function() { showError(); });
+        }
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            var div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
+
+        init();
+    })();
+    </script>
+</body>
+</html>
