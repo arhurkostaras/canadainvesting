@@ -951,31 +951,42 @@
             submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
 
             const payload = {
-                investment_type: answers[1] || '',
-                asset_range: answers[2] || '',
-                investment_goal: answers[3] || '',
-                fee_preference: answers[4] || '',
+                investmentType: answers[1] || '',
+                assetRange: answers[2] || '',
+                investmentGoal: answers[3] || '',
+                feePreference: answers[4] || '',
                 province: answers[5] || '',
-                meeting_preference: answers[6] || '',
+                meetingPreference: answers[6] || '',
                 name: document.getElementById('clientName').value.trim(),
                 email: document.getElementById('clientEmail').value.trim(),
                 phone: document.getElementById('clientPhone').value.trim(),
-                submitted_at: new Date().toISOString()
+                submittedAt: new Date().toISOString()
             };
 
+            let submitOk = false;
             try {
-                // POST to placeholder endpoint
-                await fetch('https://canadainvesting-backend-production.up.railway.app/api/find-advisor', {
+                const resp = await fetch('https://canadainvesting-backend-production.up.railway.app/api/find-advisor', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(payload)
                 });
+                submitOk = resp.ok;
+                if (!submitOk) {
+                    console.error('Submission failed:', resp.status, await resp.text());
+                }
             } catch (e) {
-                // Silently handle — show confirmation regardless for now
-                console.log('Submission endpoint not yet configured:', e);
+                console.error('Submission error:', e);
             }
 
-            // Show confirmation
+            if (!submitOk) {
+                // Show error state, NOT success. CLAUDE.md: success message must be gated on response.ok.
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = 'Try Again';
+                alert('Sorry, we hit a snag submitting your request. Please try again, or email arthur@negotiateandwin.com directly.');
+                return;
+            }
+
+            // Show confirmation only on real success
             document.querySelectorAll('.question-card').forEach(card => card.classList.remove('active'));
             progressSection.style.display = 'none';
             confirmationCard.classList.add('active');
