@@ -187,6 +187,26 @@
     <!-- Auth gate -->
     <script>
         (function() {
+            // Magic link handling: read token from URL and store in localStorage
+            const urlParams = new URLSearchParams(window.location.search);
+            const urlToken = urlParams.get('token');
+            if (urlToken) {
+                try {
+                    const payload = JSON.parse(atob(urlToken.split('.')[1]));
+                    localStorage.setItem('advisor_token', urlToken);
+                    localStorage.setItem('advisor_user', JSON.stringify({
+                        userId: payload.userId,
+                        email: payload.email,
+                        userType: payload.userType || 'advisor',
+                        firstName: payload.firstName || payload.email.split('@')[0]
+                    }));
+                    // Clean URL so token isn't visible/bookmarkable
+                    window.history.replaceState({}, '', window.location.pathname);
+                } catch (e) {
+                    console.error('Magic link token error:', e);
+                }
+            }
+
             const token = localStorage.getItem('advisor_token');
             const user = JSON.parse(localStorage.getItem('advisor_user') || '{}');
             if (!token || (user.userType !== 'Advisor' && user.userType !== 'advisor')) {
