@@ -878,6 +878,20 @@
             // Toggle clicked
             if (!isOpen) item.classList.add('open');
         }
+
+        // Founding member scarcity counter
+        fetch('https://canadainvesting-backend-production.up.railway.app/api/founding-members')
+          .then(r => r.json())
+          .then(d => {
+            if (d.spots_remaining > 0) {
+              const banner = document.createElement('div');
+              banner.style.cssText = 'text-align:center;padding:16px;background:linear-gradient(135deg,#fef3c7,#fde68a);border-radius:8px;margin:20px auto;max-width:500px;color:#92400e;font-size:14px;font-weight:600;';
+              banner.innerHTML = '<span style="font-size:24px;">🏅</span> ' + d.spots_remaining + ' of 25 Founding Member spots remaining. Founding members get permanent priority placement and a verified badge.';
+              const pricingSection = document.querySelector('.pricing-grid') || document.querySelector('.pricing-cards') || document.querySelector('.pricing') || document.querySelector('main');
+              if (pricingSection) pricingSection.parentNode.insertBefore(banner, pricingSection);
+            }
+          })
+          .catch(function() {}); // non-critical, fail silently
     </script>
 </body>
 </html>
