@@ -458,6 +458,29 @@
 
                 const data = await resp.json();
                 renderProfile(data);
+
+                // Render related profiles for internal SEO linking
+                if (data.related && data.related.length > 0) {
+                    const province = data.profile.province || '';
+                    const relatedHtml = data.related.map(r => `
+                        <a href="/profile?id=${r.id}" style="display:block;padding:16px;margin:8px 0;background:rgba(255,255,255,0.03);border:1px solid #333;border-radius:8px;text-decoration:none;color:#fff;transition:border-color 0.3s;">
+                            <strong style="color:#2563eb;">${r.name}</strong>
+                            ${r.firm ? `<span style="color:#999;margin-left:8px;">${r.firm}</span>` : ''}
+                            <br><span style="color:#888;font-size:13px;">${r.designation || ''} ${r.city ? '— ' + r.city + ', ' + r.province : r.province || ''}</span>
+                        </a>
+                    `).join('');
+
+                    const container = document.getElementById('profileContent') || document.querySelector('.container') || document.querySelector('main');
+                    if (container) {
+                        const section = document.createElement('div');
+                        section.style.cssText = 'max-width:800px;margin:40px auto;padding:0 20px;';
+                        section.innerHTML = `
+                            <h3 style="color:#fff;font-size:18px;margin:0 0 16px;font-weight:600;">Other Advisors in ${province}</h3>
+                            ${relatedHtml}
+                        `;
+                        container.appendChild(section);
+                    }
+                }
             } catch (err) {
                 console.error('Failed to load profile:', err);
                 showError();
