@@ -315,6 +315,24 @@
         </div>
     </nav>
 
+    <!-- SEO: pre-render meaningful content for Googlebot before JS loads profile data -->
+    <div id="seoPrerender" style="max-width:800px;margin:40px auto;padding:0 20px;">
+        <h1 id="seoTitle" style="color:#fff;font-size:24px;">Financial Advisor Profile — CanadaInvesting.app</h1>
+        <p style="color:#ccc;font-size:15px;line-height:1.7;">This is a verified financial advisor profile on CanadaInvesting.app, Canada's AI-powered advisor-client matching platform. This profile includes the advisor's credentials, designations, firm information, and an AI-generated professional bio based on their regulatory registration.</p>
+        <p style="color:#999;font-size:14px;">CanadaInvesting connects investors with qualified financial advisors across Canada. Our directory includes over 54,000 advisors verified through CIRO, FP Canada, and provincial regulators.</p>
+        <noscript><p style="color:#ccc;">Enable JavaScript to view the full interactive profile with AI bio, designations, and contact information.</p></noscript>
+    </div>
+    <script>
+        (function() {
+            var id = new URLSearchParams(window.location.search).get('id');
+            if (id) {
+                document.title = 'Advisor Profile #' + id + ' | CanadaInvesting.app';
+                var canon = document.querySelector('link[rel="canonical"]');
+                if (canon) canon.href = 'https://canadainvesting.app/profile?id=' + id;
+            }
+        })();
+    </script>
+
     <!-- Loading State -->
     <div id="loadingState" class="loading-state">
         <i class="fas fa-spinner"></i>
@@ -599,6 +617,7 @@
 
             // Show content
             document.getElementById('loadingState').style.display = 'none';
+            var seoPrerender = document.getElementById('seoPrerender'); if (seoPrerender) seoPrerender.style.display = 'none';
             document.getElementById('profileContent').style.display = 'block';
         }
 
