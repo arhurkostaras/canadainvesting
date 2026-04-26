@@ -173,10 +173,37 @@
         .impact-medium { background: rgba(245,158,11,0.15); color: #f59e0b; }
         .impact-low { background: rgba(37,99,235,0.15); color: var(--primary-blue); }
 
+        /* CBE Referral Widget */
+        .cbe-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden; }
+        .cbe-card-bar { height: 3px; background: linear-gradient(90deg, #B8956A, #8F6F49); }
+        .cbe-card-body { padding: 24px; }
+        .cbe-intro { color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6; margin-bottom: 16px; }
+        .cbe-intro strong { color: var(--text-primary); }
+        .cbe-toggle { background: rgba(184,149,106,0.12); color: #B8956A; border: 1px solid rgba(184,149,106,0.35); padding: 10px 18px; border-radius: 8px; font-size: 0.9rem; font-weight: 600; cursor: pointer; font-family: inherit; transition: all 0.3s; display: inline-flex; align-items: center; gap: 8px; }
+        .cbe-toggle:hover { background: rgba(184,149,106,0.2); border-color: #B8956A; }
+        .cbe-form { margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border-color); }
+        .cbe-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .cbe-group { display: flex; flex-direction: column; }
+        .cbe-group.cbe-full { grid-column: 1 / -1; }
+        .cbe-group label { font-size: 0.85rem; font-weight: 500; color: var(--text-secondary); margin-bottom: 6px; }
+        .cbe-group label .req { color: #ef4444; }
+        .cbe-group input, .cbe-group select, .cbe-group textarea { padding: 10px 14px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); font-size: 0.9rem; font-family: inherit; transition: border-color 0.3s; resize: vertical; }
+        .cbe-group input:focus, .cbe-group select:focus, .cbe-group textarea:focus { outline: none; border-color: #B8956A; }
+        .cbe-group select option { background: var(--card-bg); color: var(--text-primary); }
+        .cbe-actions { display: flex; align-items: center; gap: 16px; margin-top: 20px; }
+        .cbe-submit { background: linear-gradient(135deg, #B8956A, #8F6F49); color: white; border: none; padding: 12px 24px; border-radius: 10px; font-size: 0.9rem; font-weight: 700; cursor: pointer; transition: all 0.3s; font-family: inherit; }
+        .cbe-submit:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(184,149,106,0.4); }
+        .cbe-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; box-shadow: none; }
+        .cbe-msg { font-size: 0.85rem; }
+        .cbe-msg.success { color: var(--accent-green); }
+        .cbe-msg.error { color: #ef4444; }
+        .cbe-disclaimer { color: var(--text-secondary); font-size: 0.75rem; margin-top: 12px; line-height: 1.5; font-style: italic; }
+
         @media (max-width: 768px) {
             .stats-grid { grid-template-columns: repeat(2, 1fr); }
             .ai-tools { grid-template-columns: 1fr; }
             .profile-grid { grid-template-columns: 1fr; }
+            .cbe-grid { grid-template-columns: 1fr; }
             .dash-nav-email { display: none; }
             .dash-nav-right a { display: none; }
             .sub-banner-inner, .no-sub-inner { flex-direction: column; align-items: flex-start; }
@@ -387,6 +414,93 @@
                             <button class="tier-card-btn outline" onclick="startCheckout('enterprise')">Get Started</button>
                         </div>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Refer a Client to Canada Business Exits -->
+        <section class="section">
+            <h2 class="section-title"><i class="fas fa-handshake" style="color: #B8956A;"></i> Refer a Client to Canada Business Exits</h2>
+            <div class="cbe-card">
+                <div class="cbe-card-bar"></div>
+                <div class="cbe-card-body">
+                    <p class="cbe-intro">Have a client considering an exit in the next 6-18 months? Refer them confidentially. They receive a welcome email naming you, then enter our matching pipeline at their own pace. <strong>No banker contact unless they opt in.</strong></p>
+
+                    <button class="cbe-toggle" id="cbeToggleBtn" onclick="toggleCbeForm()" type="button">
+                        <i class="fas fa-plus" id="cbeToggleIcon"></i> <span id="cbeToggleLabel">Refer a client</span>
+                    </button>
+
+                    <form id="cbeReferralForm" class="cbe-form" style="display: none;" onsubmit="submitCbeReferral(event)">
+                        <div class="cbe-grid">
+                            <div class="cbe-group">
+                                <label for="cbeFirstName">Client first name <span class="req">*</span></label>
+                                <input type="text" id="cbeFirstName" required maxlength="100">
+                            </div>
+                            <div class="cbe-group">
+                                <label for="cbeLastName">Client last name</label>
+                                <input type="text" id="cbeLastName" maxlength="100">
+                            </div>
+                            <div class="cbe-group cbe-full">
+                                <label for="cbeEmail">Client email <span class="req">*</span></label>
+                                <input type="email" id="cbeEmail" required maxlength="255" placeholder="client@theircompany.com">
+                            </div>
+                            <div class="cbe-group cbe-full">
+                                <label for="cbeCompany">Company name</label>
+                                <input type="text" id="cbeCompany" maxlength="255">
+                            </div>
+                            <div class="cbe-group">
+                                <label for="cbeIndustry">Industry</label>
+                                <select id="cbeIndustry">
+                                    <option value="">Select sector</option>
+                                    <option value="manufacturing">Manufacturing</option>
+                                    <option value="professional_services">Professional Services</option>
+                                    <option value="distribution">Distribution / Wholesale</option>
+                                    <option value="construction">Construction</option>
+                                    <option value="healthcare_services">Healthcare Services</option>
+                                    <option value="software_saas">Software / SaaS</option>
+                                    <option value="food_production">Food Production</option>
+                                    <option value="logistics">Logistics / Transportation</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="cbe-group">
+                                <label for="cbeProvince">Province</label>
+                                <select id="cbeProvince">
+                                    <option value="">Select province</option>
+                                    <option value="ON">Ontario</option>
+                                    <option value="BC">British Columbia</option>
+                                    <option value="AB">Alberta</option>
+                                    <option value="QC">Quebec</option>
+                                    <option value="MB">Manitoba</option>
+                                    <option value="SK">Saskatchewan</option>
+                                    <option value="NS">Nova Scotia</option>
+                                    <option value="NB">New Brunswick</option>
+                                    <option value="NL">Newfoundland</option>
+                                    <option value="PE">PEI</option>
+                                </select>
+                            </div>
+                            <div class="cbe-group cbe-full">
+                                <label for="cbeRevenue">Estimated revenue band</label>
+                                <select id="cbeRevenue">
+                                    <option value="">Not sure / prefer not to say</option>
+                                    <option value="$1M-$5M">$1M – $5M</option>
+                                    <option value="$5M-$10M">$5M – $10M</option>
+                                    <option value="$10M-$25M">$10M – $25M</option>
+                                    <option value="$25M-$50M">$25M – $50M</option>
+                                    <option value="$50M+">$50M+</option>
+                                </select>
+                            </div>
+                            <div class="cbe-group cbe-full">
+                                <label for="cbeNote">Note (optional, for our team)</label>
+                                <textarea id="cbeNote" rows="3" maxlength="800" placeholder="Anything specific about timeline, sector, or what you'd like us to know..."></textarea>
+                            </div>
+                        </div>
+                        <div class="cbe-actions">
+                            <button type="submit" class="cbe-submit" id="cbeSubmitBtn"><i class="fas fa-paper-plane"></i> Send referral</button>
+                            <span class="cbe-msg" id="cbeMsg"></span>
+                        </div>
+                        <p class="cbe-disclaimer">By submitting, you confirm your client has expressed interest in exit advisory services and consents to receiving a welcome email from Canada Business Exits.</p>
+                    </form>
                 </div>
             </div>
         </section>
@@ -769,6 +883,66 @@
                 alert('Connection error. Please try again.');
                 btn.disabled = false;
                 btn.innerHTML = origHTML;
+            }
+        }
+
+        // CBE referral widget
+        function toggleCbeForm() {
+            const form = document.getElementById('cbeReferralForm');
+            const icon = document.getElementById('cbeToggleIcon');
+            const label = document.getElementById('cbeToggleLabel');
+            const isHidden = form.style.display === 'none';
+            form.style.display = isHidden ? 'block' : 'none';
+            icon.className = isHidden ? 'fas fa-minus' : 'fas fa-plus';
+            label.textContent = isHidden ? 'Hide form' : 'Refer a client';
+        }
+
+        async function submitCbeReferral(e) {
+            e.preventDefault();
+            const btn = document.getElementById('cbeSubmitBtn');
+            const msg = document.getElementById('cbeMsg');
+            btn.disabled = true;
+            msg.className = 'cbe-msg';
+            msg.textContent = 'Sending...';
+
+            const payload = {
+                client_first_name: document.getElementById('cbeFirstName').value.trim(),
+                client_last_name: document.getElementById('cbeLastName').value.trim() || null,
+                client_email: document.getElementById('cbeEmail').value.trim(),
+                client_company: document.getElementById('cbeCompany').value.trim() || null,
+                client_industry: document.getElementById('cbeIndustry').value || null,
+                client_province: document.getElementById('cbeProvince').value || null,
+                revenue_range: document.getElementById('cbeRevenue').value || null,
+                referring_note: document.getElementById('cbeNote').value.trim() || null,
+            };
+
+            try {
+                const res = await fetch(`${API}/api/advisor/refer-to-cbe`, {
+                    method: 'POST',
+                    headers,
+                    body: JSON.stringify(payload),
+                });
+                const data = await res.json();
+
+                if (res.ok && data.success) {
+                    msg.className = 'cbe-msg success';
+                    msg.innerHTML = '<i class="fas fa-check-circle"></i> ' + (data.message || 'Referral sent.');
+                    setTimeout(() => {
+                        document.getElementById('cbeReferralForm').reset();
+                        toggleCbeForm();
+                        msg.textContent = '';
+                        msg.className = 'cbe-msg';
+                    }, 3500);
+                } else {
+                    msg.className = 'cbe-msg error';
+                    msg.textContent = data.error || 'Could not send referral. Please try again.';
+                }
+            } catch (err) {
+                console.error('CBE referral submit error:', err);
+                msg.className = 'cbe-msg error';
+                msg.textContent = 'Connection error. Please try again.';
+            } finally {
+                btn.disabled = false;
             }
         }
 
