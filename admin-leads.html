@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leads — CanadaInvesting Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+  :root { --primary-blue: #2563eb; --primary-navy: #1e3a8a; --accent-green: #059669; --dark-bg: #0a0a0a; --card-bg: #1a1a1a; --text-primary: #ffffff; --text-secondary: #a0a0a0; --border-color: #333333; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Roboto', -apple-system, sans-serif; background: var(--dark-bg); color: var(--text-primary); line-height: 1.55; min-height: 100vh; }
+  nav { background: var(--card-bg); border-bottom: 2px solid var(--primary-blue); }
+  nav .inner { max-width: 1400px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; height: 64px; }
+  nav a.brand { color: white; text-decoration: none; font-weight: 700; font-size: 1.15rem; }
+  nav a.brand .blue { color: var(--primary-blue); }
+  nav .right { display: flex; gap: 16px; align-items: center; }
+  nav .right a { color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; }
+  nav .right a:hover { color: white; }
+  nav button { background: linear-gradient(135deg, var(--primary-blue), var(--primary-navy)); color: white; border: none; padding: 8px 18px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; cursor: pointer; font-family: inherit; }
+  main { max-width: 1400px; margin: 0 auto; padding: 32px 24px; }
+  h1 { font-size: 1.6rem; font-weight: 800; margin-bottom: 4px; }
+  .subhead { color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 24px; }
+  .stats { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 24px; }
+  .stat { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 10px; padding: 12px 18px; min-width: 100px; }
+  .stat .lbl { color: var(--text-secondary); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.04em; }
+  .stat .val { font-size: 1.6rem; font-weight: 800; line-height: 1.2; }
+  .stat.new .val { color: var(--primary-blue); }
+  .stat.contacted .val { color: #f59e0b; }
+  .stat.replied .val { color: var(--accent-green); }
+  .stat.paid .val { color: var(--accent-green); }
+  .stat.lost .val { color: #ef4444; }
+  .toolbar { display: flex; gap: 12px; align-items: center; margin-bottom: 16px; flex-wrap: wrap; }
+  .toolbar select, .toolbar button.add { background: var(--card-bg); border: 1px solid var(--border-color); color: var(--text-primary); padding: 8px 14px; border-radius: 8px; font-size: 0.85rem; font-family: inherit; cursor: pointer; }
+  .toolbar button.add { background: var(--accent-green); border-color: var(--accent-green); }
+  .toolbar button.add:hover { background: #047857; }
+  .toolbar .refresh { background: transparent; border: 1px solid var(--border-color); color: var(--text-secondary); padding: 8px 14px; border-radius: 8px; cursor: pointer; font-family: inherit; font-size: 0.85rem; }
+  .toolbar .spacer { flex: 1; }
+  table { width: 100%; background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; border-collapse: separate; border-spacing: 0; overflow: hidden; font-size: 0.85rem; }
+  thead { background: rgba(255,255,255,0.03); }
+  th { text-align: left; padding: 12px 14px; color: var(--text-secondary); font-weight: 600; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.04em; border-bottom: 1px solid var(--border-color); }
+  td { padding: 14px; border-bottom: 1px solid rgba(255,255,255,0.04); vertical-align: top; }
+  tr:hover td { background: rgba(255,255,255,0.02); }
+  td.name { min-width: 160px; }
+  td.name .pname { font-weight: 600; color: var(--text-primary); }
+  td.contact { font-size: 0.78rem; color: var(--text-secondary); min-width: 200px; }
+  td.contact a { color: var(--primary-blue); text-decoration: none; }
+  td.contact a:hover { text-decoration: underline; }
+  td.title { font-size: 0.85rem; max-width: 220px; }
+  td.extra { font-size: 0.72rem; color: var(--text-secondary); max-width: 180px; }
+  td.dt { color: var(--text-secondary); white-space: nowrap; font-size: 0.78rem; min-width: 90px; }
+  td.act button { background: var(--primary-blue); color: white; border: none; padding: 6px 12px; border-radius: 6px; font-size: 0.78rem; font-weight: 600; cursor: pointer; font-family: inherit; }
+  td.act button:hover { background: var(--primary-navy); }
+  .badge { display: inline-block; padding: 3px 9px; border-radius: 12px; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; white-space: nowrap; }
+  .badge.new { background: rgba(37,99,235,0.18); color: #93c5fd; }
+  .badge.contacted { background: rgba(245,158,11,0.18); color: #fbbf24; }
+  .badge.replied { background: rgba(5,150,105,0.18); color: #6ee7b7; }
+  .badge.demo_scheduled { background: rgba(168,85,247,0.18); color: #d8b4fe; }
+  .badge.paid { background: rgba(5,150,105,0.30); color: #34d399; }
+  .badge.lost { background: rgba(239,68,68,0.18); color: #fca5a5; }
+  .badge.spam { background: rgba(160,160,160,0.20); color: var(--text-secondary); }
+  .source-badge { display: inline-block; padding: 2px 7px; border-radius: 8px; font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; background: rgba(255,255,255,0.06); color: var(--text-secondary); margin-bottom: 4px; }
+  .notes { font-size: 0.72rem; color: var(--text-secondary); white-space: pre-wrap; max-width: 280px; max-height: 80px; overflow-y: auto; padding: 6px 8px; background: rgba(0,0,0,0.2); border-radius: 6px; margin-top: 4px; font-family: 'Roboto Mono', monospace; }
+  .empty { text-align: center; padding: 60px 20px; color: var(--text-secondary); }
+  /* Modal */
+  .modal-bg { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 100; align-items: center; justify-content: center; padding: 20px; }
+  .modal-bg.show { display: flex; }
+  .modal { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 28px; max-width: 540px; width: 100%; max-height: 90vh; overflow-y: auto; }
+  .modal h2 { font-size: 1.15rem; margin-bottom: 4px; }
+  .modal .who { color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 18px; }
+  .modal label { display: block; font-size: 0.78rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.04em; margin: 12px 0 6px; }
+  .modal select, .modal input, .modal textarea { width: 100%; background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); color: var(--text-primary); padding: 10px 12px; border-radius: 8px; font-size: 0.9rem; font-family: inherit; }
+  .modal textarea { min-height: 100px; resize: vertical; font-family: 'Roboto Mono', monospace; font-size: 0.82rem; }
+  .modal .actions { display: flex; gap: 10px; margin-top: 20px; }
+  .modal .actions button { flex: 1; padding: 10px; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; font-family: inherit; font-size: 0.9rem; }
+  .modal .actions .save { background: var(--accent-green); color: white; }
+  .modal .actions .cancel { background: transparent; color: var(--text-secondary); border: 1px solid var(--border-color); }
+  .modal .existing-notes { font-family: 'Roboto Mono', monospace; font-size: 0.75rem; color: var(--text-secondary); background: rgba(0,0,0,0.3); padding: 10px; border-radius: 6px; max-height: 200px; overflow-y: auto; white-space: pre-wrap; }
+  .modal .msg { background: rgba(255,255,255,0.04); padding: 10px; border-radius: 6px; font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 8px; max-height: 160px; overflow-y: auto; white-space: pre-wrap; }
+</style>
+</head>
+<body>
+<nav>
+  <div class="inner">
+    <a href="/" class="brand">CanadaInvesting<span class="blue">.app</span> · Admin Leads</a>
+    <div class="right">
+      <a href="/admin-dashboard">Dashboard</a>
+      <a href="/advisor-dashboard">Advisor View</a>
+      <button onclick="logout()">Logout</button>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <h1>Leads</h1>
+  <p class="subhead">Unified view of every inbound interest signal — contact form, advisor application, client request, and manually-logged calls.</p>
+
+  <div class="stats" id="stats">
+    <!-- populated by JS -->
+  </div>
+
+  <div class="toolbar">
+    <label style="color:var(--text-secondary);font-size:0.8rem">Status:</label>
+    <select id="filterStatus" onchange="loadLeads()">
+      <option value="">All</option>
+      <option value="new">New</option>
+      <option value="contacted">Contacted</option>
+      <option value="replied">Replied</option>
+      <option value="demo_scheduled">Demo Scheduled</option>
+      <option value="paid">Paid</option>
+      <option value="lost">Lost</option>
+      <option value="spam">Spam</option>
+    </select>
+    <label style="color:var(--text-secondary);font-size:0.8rem">Source:</label>
+    <select id="filterType" onchange="loadLeads()">
+      <option value="">All</option>
+      <option value="contact_submission">Contact form</option>
+      <option value="advisor_application">Advisor application</option>
+      <option value="client_profile">Client request</option>
+      <option value="manual_lead">Manual (call/in-person)</option>
+    </select>
+    <button class="refresh" onclick="loadLeads()"><i class="fas fa-arrows-rotate"></i> Refresh</button>
+    <span class="spacer"></span>
+    <button class="add" onclick="openManualModal()"><i class="fas fa-plus"></i> Log a call / manual lead</button>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Source / Submitted</th>
+        <th>Name</th>
+        <th>Contact</th>
+        <th>Subject / Tier</th>
+        <th>Detail</th>
+        <th>Status</th>
+        <th>Notes (timeline)</th>
+        <th>Last action</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody id="leadsTbl"><tr><td colspan="9" class="empty">Loading…</td></tr></tbody>
+  </table>
+</main>
+
+<!-- Update modal -->
+<div class="modal-bg" id="updateModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <h2 id="modalName">—</h2>
+    <div class="who" id="modalWho">—</div>
+    <div class="msg" id="modalMsg"></div>
+    <label>Existing timeline</label>
+    <div class="existing-notes" id="modalExistingNotes">No prior notes.</div>
+    <label>Status</label>
+    <select id="modalStatus">
+      <option value="new">New</option>
+      <option value="contacted">Contacted</option>
+      <option value="replied">Replied</option>
+      <option value="demo_scheduled">Demo scheduled</option>
+      <option value="paid">Paid</option>
+      <option value="lost">Lost</option>
+      <option value="spam">Spam</option>
+    </select>
+    <label>Add a note (optional)</label>
+    <textarea id="modalNote" placeholder="What did you do? (e.g., 'Called, left voicemail. Will follow up Tue.')"></textarea>
+    <div class="actions">
+      <button class="cancel" onclick="closeModal()">Cancel</button>
+      <button class="save" onclick="saveModal()">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- Manual-add modal -->
+<div class="modal-bg" id="manualModal" onclick="if(event.target===this)closeManualModal()">
+  <div class="modal">
+    <h2>Log a manual lead</h2>
+    <div class="who">For phone calls, in-person referrals, or anything you want to track that didn't come through a form.</div>
+    <label>Name *</label>
+    <input id="mlName" type="text" placeholder="Full name">
+    <label>Email</label>
+    <input id="mlEmail" type="email" placeholder="email@example.com">
+    <label>Phone</label>
+    <input id="mlPhone" type="tel" placeholder="+1 …">
+    <label>Source</label>
+    <select id="mlSource">
+      <option value="phone_call">Phone call</option>
+      <option value="referral">Referral</option>
+      <option value="in_person">In person / event</option>
+      <option value="linkedin">LinkedIn</option>
+      <option value="manual">Other</option>
+    </select>
+    <label>Subject (one-line summary)</label>
+    <input id="mlSubject" type="text" placeholder="e.g. Wants demo, retired financial planner">
+    <label>Notes / message</label>
+    <textarea id="mlMessage" placeholder="What did they say? What did they want?"></textarea>
+    <div class="actions">
+      <button class="cancel" onclick="closeManualModal()">Cancel</button>
+      <button class="save" onclick="saveManual()">Add lead</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const API = 'https://canadainvesting-backend-production.up.railway.app';
+const token = localStorage.getItem('advisor_token') || '';
+const headers = { 'Content-Type': 'application/json', 'Authorization': token ? `Bearer ${token}` : '' };
+
+function logout() {
+  localStorage.removeItem('advisor_token');
+  localStorage.removeItem('advisor_user');
+  window.location.href = '/advisor-login';
+}
+
+function fmt(d) {
+  if (!d) return '—';
+  const dt = new Date(d);
+  return dt.toLocaleDateString('en-CA', { month: 'short', day: 'numeric' }) + ' ' + dt.toLocaleTimeString('en-CA', { hour: '2-digit', minute: '2-digit' });
+}
+
+function fmtShort(d) {
+  if (!d) return '—';
+  return new Date(d).toLocaleDateString('en-CA', { month: 'short', day: 'numeric', year: 'numeric' });
+}
+
+const SOURCE_LABEL = {
+  contact_submission: 'Contact form',
+  advisor_application: 'Application',
+  client_profile: 'Client req',
+  manual_lead: 'Manual',
+};
+
+let currentLead = null;
+
+async function loadLeads() {
+  const s = document.getElementById('filterStatus').value;
+  const t = document.getElementById('filterType').value;
+  const params = new URLSearchParams();
+  if (s) params.set('status', s);
+  if (t) params.set('type', t);
+  try {
+    const res = await fetch(`${API}/api/admin/leads?${params}`, { headers });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Failed');
+    renderStats(data.counts || {});
+    renderTable(data.leads || []);
+  } catch (e) {
+    document.getElementById('leadsTbl').innerHTML = `<tr><td colspan="9" class="empty">Error: ${e.message}</td></tr>`;
+  }
+}
+
+function renderStats(counts) {
+  const order = ['new', 'contacted', 'replied', 'demo_scheduled', 'paid', 'lost'];
+  const html = order.map(s => {
+    const n = counts[s] || 0;
+    const label = s.replace(/_/g, ' ');
+    return `<div class="stat ${s}"><div class="lbl">${label}</div><div class="val">${n}</div></div>`;
+  }).join('');
+  document.getElementById('stats').innerHTML = html;
+}
+
+function renderTable(leads) {
+  if (leads.length === 0) {
+    document.getElementById('leadsTbl').innerHTML = `<tr><td colspan="9" class="empty">No leads match the current filter.</td></tr>`;
+    return;
+  }
+  document.getElementById('leadsTbl').innerHTML = leads.map(l => {
+    const src = SOURCE_LABEL[l.lead_type] || l.lead_type;
+    const notes = l.notes ? `<div class="notes">${escapeHtml(l.notes)}</div>` : '';
+    const phone = l.phone ? `<div><a href="tel:${l.phone}">${l.phone}</a></div>` : '';
+    return `<tr>
+      <td class="dt"><span class="source-badge">${src}</span><br>${fmtShort(l.submitted_at)}</td>
+      <td class="name"><div class="pname">${escapeHtml(l.name || '—')}</div></td>
+      <td class="contact">
+        ${l.email ? `<div><a href="mailto:${l.email}">${l.email}</a></div>` : ''}
+        ${phone}
+      </td>
+      <td class="title">${escapeHtml(l.title || '—')}</td>
+      <td class="extra">${escapeHtml(l.extra || '—')}</td>
+      <td><span class="badge ${l.status}">${l.status.replace(/_/g, ' ')}</span></td>
+      <td>${notes}</td>
+      <td class="dt">${fmt(l.last_action_at)}</td>
+      <td class="act"><button onclick='openModal(${JSON.stringify(l).replace(/'/g, "&apos;")})'>Update</button></td>
+    </tr>`;
+  }).join('');
+}
+
+function escapeHtml(s) {
+  if (s == null) return '';
+  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
+function openModal(lead) {
+  currentLead = lead;
+  document.getElementById('modalName').textContent = lead.name || '(no name)';
+  document.getElementById('modalWho').textContent = `${SOURCE_LABEL[lead.lead_type] || lead.lead_type} · ${lead.email || lead.phone || '—'} · submitted ${fmtShort(lead.submitted_at)}`;
+  document.getElementById('modalMsg').textContent = lead.message || lead.title || '';
+  document.getElementById('modalExistingNotes').textContent = lead.notes || 'No prior notes.';
+  document.getElementById('modalStatus').value = lead.status;
+  document.getElementById('modalNote').value = '';
+  document.getElementById('updateModal').classList.add('show');
+}
+
+function closeModal() {
+  document.getElementById('updateModal').classList.remove('show');
+  currentLead = null;
+}
+
+async function saveModal() {
+  if (!currentLead) return;
+  const status = document.getElementById('modalStatus').value;
+  const note = document.getElementById('modalNote').value.trim();
+  if (!status && !note) return alert('Pick a status or add a note.');
+  try {
+    const res = await fetch(`${API}/api/admin/leads/${currentLead.lead_type}/${currentLead.lead_id}/status`, {
+      method: 'POST', headers, body: JSON.stringify({ status, note: note || null }),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Failed');
+    closeModal();
+    loadLeads();
+  } catch (e) {
+    alert('Save failed: ' + e.message);
+  }
+}
+
+function openManualModal() {
+  document.getElementById('manualModal').classList.add('show');
+}
+function closeManualModal() {
+  document.getElementById('manualModal').classList.remove('show');
+}
+async function saveManual() {
+  const payload = {
+    name: document.getElementById('mlName').value.trim(),
+    email: document.getElementById('mlEmail').value.trim(),
+    phone: document.getElementById('mlPhone').value.trim(),
+    source: document.getElementById('mlSource').value,
+    subject: document.getElementById('mlSubject').value.trim(),
+    message: document.getElementById('mlMessage').value.trim(),
+  };
+  if (!payload.name && !payload.email && !payload.phone) return alert('Need at least a name, email, or phone.');
+  try {
+    const res = await fetch(`${API}/api/admin/leads/manual`, { method: 'POST', headers, body: JSON.stringify(payload) });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Failed');
+    // Clear form
+    ['mlName', 'mlEmail', 'mlPhone', 'mlSubject', 'mlMessage'].forEach(id => document.getElementById(id).value = '');
+    closeManualModal();
+    loadLeads();
+  } catch (e) {
+    alert('Save failed: ' + e.message);
+  }
+}
+
+// Init
+loadLeads();
+// Auto-refresh every 90 seconds
+setInterval(loadLeads, 90000);
+</script>
+</body>
+</html>
