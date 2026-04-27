@@ -11,8 +11,13 @@
     <link rel="icon" type="image/png" href="/icon-512.png">
     <link rel="apple-touch-icon" href="/icon-512.png">
 
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://canadainvesting.app/profile">
+    <!-- Canonical URL is injected at runtime once the advisor ID is read from
+         the query string (see SEO bootstrap script below). The static fallback
+         used to be href="/profile" without an ID, which Google honored as the
+         canonical for every /profile?id=X URL — collapsing 200+ advisor pages
+         into one and triggering "duplicate, Google chose different canonical
+         than user" alerts. The runtime injection now sets the per-ID canonical
+         correctly. -->
 
     <!-- Open Graph -->
     <meta property="og:type" content="profile">
@@ -320,8 +325,15 @@
         (function() {
             var id = new URLSearchParams(window.location.search).get('id');
             if (!id) return;
+            // Inject per-ID canonical. Create the element if not present (no
+            // static fallback so Google never sees a misleading default).
             var canon = document.querySelector('link[rel="canonical"]');
-            if (canon) canon.href = 'https://canadainvesting.app/profile?id=' + id;
+            if (!canon) {
+                canon = document.createElement('link');
+                canon.rel = 'canonical';
+                document.head.appendChild(canon);
+            }
+            canon.href = 'https://canadainvesting.app/profile?id=' + id;
             fetch('https://canadainvesting-backend-production.up.railway.app/api/profiles/' + encodeURIComponent(id))
                 .then(function(r) { return r.ok ? r.json() : null; })
                 .then(function(data) {
