@@ -31,3 +31,5 @@ Disallow: /ai-demo.html
 Disallow: /data-processing-agreement.html
 
 Sitemap: https://canadainvesting.app/sitemap.xml
+Sitemap: https://canadainvesting.app/sitemap-directory.xml
+Sitemap: https://canadainvesting.app/sitemap_index.xml
