@@ -623,12 +623,19 @@
 
         async function submitContactForm(e) {
             e.preventDefault();
+
+            // Redirect clients/investors to the advisor matching form
+            const typeSelect = document.getElementById('type');
+            if (typeSelect.value === 'client') {
+                window.location.href = '/find-advisor.html';
+                return;
+            }
+
             const btn = document.getElementById('submitBtn');
             const originalHTML = btn.innerHTML;
             btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
             btn.disabled = true;
 
-            const typeSelect = document.getElementById('type');
             const typeLabel = typeSelect.options[typeSelect.selectedIndex].text;
 
             try {
@@ -668,6 +675,13 @@
                 }, 3000);
             }
         }
+
+        // Redirect immediately when "Client / Investor" is selected
+        document.getElementById('type').addEventListener('change', function() {
+            if (this.value === 'client') {
+                window.location.href = '/find-advisor.html';
+            }
+        });
     </script>
 </body>
 </html>
