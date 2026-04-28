@@ -32,4 +32,6 @@ Disallow: /data-processing-agreement.html
 
 Sitemap: https://canadainvesting.app/sitemap.xml
 Sitemap: https://canadainvesting.app/sitemap-directory.xml
+Sitemap: https://canadainvesting.app/sitemap-profiles-1.xml
+Sitemap: https://canadainvesting.app/sitemap-profiles-2.xml
 Sitemap: https://canadainvesting.app/sitemap_index.xml
