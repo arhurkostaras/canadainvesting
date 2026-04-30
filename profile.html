@@ -333,43 +333,46 @@
                 document.head.appendChild(canon);
             }
             canon.href = 'https://canadainvesting.app/profile?id=' + id;
-            fetch('https://canadainvesting-backend-production.up.railway.app/api/profiles/' + encodeURIComponent(id))
-                .then(function(r) { return r.ok ? r.json() : null; })
-                .then(function(data) {
-                    if (!data || !data.profile) return;
+            // Synchronous XHR — guarantees content in initial render for Googlebot
+            try {
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', 'https://canadainvesting-backend-production.up.railway.app/api/profiles/' + encodeURIComponent(id), false);
+                xhr.timeout = 5000;
+                xhr.send();
+                if (xhr.status === 200) {
+                    var data = JSON.parse(xhr.responseText);
                     var p = data.profile;
-                    var name = p.name || '';
-                    var designation = p.designation || 'Financial Advisor';
-                    var firm = p.firm_name || '';
-                    var city = p.city || '';
-                    var province = p.province || '';
-                    var location = [city, province].filter(Boolean).join(', ');
-                    document.title = name + ', ' + designation + ' | CanadaInvesting.app';
-                    var metaDesc = document.querySelector('meta[name="description"]');
-                    if (metaDesc) {
-                        metaDesc.content = name + ' is a ' + designation + (firm ? ' at ' + firm : '') + (location ? ' in ' + location : '') + '. View verified credentials and AI-generated bio on CanadaInvesting.app.';
+                    if (p && p.name) {
+                        var name = p.name;
+                        var designation = p.designation || 'Financial Advisor';
+                        var firm = p.firm_name || '';
+                        var city = p.city || '';
+                        var province = p.province || '';
+                        var location = [city, province].filter(Boolean).join(', ');
+                        document.title = name + ', ' + designation + ' | CanadaInvesting.app';
+                        var metaDesc = document.querySelector('meta[name="description"]');
+                        if (metaDesc) metaDesc.content = name + ' is a ' + designation + (firm ? ' at ' + firm : '') + (location ? ' in ' + location : '') + '. View verified credentials and AI-generated bio on CanadaInvesting.app.';
+                        var ogTitle = document.querySelector('meta[property="og:title"]');
+                        if (ogTitle) ogTitle.content = name + ', ' + designation + ' | CanadaInvesting.app';
+                        var ogDesc = document.querySelector('meta[property="og:description"]');
+                        if (ogDesc) ogDesc.content = name + ' — ' + designation + (location ? ' in ' + location : '') + '. Verified profile on CanadaInvesting.app.';
+                        var ogUrl = document.querySelector('meta[property="og:url"]');
+                        if (ogUrl) ogUrl.content = 'https://canadainvesting.app/profile?id=' + id;
+                        var twTitle = document.querySelector('meta[name="twitter:title"]');
+                        if (twTitle) twTitle.content = name + ', ' + designation + ' | CanadaInvesting.app';
+                        var twDesc = document.querySelector('meta[name="twitter:description"]');
+                        if (twDesc) twDesc.content = name + ' — ' + designation + (location ? ' in ' + location : '') + '. Verified profile on CanadaInvesting.app.';
+                        var seoTitle = document.getElementById('seoTitle');
+                        if (seoTitle) seoTitle.textContent = name + ', ' + designation;
+                        var seoDetails = document.getElementById('seoDetails');
+                        if (seoDetails) seoDetails.textContent = (firm ? firm + ' — ' : '') + (location || 'Canada');
+                        var seoBio = document.getElementById('seoBio');
+                        if (seoBio && p.bio) {
+                            seoBio.textContent = p.bio.length > 200 ? p.bio.substring(0, 200) + '...' : p.bio;
+                        }
                     }
-                    var ogTitle = document.querySelector('meta[property="og:title"]');
-                    if (ogTitle) ogTitle.content = name + ', ' + designation + ' | CanadaInvesting.app';
-                    var ogDesc = document.querySelector('meta[property="og:description"]');
-                    if (ogDesc) ogDesc.content = name + ' — ' + designation + (location ? ' in ' + location : '') + '. Verified profile on CanadaInvesting.app.';
-                    var ogUrl = document.querySelector('meta[property="og:url"]');
-                    if (ogUrl) ogUrl.content = 'https://canadainvesting.app/profile?id=' + id;
-                    var twTitle = document.querySelector('meta[name="twitter:title"]');
-                    if (twTitle) twTitle.content = name + ', ' + designation + ' | CanadaInvesting.app';
-                    var twDesc = document.querySelector('meta[name="twitter:description"]');
-                    if (twDesc) twDesc.content = name + ' — ' + designation + (location ? ' in ' + location : '') + '. Verified profile on CanadaInvesting.app.';
-                    var seoTitle = document.getElementById('seoTitle');
-                    if (seoTitle) seoTitle.textContent = name + ', ' + designation;
-                    var seoDetails = document.getElementById('seoDetails');
-                    if (seoDetails) seoDetails.textContent = (firm ? firm + ' — ' : '') + (location || 'Canada');
-                    var seoBio = document.getElementById('seoBio');
-                    if (seoBio && p.bio) {
-                        var bioText = p.bio.length > 200 ? p.bio.substring(0, 200) + '...' : p.bio;
-                        seoBio.textContent = bioText;
-                    }
-                })
-                .catch(function() {});
+                }
+            } catch(e) {}
         })();
     </script>
 
