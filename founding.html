@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Founding Cohort — CanadaInvesting</title>
+<meta name="description" content="Live status of the CanadaInvesting founding cohort: 30 seats, locked $299/mo for 24 months from activation.">
+<link rel="canonical" href="https://canadainvesting.app/founding">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root { --primary-blue: #2563eb; --primary-navy: #1e3a8a; --accent-green: #059669; --dark-bg: #0a0a0a; --card-bg: #1a1a1a; --border-color: #333; --text-muted: #9ca3af; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Roboto', Arial, sans-serif; background: var(--dark-bg); color: #fff; line-height: 1.6; }
+.container { max-width: 760px; margin: 0 auto; padding: 56px 24px; }
+nav { background: rgba(0,0,0,0.4); backdrop-filter: blur(20px); padding: 16px 24px; border-bottom: 1px solid var(--border-color); }
+nav a { color: #fff; text-decoration: none; font-weight: 500; }
+h1 { font-size: 36px; margin-bottom: 8px; line-height: 1.2; }
+h2 { font-size: 22px; margin: 32px 0 12px; color: #fff; }
+.tag { display: inline-block; background: var(--primary-navy); color: #fff; padding: 4px 12px; border-radius: 4px; font-size: 13px; font-weight: 500; margin-bottom: 16px; letter-spacing: 0.5px; }
+.counter-block { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 32px; margin: 32px 0; text-align: center; }
+.counter-big { font-size: 72px; font-weight: 700; color: var(--primary-blue); line-height: 1; }
+.counter-label { color: var(--text-muted); font-size: 14px; margin-top: 8px; letter-spacing: 0.5px; text-transform: uppercase; }
+.progress-bar { background: #1f1f1f; height: 8px; border-radius: 4px; margin: 24px 0 8px; overflow: hidden; }
+.progress-fill { background: linear-gradient(90deg, var(--primary-blue), var(--accent-green)); height: 100%; transition: width 0.6s ease; }
+.terms { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 24px; }
+.terms ul { list-style: none; padding: 0; }
+.terms li { padding: 12px 0; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.terms li:last-child { border: 0; }
+.terms li strong { color: #fff; }
+.terms li span { color: var(--text-muted); text-align: right; }
+.muted { color: var(--text-muted); font-size: 14px; }
+.footer { margin-top: 56px; padding-top: 32px; border-top: 1px solid var(--border-color); color: var(--text-muted); font-size: 13px; text-align: center; }
+.footer a { color: var(--primary-blue); }
+.error { color: #f87171; }
+</style>
+</head>
+<body>
+<nav><a href="/">CanadaInvesting</a></nav>
+<div class="container">
+<span class="tag">Founding Cohort — Live Status</span>
+<h1>30 founding seats. <br>Live count below.</h1>
+<p class="muted">Founding cohort pricing on the investing side is $299/mo locked for 24 months from your activation date, even when standard tier pricing changes. Investor-side demand is building, not yet at LAW-equivalent volume; founding cohort positions before flow lands.</p>
+
+<div class="counter-block">
+  <div class="counter-big" id="remaining">—</div>
+  <div class="counter-label">seats remaining</div>
+  <div class="progress-bar"><div class="progress-fill" id="fill" style="width: 0%"></div></div>
+  <p class="muted" id="filled-text">Loading live count…</p>
+</div>
+
+<h2>Founding terms</h2>
+<div class="terms">
+  <ul>
+    <li><strong>Seat cap</strong><span id="cap-display">—</span></li>
+    <li><strong>Subscription</strong><span>$299/mo</span></li>
+    <li><strong>Price lock</strong><span id="lock-display">— months from activation</span></li>
+    <li><strong>What ends the lock?</strong><span>Nothing. Locked even if standard tier pricing changes.</span></li>
+    <li><strong>Waitlist after cap?</strong><span>None. Standard tier opens directly.</span></li>
+    <li><strong>Eligibility</strong><span>Active CIRO, FP Canada, or PMAC standing.</span></li>
+  </ul>
+</div>
+
+<p class="footer">
+Once founding seats fill, standard tier opens at standard pricing.<br>
+Questions? <a href="/contact">Contact us</a> or reply directly to any outreach you've received.
+</p>
+</div>
+
+<script>
+(function() {
+  const API = 'https://canadainvesting-backend-production.up.railway.app/api/public/founding';
+  fetch(API, { cache: 'no-store' })
+    .then(r => r.ok ? r.json() : Promise.reject(r.status))
+    .then(d => {
+      document.getElementById('remaining').textContent = d.remaining;
+      document.getElementById('cap-display').textContent = d.cap + ' seats';
+      document.getElementById('lock-display').textContent = d.pricing_lock_months + ' months from activation';
+      const pct = d.cap > 0 ? Math.min(100, (d.filled / d.cap) * 100) : 0;
+      document.getElementById('fill').style.width = pct.toFixed(1) + '%';
+      document.getElementById('filled-text').textContent = d.filled + ' of ' + d.cap + ' founding seats activated';
+    })
+    .catch(err => {
+      document.getElementById('remaining').textContent = '—';
+      document.getElementById('filled-text').innerHTML = '<span class="error">Live counter temporarily unavailable. Founding cohort is 30 seats; please check back shortly.</span>';
+    });
+})();
+</script>
+</body>
+</html>
