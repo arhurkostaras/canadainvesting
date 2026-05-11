@@ -5,6 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <meta name="description" content="View this investment advisor's verified profile on CanadaInvesting.app — credentials, specializations, and AI-generated bio.">
 
+    <!-- 2026-05-11 EXPOSURE MITIGATION: pool contamination audit identified
+         35,274 Licensed Insurance Agents (64% of pool) misclassified as
+         investment advisors. Insurance agents are regulated under provincial
+         insurance acts, not CIRO — describing them as registered advisors is
+         regulated-profession misrepresentation. Until cleanup completes, all
+         profile pages are noindex'd to prevent further search exposure of
+         misclassified AI bios. Paired with robots.txt Disallow:/profile.
+         Reversal: remove this meta tag + robots.txt entry post-cleanup. -->
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="googlebot" content="noindex, nofollow">
+
     <title>Advisor Profile | CanadaInvesting.app</title>
 
     <!-- Favicon -->

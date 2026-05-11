@@ -15,6 +15,17 @@ Allow: /trust-center.html
 Allow: /privacy-policy.html
 Allow: /terms-of-service.html
 
+# 2026-05-11 EXPOSURE MITIGATION: pool contamination audit identified 35,274
+# Licensed Insurance Agents (64% of pool) misclassified as investment advisors.
+# Insurance agents are regulated under provincial insurance acts, not CIRO —
+# describing them as registered advisors is regulated-profession
+# misrepresentation. Until cleanup completes, profile pages are disallowed
+# from crawl. Paired with noindex meta on profile.html. Reversal: remove
+# these lines + the noindex meta tag post-cleanup. Profile sitemaps also
+# withdrawn to stop sitemap-driven discovery.
+Disallow: /profile
+Disallow: /profile?*
+
 # App pages (disallow)
 Disallow: /advisor-dashboard.html
 Disallow: /advisor-login.html
@@ -32,6 +43,7 @@ Disallow: /data-processing-agreement.html
 
 Sitemap: https://canadainvesting.app/sitemap.xml
 Sitemap: https://canadainvesting.app/sitemap-directory.xml
-Sitemap: https://canadainvesting.app/sitemap-profiles-1.xml
-Sitemap: https://canadainvesting.app/sitemap-profiles-2.xml
+# Profile sitemaps temporarily withdrawn pending pool-contamination cleanup.
+# Sitemap: https://canadainvesting.app/sitemap-profiles-1.xml
+# Sitemap: https://canadainvesting.app/sitemap-profiles-2.xml
 Sitemap: https://canadainvesting.app/sitemap_index.xml
