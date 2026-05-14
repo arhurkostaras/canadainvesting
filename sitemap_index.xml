@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Profile sitemaps (sitemap-profiles-1.xml, sitemap-profiles-2.xml) removed
+  2026-05-14 to complete the May 11 exposure mitigation. They referenced
+  54,797 /profile?id=N URLs that are noindex'd in profile.html and disallowed
+  in robots.txt; leaving them in the sitemap index was producing the
+  "Discovered/Crawled - currently not indexed" GSC backlog.
+  Reversal post pool cleanup: re-add the two profile sitemap entries below.
+-->
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <sitemap>
     <loc>https://canadainvesting.app/sitemap.xml</loc>
-    <lastmod>2026-04-26</lastmod>
+    <lastmod>2026-05-14</lastmod>
   </sitemap>
   <sitemap>
     <loc>https://canadainvesting.app/sitemap-directory.xml</loc>
-    <lastmod>2026-04-26</lastmod>
-  </sitemap>
-  <sitemap>
-    <loc>https://canadainvesting.app/sitemap-profiles-1.xml</loc>
-    <lastmod>2026-04-28</lastmod>
-  </sitemap>
-  <sitemap>
-    <loc>https://canadainvesting.app/sitemap-profiles-2.xml</loc>
-    <lastmod>2026-04-28</lastmod>
+    <lastmod>2026-05-14</lastmod>
   </sitemap>
 </sitemapindex>

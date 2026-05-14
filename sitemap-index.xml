@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Legacy duplicate of sitemap_index.xml (note underscore vs hyphen in filename).
+  Cleaned 2026-05-14 to remove stale profile sitemap references that contradicted
+  the May 11 exposure mitigation. Canonical sitemap index is sitemap_index.xml
+  (with underscore) per robots.txt. This file is kept as a harmless mirror in
+  case anything externally references the hyphen-form URL; it can be deleted
+  outright once GSC and external references are confirmed clean.
+-->
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <sitemap><loc>https://canadainvesting.app/sitemap.xml</loc></sitemap>
-  <sitemap><loc>https://canadainvesting.app/sitemap-profiles-1.xml</loc></sitemap>
-  <sitemap><loc>https://canadainvesting.app/sitemap-profiles-2.xml</loc></sitemap>
+  <sitemap><loc>https://canadainvesting.app/sitemap-directory.xml</loc></sitemap>
 </sitemapindex>
