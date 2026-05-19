@@ -441,7 +441,7 @@
                     renderProfile(profile);
                 })
                 .catch(function(err) {
-                    var msg = (err && err.message) || 'This claim link has expired or is invalid.';
+                    var msg = (err && (err.message || err.error)) || 'This claim link has expired or is invalid.';
                     if (msg.toLowerCase().indexOf('already claimed') !== -1 || msg.toLowerCase().indexOf('already been claimed') !== -1) {
                         showError('Profile Already Claimed', 'This profile has already been claimed. If you own this profile, please log in to your dashboard.');
                     } else {
@@ -544,7 +544,7 @@
                 showSuccess(data.referralLink);
             })
             .catch(function(err) {
-                var msg = (err && err.message) || 'Something went wrong. Please try again.';
+                var msg = (err && (err.message || err.error)) || 'Something went wrong. Please try again.';
                 // Funnel event 6: claim failed
                 gtag('event', 'claim_error', { error_message: msg });
                 if (msg.toLowerCase().indexOf('already claimed') !== -1) {
