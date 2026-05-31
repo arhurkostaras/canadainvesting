@@ -549,6 +549,18 @@
 
             try {
                 const resp = await fetch(`${API_BASE}/api/profiles/${encodeURIComponent(id)}`);
+                // 2026-05-31: 410 PROFILE_UNDER_REVIEW is a permanent-by-design state,
+                // not a transient error. Render credential-neutral recovery copy
+                // instead of the generic "Profile Not Found" error state. INV's
+                // 410 body currently lacks profile_name; showGated(undefined)
+                // renders the generic "this listing" version.
+                if (resp.status === 410) {
+                    let gatedBody = null;
+                    try { gatedBody = await resp.json(); } catch (e) {}
+                    const gatedName = (gatedBody && gatedBody.profile_name) ? gatedBody.profile_name : '';
+                    showGated(gatedName);
+                    return;
+                }
                 if (!resp.ok) {
                     showError();
                     return;
@@ -588,6 +600,46 @@
         function showError() {
             document.getElementById('loadingState').style.display = 'none';
             document.getElementById('errorState').style.display = 'block';
+        }
+
+        // 2026-05-31: dedicated handler for HTTP 410 PROFILE_UNDER_REVIEW. The
+        // pool-contamination gate (2026-05-11) prevents serving listings where
+        // the underlying record may misrepresent the person's profession.
+        // INV's pool came back ~64-68% non-advisor — primarily Licensed
+        // Insurance Agents misclassified as CIRO-registered investment
+        // advisors, which is regulated-profession misrepresentation. Recovery
+        // copy is CREDENTIAL-NEUTRAL: never asserts the person is an investment
+        // advisor. Points searchers at authoritative Canadian registers (CIRO
+        // for advisors, provincial insurance regulators, FP Canada for CFPs).
+        // Name parameter is optional — INV's 410 body lacks profile_name, so
+        // the generic "this listing" version is rendered.
+        function showGated(name) {
+            document.getElementById('loadingState').style.display = 'none';
+            const errorState = document.getElementById('errorState');
+            errorState.style.display = 'block';
+            const safeName = escapeHtml(name);
+            const nameSentence = safeName
+                ? "We're updating the credential record for <strong>" + safeName + "</strong>."
+                : "We're updating the credential record for this listing.";
+            const subjectParam = name
+                ? 'Profile%20Review:%20' + encodeURIComponent(name)
+                : 'Profile%20Review%20Investing';
+            errorState.innerHTML =
+                '<h2 style="margin-top:0;">This listing is being verified</h2>' +
+                '<p>' + nameSentence + " While verification is in progress, this profile isn't publicly visible on CanadaInvesting.app.</p>" +
+                '<p>For current, official credential information about Canadian financial professionals, consult the relevant regulatory body directly:</p>' +
+                '<ul style="text-align:left; max-width:600px; margin:1em auto;">' +
+                    '<li><strong>Investment advisors</strong> &mdash; <a href="https://www.ciro.ca/office-investor/protect-your-money/check-registration-background-advisor" target="_blank" rel="noopener">CIRO Advisor Report</a> (Canadian Investment Regulatory Organization)</li>' +
+                    '<li><strong>Insurance professionals</strong> &mdash; contact your provincial insurance regulator: ' +
+                        '<a href="https://www.fsrao.ca/" target="_blank" rel="noopener">FSRA (Ontario)</a>, ' +
+                        '<a href="https://lautorite.qc.ca/" target="_blank" rel="noopener">AMF (Qu&eacute;bec)</a>, ' +
+                        '<a href="https://www.bcfsa.ca/" target="_blank" rel="noopener">BCFSA (BC)</a>, ' +
+                        'or your provincial equivalent</li>' +
+                    '<li><strong>Financial planners (CFP)</strong> &mdash; <a href="https://www.fpcanada.ca/findaplanner" target="_blank" rel="noopener">FP Canada &mdash; Find Your Planner</a></li>' +
+                '</ul>' +
+                '<p style="font-size:0.9em; color:#666; margin-top:1.5em;">Listing questions? Email ' +
+                    '<a href="mailto:arthur@negotiateandwin.com?subject=' + subjectParam + '">arthur@negotiateandwin.com</a>' +
+                '</p>';
         }
 
         function renderProfile(data) {
