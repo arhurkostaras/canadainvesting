@@ -127,14 +127,16 @@
         const API_BASE_URL = 'https://canadainvesting-backend-production.up.railway.app';
 
         async function checkSubscription() {
-            const email = localStorage.getItem('ca_checkout_email');
-            if (!email) {
+            const token = localStorage.getItem('advisor_token');
+            if (!token) {
                 document.getElementById('loadingState').style.display = 'none';
                 return;
             }
 
             try {
-                const res = await fetch(`${API_BASE_URL}/api/stripe/subscription-status?email=${encodeURIComponent(email)}`);
+                const res = await fetch(`${API_BASE_URL}/api/stripe/subscription-status`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
                 const data = await res.json();
 
                 document.getElementById('loadingState').style.display = 'none';
@@ -145,7 +147,7 @@
                         professional: 'Professional ($299/mo)',
                         enterprise: 'Enterprise ($599/mo)'
                     };
-                    document.getElementById('planName').textContent = tierNames[data.subscription.tier] || data.subscription.tier;
+                    document.getElementById('planName').textContent = tierNames[data.subscription.plan_type] || tierNames[data.subscription.tier] || data.subscription.plan_type || data.subscription.tier;
                     document.getElementById('subscriptionDetails').style.display = 'block';
                 }
             } catch (err) {

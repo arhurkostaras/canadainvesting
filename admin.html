@@ -819,20 +819,23 @@
         };
 
         async function loadSubscription() {
-            if (!email) {
+            const token = localStorage.getItem('advisor_token');
+            if (!token) {
                 document.getElementById('noSubscriptionBanner').style.display = 'block';
                 return;
             }
 
             try {
-                const res = await fetch(`${API_BASE_URL}/api/stripe/subscription-status?email=${encodeURIComponent(email)}`);
+                const res = await fetch(`${API_BASE_URL}/api/stripe/subscription-status`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
                 const data = await res.json();
 
                 if (data.subscription && data.subscription.status !== 'canceled') {
                     const sub = data.subscription;
                     const iconStyle = STATUS_ICONS[sub.status] || STATUS_ICONS.active;
 
-                    document.getElementById('subTierDisplay').textContent = TIER_NAMES[sub.tier] || sub.tier;
+                    document.getElementById('subTierDisplay').textContent = TIER_NAMES[sub.plan_type] || TIER_NAMES[sub.tier] || sub.plan_type || sub.tier;
 
                     const badgeEl = document.getElementById('subStatusBadge');
                     badgeEl.textContent = sub.status.charAt(0).toUpperCase() + sub.status.slice(1);
@@ -858,7 +861,8 @@
         }
 
         window.openBillingPortal = async function() {
-            if (!email) {
+            const token = localStorage.getItem('advisor_token');
+            if (!token) {
                 alert('Please log in to manage your subscription.');
                 return;
             }
@@ -866,7 +870,7 @@
             try {
                 const res = await fetch(`${API_BASE_URL}/api/stripe/create-portal-session`, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
                     body: JSON.stringify({ email: email })
                 });
 
