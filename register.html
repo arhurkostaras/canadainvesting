@@ -16,12 +16,12 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: var(--font-body), sans-serif; background: var(--bg); color: var(--text-primary); line-height: 1.6; min-height: 100vh; padding: 20px; }
         .reg-nav { background: var(--border); backdrop-filter: blur(20px); padding: 0 24px; display: flex; justify-content: space-between; align-items: center; height: 56px; max-width: 800px; margin: 0 auto 20px; border-radius: 12px; position: relative; }
-        .reg-nav a.reg-logo { color: var(--cream); font-weight: 700; font-size: 1.2rem; text-decoration: none; }
+        .reg-nav a.reg-logo { color: var(--cream-text); font-weight: 700; font-size: 1.2rem; text-decoration: none; }
         .reg-nav a.reg-logo span { color: var(--text-2); }
-        .nav-toggle { display: none; background: none; border: none; color: var(--cream); font-size: 1.5rem; cursor: pointer; padding: 4px; }
+        .nav-toggle { display: none; background: none; border: none; color: var(--cream-text); font-size: 1.5rem; cursor: pointer; padding: 4px; }
         .reg-nav-links { display: flex; align-items: center; gap: 16px; }
         .reg-nav-links a { color: var(--text-2); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
-        .reg-nav-links a:hover { color: var(--cream); }
+        .reg-nav-links a:hover { color: var(--cream-text); }
         .reg-nav-links.active { display: flex !important; }
         .container { max-width: 800px; margin: 0 auto; background: var(--card-bg); border-radius: 20px; padding: 32px; border: 1px solid var(--border-color); }
         .header { text-align: center; margin-bottom: 30px; }
@@ -76,7 +76,7 @@
 
         <form id="advisorRegistrationForm">
             <div class="form-section">
-                <h3 class="section-title">Personal Information</h3>
+                <h2 class="section-title">Personal Information</h2>
                 <div class="form-row">
                     <div class="form-group">
                         <label for="firstName">First Name <span class="required">*</span></label>
@@ -100,7 +100,7 @@
             </div>
 
             <div class="form-section">
-                <h3 class="section-title">Professional Credentials</h3>
+                <h2 class="section-title">Professional Credentials</h2>
                 <div class="form-row">
                     <div class="form-group">
                         <label for="ciroNumber">CIRO Registration Number <span class="required">*</span></label>
@@ -151,7 +151,7 @@
             </div>
 
             <div class="form-section">
-                <h3 class="section-title">Designations</h3>
+                <h2 class="section-title">Designations</h2>
                 <label style="color: var(--text-secondary); font-size: 0.85rem;">Select your professional designations</label>
                 <div class="checkbox-group">
                     <div class="checkbox-item"><input type="checkbox" id="cfa" name="designations" value="CFA"><label for="cfa">CFA (Chartered Financial Analyst)</label></div>
@@ -164,7 +164,7 @@
             </div>
 
             <div class="form-section">
-                <h3 class="section-title">Specializations</h3>
+                <h2 class="section-title">Specializations</h2>
                 <label style="color: var(--text-secondary); font-size: 0.85rem;">Select the services you specialize in <span class="required">*</span></label>
                 <div class="checkbox-group">
                     <div class="checkbox-item"><input type="checkbox" id="wealth" name="services" value="wealth-management"><label for="wealth">Wealth Management</label></div>
@@ -179,7 +179,7 @@
             </div>
 
             <div class="form-section">
-                <h3 class="section-title">Professional Profile</h3>
+                <h2 class="section-title">Professional Profile</h2>
                 <div class="form-row">
                     <div class="form-group" style="flex: 100%;">
                         <label for="bio">Professional Bio</label>

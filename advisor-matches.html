@@ -41,7 +41,7 @@
         .matches-grid { display: grid; gap: 2rem; margin-bottom: 3rem; }
         .match-card { background: var(--border); backdrop-filter: blur(10px); border-radius: 1rem; padding: 2rem; border: 1px solid var(--border); position: relative; transition: transform 0.3s ease, box-shadow 0.3s ease; }
         .match-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2); }
-        .match-rank { position: absolute; top: -10px; left: 2rem; background: var(--success); color: var(--cream); padding: 0.5rem 1rem; border-radius: 1rem; font-weight: bold; font-size: 0.9rem; }
+        .match-rank { position: absolute; top: -10px; left: 2rem; background: var(--success); color: var(--ink); padding: 0.5rem 1rem; border-radius: 1rem; font-weight: bold; font-size: 0.9rem; }
         .match-rank.second { background: var(--gold); }
         .match-rank.third { background: var(--gold); }
         .match-header { display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-items: start; margin-bottom: 1.5rem; }
@@ -52,12 +52,12 @@
         .score-circle { width: 80px; height: 80px; border-radius: 50%; background: conic-gradient(var(--success) var(--score-percentage), var(--border) 0); display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem; position: relative; }
         .score-circle::before { content: ''; width: 60px; height: 60px; background: var(--border); border-radius: 50%; position: absolute; }
         .score-number { font-size: 1.2rem; font-weight: bold; z-index: 1; }
-        .confidence-badge { background: var(--success); color: var(--cream); padding: 0.25rem 0.75rem; border-radius: 1rem; font-size: 0.8rem; font-weight: 500; }
+        .confidence-badge { background: var(--success); color: var(--ink); padding: 0.25rem 0.75rem; border-radius: 1rem; font-size: 0.8rem; font-weight: 500; }
         .confidence-badge.high { background: var(--success); }
         .confidence-badge.medium { background: var(--gold); }
         .confidence-badge.low { background: var(--danger); }
         .match-reasons { margin-bottom: 1.5rem; }
-        .match-reasons h4 { font-size: 1.1rem; margin-bottom: 1rem; color: var(--success); }
+        .match-reasons h4 { font-size: 1.1rem; margin-bottom: 1rem; color: var(--gold); }
         .reasons-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 0.75rem; }
         .reason-item { background: rgba(111,143,106, 0.1); border: 1px solid rgba(111,143,106, 0.2); border-radius: 0.5rem; padding: 0.75rem; font-size: 0.9rem; display: flex; align-items: center; }
         .reason-item::before { content: "\2713"; color: var(--success); font-weight: bold; margin-right: 0.5rem; }
@@ -71,7 +71,7 @@
         .score-bar-value { font-size: 0.9rem; font-weight: 500; min-width: 40px; text-align: right; }
         .cta-buttons { display: flex; gap: 1rem; flex-wrap: wrap; }
         .btn { padding: 1rem 2rem; border: none; border-radius: 0.5rem; font-size: 1rem; font-weight: 500; cursor: pointer; transition: all 0.3s ease; text-decoration: none; display: inline-block; text-align: center; }
-        .btn-primary { background: var(--success); color: var(--cream); }
+        .btn-primary { background: var(--success); color: var(--ink); }
         .btn-primary:hover { background: var(--success); transform: translateY(-2px); }
         .btn-secondary { background: transparent; color: var(--cream); border: 2px solid var(--border); }
         .btn-secondary:hover { background: var(--border); }
@@ -106,7 +106,7 @@
         .insight-item { display: flex; align-items: center; gap: 10px; padding: 8px; background: var(--border); border-radius: 6px; }
         .insight-icon { font-size: 16px; }
         .insight-text { flex: 1; font-size: 13px; }
-        .insight-confidence { font-size: 12px; font-weight: bold; color: var(--success); }
+        .insight-confidence { font-size: 12px; font-weight: bold; color: var(--gold); }
         .score-breakdown.ai-enhanced { background: var(--bg-high); border-radius: 8px; padding: 15px; margin: 15px 0; }
         .score-bar.ai-enhanced { margin-bottom: 12px; }
         .score-bar-fill.ai-fill { background: var(--success); border-radius: 4px; transition: width 1s ease-in-out; }
@@ -127,7 +127,7 @@
 
 <style id="phronisi-type">body{font-family:var(--font-body)}</style>
 </head>
-<body class="mode-light">
+<body>
     <nav>
         <div class="nav-container">
             <a href="/" class="logo">

@@ -15,7 +15,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: var(--font-body), sans-serif; line-height: 1.6; color: var(--text); background: var(--bg); min-height: 100vh; }
         .container { max-width: 800px; margin: 0 auto; padding: 20px; }
-        .header { text-align: center; color: var(--cream); margin-bottom: 30px; }
+        .header { text-align: center; color: var(--cream-text); margin-bottom: 30px; }
         .header h1 { font-size: 2.5rem; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; gap: 10px; }
         .header p { font-size: 1.2rem; opacity: 0.9; }
         .questionnaire-container { background: var(--bg-raised); border-radius: 20px; padding: 40px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); margin-bottom: 30px; }
@@ -53,7 +53,7 @@
         .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(201,168,106, 0.3); }
         .btn:disabled { opacity: 0.5; cursor: not-allowed; }
         .ai-insight { background: var(--bg-high); border-left: 4px solid var(--gold-deep); padding: 15px; margin: 20px 0; border-radius: 8px; }
-        .ai-insight h4 { color: var(--gold-deep); margin-bottom: 5px; display: flex; align-items: center; gap: 8px; }
+        .ai-insight h3 { font-size: 1rem; color: var(--cream-text); margin-bottom: 5px; display: flex; align-items: center; gap: 8px; }
         .ai-insight p { color: var(--text-2); font-size: 0.9rem; }
         .step-indicator { text-align: center; color: var(--text-2); margin-bottom: 20px; font-size: 0.9rem; }
         @media (max-width: 768px) {
@@ -138,34 +138,34 @@
                     <label>Professional Designations</label>
                     <div class="checkbox-grid">
                         <div class="checkbox-item multi-select" data-value="CFA">
-                            <input type="checkbox" name="designations" value="CFA">
+                            <input type="checkbox" name="designations" value="CFA" aria-label="CFA (Chartered Financial Analyst)">
                             <span>CFA (Chartered Financial Analyst)</span>
                         </div>
                         <div class="checkbox-item multi-select" data-value="CFP">
-                            <input type="checkbox" name="designations" value="CFP">
+                            <input type="checkbox" name="designations" value="CFP" aria-label="CFP (Certified Financial Planner)">
                             <span>CFP (Certified Financial Planner)</span>
                         </div>
                         <div class="checkbox-item multi-select" data-value="CIM">
-                            <input type="checkbox" name="designations" value="CIM">
+                            <input type="checkbox" name="designations" value="CIM" aria-label="CIM (Chartered Investment Manager)">
                             <span>CIM (Chartered Investment Manager)</span>
                         </div>
                         <div class="checkbox-item multi-select" data-value="FCSI">
-                            <input type="checkbox" name="designations" value="FCSI">
+                            <input type="checkbox" name="designations" value="FCSI" aria-label="FCSI (Fellow of the CSI)">
                             <span>FCSI (Fellow of the CSI)</span>
                         </div>
                         <div class="checkbox-item multi-select" data-value="PFP">
-                            <input type="checkbox" name="designations" value="PFP">
+                            <input type="checkbox" name="designations" value="PFP" aria-label="PFP (Personal Financial Planner)">
                             <span>PFP (Personal Financial Planner)</span>
                         </div>
                         <div class="checkbox-item multi-select" data-value="RFP">
-                            <input type="checkbox" name="designations" value="RFP">
+                            <input type="checkbox" name="designations" value="RFP" aria-label="RFP (Registered Financial Planner)">
                             <span>RFP (Registered Financial Planner)</span>
                         </div>
                     </div>
                 </div>
 
                 <div class="ai-insight">
-                    <h4><i class="fas fa-robot"></i> AI Insight</h4>
+                    <h3><i class="fas fa-robot"></i> AI Insight</h3>
                     <p>We verify all advisor credentials through CIRO to ensure our investors connect with legitimate, qualified professionals.</p>
                 </div>
             </div>
@@ -208,7 +208,7 @@
                 </div>
 
                 <div class="ai-insight">
-                    <h4><i class="fas fa-bullseye"></i> Matching Insight</h4>
+                    <h3><i class="fas fa-bullseye"></i> Matching Insight</h3>
                     <p>Practice size helps us match you with investors that fit your capacity and service model.</p>
                 </div>
             </div>
@@ -223,49 +223,49 @@
 
                 <div class="checkbox-grid">
                     <div class="checkbox-item multi-select" data-value="wealth-management">
-                        <input type="checkbox" name="specializations" value="wealth-management">
+                        <input type="checkbox" name="specializations" value="wealth-management" aria-label="Wealth Management">
                         <span><i class="fas fa-gem"></i> Wealth Management</span>
                     </div>
                     <div class="checkbox-item multi-select" data-value="retirement-planning">
-                        <input type="checkbox" name="specializations" value="retirement-planning">
+                        <input type="checkbox" name="specializations" value="retirement-planning" aria-label="Retirement Planning">
                         <span><i class="fas fa-umbrella-beach"></i> Retirement Planning</span>
                     </div>
                     <div class="checkbox-item multi-select" data-value="tax-efficient-investing">
-                        <input type="checkbox" name="specializations" value="tax-efficient-investing">
+                        <input type="checkbox" name="specializations" value="tax-efficient-investing" aria-label="Tax-Efficient Investing">
                         <span><i class="fas fa-receipt"></i> Tax-Efficient Investing</span>
                     </div>
                     <div class="checkbox-item multi-select" data-value="esg-investing">
-                        <input type="checkbox" name="specializations" value="esg-investing">
+                        <input type="checkbox" name="specializations" value="esg-investing" aria-label="ESG / Responsible Investing">
                         <span><i class="fas fa-leaf"></i> ESG / Responsible Investing</span>
                     </div>
                     <div class="checkbox-item multi-select" data-value="estate-planning">
-                        <input type="checkbox" name="specializations" value="estate-planning">
+                        <input type="checkbox" name="specializations" value="estate-planning" aria-label="Estate Planning">
                         <span><i class="fas fa-scroll"></i> Estate Planning</span>
                     </div>
                     <div class="checkbox-item multi-select" data-value="portfolio-management">
-                        <input type="checkbox" name="specializations" value="portfolio-management">
+                        <input type="checkbox" name="specializations" value="portfolio-management" aria-label="Portfolio Management">
                         <span><i class="fas fa-chart-pie"></i> Portfolio Management</span>
                     </div>
                     <div class="checkbox-item multi-select" data-value="corporate-pensions">
-                        <input type="checkbox" name="specializations" value="corporate-pensions">
+                        <input type="checkbox" name="specializations" value="corporate-pensions" aria-label="Corporate Pensions">
                         <span><i class="fas fa-building"></i> Corporate Pensions</span>
                     </div>
                     <div class="checkbox-item multi-select" data-value="insurance-planning">
-                        <input type="checkbox" name="specializations" value="insurance-planning">
+                        <input type="checkbox" name="specializations" value="insurance-planning" aria-label="Insurance Planning">
                         <span><i class="fas fa-shield-alt"></i> Insurance Planning</span>
                     </div>
                     <div class="checkbox-item multi-select" data-value="financial-planning">
-                        <input type="checkbox" name="specializations" value="financial-planning">
+                        <input type="checkbox" name="specializations" value="financial-planning" aria-label="Comprehensive Financial Planning">
                         <span><i class="fas fa-clipboard-list"></i> Comprehensive Financial Planning</span>
                     </div>
                     <div class="checkbox-item multi-select" data-value="alternative-investments">
-                        <input type="checkbox" name="specializations" value="alternative-investments">
+                        <input type="checkbox" name="specializations" value="alternative-investments" aria-label="Alternative Investments">
                         <span><i class="fas fa-coins"></i> Alternative Investments</span>
                     </div>
                 </div>
 
                 <div class="ai-insight">
-                    <h4><i class="fas fa-bullseye"></i> Smart Matching</h4>
+                    <h3><i class="fas fa-bullseye"></i> Smart Matching</h3>
                     <p>Specialization expertise is our #1 matching factor. Investors strongly prefer advisors with relevant specialization experience.</p>
                 </div>
             </div>
@@ -280,49 +280,49 @@
 
                 <div class="checkbox-grid">
                     <div class="checkbox-item multi-select" data-value="rrsp-tfsa">
-                        <input type="checkbox" name="services" value="rrsp-tfsa">
+                        <input type="checkbox" name="services" value="rrsp-tfsa" aria-label="RRSP & TFSA Management">
                         <span><i class="fas fa-piggy-bank"></i> RRSP & TFSA Management</span>
                     </div>
                     <div class="checkbox-item multi-select" data-value="resp">
-                        <input type="checkbox" name="services" value="resp">
+                        <input type="checkbox" name="services" value="resp" aria-label="RESP Planning">
                         <span><i class="fas fa-graduation-cap"></i> RESP Planning</span>
                     </div>
                     <div class="checkbox-item multi-select" data-value="rrif-lif">
-                        <input type="checkbox" name="services" value="rrif-lif">
+                        <input type="checkbox" name="services" value="rrif-lif" aria-label="RRIF & LIF Decumulation">
                         <span><i class="fas fa-calendar-check"></i> RRIF & LIF Decumulation</span>
                     </div>
                     <div class="checkbox-item multi-select" data-value="discretionary">
-                        <input type="checkbox" name="services" value="discretionary">
+                        <input type="checkbox" name="services" value="discretionary" aria-label="Discretionary Portfolio Management">
                         <span><i class="fas fa-chart-line"></i> Discretionary Portfolio Management</span>
                     </div>
                     <div class="checkbox-item multi-select" data-value="financial-plan">
-                        <input type="checkbox" name="services" value="financial-plan">
+                        <input type="checkbox" name="services" value="financial-plan" aria-label="Comprehensive Financial Plan">
                         <span><i class="fas fa-map"></i> Comprehensive Financial Plan</span>
                     </div>
                     <div class="checkbox-item multi-select" data-value="tax-planning">
-                        <input type="checkbox" name="services" value="tax-planning">
+                        <input type="checkbox" name="services" value="tax-planning" aria-label="Tax Planning & Optimization">
                         <span><i class="fas fa-calculator"></i> Tax Planning & Optimization</span>
                     </div>
                     <div class="checkbox-item multi-select" data-value="estate-trusts">
-                        <input type="checkbox" name="services" value="estate-trusts">
+                        <input type="checkbox" name="services" value="estate-trusts" aria-label="Estate & Trust Services">
                         <span><i class="fas fa-file-contract"></i> Estate & Trust Services</span>
                     </div>
                     <div class="checkbox-item multi-select" data-value="corporate-advisory">
-                        <input type="checkbox" name="services" value="corporate-advisory">
+                        <input type="checkbox" name="services" value="corporate-advisory" aria-label="Corporate Advisory">
                         <span><i class="fas fa-briefcase"></i> Corporate Advisory</span>
                     </div>
                     <div class="checkbox-item multi-select" data-value="insurance">
-                        <input type="checkbox" name="services" value="insurance">
+                        <input type="checkbox" name="services" value="insurance" aria-label="Insurance Solutions">
                         <span><i class="fas fa-shield-alt"></i> Insurance Solutions</span>
                     </div>
                     <div class="checkbox-item multi-select" data-value="cross-border">
-                        <input type="checkbox" name="services" value="cross-border">
+                        <input type="checkbox" name="services" value="cross-border" aria-label="Cross-Border Planning (US/Canada)">
                         <span><i class="fas fa-globe-americas"></i> Cross-Border Planning (US/Canada)</span>
                     </div>
                 </div>
 
                 <div class="ai-insight">
-                    <h4><i class="fas fa-lightbulb"></i> Service Matching</h4>
+                    <h3><i class="fas fa-lightbulb"></i> Service Matching</h3>
                     <p>Investors often need multiple services. Offering comprehensive services increases your match opportunities.</p>
                 </div>
             </div>
@@ -337,23 +337,23 @@
 
                 <div class="checkbox-grid">
                     <div class="checkbox-item multi-select" data-value="new-investor">
-                        <input type="checkbox" name="client-types" value="new-investor">
+                        <input type="checkbox" name="client-types" value="new-investor" aria-label="New Investors (Just Starting Out)">
                         <span><i class="fas fa-seedling"></i> New Investors (Just Starting Out)</span>
                     </div>
                     <div class="checkbox-item multi-select" data-value="accumulation">
-                        <input type="checkbox" name="client-types" value="accumulation">
+                        <input type="checkbox" name="client-types" value="accumulation" aria-label="Accumulation Phase (Building Wealth)">
                         <span><i class="fas fa-chart-line"></i> Accumulation Phase (Building Wealth)</span>
                     </div>
                     <div class="checkbox-item multi-select" data-value="pre-retirement">
-                        <input type="checkbox" name="client-types" value="pre-retirement">
+                        <input type="checkbox" name="client-types" value="pre-retirement" aria-label="Pre-Retirement (5-10 Years Away)">
                         <span><i class="fas fa-clock"></i> Pre-Retirement (5-10 Years Away)</span>
                     </div>
                     <div class="checkbox-item multi-select" data-value="retiree">
-                        <input type="checkbox" name="client-types" value="retiree">
+                        <input type="checkbox" name="client-types" value="retiree" aria-label="Retirees (Income & Preservation)">
                         <span><i class="fas fa-umbrella-beach"></i> Retirees (Income & Preservation)</span>
                     </div>
                     <div class="checkbox-item multi-select" data-value="hnw">
-                        <input type="checkbox" name="client-types" value="hnw">
+                        <input type="checkbox" name="client-types" value="hnw" aria-label="High Net Worth ($1M+ Portfolio)">
                         <span><i class="fas fa-gem"></i> High Net Worth ($1M+ Portfolio)</span>
                     </div>
                 </div>
@@ -382,7 +382,7 @@
                 </div>
 
                 <div class="ai-insight">
-                    <h4><i class="fas fa-bullseye"></i> Portfolio Matching</h4>
+                    <h3><i class="fas fa-bullseye"></i> Portfolio Matching</h3>
                     <p>Client portfolio size preferences help us match you with investors that fit your minimum AUM requirements and service capacity.</p>
                 </div>
             </div>
@@ -440,7 +440,7 @@
                 </div>
 
                 <div class="ai-insight">
-                    <h4><i class="fas fa-bolt"></i> Availability Matching</h4>
+                    <h3><i class="fas fa-bolt"></i> Availability Matching</h3>
                     <p>We prioritize advisors with immediate availability for investors with urgent planning needs.</p>
                 </div>
             </div>
@@ -478,7 +478,7 @@
                 </div>
 
                 <div class="ai-insight">
-                    <h4><i class="fas fa-globe-americas"></i> Geographic Matching</h4>
+                    <h3><i class="fas fa-globe-americas"></i> Geographic Matching</h3>
                     <p>Many investors prefer local advisors for in-person meetings, while others are comfortable with virtual relationships. We match based on preferences.</p>
                 </div>
             </div>
@@ -524,7 +524,7 @@
                 </div>
 
                 <div class="ai-insight">
-                    <h4><i class="fas fa-star"></i> Profile Quality</h4>
+                    <h3><i class="fas fa-star"></i> Profile Quality</h3>
                     <p>Complete profiles with professional bios receive 3x more investor inquiries than basic profiles.</p>
                 </div>
             </div>
@@ -536,7 +536,7 @@
             </div>
         </div>
 
-        <div style="text-align: center; color: var(--cream); opacity: 0.8; margin-top: 20px;">
+        <div style="text-align: center; color: var(--cream-text); opacity: 0.8; margin-top: 20px;">
             <p><i class="fas fa-lock"></i> Your information is secure and will only be shared with verified investor clients</p>
         </div>
     </div>
