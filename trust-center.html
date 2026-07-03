@@ -7,6 +7,10 @@
     <meta name="keywords" content="trust center, security, privacy, PIPEDA, CIRO compliance, data protection, investment advisor marketplace">
 
     <title>Trust Center | CanadaInvesting.app - Security, Privacy & Compliance</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/phronisi-tokens.css">
 
     <!-- Favicon -->
 
@@ -27,12 +31,11 @@
     <meta name="twitter:description" content="Security, privacy, and regulatory compliance measures protecting advisors and clients on Canada's AI-powered investment advisor marketplace.">
 
     <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <meta name="theme-color" content="#2563eb">
+    <meta name="theme-color" content="#0B0E12">
 
     <!-- Google Analytics 4 -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-YVD0B8RF20"></script>
@@ -57,21 +60,21 @@
 
     <style>
         :root {
-            --primary-blue: #2563eb;
-            --primary-navy: #1e3a8a;
-            --primary-emerald: #059669;
-            --accent-green: #059669;
-            --dark-bg: #0a0a0a;
-            --card-bg: #1a1a1a;
-            --text-primary: #ffffff;
-            --text-secondary: #a0a0a0;
-            --border-color: #333333;
+            --primary-blue: var(--gold);
+            --primary-navy: var(--gold-deep);
+            --primary-emerald: var(--success);
+            --accent-green: var(--success);
+            --dark-bg: var(--bg);
+            --card-bg: var(--bg-raised);
+            --text-primary: var(--text);
+            --text-secondary: var(--text-2);
+            --border-color: var(--border);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-family: var(--font-body), sans-serif;
             background: var(--dark-bg);
             color: var(--text-primary);
             line-height: 1.6;
@@ -79,22 +82,22 @@
         }
 
         /* Navigation */
-        .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(0,0,0,0.4); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .nav{ position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: var(--nav-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(241,234,220,0.1); }
         .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; height: 64px; }
-        .nav-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; color: white; font-weight: 700; font-size: 1.25rem; }
+        .nav-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; color: var(--cream); font-weight: 700; font-size: 1.25rem; }
         .nav-logo .maple { color: var(--primary-blue); font-size: 1.5rem; }
         .nav-links { display: flex; align-items: center; gap: 24px; list-style: none; }
-        .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.3s; }
-        .nav-links a:hover { color: white; }
-        .nav-cta { background: white !important; color: var(--primary-blue) !important; padding: 10px 24px; border-radius: 8px; font-weight: 700 !important; transition: transform 0.3s, box-shadow 0.3s; }
-        .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 4px 15px rgba(37,99,235,0.3); }
-        .nav-toggle { display: none; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; padding: 4px; }
+        .nav-links a { color: rgba(241,234,220,0.8); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.3s; }
+        .nav-links a:hover { color: var(--cream); }
+        .nav-cta { background: var(--gold) !important; color: var(--ink) !important; padding: 10px 24px; border-radius: 8px; font-weight: 700 !important; transition: transform 0.3s, box-shadow 0.3s; }
+        .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 4px 15px rgba(201,168,106,0.3); }
+        .nav-toggle { display: none; background: none; border: none; color: var(--cream); font-size: 1.5rem; cursor: pointer; padding: 4px; }
         .nav-links.active { display: flex; }
 
         /* Hero */
         .hero {
             padding: 140px 24px 80px;
-            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-navy) 50%, #1e3a5f 100%);
+            background: var(--bg-raised);
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -102,14 +105,14 @@
         .hero::before {
             content: '';
             position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-            background: radial-gradient(ellipse at 30% 20%, rgba(255,255,255,0.1) 0%, transparent 60%);
+            background: radial-gradient(ellipse at 30% 20%, rgba(241,234,220,0.1) 0%, transparent 60%);
             pointer-events: none;
         }
         .hero-badge {
             display: inline-flex; align-items: center; gap: 8px;
-            background: rgba(255,255,255,0.15); backdrop-filter: blur(10px);
+            background: rgba(241,234,220,0.15); backdrop-filter: blur(10px);
             padding: 10px 22px; border-radius: 50px; font-size: 0.85rem; font-weight: 500;
-            margin-bottom: 28px; border: 1px solid rgba(255,255,255,0.2);
+            margin-bottom: 28px; border: 1px solid rgba(241,234,220,0.2);
             position: relative;
         }
         .hero h1 {
@@ -165,14 +168,14 @@
         .trust-card:hover { transform: translateY(-4px); border-color: var(--primary-blue); }
         .trust-card-icon {
             width: 56px; height: 56px;
-            background: linear-gradient(135deg, rgba(37,99,235,0.15), rgba(30,58,138,0.15));
+            background: rgba(201,168,106,0.10);
             border-radius: 14px; display: flex; align-items: center; justify-content: center;
             margin-bottom: 20px; font-size: 1.5rem; color: var(--primary-blue);
         }
         .trust-card h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 12px; }
         .trust-card p { color: var(--text-secondary); line-height: 1.7; font-size: 0.95rem; margin-bottom: 16px; }
         .trust-card ul { list-style: none; }
-        .trust-card li { padding: 8px 0; padding-left: 28px; position: relative; color: rgba(255,255,255,0.85); font-size: 0.9rem; }
+        .trust-card li { padding: 8px 0; padding-left: 28px; position: relative; color: rgba(241,234,220,0.85); font-size: 0.9rem; }
         .trust-card li::before { content: "\f00c"; font-family: "Font Awesome 6 Free"; font-weight: 900; position: absolute; left: 0; color: var(--accent-green); font-size: 0.8rem; }
 
         /* Full Width Trust Card */
@@ -188,7 +191,7 @@
         /* Regulatory Compliance Grid */
         .compliance-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1000px; margin: 0 auto; }
         .compliance-card {
-            background: rgba(255,255,255,0.03); border: 1px solid var(--border-color);
+            background: rgba(241,234,220,0.03); border: 1px solid var(--border-color);
             border-radius: 16px; padding: 32px; transition: transform 0.3s, border-color 0.3s;
         }
         .compliance-card:hover { transform: translateY(-3px); border-color: var(--primary-blue); }
@@ -207,14 +210,14 @@
         }
         .retention-row:last-child { border-bottom: none; }
         .retention-row.header {
-            background: rgba(37,99,235,0.1);
+            background: rgba(201,168,106,0.1);
         }
         .retention-row.header .retention-cell {
             font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;
             color: var(--primary-blue);
         }
         .retention-cell {
-            padding: 18px 24px; font-size: 0.9rem; color: rgba(255,255,255,0.85);
+            padding: 18px 24px; font-size: 0.9rem; color: rgba(241,234,220,0.85);
         }
         .retention-cell:not(:last-child) { border-right: 1px solid var(--border-color); }
 
@@ -228,7 +231,7 @@
         .tech-card:hover { transform: translateY(-3px); border-color: var(--primary-blue); }
         .tech-icon {
             font-size: 2rem; margin-bottom: 16px; width: 56px; height: 56px;
-            background: linear-gradient(135deg, rgba(37,99,235,0.15), rgba(30,58,138,0.15));
+            background: rgba(201,168,106,0.10);
             border-radius: 14px; display: flex; align-items: center; justify-content: center;
             margin: 0 auto 16px; color: var(--primary-blue);
         }
@@ -246,7 +249,7 @@
         .contact-methods { display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; }
         .contact-method {
             display: flex; align-items: center; gap: 10px;
-            color: rgba(255,255,255,0.85); text-decoration: none; font-size: 0.95rem; font-weight: 500;
+            color: rgba(241,234,220,0.85); text-decoration: none; font-size: 0.95rem; font-weight: 500;
             transition: color 0.3s;
         }
         .contact-method:hover { color: var(--primary-blue); }
@@ -255,45 +258,45 @@
         /* CTA Section */
         .cta-section {
             padding: 100px 24px; text-align: center;
-            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-navy) 50%, #1e3a5f 100%);
+            background: var(--bg-raised);
             position: relative; overflow: hidden;
         }
         .cta-section::before {
             content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-            background: radial-gradient(ellipse at 70% 80%, rgba(255,255,255,0.08) 0%, transparent 60%);
+            background: radial-gradient(ellipse at 70% 80%, rgba(241,234,220,0.08) 0%, transparent 60%);
             pointer-events: none;
         }
         .cta-section h2 { font-size: 2.5rem; font-weight: 900; margin-bottom: 16px; max-width: 700px; margin-left: auto; margin-right: auto; position: relative; }
         .cta-section p { font-size: 1.1rem; opacity: 0.9; max-width: 600px; margin: 0 auto 40px; line-height: 1.7; position: relative; }
         .cta-buttons { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; position: relative; }
         .btn-primary {
-            background: white; color: var(--primary-blue); padding: 16px 36px;
+            background: var(--btn-primary-bg); color: var(--btn-primary-text); padding: 16px 36px;
             border-radius: 10px; font-weight: 700; font-size: 1rem;
             text-decoration: none; transition: all 0.3s; display: inline-flex; align-items: center; gap: 8px;
         }
         .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.25); }
         .btn-secondary {
-            background: rgba(255,255,255,0.15); color: white; padding: 16px 36px;
+            background: rgba(241,234,220,0.15); color: var(--cream); padding: 16px 36px;
             border-radius: 10px; font-weight: 700; font-size: 1rem;
-            text-decoration: none; border: 1px solid rgba(255,255,255,0.3);
+            text-decoration: none; border: 1px solid rgba(241,234,220,0.3);
             transition: all 0.3s; display: inline-flex; align-items: center; gap: 8px;
         }
-        .btn-secondary:hover { background: rgba(255,255,255,0.25); transform: translateY(-2px); }
+        .btn-secondary:hover { background: rgba(241,234,220,0.25); transform: translateY(-2px); }
 
         /* Footer */
-        .footer { background: #111; padding: 60px 24px; border-top: 1px solid var(--border-color); }
+        .footer { background: var(--bg); padding: 60px 24px; border-top: 1px solid var(--border-color); }
         .footer-inner { max-width: 1100px; margin: 0 auto; }
         .footer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; margin-bottom: 40px; }
         .footer-grid h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 16px; }
         .footer-grid ul { list-style: none; }
         .footer-grid li { margin-bottom: 10px; }
         .footer-grid a { color: var(--text-secondary); text-decoration: none; font-size: 0.85rem; transition: color 0.3s; }
-        .footer-grid a:hover { color: white; }
+        .footer-grid a:hover { color: var(--cream); }
         .footer-bottom { border-top: 1px solid var(--border-color); padding-top: 24px; text-align: center; }
         .footer-logo { display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 1.5rem; font-weight: 700; margin-bottom: 12px; }
         .footer-logo .maple { color: var(--primary-blue); }
         .footer-tagline { color: var(--text-secondary); margin-bottom: 16px; font-size: 0.9rem; }
-        .footer-copy { color: #666; font-size: 0.8rem; }
+        .footer-copy { color: var(--text-3); font-size: 0.8rem; }
 
         /* Mobile */
         @media (max-width: 900px) {
@@ -316,11 +319,11 @@
                 position: absolute; top: 64px; left: 0; right: 0;
                 flex-direction: column; align-items: center; gap: 0;
                 background: rgba(0,0,0,0.95); backdrop-filter: blur(20px);
-                padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.1);
+                padding: 12px 0; border-bottom: 1px solid rgba(241,234,220,0.1);
             }
             .nav-links.active { display: flex; }
             .nav-links a { padding: 14px 24px; width: 100%; text-align: center; font-size: 0.95rem; }
-            .nav-links a:hover { background: rgba(255,255,255,0.05); }
+            .nav-links a:hover { background: rgba(241,234,220,0.05); }
             .nav-cta { margin: 8px 24px; width: auto; padding: 12px 24px; font-size: 0.9rem !important; text-align: center; border-radius: 8px; }
             .hero { padding: 120px 20px 60px; }
             .hero h1 { font-size: 2rem; }
@@ -335,6 +338,8 @@
             .footer-grid { grid-template-columns: 1fr; }
         }
     </style>
+
+<style id="phronisi-type">body{font-family:var(--font-body)}h1,h2,h3,.section-title{font-family:var(--font-display)}</style>
 </head>
 <body>
     <!-- Navigation -->
@@ -454,7 +459,7 @@
                 <p>We follow Canada's Personal Information Protection and Electronic Documents Act to the letter. Your data is never sold, shared, or used beyond its stated purpose.</p>
             </div>
             <div class="trust-grid">
-                <div class="trust-card" style="background: rgba(255,255,255,0.03);">
+                <div class="trust-card" style="background: rgba(241,234,220,0.03);">
                     <div class="trust-card-icon"><i class="fas fa-user-shield"></i></div>
                     <h3>Data Collection</h3>
                     <p>We collect only the minimum data required to deliver the matching service and verify regulatory compliance.</p>
@@ -466,7 +471,7 @@
                         <li>Consent obtained before any data processing</li>
                     </ul>
                 </div>
-                <div class="trust-card" style="background: rgba(255,255,255,0.03);">
+                <div class="trust-card" style="background: rgba(241,234,220,0.03);">
                     <div class="trust-card-icon"><i class="fas fa-ban"></i></div>
                     <h3>What We Never Do</h3>
                     <p>Clear commitments about what will never happen with your data on this platform.</p>
@@ -478,7 +483,7 @@
                         <li>Never process data outside of Canada without consent</li>
                     </ul>
                 </div>
-                <div class="trust-card full-width" style="background: rgba(255,255,255,0.03);">
+                <div class="trust-card full-width" style="background: rgba(241,234,220,0.03);">
                     <div class="trust-card-icon"><i class="fas fa-scale-balanced"></i></div>
                     <h3>Your Rights Under PIPEDA</h3>
                     <p>As a user of our platform, Canadian privacy law guarantees you specific rights regarding your personal information. We make exercising these rights straightforward.</p>
@@ -633,7 +638,7 @@
                 <h2>Security & Privacy Inquiries</h2>
                 <p>If you have questions about our security practices, privacy policies, or need to exercise your data rights, reach out directly.</p>
             </div>
-            <div class="contact-box" style="background: rgba(255,255,255,0.03);">
+            <div class="contact-box" style="background: rgba(241,234,220,0.03);">
                 <h3>Contact Our Team</h3>
                 <p>For security concerns, data access requests, privacy complaints, or general trust-related questions, contact us through any of the following channels. We respond to all security and privacy inquiries within 48 hours.</p>
                 <div class="contact-methods">

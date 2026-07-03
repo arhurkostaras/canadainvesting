@@ -7,6 +7,10 @@
     <meta name="keywords" content="claim advisor profile, investment advisor listing, Canadian financial advisor, CIRO verified advisor">
 
     <title>Claim Your Profile | CanadaInvesting.app</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/phronisi-tokens.css">
 
     <!-- Favicon -->
 
@@ -29,12 +33,11 @@
     <meta name="twitter:description" content="Claim your investment advisor profile on CanadaInvesting.app. Verify your identity and start receiving qualified client leads.">
 
     <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <meta name="theme-color" content="#2563eb">
+    <meta name="theme-color" content="#0B0E12">
 
     <!-- Google Analytics 4 -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-YVD0B8RF20"></script>
@@ -59,20 +62,20 @@
 
     <style>
         :root {
-            --primary-blue: #2563eb;
-            --primary-navy: #1e3a8a;
-            --accent-green: #059669;
-            --dark-bg: #0a0a0a;
-            --card-bg: #1a1a1a;
-            --text-primary: #ffffff;
-            --text-secondary: #a0a0a0;
-            --border-color: #333333;
+            --primary-blue: var(--gold);
+            --primary-navy: var(--gold-deep);
+            --accent-green: var(--success);
+            --dark-bg: var(--bg);
+            --card-bg: var(--bg-raised);
+            --text-primary: var(--text);
+            --text-secondary: var(--text-2);
+            --border-color: var(--border);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-family: var(--font-body), sans-serif;
             background: var(--dark-bg);
             color: var(--text-primary);
             line-height: 1.6;
@@ -80,26 +83,26 @@
         }
 
         /* Navigation */
-        .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(0,0,0,0.4); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .nav{ position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: var(--nav-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(241,234,220,0.1); }
         .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; height: 64px; }
-        .nav-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; color: white; font-weight: 700; font-size: 1.25rem; }
+        .nav-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; color: var(--cream); font-weight: 700; font-size: 1.25rem; }
         .nav-logo .maple { color: var(--primary-blue); font-size: 1.5rem; }
         .nav-links { display: flex; align-items: center; gap: 24px; list-style: none; }
-        .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.3s; }
-        .nav-links a:hover { color: white; }
-        .nav-cta { background: white !important; color: var(--primary-blue) !important; padding: 10px 24px; border-radius: 8px; font-weight: 700 !important; transition: transform 0.3s, box-shadow 0.3s; }
-        .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 4px 15px rgba(37,99,235,0.3); }
-        .nav-toggle { display: none; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; padding: 4px; }
+        .nav-links a { color: rgba(241,234,220,0.8); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.3s; }
+        .nav-links a:hover { color: var(--cream); }
+        .nav-cta { background: var(--gold) !important; color: var(--ink) !important; padding: 10px 24px; border-radius: 8px; font-weight: 700 !important; transition: transform 0.3s, box-shadow 0.3s; }
+        .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 4px 15px rgba(201,168,106,0.3); }
+        .nav-toggle { display: none; background: none; border: none; color: var(--cream); font-size: 1.5rem; cursor: pointer; padding: 4px; }
         .nav-links.active { display: flex; }
 
         /* Hero */
         .hero {
             padding: 140px 24px 80px;
-            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-navy) 50%, #1e3a5f 100%);
+            background: var(--bg-raised);
             text-align: center;
             position: relative; overflow: hidden;
         }
-        .hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(ellipse at 30% 20%, rgba(255,255,255,0.1) 0%, transparent 60%); pointer-events: none; }
+        .hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(ellipse at 30% 20%, rgba(241,234,220,0.1) 0%, transparent 60%); pointer-events: none; }
         .hero h1 { font-size: 3.2rem; font-weight: 900; line-height: 1.1; margin-bottom: 24px; max-width: 900px; margin-left: auto; margin-right: auto; position: relative; }
         .hero p { font-size: 1.2rem; max-width: 700px; margin: 0 auto; opacity: 0.9; line-height: 1.7; position: relative; }
 
@@ -114,7 +117,7 @@
 
         /* Error */
         .error-state { text-align: center; padding: 60px 0; display: none; }
-        .error-icon { width: 72px; height: 72px; background: rgba(239,68,68,0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 1.8rem; color: #ef4444; }
+        .error-icon { width: 72px; height: 72px; background: rgba(168,86,56,0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 1.8rem; color: var(--danger); }
         .error-state h3 { font-size: 1.5rem; font-weight: 700; margin-bottom: 12px; }
         .error-state p { color: var(--text-secondary); font-size: 1rem; line-height: 1.7; max-width: 480px; margin: 0 auto; }
 
@@ -127,8 +130,8 @@
         .profile-meta-item i { color: var(--primary-blue); font-size: 0.85rem; }
         .profile-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
         .badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; }
-        .badge-designation { background: rgba(37,99,235,0.15); color: #60a5fa; border: 1px solid rgba(37,99,235,0.3); }
-        .badge-status { background: rgba(245,158,11,0.12); color: #fbbf24; border: 1px solid rgba(245,158,11,0.3); }
+        .badge-designation { background: rgba(201,168,106,0.15); color: var(--gold-bright); border: 1px solid rgba(201,168,106,0.3); }
+        .badge-status { background: rgba(201,168,106,0.12); color: var(--gold-bright); border: 1px solid rgba(201,168,106,0.3); }
 
         /* Claim Form */
         .claim-form { margin-top: 32px; display: none; }
@@ -136,24 +139,24 @@
         .form-row { display: flex; gap: 12px; }
         .form-row input { flex: 1; }
         .claim-input {
-            width: 100%; background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); border-radius: 10px;
-            padding: 14px 16px; color: var(--text-primary); font-family: 'Roboto', sans-serif; font-size: 0.95rem;
+            width: 100%; background: rgba(241,234,220,0.05); border: 1px solid var(--border-color); border-radius: 10px;
+            padding: 14px 16px; color: var(--text-primary); font-family: var(--font-body); font-size: 0.95rem;
             outline: none; transition: border-color 0.3s, box-shadow 0.3s;
         }
-        .claim-input:focus { border-color: var(--primary-blue); box-shadow: 0 0 0 3px rgba(37,99,235,0.15); }
-        .claim-input::placeholder { color: #666; }
+        .claim-input:focus { border-color: var(--primary-blue); box-shadow: 0 0 0 3px rgba(201,168,106,0.15); }
+        .claim-input::placeholder { color: var(--text-3); }
         .claim-btn {
             display: inline-flex; align-items: center; justify-content: center; gap: 10px; width: 100%; margin-top: 16px;
-            background: var(--accent-green); color: white; border: none; padding: 16px 32px; border-radius: 12px;
-            font-size: 1.05rem; font-weight: 700; font-family: 'Roboto', sans-serif; cursor: pointer; transition: all 0.3s;
+            background: var(--accent-green); color: var(--cream); border: none; padding: 16px 32px; border-radius: 12px;
+            font-size: 1.05rem; font-weight: 700; font-family: var(--font-body); cursor: pointer; transition: all 0.3s;
         }
-        .claim-btn:hover { background: #047857; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(5,150,105,0.4); }
+        .claim-btn:hover { background: var(--success); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(111,143,106,0.4); }
         .claim-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; box-shadow: none; }
         .claim-note { margin-top: 12px; font-size: 0.8rem; color: var(--text-secondary); text-align: center; }
 
         /* Success State */
         .success-state { text-align: center; padding: 40px 0; display: none; }
-        .success-icon { width: 80px; height: 80px; background: linear-gradient(135deg, var(--accent-green), #10b981); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; font-size: 2rem; color: white; animation: scaleIn 0.5s ease; }
+        .success-icon { width: 80px; height: 80px; background: var(--success); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; font-size: 2rem; color: var(--cream); animation: scaleIn 0.5s ease; }
         @keyframes scaleIn { 0% { transform: scale(0); } 60% { transform: scale(1.15); } 100% { transform: scale(1); } }
         .success-state h3 { font-size: 1.8rem; font-weight: 900; margin-bottom: 16px; }
         .success-state p { font-size: 1.05rem; color: var(--text-secondary); line-height: 1.7; max-width: 540px; margin: 0 auto; }
@@ -164,28 +167,28 @@
         .upsell-box h3 { font-size: 1.5rem; font-weight: 900; margin-bottom: 8px; }
         .upsell-box .upsell-sub { color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 32px; }
         .tier-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-        .tier-card { background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 14px; padding: 24px 16px; transition: all 0.3s; text-decoration: none; color: var(--text-primary); display: block; }
+        .tier-card { background: rgba(241,234,220,0.03); border: 1px solid var(--border-color); border-radius: 14px; padding: 24px 16px; transition: all 0.3s; text-decoration: none; color: var(--text-primary); display: block; }
         .tier-card:hover { border-color: var(--primary-blue); transform: translateY(-4px); }
         .tier-card.popular { border-color: var(--primary-blue); position: relative; }
-        .tier-card.popular::before { content: 'Most Popular'; position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, var(--primary-blue), var(--primary-navy)); color: white; padding: 4px 14px; border-radius: 20px; font-size: 0.65rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; white-space: nowrap; }
+        .tier-card.popular::before { content: 'Most Popular'; position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: var(--gold); color: var(--ink); padding: 4px 14px; border-radius: 20px; font-size: 0.65rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; white-space: nowrap; }
         .tier-name { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--text-secondary); margin-bottom: 4px; }
         .tier-price { font-size: 1.8rem; font-weight: 900; margin-bottom: 4px; }
         .tier-period { font-size: 0.8rem; color: var(--text-secondary); }
 
         /* Footer */
-        .footer { background: #111; padding: 60px 24px; border-top: 1px solid var(--border-color); }
+        .footer { background: var(--bg); padding: 60px 24px; border-top: 1px solid var(--border-color); }
         .footer-inner { max-width: 1100px; margin: 0 auto; }
         .footer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; margin-bottom: 40px; }
         .footer-grid h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 16px; }
         .footer-grid ul { list-style: none; }
         .footer-grid li { margin-bottom: 10px; }
         .footer-grid a { color: var(--text-secondary); text-decoration: none; font-size: 0.85rem; transition: color 0.3s; }
-        .footer-grid a:hover { color: white; }
+        .footer-grid a:hover { color: var(--cream); }
         .footer-bottom { border-top: 1px solid var(--border-color); padding-top: 24px; text-align: center; }
         .footer-logo { display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 1.5rem; font-weight: 700; margin-bottom: 12px; }
         .footer-logo .maple { color: var(--primary-blue); }
         .footer-tagline { color: var(--text-secondary); margin-bottom: 16px; font-size: 0.9rem; }
-        .footer-copy { color: #666; font-size: 0.8rem; }
+        .footer-copy { color: var(--text-3); font-size: 0.8rem; }
 
         /* Mobile */
         @media (max-width: 768px) {
@@ -194,11 +197,11 @@
                 display: none; position: absolute; top: 64px; left: 0; right: 0;
                 flex-direction: column; align-items: center; gap: 0;
                 background: rgba(0,0,0,0.95); backdrop-filter: blur(20px);
-                padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.1);
+                padding: 12px 0; border-bottom: 1px solid rgba(241,234,220,0.1);
             }
             .nav-links.active { display: flex; }
             .nav-links a { padding: 14px 24px; width: 100%; text-align: center; font-size: 0.95rem; }
-            .nav-links a:hover { background: rgba(255,255,255,0.05); }
+            .nav-links a:hover { background: rgba(241,234,220,0.05); }
             .nav-cta { margin: 8px 24px; width: auto; padding: 12px 24px; font-size: 0.9rem !important; text-align: center; border-radius: 8px; }
             .hero { padding: 120px 20px 60px; }
             .hero h1 { font-size: 2rem; }
@@ -211,6 +214,8 @@
             .footer-grid { grid-template-columns: 1fr; }
         }
     </style>
+
+<style id="phronisi-type">body{font-family:var(--font-body)}h1,h2,h3,.section-title{font-family:var(--font-display)}</style>
 </head>
 <body>
     <!-- Navigation -->
@@ -240,7 +245,7 @@
         <!-- Loading State -->
         <div class="loading" id="loadingState">
             <div class="spinner"></div>
-            <p>Generating your AI bio... <span style="color:#94a3b8;">(usually takes 5–10 seconds)</span></p>
+            <p>Generating your AI bio... <span style="color:var(--text-3);">(usually takes 5–10 seconds)</span></p>
         </div>
 
         <!-- Error State -->
@@ -265,18 +270,18 @@
         </div>
 
         <!-- AI Bio Preview -->
-        <div id="aiBioPreview" style="display:none; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border-radius: 16px; padding: 32px; margin: 24px auto; max-width: 640px; border: 1px solid #334155;">
+        <div id="aiBioPreview" style="display:none; background: var(--bg); border-radius: 16px; padding: 32px; margin: 24px auto; max-width: 640px; border: 1px solid var(--bg-high);">
             <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px;">
-                <div style="background: linear-gradient(135deg, #2563eb, #7c3aed); width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center;"><i class="fas fa-robot" style="color: white; font-size: 16px;"></i></div>
+                <div style="background: var(--gold); width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center;"><i class="fas fa-robot" style="color: var(--cream); font-size: 16px;"></i></div>
                 <div>
-                    <div style="color: #f1f5f9; font-weight: 700; font-size: 1.05rem;">Your AI-Generated Bio</div>
-                    <div style="color: #94a3b8; font-size: 0.8rem;">Written by AI in 12 seconds from your regulatory data</div>
+                    <div style="color: var(--text); font-weight: 700; font-size: 1.05rem;">Your AI-Generated Bio</div>
+                    <div style="color: var(--text-3); font-size: 0.8rem;">Written by AI in 12 seconds from your regulatory data</div>
                 </div>
             </div>
-            <div id="aiBioText" style="color: #e2e8f0; font-size: 0.95rem; line-height: 1.8; padding: 20px; background: rgba(255,255,255,0.04); border-radius: 10px; border: 1px solid #334155; font-style: italic;"></div>
+            <div id="aiBioText" style="color: var(--text-2); font-size: 0.95rem; line-height: 1.8; padding: 20px; background: rgba(241,234,220,0.04); border-radius: 10px; border: 1px solid var(--bg-high); font-style: italic;"></div>
             <div style="margin-top: 16px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
-                <div id="seoScoreBadge" style="display:none; background: rgba(37,99,235,0.15); color: #60a5fa; padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 600;"><i class="fas fa-chart-line"></i> Profile Score: <span id="seoScoreVal"></span>/100</div>
-                <div style="color: #64748b; font-size: 0.8rem;"><i class="fas fa-lock"></i> Claim to edit, customize, and publish</div>
+                <div id="seoScoreBadge" style="display:none; background: rgba(201,168,106,0.15); color: var(--gold-bright); padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 600;"><i class="fas fa-chart-line"></i> Profile Score: <span id="seoScoreVal"></span>/100</div>
+                <div style="color: var(--text-3); font-size: 0.8rem;"><i class="fas fa-lock"></i> Claim to edit, customize, and publish</div>
             </div>
         </div>
 
@@ -290,7 +295,7 @@
                 <button type="submit" class="claim-btn" id="claimBtn">
                     <i class="fas fa-check-circle"></i> Confirm & Claim My Profile
                 </button>
-                <p style="margin-top:12px;font-size:13px;color:#64748b;text-align:center;">Claimed profiles receive direct notifications when an advisor match is found — unclaimed profiles don't.</p>
+                <p style="margin-top:12px;font-size:13px;color:var(--text-3);text-align:center;">Claimed profiles receive direct notifications when an advisor match is found — unclaimed profiles don't.</p>
             </form>
             <p class="claim-note">No credit card required. Upgrade anytime.</p>
         </div>
@@ -299,20 +304,20 @@
         <div class="success-state" id="successState">
             <div class="success-icon"><i class="fas fa-check"></i></div>
             <h3>Profile Claimed Successfully!</h3>
-            <p style="font-size: 1.1rem; color: #fbbf24; font-weight: 600; margin-bottom: 8px;"><i class="fas fa-envelope"></i> Check your email — we sent you a magic link to access your dashboard.</p>
+            <p style="font-size: 1.1rem; color: var(--gold-bright); font-weight: 600; margin-bottom: 8px;"><i class="fas fa-envelope"></i> Check your email — we sent you a magic link to access your dashboard.</p>
             <p>One click and you're in. No password needed.</p>
         </div>
 
         <!-- Referral Box -->
-        <div id="referralBox" style="display: none; margin-top: 32px; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border: 1px solid #334155; border-radius: 16px; padding: 32px; text-align: center;">
+        <div id="referralBox" style="display: none; margin-top: 32px; background: var(--bg); border: 1px solid var(--bg-high); border-radius: 16px; padding: 32px; text-align: center;">
             <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 16px;">
-                <i class="fas fa-user-plus" style="color: #60a5fa; font-size: 1.3rem;"></i>
+                <i class="fas fa-user-plus" style="color: var(--gold-bright); font-size: 1.3rem;"></i>
                 <span style="font-weight: 700; font-size: 1.1rem;">Refer a Colleague</span>
             </div>
-            <p style="color: #94a3b8; font-size: 0.95rem; line-height: 1.7; margin-bottom: 20px;">Know a colleague who should be here? Share your referral link — they get a verified profile, you get priority search placement.</p>
+            <p style="color: var(--text-3); font-size: 0.95rem; line-height: 1.7; margin-bottom: 20px;">Know a colleague who should be here? Share your referral link — they get a verified profile, you get priority search placement.</p>
             <div style="display: flex; gap: 8px; max-width: 480px; margin: 0 auto;">
-                <input type="text" id="referralLinkInput" readonly style="flex: 1; background: rgba(255,255,255,0.05); border: 1px solid #334155; border-radius: 8px; padding: 12px 14px; color: #e2e8f0; font-size: 0.85rem; font-family: 'Roboto', sans-serif; outline: none;">
-                <button onclick="navigator.clipboard.writeText(document.getElementById('referralLinkInput').value); this.innerHTML='<i class=\'fas fa-check\'></i> Copied'; setTimeout(function(){ document.querySelector('#referralBox button').innerHTML='<i class=\'fas fa-copy\'></i> Copy'; }, 2000);" style="background: #2563eb; color: white; border: none; padding: 12px 20px; border-radius: 8px; font-weight: 700; font-size: 0.85rem; cursor: pointer; white-space: nowrap; font-family: 'Roboto', sans-serif;"><i class="fas fa-copy"></i> Copy</button>
+                <input type="text" id="referralLinkInput" readonly style="flex: 1; background: rgba(241,234,220,0.05); border: 1px solid var(--bg-high); border-radius: 8px; padding: 12px 14px; color: var(--text-2); font-size: 0.85rem; font-family: var(--font-body); outline: none;">
+                <button onclick="navigator.clipboard.writeText(document.getElementById('referralLinkInput').value); this.innerHTML='<i class=\'fas fa-check\'></i> Copied'; setTimeout(function(){ document.querySelector('#referralBox button').innerHTML='<i class=\'fas fa-copy\'></i> Copy'; }, 2000);" style="background: var(--gold); color: var(--cream); border: none; padding: 12px 20px; border-radius: 8px; font-weight: 700; font-size: 0.85rem; cursor: pointer; white-space: nowrap; font-family: var(--font-body);"><i class="fas fa-copy"></i> Copy</button>
             </div>
         </div>
 

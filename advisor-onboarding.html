@@ -6,53 +6,56 @@
     <title>Join Our Advisor Network - CanadaInvesting.app</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/phronisi-tokens.css">
+
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.6; color: #333; background: linear-gradient(135deg, #2563eb 0%, #1e3a8a 100%); min-height: 100vh; }
+        body { font-family: var(--font-body), sans-serif; line-height: 1.6; color: var(--text); background: var(--bg); min-height: 100vh; }
         .container { max-width: 800px; margin: 0 auto; padding: 20px; }
-        .header { text-align: center; color: white; margin-bottom: 30px; }
+        .header { text-align: center; color: var(--cream); margin-bottom: 30px; }
         .header h1 { font-size: 2.5rem; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; gap: 10px; }
         .header p { font-size: 1.2rem; opacity: 0.9; }
-        .questionnaire-container { background: white; border-radius: 20px; padding: 40px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); margin-bottom: 30px; }
-        .progress-bar { width: 100%; height: 8px; background: #e0e7ff; border-radius: 4px; margin-bottom: 30px; overflow: hidden; }
-        .progress-fill { height: 100%; background: linear-gradient(90deg, #10b981, #059669); border-radius: 4px; transition: width 0.3s ease; width: 12.5%; }
+        .questionnaire-container { background: var(--bg-raised); border-radius: 20px; padding: 40px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); margin-bottom: 30px; }
+        .progress-bar { width: 100%; height: 8px; background: rgba(138,111,63,0.10); border-radius: 4px; margin-bottom: 30px; overflow: hidden; }
+        .progress-fill { height: 100%; background: var(--success); border-radius: 4px; transition: width 0.3s ease; width: 12.5%; }
         .step { display: none; animation: fadeIn 0.5s ease; }
         .step.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         .step-header { text-align: center; margin-bottom: 30px; }
-        .step-number { background: linear-gradient(135deg, #2563eb, #1e3a8a); color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; margin: 0 auto 15px; }
-        .step h2 { color: #1f2937; font-size: 1.8rem; margin-bottom: 10px; }
-        .step p { color: #6b7280; font-size: 1.1rem; }
+        .step-number { background: var(--gold); color: var(--ink); width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; margin: 0 auto 15px; }
+        .step h2 { color: var(--text); font-size: 1.8rem; margin-bottom: 10px; }
+        .step p { color: var(--text-2); font-size: 1.1rem; }
         .options-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin: 30px 0; }
-        .option-card { border: 2px solid #e5e7eb; border-radius: 12px; padding: 20px; cursor: pointer; transition: all 0.3s ease; background: white; }
-        .option-card:hover { border-color: #2563eb; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15); }
-        .option-card.selected { border-color: #10b981; background: #f0fdf4; }
-        .option-card.multi-select.selected { border-color: #10b981; background: #f0fdf4; }
-        .option-card h3 { color: #1f2937; font-size: 1.2rem; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
-        .option-card p { color: #6b7280; font-size: 0.95rem; }
+        .option-card { border: 2px solid var(--border); border-radius: 12px; padding: 20px; cursor: pointer; transition: all 0.3s ease; background: var(--bg-raised); }
+        .option-card:hover { border-color: var(--gold-deep); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(201,168,106, 0.15); }
+        .option-card.selected { border-color: var(--success); background: rgba(111,143,106,0.08); }
+        .option-card.multi-select.selected { border-color: var(--success); background: rgba(111,143,106,0.08); }
+        .option-card h3 { color: var(--text); font-size: 1.2rem; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
+        .option-card p { color: var(--text-2); font-size: 0.95rem; }
         .checkbox-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 10px; margin: 30px 0; }
-        .checkbox-item { display: flex; align-items: center; padding: 15px; border: 2px solid #e5e7eb; border-radius: 8px; cursor: pointer; transition: all 0.3s ease; }
-        .checkbox-item:hover { border-color: #2563eb; }
-        .checkbox-item.selected { border-color: #10b981; background: #f0fdf4; }
+        .checkbox-item { display: flex; align-items: center; padding: 15px; border: 2px solid var(--border); border-radius: 8px; cursor: pointer; transition: all 0.3s ease; }
+        .checkbox-item:hover { border-color: var(--gold-deep); }
+        .checkbox-item.selected { border-color: var(--success); background: rgba(111,143,106,0.08); }
         .checkbox-item input[type="checkbox"] { margin-right: 12px; transform: scale(1.2); }
         .form-group { margin: 20px 0; }
-        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: #374151; }
-        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 12px; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 1rem; transition: border-color 0.3s ease; font-family: inherit; }
-        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: #2563eb; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--text-2); }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 12px; border: 2px solid var(--border); border-radius: 8px; font-size: 1rem; transition: border-color 0.3s ease; font-family: inherit; }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--gold-deep); }
         .form-group textarea { resize: vertical; min-height: 100px; }
-        .navigation { display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding-top: 30px; border-top: 1px solid #e5e7eb; }
+        .navigation { display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding-top: 30px; border-top: 1px solid var(--border); }
         .btn { padding: 12px 30px; border: none; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; font-family: inherit; }
-        .btn-secondary { background: #f3f4f6; color: #374151; }
-        .btn-secondary:hover { background: #e5e7eb; }
-        .btn-primary { background: linear-gradient(135deg, #2563eb, #1e3a8a); color: white; }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3); }
+        .btn-secondary { background: var(--bg-high); color: var(--text-2); }
+        .btn-secondary:hover { background: var(--border); }
+        .btn-primary { background: var(--gold); color: var(--ink); }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(201,168,106, 0.3); }
         .btn:disabled { opacity: 0.5; cursor: not-allowed; }
-        .ai-insight { background: linear-gradient(135deg, #f0f9ff, #e0f2fe); border-left: 4px solid #0ea5e9; padding: 15px; margin: 20px 0; border-radius: 8px; }
-        .ai-insight h4 { color: #0369a1; margin-bottom: 5px; display: flex; align-items: center; gap: 8px; }
-        .ai-insight p { color: #0c4a6e; font-size: 0.9rem; }
-        .step-indicator { text-align: center; color: #6b7280; margin-bottom: 20px; font-size: 0.9rem; }
+        .ai-insight { background: var(--bg-high); border-left: 4px solid var(--gold-deep); padding: 15px; margin: 20px 0; border-radius: 8px; }
+        .ai-insight h4 { color: var(--gold-deep); margin-bottom: 5px; display: flex; align-items: center; gap: 8px; }
+        .ai-insight p { color: var(--text-2); font-size: 0.9rem; }
+        .step-indicator { text-align: center; color: var(--text-2); margin-bottom: 20px; font-size: 0.9rem; }
         @media (max-width: 768px) {
             .container { padding: 10px; }
             .questionnaire-container { padding: 20px; }
@@ -61,11 +64,13 @@
             .checkbox-grid { grid-template-columns: 1fr; }
         }
     </style>
+
+<style id="phronisi-type">body{font-family:var(--font-body)}</style>
 </head>
-<body>
+<body class="mode-light">
     <div class="container">
         <div class="header">
-            <h1><i class="fas fa-maple-leaf" style="color: rgba(255,255,255,0.9);"></i> Join as a Professional Advisor</h1>
+            <h1><i class="fas fa-maple-leaf" style="color: rgba(241,234,220,0.9);"></i> Join as a Professional Advisor</h1>
             <p>Connect with quality investors across Canada and grow your practice</p>
         </div>
 
@@ -514,7 +519,7 @@
                 <div class="form-group">
                     <label>
                         <input type="checkbox" id="termsAccepted" name="termsAccepted" required style="margin-right: 10px;">
-                        I agree to the <a href="terms-of-service" style="color: #2563eb;">Terms of Service</a> and understand that my profile will be shared with potential investor clients *
+                        I agree to the <a href="terms-of-service" style="color: var(--gold-deep);">Terms of Service</a> and understand that my profile will be shared with potential investor clients *
                     </label>
                 </div>
 
@@ -531,7 +536,7 @@
             </div>
         </div>
 
-        <div style="text-align: center; color: white; opacity: 0.8; margin-top: 20px;">
+        <div style="text-align: center; color: var(--cream); opacity: 0.8; margin-top: 20px;">
             <p><i class="fas fa-lock"></i> Your information is secure and will only be shared with verified investor clients</p>
         </div>
     </div>

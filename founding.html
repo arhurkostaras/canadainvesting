@@ -4,36 +4,41 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Founding Cohort — CanadaInvesting</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/phronisi-tokens.css">
 <meta name="description" content="Live status of the CanadaInvesting founding cohort: 30 seats, locked $299/mo for 24 months from activation.">
 <link rel="canonical" href="https://canadainvesting.app/founding">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
 <style>
-:root { --primary-blue: #2563eb; --primary-navy: #1e3a8a; --accent-green: #059669; --dark-bg: #0a0a0a; --card-bg: #1a1a1a; --border-color: #333; --text-muted: #9ca3af; }
+:root { --primary-blue: var(--gold); --primary-navy: var(--gold-deep); --accent-green: var(--success); --dark-bg: var(--bg); --card-bg: var(--bg-raised); --border-color: var(--border); --text-muted: var(--text-3); }
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Roboto', Arial, sans-serif; background: var(--dark-bg); color: #fff; line-height: 1.6; }
+body { font-family: var(--font-body); background: var(--dark-bg); color: var(--text); line-height: 1.6; }
 .container { max-width: 760px; margin: 0 auto; padding: 56px 24px; }
-nav { background: rgba(0,0,0,0.4); backdrop-filter: blur(20px); padding: 16px 24px; border-bottom: 1px solid var(--border-color); }
-nav a { color: #fff; text-decoration: none; font-weight: 500; }
+nav{ background: var(--nav-bg); backdrop-filter: blur(12px); padding: 16px 24px; border-bottom: 1px solid var(--border-color); }
+nav a { color: var(--text); text-decoration: none; font-weight: 500; }
 h1 { font-size: 36px; margin-bottom: 8px; line-height: 1.2; }
-h2 { font-size: 22px; margin: 32px 0 12px; color: #fff; }
-.tag { display: inline-block; background: var(--primary-navy); color: #fff; padding: 4px 12px; border-radius: 4px; font-size: 13px; font-weight: 500; margin-bottom: 16px; letter-spacing: 0.5px; }
+h2 { font-size: 22px; margin: 32px 0 12px; color: var(--text); }
+.tag { display: inline-block; background: var(--primary-navy); color: var(--text); padding: 4px 12px; border-radius: 4px; font-size: 13px; font-weight: 500; margin-bottom: 16px; letter-spacing: 0.5px; }
 .counter-block { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 32px; margin: 32px 0; text-align: center; }
 .counter-big { font-size: 72px; font-weight: 700; color: var(--primary-blue); line-height: 1; }
 .counter-label { color: var(--text-muted); font-size: 14px; margin-top: 8px; letter-spacing: 0.5px; text-transform: uppercase; }
-.progress-bar { background: #1f1f1f; height: 8px; border-radius: 4px; margin: 24px 0 8px; overflow: hidden; }
-.progress-fill { background: linear-gradient(90deg, var(--primary-blue), var(--accent-green)); height: 100%; transition: width 0.6s ease; }
+.progress-bar { background: var(--bg-raised); height: 8px; border-radius: 4px; margin: 24px 0 8px; overflow: hidden; }
+.progress-fill { background: linear-gradient(90deg, var(--gold), var(--gold-bright)); height: 100%; transition: width 0.6s ease; }
 .terms { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 24px; }
 .terms ul { list-style: none; padding: 0; }
 .terms li { padding: 12px 0; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
 .terms li:last-child { border: 0; }
-.terms li strong { color: #fff; }
+.terms li strong { color: var(--text); }
 .terms li span { color: var(--text-muted); text-align: right; }
 .muted { color: var(--text-muted); font-size: 14px; }
 .footer { margin-top: 56px; padding-top: 32px; border-top: 1px solid var(--border-color); color: var(--text-muted); font-size: 13px; text-align: center; }
 .footer a { color: var(--primary-blue); }
-.error { color: #f87171; }
+.error { color: var(--danger); }
 </style>
+
+<style id="phronisi-type">body{font-family:var(--font-body)}h1,h2,h3,.section-title{font-family:var(--font-display)}</style>
 </head>
 <body>
 <nav><a href="/">CanadaInvesting</a></nav>
