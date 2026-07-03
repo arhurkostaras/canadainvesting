@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <meta name="description" content="Find a verified financial advisor in Vancouver, BC. Browse top investment professionals, compare credentials, and get matched with the right Vancouver advisor in 90 seconds.">
     <title>Find a Financial Advisor in Vancouver | CanadaInvesting.app</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/phronisi-tokens.css">
     <link rel="canonical" href="https://canadainvesting.app/find-advisor-vancouver">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://canadainvesting.app/find-advisor-vancouver">
@@ -12,7 +16,7 @@
     <meta property="og:description" content="Find a verified financial advisor in Vancouver. Browse profiles, compare credentials, and get matched in 90 seconds.">
     <meta property="og:site_name" content="CanadaInvesting">
     <meta property="og:locale" content="en_CA">
-    <meta name="theme-color" content="#2563eb">
+    <meta name="theme-color" content="#0B0E12">
 
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-YVD0B8RF20"></script>
     <script>
@@ -74,27 +78,25 @@
     }
     </script>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root { --primary-blue: #2563eb; --primary-navy: #1e3a8a; --accent-green: #059669; --dark-bg: #0a0a0a; --card-bg: #1a1a1a; --text-primary: #ffffff; --text-secondary: #a0a0a0; --border-color: #333333; }
+        :root { --primary-blue: var(--gold); --primary-navy: var(--gold-deep); --accent-green: var(--success); --dark-bg: var(--bg); --card-bg: var(--bg-raised); --text-primary: var(--text); --text-secondary: var(--text-2); --border-color: var(--border); }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--dark-bg); color: var(--text-primary); line-height: 1.6; -webkit-font-smoothing: antialiased; }
-        .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(0,0,0,0.4); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.1); }
+        body { font-family: var(--font-body), sans-serif; background: var(--dark-bg); color: var(--text-primary); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+        .nav{ position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: var(--nav-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(241,234,220,0.1); }
         .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; height: 64px; }
-        .nav-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; color: white; font-weight: 700; font-size: 1.25rem; }
+        .nav-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; color: var(--cream); font-weight: 700; font-size: 1.25rem; }
         .nav-links { display: flex; align-items: center; gap: 24px; list-style: none; }
-        .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.3s; }
-        .nav-links a:hover { color: white; }
-        .nav-cta { background: white !important; color: var(--primary-blue) !important; padding: 10px 24px; border-radius: 8px; font-weight: 700 !important; }
-        .nav-toggle { display: none; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; padding: 4px; }
-        .page-header { padding: 120px 24px 60px; background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-navy) 50%, #1e3a5f 100%); text-align: center; position: relative; }
-        .page-header::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(ellipse at 30% 20%, rgba(255,255,255,0.1) 0%, transparent 60%); pointer-events: none; }
+        .nav-links a { color: rgba(241,234,220,0.8); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.3s; }
+        .nav-links a:hover { color: var(--cream); }
+        .nav-cta { background: var(--gold) !important; color: var(--ink) !important; padding: 10px 24px; border-radius: 8px; font-weight: 700 !important; }
+        .nav-toggle { display: none; background: none; border: none; color: var(--cream); font-size: 1.5rem; cursor: pointer; padding: 4px; }
+        .page-header { padding: 120px 24px 60px; background: var(--bg-raised); text-align: center; position: relative; }
+        .page-header::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(ellipse at 30% 20%, rgba(241,234,220,0.1) 0%, transparent 60%); pointer-events: none; }
         .page-header h1 { font-size: 2.8rem; font-weight: 900; margin-bottom: 16px; position: relative; }
         .page-header p { font-size: 1.15rem; opacity: 0.9; max-width: 660px; margin: 0 auto 28px; position: relative; }
-        .header-cta { display: inline-flex; align-items: center; gap: 8px; background: white; color: var(--primary-blue); padding: 14px 32px; border-radius: 10px; font-weight: 700; text-decoration: none; font-size: 1rem; transition: transform 0.3s, box-shadow 0.3s; position: relative; }
+        .header-cta { display: inline-flex; align-items: center; gap: 8px; background: var(--btn-primary-bg); color: var(--btn-primary-text); padding: 14px 32px; border-radius: 10px; font-weight: 700; text-decoration: none; font-size: 1rem; transition: transform 0.3s, box-shadow 0.3s; position: relative; }
         .header-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.3); }
         .breadcrumbs { max-width: 1200px; margin: 0 auto; padding: 20px 24px; font-size: 0.85rem; color: var(--text-secondary); }
         .breadcrumbs a { color: var(--primary-blue); text-decoration: none; }
@@ -113,15 +115,15 @@
         .card-name { font-size: 1.05rem; font-weight: 700; margin-bottom: 6px; }
         .card-firm { color: var(--primary-blue); font-size: 0.88rem; font-weight: 500; margin-bottom: 5px; }
         .card-location { color: var(--text-secondary); font-size: 0.82rem; margin-bottom: 8px; display: flex; align-items: center; gap: 5px; }
-        .card-designation { display: inline-block; background: rgba(5,150,105,0.15); color: var(--accent-green); padding: 3px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; margin-bottom: 10px; }
+        .card-designation { display: inline-block; background: rgba(111,143,106,0.15); color: var(--accent-green); padding: 3px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; margin-bottom: 10px; }
         .card-bio { color: var(--text-secondary); font-size: 0.83rem; line-height: 1.55; }
-        .claimed-badge { display: inline-flex; align-items: center; gap: 4px; background: rgba(37,99,235,0.15); color: var(--primary-blue); padding: 2px 8px; border-radius: 4px; font-size: 0.72rem; font-weight: 600; margin-left: 8px; }
+        .claimed-badge { display: inline-flex; align-items: center; gap: 4px; background: rgba(201,168,106,0.15); color: var(--primary-blue); padding: 2px 8px; border-radius: 4px; font-size: 0.72rem; font-weight: 600; margin-left: 8px; }
         .loading-state { text-align: center; padding: 48px; color: var(--text-secondary); }
         .loading-state i { font-size: 2rem; margin-bottom: 12px; display: block; }
-        .cta-section { background: linear-gradient(135deg, var(--primary-blue), var(--primary-navy)); border-radius: 20px; padding: 48px; text-align: center; margin: 40px 0; }
+        .cta-section { background: var(--gold); border-radius: 20px; padding: 48px; text-align: center; margin: 40px 0; }
         .cta-section h2 { font-size: 1.8rem; font-weight: 900; margin-bottom: 12px; }
         .cta-section p { opacity: 0.9; margin-bottom: 28px; max-width: 500px; margin-left: auto; margin-right: auto; }
-        .cta-button { display: inline-flex; align-items: center; gap: 8px; background: white; color: var(--primary-blue); padding: 14px 36px; border-radius: 10px; font-weight: 700; text-decoration: none; transition: transform 0.3s, box-shadow 0.3s; font-size: 1rem; }
+        .cta-button { display: inline-flex; align-items: center; gap: 8px; background: var(--btn-primary-bg); color: var(--btn-primary-text); padding: 14px 36px; border-radius: 10px; font-weight: 700; text-decoration: none; transition: transform 0.3s, box-shadow 0.3s; font-size: 1rem; }
         .cta-button:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.3); }
         .faq-section { margin: 40px 0; }
         .faq-section h2 { font-size: 1.6rem; font-weight: 700; margin-bottom: 24px; }
@@ -131,29 +133,31 @@
         .related-links { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 16px; padding: 32px; margin-top: 40px; }
         .related-links h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 16px; }
         .related-links-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
-        .related-link { display: flex; align-items: center; gap: 8px; color: var(--primary-blue); text-decoration: none; font-size: 0.88rem; font-weight: 500; padding: 10px 14px; background: rgba(37,99,235,0.08); border-radius: 8px; transition: background 0.2s; }
-        .related-link:hover { background: rgba(37,99,235,0.18); }
-        .footer { background: #111; padding: 60px 24px; border-top: 1px solid var(--border-color); }
+        .related-link { display: flex; align-items: center; gap: 8px; color: var(--primary-blue); text-decoration: none; font-size: 0.88rem; font-weight: 500; padding: 10px 14px; background: rgba(201,168,106,0.08); border-radius: 8px; transition: background 0.2s; }
+        .related-link:hover { background: rgba(201,168,106,0.18); }
+        .footer { background: var(--bg); padding: 60px 24px; border-top: 1px solid var(--border-color); }
         .footer-inner { max-width: 1100px; margin: 0 auto; }
         .footer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; margin-bottom: 40px; }
-        .footer-grid h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 16px; }
+        .footer-grid h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 16px; }
         .footer-grid ul { list-style: none; }
         .footer-grid li { margin-bottom: 10px; }
         .footer-grid a { color: var(--text-secondary); text-decoration: none; font-size: 0.85rem; transition: color 0.3s; }
-        .footer-grid a:hover { color: white; }
+        .footer-grid a:hover { color: var(--cream); }
         .footer-bottom { border-top: 1px solid var(--border-color); padding-top: 24px; text-align: center; }
         .footer-logo { display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 1.5rem; font-weight: 700; margin-bottom: 12px; }
         .footer-tagline { color: var(--text-secondary); margin-bottom: 16px; font-size: 0.9rem; }
-        .footer-copy { color: #666; font-size: 0.8rem; }
+        .footer-copy { color: var(--text-3); font-size: 0.8rem; }
         @media (max-width: 900px) { .professionals-grid { grid-template-columns: repeat(2, 1fr); } .footer-grid { grid-template-columns: repeat(2, 1fr); } .page-header h1 { font-size: 2rem; } .related-links-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 600px) { .professionals-grid { grid-template-columns: 1fr; } .footer-grid { grid-template-columns: 1fr; } .nav-links { display: none; flex-direction: column; position: absolute; top: 64px; left: 0; right: 0; background: rgba(0,0,0,0.95); padding: 24px; gap: 16px; } .nav-links.active { display: flex; } .nav-toggle { display: block; } .page-header h1 { font-size: 1.6rem; } .cta-section { padding: 32px 20px; } .related-links-grid { grid-template-columns: 1fr; } }
     </style>
+
+<style id="phronisi-type">body{font-family:var(--font-body)}h1,h2,h3,.section-title{font-family:var(--font-display)}</style>
 </head>
 <body>
 
 <nav class="nav">
     <div class="nav-inner">
-        <a href="/" class="nav-logo">&#128200; CanadaInvesting</a>
+        <a href="/" class="nav-logo"> CanadaInvesting</a>
         <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('active')" aria-label="Menu"><i class="fas fa-bars"></i></button>
         <div class="nav-links">
             <a href="/find-advisor">Find Advisor</a>
@@ -240,7 +244,7 @@
     <div class="footer-inner">
         <div class="footer-grid">
             <div>
-                <h4>CanadaInvesting</h4>
+                <h3>CanadaInvesting</h3>
                 <ul>
                     <li><a href="/find-advisor">Find an Advisor</a></li>
                     <li><a href="/directory/">Directory</a></li>
@@ -249,7 +253,7 @@
                 </ul>
             </div>
             <div>
-                <h4>Cities</h4>
+                <h3>Cities</h3>
                 <ul>
                     <li><a href="/find-advisor-toronto">Toronto</a></li>
                     <li><a href="/find-advisor-vancouver">Vancouver</a></li>
@@ -257,7 +261,7 @@
                 </ul>
             </div>
             <div>
-                <h4>Specializations</h4>
+                <h3>Specializations</h3>
                 <ul>
                     <li><a href="/retirement-planning-advisor">Retirement Planning</a></li>
                     <li><a href="/ontario/">Ontario</a></li>
@@ -266,7 +270,7 @@
                 </ul>
             </div>
             <div>
-                <h4>For Advisors</h4>
+                <h3>For Advisors</h3>
                 <ul>
                     <li><a href="/join-as-advisor">Apply to Join</a></li>
                     <li><a href="/pricing">View Plans</a></li>
@@ -276,7 +280,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <div class="footer-logo">&#128200; CanadaInvesting</div>
+            <div class="footer-logo"> CanadaInvesting</div>
             <p class="footer-tagline">AI-powered advisor-client matching for Canada</p>
             <p class="footer-copy">&copy; 2026 CanadaInvesting.app &mdash; All Rights Reserved</p>
         </div>

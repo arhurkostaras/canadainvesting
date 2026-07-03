@@ -5,15 +5,15 @@
 
 /* CSS Variables */
 :root {
-    --primary-blue: #2563eb;
-    --primary-navy: #1e3a8a;
-    --primary-emerald: #059669;
-    --accent-green: #059669;
-    --dark-bg: #0a0a0a;
-    --card-bg: #1a1a1a;
-    --text-primary: #ffffff;
-    --text-secondary: #a0a0a0;
-    --border-color: #333333;
+    --primary-blue: var(--gold);
+    --primary-navy: var(--gold-deep);
+    --primary-emerald: var(--success);
+    --accent-green: var(--success);
+    --dark-bg: var(--bg);
+    --card-bg: var(--bg-raised);
+    --text-primary: var(--text);
+    --text-secondary: var(--text-2);
+    --border-color: var(--border);
 }
 
 /* Reset */
@@ -24,7 +24,7 @@
 }
 
 body {
-    font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-family: var(--font-body), sans-serif;
     background: var(--dark-bg);
     color: var(--text-primary);
     line-height: 1.6;
@@ -43,7 +43,7 @@ body {
     background: rgba(0, 0, 0, 0.4);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(241,234,220, 0.1);
 }
 
 .nav-inner {
@@ -61,7 +61,7 @@ body {
     align-items: center;
     gap: 8px;
     text-decoration: none;
-    color: white;
+    color: var(--cream);
     font-weight: 700;
     font-size: 1.25rem;
 }
@@ -79,7 +79,7 @@ body {
 }
 
 .nav-links a {
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(241,234,220, 0.8);
     text-decoration: none;
     font-size: 0.9rem;
     font-weight: 500;
@@ -87,15 +87,15 @@ body {
 }
 
 .nav-links a:hover {
-    color: white;
+    color: var(--cream);
 }
 
 .nav-links a.active {
-    color: white;
+    color: var(--cream);
 }
 
 .nav-cta {
-    background: white !important;
+    background: var(--cream) !important;
     color: var(--primary-blue) !important;
     padding: 10px 24px;
     border-radius: 8px;
@@ -105,14 +105,14 @@ body {
 
 .nav-cta:hover {
     transform: translateY(-1px);
-    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+    box-shadow: 0 4px 15px rgba(201,168,106, 0.3);
 }
 
 .nav-toggle {
     display: none;
     background: none;
     border: none;
-    color: white;
+    color: var(--cream);
     font-size: 1.5rem;
     cursor: pointer;
     padding: 4px;
@@ -127,7 +127,7 @@ body {
    ============================================ */
 .hero {
     padding: 140px 24px 100px;
-    background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-navy) 50%, #1e3a5f 100%);
+    background: var(--bg-raised);
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -140,7 +140,7 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: radial-gradient(ellipse at 30% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 60%);
+    background: radial-gradient(ellipse at 30% 20%, rgba(241,234,220, 0.1) 0%, transparent 60%);
     pointer-events: none;
 }
 
@@ -148,14 +148,14 @@ body {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(241,234,220, 0.15);
     backdrop-filter: blur(10px);
     padding: 10px 22px;
     border-radius: 50px;
     font-size: 0.85rem;
     font-weight: 500;
     margin-bottom: 28px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(241,234,220, 0.2);
     position: relative;
 }
 
@@ -199,9 +199,9 @@ body {
 }
 
 .hero-stat {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(241,234,220, 0.1);
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(241,234,220, 0.15);
     border-radius: 14px;
     padding: 20px;
 }
@@ -221,7 +221,7 @@ body {
    Buttons
    ============================================ */
 .btn-primary {
-    background: white;
+    background: var(--cream);
     color: var(--primary-blue);
     padding: 16px 36px;
     border-radius: 10px;
@@ -240,14 +240,14 @@ body {
 }
 
 .btn-secondary {
-    background: rgba(255, 255, 255, 0.15);
-    color: white;
+    background: rgba(241,234,220, 0.15);
+    color: var(--cream);
     padding: 16px 36px;
     border-radius: 10px;
     font-weight: 700;
     font-size: 1rem;
     text-decoration: none;
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(241,234,220, 0.3);
     transition: all 0.3s;
     display: inline-flex;
     align-items: center;
@@ -255,7 +255,7 @@ body {
 }
 
 .btn-secondary:hover {
-    background: rgba(255, 255, 255, 0.25);
+    background: rgba(241,234,220, 0.25);
     transform: translateY(-2px);
 }
 
@@ -346,7 +346,7 @@ body {
     padding: 8px 0;
     padding-left: 28px;
     position: relative;
-    color: rgba(255, 255, 255, 0.85);
+    color: rgba(241,234,220, 0.85);
     font-size: 0.95rem;
 }
 
@@ -423,8 +423,8 @@ body {
 .step-number {
     width: 56px;
     height: 56px;
-    background: linear-gradient(135deg, var(--primary-blue), var(--primary-navy));
-    color: white;
+    background: var(--gold);
+    color: var(--cream);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -474,7 +474,7 @@ body {
     margin-bottom: 16px;
     width: 56px;
     height: 56px;
-    background: linear-gradient(135deg, rgba(37, 99, 235, 0.15), rgba(30, 58, 138, 0.15));
+    background: linear-gradient(135deg, rgba(201,168,106, 0.15), rgba(201,168,106, 0.15));
     border-radius: 14px;
     display: flex;
     align-items: center;
@@ -548,7 +548,7 @@ body {
 }
 
 .pricing-card {
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(241,234,220, 0.03);
     border: 1px solid var(--border-color);
     border-radius: 20px;
     padding: 40px 32px;
@@ -564,7 +564,7 @@ body {
 
 .pricing-card.popular {
     border-color: var(--primary-blue);
-    box-shadow: 0 0 30px rgba(37, 99, 235, 0.15);
+    box-shadow: 0 0 30px rgba(201,168,106, 0.15);
 }
 
 .popular-badge {
@@ -572,8 +572,8 @@ body {
     top: -14px;
     left: 50%;
     transform: translateX(-50%);
-    background: linear-gradient(135deg, var(--primary-blue), var(--primary-navy));
-    color: white;
+    background: var(--gold);
+    color: var(--cream);
     padding: 6px 20px;
     border-radius: 20px;
     font-size: 0.7rem;
@@ -626,7 +626,7 @@ body {
     padding-left: 28px;
     position: relative;
     font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.85);
+    color: rgba(241,234,220, 0.85);
 }
 
 .pricing-card li::before {
@@ -648,15 +648,15 @@ body {
     font-weight: 700;
     font-size: 0.95rem;
     transition: all 0.3s;
-    background: linear-gradient(135deg, var(--primary-blue), var(--primary-navy));
-    color: white;
+    background: var(--gold);
+    color: var(--cream);
     border: none;
     cursor: pointer;
 }
 
 .pricing-card .card-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+    box-shadow: 0 6px 20px rgba(201,168,106, 0.4);
 }
 
 /* ============================================
@@ -679,7 +679,7 @@ body {
     width: 180px;
     height: 180px;
     border-radius: 50%;
-    background: linear-gradient(135deg, var(--primary-blue), var(--primary-navy));
+    background: var(--gold);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -711,7 +711,7 @@ body {
 }
 
 .founder-text a {
-    color: white;
+    color: var(--cream);
 }
 
 /* ============================================
@@ -720,7 +720,7 @@ body {
 .cta-section {
     padding: 100px 24px;
     text-align: center;
-    background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-navy) 50%, #1e3a5f 100%);
+    background: var(--bg-raised);
     position: relative;
     overflow: hidden;
 }
@@ -732,7 +732,7 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: radial-gradient(ellipse at 70% 80%, rgba(255, 255, 255, 0.08) 0%, transparent 60%);
+    background: radial-gradient(ellipse at 70% 80%, rgba(241,234,220, 0.08) 0%, transparent 60%);
     pointer-events: none;
 }
 
@@ -827,7 +827,7 @@ body {
    Footer
    ============================================ */
 .footer {
-    background: #111;
+    background: var(--bg);
     padding: 60px 24px;
     border-top: 1px solid var(--border-color);
 }
@@ -866,7 +866,7 @@ body {
 }
 
 .footer-grid a:hover {
-    color: white;
+    color: var(--cream);
 }
 
 .footer-bottom {
@@ -896,7 +896,7 @@ body {
 }
 
 .footer-copy {
-    color: #666;
+    color: var(--text-3);
     font-size: 0.8rem;
 }
 
@@ -907,13 +907,13 @@ body {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background: linear-gradient(135deg, var(--primary-blue), var(--primary-navy));
-    color: white;
+    background: var(--gold);
+    color: var(--cream);
     padding: 12px 20px;
     border-radius: 25px;
     font-size: 13px;
     font-weight: 600;
-    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
+    box-shadow: 0 4px 15px rgba(201,168,106, 0.4);
     z-index: 9999;
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -922,7 +922,7 @@ body {
 
 .ai-badge:hover {
     transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.6);
+    box-shadow: 0 6px 20px rgba(201,168,106, 0.6);
 }
 
 .ai-badge-icon {
@@ -994,7 +994,7 @@ body {
         background: rgba(0, 0, 0, 0.95);
         backdrop-filter: blur(20px);
         padding: 12px 0;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        border-bottom: 1px solid rgba(241,234,220, 0.1);
     }
 
     .nav-links.active {
@@ -1009,7 +1009,7 @@ body {
     }
 
     .nav-links a:hover {
-        background: rgba(255, 255, 255, 0.05);
+        background: rgba(241,234,220, 0.05);
     }
 
     .nav-cta {

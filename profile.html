@@ -17,6 +17,10 @@
     <meta name="googlebot" content="noindex, nofollow">
 
     <title>Advisor Profile | CanadaInvesting.app</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/phronisi-tokens.css">
 
     <!-- Favicon -->
 
@@ -42,12 +46,11 @@
     <meta name="twitter:description" content="View this investment advisor's verified profile on CanadaInvesting.app.">
 
     <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <meta name="theme-color" content="#2563eb">
+    <meta name="theme-color" content="#0B0E12">
 
     <!-- Google Analytics 4 -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-YVD0B8RF20"></script>
@@ -76,21 +79,21 @@
 
     <style>
         :root {
-            --primary-blue: #2563eb;
-            --primary-navy: #1e3a8a;
-            --primary-emerald: #059669;
-            --accent-green: #059669;
-            --dark-bg: #0a0a0a;
-            --card-bg: #1a1a1a;
-            --text-primary: #ffffff;
-            --text-secondary: #a0a0a0;
-            --border-color: #333333;
+            --primary-blue: var(--gold);
+            --primary-navy: var(--gold-deep);
+            --primary-emerald: var(--success);
+            --accent-green: var(--success);
+            --dark-bg: var(--bg);
+            --card-bg: var(--bg-raised);
+            --text-primary: var(--text);
+            --text-secondary: var(--text-2);
+            --border-color: var(--border);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-family: var(--font-body), sans-serif;
             background: var(--dark-bg);
             color: var(--text-primary);
             line-height: 1.6;
@@ -98,22 +101,22 @@
         }
 
         /* Navigation */
-        .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(0,0,0,0.4); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .nav{ position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: var(--nav-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(241,234,220,0.1); }
         .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; height: 64px; }
-        .nav-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; color: white; font-weight: 700; font-size: 1.25rem; }
+        .nav-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; color: var(--cream); font-weight: 700; font-size: 1.25rem; }
         .nav-logo .maple { color: var(--primary-blue); font-size: 1.5rem; }
         .nav-links { display: flex; align-items: center; gap: 24px; list-style: none; }
-        .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.3s; }
-        .nav-links a:hover { color: white; }
-        .nav-cta { background: white !important; color: var(--primary-blue) !important; padding: 10px 24px; border-radius: 8px; font-weight: 700 !important; transition: transform 0.3s, box-shadow 0.3s; }
-        .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 4px 15px rgba(37,99,235,0.3); }
-        .nav-toggle { display: none; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; padding: 4px; }
+        .nav-links a { color: rgba(241,234,220,0.8); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.3s; }
+        .nav-links a:hover { color: var(--cream); }
+        .nav-cta { background: var(--gold) !important; color: var(--ink) !important; padding: 10px 24px; border-radius: 8px; font-weight: 700 !important; transition: transform 0.3s, box-shadow 0.3s; }
+        .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 4px 15px rgba(201,168,106,0.3); }
+        .nav-toggle { display: none; background: none; border: none; color: var(--cream); font-size: 1.5rem; cursor: pointer; padding: 4px; }
         .nav-links.active { display: flex; }
 
         /* Profile Hero */
         .profile-hero {
             padding: 140px 24px 60px;
-            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-navy) 50%, #1e3a5f 100%);
+            background: var(--bg-raised);
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -121,13 +124,13 @@
         .profile-hero::before {
             content: '';
             position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-            background: radial-gradient(ellipse at 30% 20%, rgba(255,255,255,0.1) 0%, transparent 60%);
+            background: radial-gradient(ellipse at 30% 20%, rgba(241,234,220,0.1) 0%, transparent 60%);
             pointer-events: none;
         }
         .profile-avatar {
             width: 100px; height: 100px; border-radius: 50%;
-            background: rgba(255,255,255,0.15); backdrop-filter: blur(10px);
-            border: 3px solid rgba(255,255,255,0.3);
+            background: rgba(241,234,220,0.15); backdrop-filter: blur(10px);
+            border: 3px solid rgba(241,234,220,0.3);
             display: flex; align-items: center; justify-content: center;
             margin: 0 auto 20px; font-size: 2.2rem; font-weight: 700;
             position: relative;
@@ -149,13 +152,13 @@
         }
         .badge {
             display: inline-flex; align-items: center; gap: 6px;
-            background: rgba(255,255,255,0.15); backdrop-filter: blur(10px);
+            background: rgba(241,234,220,0.15); backdrop-filter: blur(10px);
             padding: 8px 18px; border-radius: 50px; font-size: 0.85rem; font-weight: 600;
-            border: 1px solid rgba(255,255,255,0.25);
+            border: 1px solid rgba(241,234,220,0.25);
         }
         .badge i { font-size: 0.75rem; }
         .badge-claimed {
-            background: rgba(5,150,105,0.3); border-color: rgba(5,150,105,0.5);
+            background: rgba(111,143,106,0.3); border-color: rgba(111,143,106,0.5);
         }
 
         /* Content Sections */
@@ -175,7 +178,7 @@
 
         /* Bio */
         .bio-text {
-            font-size: 1.05rem; line-height: 1.8; color: rgba(255,255,255,0.9);
+            font-size: 1.05rem; line-height: 1.8; color: rgba(241,234,220,0.9);
         }
         .bio-text p { margin-bottom: 16px; }
         .bio-text p:last-child { margin-bottom: 0; }
@@ -210,9 +213,9 @@
             padding: 8px 0; font-size: 0.9rem; color: var(--text-secondary);
         }
         .recommendation i { font-size: 0.75rem; }
-        .rec-high i { color: #ef4444; }
-        .rec-medium i { color: #f59e0b; }
-        .rec-low i { color: #6b7280; }
+        .rec-high i { color: var(--danger); }
+        .rec-medium i { color: var(--gold); }
+        .rec-low i { color: var(--text-3); }
         .recommendation .points {
             margin-left: auto; font-size: 0.8rem; font-weight: 600;
             color: var(--primary-blue);
@@ -220,8 +223,8 @@
 
         /* CTA Section */
         .cta-section {
-            background: linear-gradient(135deg, rgba(37,99,235,0.1), rgba(30,58,138,0.15));
-            border: 1px solid rgba(37,99,235,0.3);
+            background: rgba(201,168,106,0.08);
+            border: 1px solid rgba(201,168,106,0.3);
             border-radius: 20px; padding: 48px 32px; text-align: center;
             margin-bottom: 28px;
         }
@@ -234,14 +237,14 @@
         }
         .cta-btn {
             display: inline-flex; align-items: center; gap: 10px;
-            background: white; color: var(--primary-blue);
+            background: var(--btn-primary-bg); color: var(--btn-primary-text);
             padding: 16px 36px; border-radius: 12px;
             font-size: 1.05rem; font-weight: 700; text-decoration: none;
             transition: transform 0.3s, box-shadow 0.3s;
         }
         .cta-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(37,99,235,0.3);
+            box-shadow: 0 8px 30px rgba(201,168,106,0.3);
         }
         .cta-features {
             display: flex; justify-content: center; gap: 28px; flex-wrap: wrap;
@@ -258,7 +261,7 @@
             text-align: center; padding: 200px 24px;
         }
         .loading-state i { font-size: 3rem; color: var(--primary-blue); margin-bottom: 16px; animation: spin 1s linear infinite; }
-        .error-state i { font-size: 3rem; color: #ef4444; margin-bottom: 16px; }
+        .error-state i { font-size: 3rem; color: var(--danger); margin-bottom: 16px; }
         .error-state h2 { margin-bottom: 12px; }
         .error-state a { color: var(--primary-blue); text-decoration: none; font-weight: 600; }
         .error-state a:hover { text-decoration: underline; }
@@ -271,19 +274,19 @@
         .animate-in { animation: fadeInUp 0.5s ease forwards; }
 
         /* Footer */
-        .footer { background: #111; padding: 60px 24px; border-top: 1px solid var(--border-color); }
+        .footer { background: var(--bg); padding: 60px 24px; border-top: 1px solid var(--border-color); }
         .footer-inner { max-width: 1100px; margin: 0 auto; }
         .footer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; margin-bottom: 40px; }
-        .footer-grid h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 16px; }
+        .footer-grid h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 16px; }
         .footer-grid ul { list-style: none; }
         .footer-grid li { margin-bottom: 10px; }
         .footer-grid a { color: var(--text-secondary); text-decoration: none; font-size: 0.85rem; transition: color 0.3s; }
-        .footer-grid a:hover { color: white; }
+        .footer-grid a:hover { color: var(--cream); }
         .footer-bottom { border-top: 1px solid var(--border-color); padding-top: 24px; text-align: center; }
         .footer-logo { display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 1.5rem; font-weight: 700; margin-bottom: 12px; }
         .footer-logo .maple { color: var(--primary-blue); }
         .footer-tagline { color: var(--text-secondary); margin-bottom: 16px; font-size: 0.9rem; }
-        .footer-copy { color: #666; font-size: 0.8rem; }
+        .footer-copy { color: var(--text-3); font-size: 0.8rem; }
 
         /* Mobile */
         @media (max-width: 768px) {
@@ -293,11 +296,11 @@
                 position: absolute; top: 64px; left: 0; right: 0;
                 flex-direction: column; align-items: center; gap: 0;
                 background: rgba(0,0,0,0.95); backdrop-filter: blur(20px);
-                padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.1);
+                padding: 12px 0; border-bottom: 1px solid rgba(241,234,220,0.1);
             }
             .nav-links.active { display: flex; }
             .nav-links a { padding: 14px 24px; width: 100%; text-align: center; font-size: 0.95rem; }
-            .nav-links a:hover { background: rgba(255,255,255,0.05); }
+            .nav-links a:hover { background: rgba(241,234,220,0.05); }
             .nav-cta { margin: 8px 24px; width: auto; padding: 12px 24px; font-size: 0.9rem !important; text-align: center; border-radius: 8px; }
             .profile-hero { padding: 120px 20px 48px; }
             .profile-hero h1 { font-size: 2rem; }
@@ -309,6 +312,8 @@
             .footer-grid { grid-template-columns: 1fr; }
         }
     </style>
+
+<style id="phronisi-type">body{font-family:var(--font-body)}h1,h2,h3,.section-title{font-family:var(--font-display)}</style>
 </head>
 <body>
     <!-- Navigation -->
@@ -384,14 +389,14 @@
     </script>
 
     <div id="seoPrerender" style="max-width:800px;margin:100px auto 40px;padding:0 20px;">
-        <h1 id="seoTitle" style="color:#fff;font-size:24px;">Financial Advisor Profile</h1>
-        <p id="seoDetails" style="color:#ccc;font-size:15px;line-height:1.7;margin-top:8px;"></p>
-        <p id="seoBio" style="color:#999;font-size:14px;line-height:1.7;margin-top:8px;"></p>
+        <h1 id="seoTitle" style="color:var(--text);font-size:24px;">Financial Advisor Profile</h1>
+        <p id="seoDetails" style="color:var(--text-2);font-size:15px;line-height:1.7;margin-top:8px;"></p>
+        <p id="seoBio" style="color:var(--text-3);font-size:14px;line-height:1.7;margin-top:8px;"></p>
     </div>
 
     <noscript>
-        <div style="max-width:800px;margin:100px auto 40px;padding:0 20px;color:#ccc;font-size:15px;line-height:1.7;">
-            <p>JavaScript is required to view this advisor's full profile, including their AI-generated bio, designations, firm details, and profile score. Please enable JavaScript or visit <a href="https://canadainvesting.app/find-advisor" style="color:#2563eb;">our advisor directory</a> to search for advisors.</p>
+        <div style="max-width:800px;margin:100px auto 40px;padding:0 20px;color:var(--text-2);font-size:15px;line-height:1.7;">
+            <p>JavaScript is required to view this advisor's full profile, including their AI-generated bio, designations, firm details, and profile score. Please enable JavaScript or visit <a href="https://canadainvesting.app/find-advisor" style="color:var(--gold);">our advisor directory</a> to search for advisors.</p>
         </div>
     </noscript>
 
@@ -454,17 +459,17 @@
             </section>
 
             <!-- Client CTA Section -->
-            <section class="cta-section animate-in" style="background:linear-gradient(135deg,#059669,#047857);">
+            <section class="cta-section animate-in" style="background:rgba(111,143,106,0.12);border-color:var(--success);">
                 <h2>Looking for an Advisor Like This?</h2>
                 <p>Tell us what you need — we'll match you with a verified advisor in your area. Free, confidential, no obligation.</p>
-                <a href="find-advisor.html" class="cta-btn" style="background:#fff;color:#059669;">
+                <a href="find-advisor.html" class="cta-btn" style="background: var(--btn-primary-bg);color: var(--btn-primary-text);">
                     <i class="fas fa-search"></i> Get My Advisor Match
                 </a>
                 <div class="cta-features">
-                    <div class="cta-feature" style="color:#d1fae5;"><i class="fas fa-check" style="color:#6ee7b7;"></i> Free for clients</div>
-                    <div class="cta-feature" style="color:#d1fae5;"><i class="fas fa-check" style="color:#6ee7b7;"></i> AI-powered matching</div>
-                    <div class="cta-feature" style="color:#d1fae5;"><i class="fas fa-check" style="color:#6ee7b7;"></i> CIRO-verified advisors</div>
-                    <div class="cta-feature" style="color:#d1fae5;"><i class="fas fa-check" style="color:#6ee7b7;"></i> Response within 24hrs</div>
+                    <div class="cta-feature" style="color:var(--cream);"><i class="fas fa-check" style="color:var(--success);"></i> Free for clients</div>
+                    <div class="cta-feature" style="color:var(--cream);"><i class="fas fa-check" style="color:var(--success);"></i> AI-powered matching</div>
+                    <div class="cta-feature" style="color:var(--cream);"><i class="fas fa-check" style="color:var(--success);"></i> CIRO-verified advisors</div>
+                    <div class="cta-feature" style="color:var(--cream);"><i class="fas fa-check" style="color:var(--success);"></i> Response within 24hrs</div>
                 </div>
             </section>
 
@@ -490,7 +495,7 @@
         <div class="footer-inner">
             <div class="footer-grid">
                 <div>
-                    <h4>For Advisors</h4>
+                    <h3>For Advisors</h3>
                     <ul>
                         <li><a href="join-as-advisor">Apply to Join</a></li>
                         <li><a href="pricing">Pricing & Algorithm</a></li>
@@ -499,14 +504,14 @@
                     </ul>
                 </div>
                 <div>
-                    <h4>For Clients</h4>
+                    <h3>For Clients</h3>
                     <ul>
                         <li><a href="find-advisor">Find an Advisor</a></li>
                         <li><a href="guarantee">Our Guarantee</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h4>Legal</h4>
+                    <h3>Legal</h3>
                     <ul>
                         <li><a href="terms-of-service">Terms of Service</a></li>
                         <li><a href="privacy-policy">Privacy Policy</a></li>
@@ -514,7 +519,7 @@
                     </ul>
                 </div>
                 <div>
-                    <h4>Contact</h4>
+                    <h3>Contact</h3>
                     <ul>
                         <li><a href="mailto:support@canadainvesting.app">support@canadainvesting.app</a></li>
                         <li><a href="tel:+16479567290">1.647.956.7290</a></li>
@@ -569,10 +574,10 @@
                 if (data.related && data.related.length > 0) {
                     const province = data.profile.province || '';
                     const relatedHtml = data.related.map(r => `
-                        <a href="/profile?id=${r.id}" style="display:block;padding:16px;margin:8px 0;background:rgba(255,255,255,0.03);border:1px solid #333;border-radius:8px;text-decoration:none;color:#fff;transition:border-color 0.3s;">
-                            <strong style="color:#2563eb;">${r.name}</strong>
-                            ${r.firm ? `<span style="color:#999;margin-left:8px;">${r.firm}</span>` : ''}
-                            <br><span style="color:#888;font-size:13px;">${r.designation || ''} ${r.city ? '— ' + r.city + ', ' + r.province : r.province || ''}</span>
+                        <a href="/profile?id=${r.id}" style="display:block;padding:16px;margin:8px 0;background:rgba(241,234,220,0.03);border:1px solid var(--border-strong);border-radius:8px;text-decoration:none;color:var(--text);transition:border-color 0.3s;">
+                            <strong style="color:var(--gold);">${r.name}</strong>
+                            ${r.firm ? `<span style="color:var(--text-3);margin-left:8px;">${r.firm}</span>` : ''}
+                            <br><span style="color:var(--text-3);font-size:13px;">${r.designation || ''} ${r.city ? '— ' + r.city + ', ' + r.province : r.province || ''}</span>
                         </a>
                     `).join('');
 
@@ -581,7 +586,7 @@
                         const section = document.createElement('div');
                         section.style.cssText = 'max-width:800px;margin:40px auto;padding:0 20px;';
                         section.innerHTML = `
-                            <h3 style="color:#fff;font-size:18px;margin:0 0 16px;font-weight:600;">Other Advisors in ${province}</h3>
+                            <h3 style="color:var(--text);font-size:18px;margin:0 0 16px;font-weight:600;">Other Advisors in ${province}</h3>
                             ${relatedHtml}
                         `;
                         container.appendChild(section);
@@ -633,7 +638,7 @@
                         'or your provincial equivalent</li>' +
                     '<li><strong>Financial planners (CFP)</strong> &mdash; <a href="https://www.fpcanada.ca/findaplanner" target="_blank" rel="noopener">FP Canada &mdash; Find Your Planner</a></li>' +
                 '</ul>' +
-                '<p style="font-size:0.9em; color:#666; margin-top:1.5em;">Listing questions? Email ' +
+                '<p style="font-size:0.9em; color:var(--text-3); margin-top:1.5em;">Listing questions? Email ' +
                     '<a href="mailto:arthur@negotiateandwin.com?subject=' + subjectParam + '">arthur@negotiateandwin.com</a>' +
                 '</p>';
         }
@@ -657,7 +662,7 @@
             document.getElementById('profileName').textContent = profile.name;
             if (profile.founding_member) {
                 const badge = document.createElement('span');
-                badge.style.cssText = 'display:inline-block;background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:12px;margin-left:8px;text-transform:uppercase;letter-spacing:0.5px;';
+                badge.style.cssText = 'display:inline-block;background:var(--gold);color:var(--text);font-size:11px;font-weight:700;padding:4px 10px;border-radius:12px;margin-left:8px;text-transform:uppercase;letter-spacing:0.5px;';
                 badge.textContent = 'Founding Member';
                 document.getElementById('profileName').appendChild(badge);
             }
@@ -716,9 +721,9 @@
                 const circumference = 326.73;
                 const offset = circumference - (circumference * score / 100);
                 const arc = document.getElementById('scoreArc');
-                let strokeColor = '#ef4444';
-                if (score >= 70) strokeColor = '#059669';
-                else if (score >= 50) strokeColor = '#f59e0b';
+                let strokeColor = 'var(--danger)';
+                if (score >= 70) strokeColor = 'var(--success)';
+                else if (score >= 50) strokeColor = 'var(--gold)';
                 arc.style.stroke = strokeColor;
                 setTimeout(() => { arc.style.strokeDashoffset = offset; }, 100);
 

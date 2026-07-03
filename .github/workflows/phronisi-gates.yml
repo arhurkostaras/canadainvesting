@@ -1,0 +1,84 @@
+name: phronisi-gates
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  hex-ban:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: No raw color hex outside the tokens file
+        run: |
+          # Rule: page CSS references tokens only. Raw hex is allowed in
+          # assets/phronisi-tokens.css (the source of truth) and in the
+          # admin-dashboard email template strings (DEFAULT_ADVISOR_BODY /
+          # DEFAULT_INVESTOR_BODY: email clients cannot resolve var(), so
+          # they carry raw Phronisi hex). HTML entities (&#128200;), the
+          # pre-existing double-escaped &amp;#038; content artifact, and
+          # theme-color meta attributes are not CSS colors and are filtered.
+          set -euo pipefail
+          violations=$(grep -rnE '#[0-9a-fA-F]{3,8}' \
+              --include='*.html' --include='*.css' . \
+            | sed 's|^\./||' \
+            | grep -v '^assets/phronisi-tokens.css' \
+            | grep -v '^public/' \
+            | grep -v '^node_modules/' \
+            | grep -v 'name="theme-color"' \
+            | grep -v 'DEFAULT_ADVISOR_BODY\|DEFAULT_INVESTOR_BODY' \
+            | sed -E 's/&(amp;)?#[0-9]+;//g; s/#(fff|ffffff|000|000000)\b//g' \
+            | grep -E '#[0-9a-fA-F]{6}\b|#[0-9a-fA-F]{3}\b' \
+            || true)
+          if [ -n "$violations" ]; then
+            count=$(echo "$violations" | wc -l)
+            echo "FAIL: $count raw color hex value(s) outside assets/phronisi-tokens.css."
+            echo "Fix: replace each with the matching token (see the ACC mapping table in canadaaccountants PR #3)."
+            echo "$violations" | head -50
+            exit 1
+          fi
+          echo "PASS: zero raw color hex outside the tokens file."
+
+  lighthouse-a11y:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Serve site
+        run: |
+          python3 -m http.server 8901 &
+          sleep 2
+      - name: Lighthouse accessibility >= 90 on the six key pages
+        run: |
+          set -euo pipefail
+          fail=0
+          for p in index find-advisor directory pricing advisor-login; do
+            npx --yes lighthouse "http://localhost:8901/$p.html" \
+              --only-categories=accessibility --output=json \
+              --output-path="/tmp/$p.json" \
+              --chrome-flags="--headless --no-sandbox" --quiet
+            score=$(node -e "console.log(Math.round(require('/tmp/$p.json').categories.accessibility.score*100))")
+            echo "$p: $score"
+            if [ "$score" -lt 90 ]; then
+              echo "FAIL: $p accessibility score $score < 90."
+              echo "Fix: run 'npx lighthouse http://localhost:8901/$p.html --only-categories=accessibility' locally and clear the flagged audits."
+              fail=1
+            fi
+          done
+          # advisor-dashboard needs its auth-guard suppressed to render for audit
+          sed "s|window.location.href = '/advisor-login';|/*ci*/;|" advisor-dashboard.html > __ci-dashboard.html
+          npx --yes lighthouse "http://localhost:8901/__ci-dashboard.html" \
+            --only-categories=accessibility --output=json \
+            --output-path="/tmp/advisor-dashboard.json" \
+            --chrome-flags="--headless --no-sandbox" --quiet
+          score=$(node -e "console.log(Math.round(require('/tmp/advisor-dashboard.json').categories.accessibility.score*100))")
+          echo "advisor-dashboard: $score"
+          if [ "$score" -lt 90 ]; then
+            echo "FAIL: advisor-dashboard accessibility score $score < 90."
+            fail=1
+          fi
+          rm -f __ci-dashboard.html
+          exit $fail

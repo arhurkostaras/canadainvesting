@@ -1,0 +1,137 @@
+/* ============================================================
+   PHRONISI DESIGN TOKENS — shared across all four platforms
+   canadaaccountants.app · canadalawyers.app · canadainvesting.app
+   (· canadabusinessexits.app)
+   Source of truth: phronisi.app palette, extracted 2026-07-02
+   Usage rule: NO raw hex values in page CSS. Tokens only.
+   ============================================================ */
+
+:root {
+  /* --- Ink scale (dark surfaces) --- */
+  --ink:        #0B0E12;   /* page background, dark mode */
+  --ink-2:      #14181F;   /* raised surface / card */
+  --ink-3:      #1C2128;   /* higher surface / hover */
+
+  /* --- Cream scale (light text on dark; light-mode surfaces) --- */
+  --cream:      #F1EADC;   /* primary text on ink; light-mode page bg */
+  --cream-2:    #E6DDC7;   /* light-mode raised surface */
+  --bone:       #D9D0BA;   /* secondary text on ink */
+  --cream-text: #1A1815;   /* primary text on cream (light mode) */
+
+  /* --- Gold ramp (the accent system) --- */
+  --gold:        #C9A86A;  /* primary accent: links, active nav, borders */
+  --gold-bright: #E0BE7E;  /* hover / emphasis */
+  --gold-deep:   #8A6F3F;  /* pressed / subdued accent on light */
+
+  /* --- Muted / neutral --- */
+  --mute:       #7C8492;   /* tertiary text, captions on dark */
+  --mute-2:     #A4ACBA;   /* secondary text on dark alt */
+
+  /* --- Lines --- */
+  --line:        rgba(212, 188, 138, 0.14);
+  --line-strong: rgba(212, 188, 138, 0.30);
+
+  /* --- Semantic states (calm, no sirens) --- */
+  --success:    #6F8F6A;   /* sage green — verified, deployed, paid */
+  --warning:    #C9A86A;   /* warnings ride the gold, not amber alarm */
+  --danger:     #A85638;   /* rust — errors & destructive actions.
+                              NEVER #e5484d / #ff0000-class reds. */
+  --info:       #7C8492;
+
+  /* --- Per-platform accent slot ---
+     Default = gold (full family look). If differentiation is ever
+     wanted, override ONLY this variable per platform. */
+  --platform-accent:        var(--gold);
+  --platform-accent-bright: var(--gold-bright);
+
+  /* --- Typography --- */
+  --font-display: "Playfair Display", "Freight Display Pro", Georgia, serif;
+  --font-body:    "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont,
+                  "Segoe UI", sans-serif;
+  --font-mono:    "JetBrains Mono", ui-monospace, monospace;
+
+  /* --- Component tokens: DARK (marketing surfaces) --- */
+  --bg:            var(--ink);
+  --bg-raised:     var(--ink-2);
+  --bg-high:       var(--ink-3);
+  --text:          var(--cream);
+  --text-2:        var(--bone);
+  --text-3:        var(--mute);
+  --border:        var(--line);
+  --border-strong: var(--line-strong);
+
+  --btn-primary-bg:     var(--gold);
+  --btn-primary-text:   var(--ink);
+  --btn-primary-hover:  var(--gold-bright);
+  --btn-secondary-bg:   transparent;
+  --btn-secondary-text: var(--cream);
+  --btn-secondary-border: var(--line-strong);
+
+  --nav-bg:     rgba(11, 14, 18, 0.92);  /* opaque-ish; add blur */
+  --nav-text:   var(--bone);
+  --nav-active: var(--gold);
+
+  --card-selected-bg:     rgba(201, 168, 106, 0.10);
+  --card-selected-border: var(--gold);
+
+  --focus-ring: 2px solid var(--gold-bright);
+}
+
+/* --- LIGHT MODE (app surfaces: dashboards, forms, login, wizard) ---
+   Apply class="mode-light" on <body> for these pages. */
+.mode-light {
+  --bg:            var(--cream);
+  --bg-raised:     #FFFFFF;
+  --bg-high:       var(--cream-2);
+  --text:          var(--cream-text);
+  --text-2:        #4A453C;
+  --text-3:        #8A8474;
+  --border:        rgba(26, 24, 21, 0.12);
+  --border-strong: rgba(26, 24, 21, 0.28);
+
+  --btn-primary-bg:     var(--ink);
+  --btn-primary-text:   var(--cream);
+  --btn-primary-hover:  var(--ink-3);
+  --btn-secondary-text: var(--cream-text);
+  --btn-secondary-border: rgba(26, 24, 21, 0.28);
+
+  --nav-bg:     rgba(241, 234, 220, 0.94);
+  --nav-text:   var(--cream-text);
+  --nav-active: var(--gold-deep);
+
+  --card-selected-bg:     rgba(138, 111, 63, 0.08);
+  --card-selected-border: var(--gold-deep);
+
+  /* Gold on cream fails contrast for body text — use gold-deep
+     for text-sized accents in light mode; gold for borders only. */
+}
+
+/* --- Contrast guarantees (WCAG AA verified pairs) ---
+   cream  on ink      : 15.9:1  ✓ any size
+   bone   on ink      : 13.1:1  ✓ any size
+   mute   on ink      :  5.1:1  ✓ body text
+   gold   on ink      :  8.2:1  ✓ any size
+   ink    on gold     :  8.2:1  ✓ buttons
+   cream-text on cream: 13.7:1  ✓ any size
+   gold-deep on cream :  4.6:1  ✓ ≥18px or bold only
+   rust   on cream    :  5.0:1  ✓ body text
+   rust   on ink      :  3.2:1  ✗ text — pair with cream text on
+                                   rust-tinted bg for dark-mode errors
+*/
+
+/* --- ACC implementation extension (not from the handoff palette) ---
+   Legacy alias re-resolution. Page :root blocks alias their old variable
+   names to component tokens (--dark-bg: var(--bg), etc.). Custom properties
+   substitute var() where the property is DEFINED, so aliases declared at
+   :root freeze to dark values before body.mode-light can flip them.
+   Re-declaring the aliases under .mode-light makes them resolve against the
+   light component tokens. Remove when pages stop using legacy names. */
+.mode-light {
+  --dark-bg: var(--bg);
+  --primary-blue: var(--gold-deep);   /* small gold accents must deepen on cream */
+  --card-bg: var(--bg-raised);
+  --text-primary: var(--text);
+  --text-secondary: var(--text-2);
+  --text-muted: var(--text-3);
+  --border-color: var(--border);
+}
