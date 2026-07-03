@@ -140,7 +140,7 @@
             border-radius: 20px;
             padding: 40px;
         }
-        .contact-form-card h3 {
+        .contact-form-card h2 {
             font-size: 1.4rem;
             font-weight: 700;
             margin-bottom: 8px;
@@ -243,7 +243,7 @@
             border-radius: 20px;
             padding: 32px;
         }
-        .sidebar-card h4 {
+        .sidebar-card h3 {
             font-size: 1.1rem;
             font-weight: 700;
             margin-bottom: 20px;
@@ -317,10 +317,7 @@
         .hours-list .time {
             color: var(--text-secondary);
         }
-        .hours-list .closed {
-            color: var(--danger);
-            font-weight: 500;
-        }
+        .hours-list .closed { color: var(--cream); background: rgba(168,86,56,0.22); padding: 1px 8px; border-radius: 4px; }
 
         /* Response Time Badge */
         .response-badge {
@@ -375,7 +372,7 @@
         .footer { background: var(--bg); padding: 60px 24px; border-top: 1px solid var(--border-color); }
         .footer-inner { max-width: 1100px; margin: 0 auto; }
         .footer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; margin-bottom: 40px; }
-        .footer-grid h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 16px; }
+        .footer-grid h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 16px; }
         .footer-grid ul { list-style: none; }
         .footer-grid li { margin-bottom: 10px; }
         .footer-grid a { color: var(--text-secondary); text-decoration: none; font-size: 0.85rem; transition: color 0.3s; }
@@ -447,7 +444,7 @@
         <div class="contact-grid">
             <!-- Contact Form -->
             <div class="contact-form-card">
-                <h3>Send Us a Message</h3>
+                <h2>Send Us a Message</h2>
                 <p class="form-subtitle">Fill out the form below and we'll get back to you within one business day.</p>
                 <form id="contactForm" onsubmit="submitContactForm(event)">
                     <div class="form-row">
@@ -488,7 +485,7 @@
             <div class="contact-sidebar">
                 <!-- Contact Info -->
                 <div class="sidebar-card">
-                    <h4>Contact Information</h4>
+                    <h3>Contact Information</h3>
                     <div class="contact-item">
                         <div class="contact-item-icon"><i class="fas fa-phone"></i></div>
                         <div class="contact-item-text">
@@ -518,7 +515,7 @@
 
                 <!-- Office Hours -->
                 <div class="sidebar-card">
-                    <h4>Office Hours</h4>
+                    <h3>Office Hours</h3>
                     <ul class="hours-list">
                         <li>
                             <span class="day">Monday</span>
@@ -553,7 +550,7 @@
 
                 <!-- Founder Direct -->
                 <div class="sidebar-card" style="border-color: var(--primary-blue); background: rgba(201,168,106,0.05);">
-                    <h4><i class="fas fa-user-tie" style="color: var(--primary-blue); margin-right: 8px;"></i> Speak with Our Team</h4>
+                    <h3><i class="fas fa-user-tie" style="color: var(--primary-blue); margin-right: 8px;"></i> Speak with Our Team</h3>
                     <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6; margin-bottom: 16px;">Our team handles partnership inquiries and high-value advisor onboarding. Don't hesitate to reach out.</p>
                     <a href="tel:+16479567290" style="display: inline-flex; align-items: center; gap: 8px; color: var(--primary-blue); font-weight: 600; text-decoration: none; font-size: 0.9rem;">
                         <i class="fas fa-phone"></i> Call Us Directly
@@ -578,7 +575,7 @@
         <div class="footer-inner">
             <div class="footer-grid">
                 <div>
-                    <h4>For Advisors</h4>
+                    <h3>For Advisors</h3>
                     <ul>
                         <li><a href="join-as-advisor">Apply to Join</a></li>
                         <li><a href="pricing">Pricing & Algorithm</a></li>
@@ -587,7 +584,7 @@
                     </ul>
                 </div>
                 <div>
-                    <h4>For Clients</h4>
+                    <h3>For Clients</h3>
                     <ul>
                         <li><a href="find-advisor">Find an Advisor</a></li>
                         <li><a href="guarantee">Our Guarantee</a></li>
@@ -595,7 +592,7 @@
                     </ul>
                 </div>
                 <div>
-                    <h4>Legal</h4>
+                    <h3>Legal</h3>
                     <ul>
                         <li><a href="terms-of-service">Terms of Service</a></li>
                         <li><a href="privacy-policy">Privacy Policy</a></li>
@@ -603,7 +600,7 @@
                     </ul>
                 </div>
                 <div>
-                    <h4>Contact</h4>
+                    <h3>Contact</h3>
                     <ul>
                         <li><a href="mailto:support@canadainvesting.app">support@canadainvesting.app</a></li>
                         <li><a href="tel:+16479567290">1.647.956.7290</a></li>
