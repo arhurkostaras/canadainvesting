@@ -303,10 +303,16 @@
             margin-left: auto;
         }
         .btn-next:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(201,168,106,0.4); }
-        .btn-next:disabled {
+        .btn-next:disabled,
+        .btn-next[aria-disabled="true"] {
             opacity: 0.4; cursor: not-allowed; transform: none;
             box-shadow: none;
         }
+        .step-hint {
+            color: var(--gold); font-size: 0.85rem; font-weight: 500;
+            flex: 1; text-align: right; min-height: 1.2em;
+        }
+        .question-card { scroll-margin-top: 84px; }
         .btn-submit {
             background: var(--success);
             border: none; color: var(--cream); padding: 16px 36px;
@@ -530,7 +536,8 @@
             </div>
             <div class="question-nav">
                 <div></div>
-                <button class="btn-next" disabled onclick="nextStep()">Continue <i class="fas fa-arrow-right"></i></button>
+                <div class="step-hint" role="status" aria-live="polite"></div>
+                <button class="btn-next" aria-disabled="true" onclick="nextStep()">Continue <i class="fas fa-arrow-right"></i></button>
             </div>
         </div>
 
@@ -578,7 +585,8 @@
             </div>
             <div class="question-nav">
                 <button class="btn-back" onclick="prevStep()"><i class="fas fa-arrow-left"></i> Back</button>
-                <button class="btn-next" disabled onclick="nextStep()">Continue <i class="fas fa-arrow-right"></i></button>
+                <div class="step-hint" role="status" aria-live="polite"></div>
+                <button class="btn-next" aria-disabled="true" onclick="nextStep()">Continue <i class="fas fa-arrow-right"></i></button>
             </div>
         </div>
 
@@ -626,7 +634,8 @@
             </div>
             <div class="question-nav">
                 <button class="btn-back" onclick="prevStep()"><i class="fas fa-arrow-left"></i> Back</button>
-                <button class="btn-next" disabled onclick="nextStep()">Continue <i class="fas fa-arrow-right"></i></button>
+                <div class="step-hint" role="status" aria-live="polite"></div>
+                <button class="btn-next" aria-disabled="true" onclick="nextStep()">Continue <i class="fas fa-arrow-right"></i></button>
             </div>
         </div>
 
@@ -667,7 +676,8 @@
             </div>
             <div class="question-nav">
                 <button class="btn-back" onclick="prevStep()"><i class="fas fa-arrow-left"></i> Back</button>
-                <button class="btn-next" disabled onclick="nextStep()">Continue <i class="fas fa-arrow-right"></i></button>
+                <div class="step-hint" role="status" aria-live="polite"></div>
+                <button class="btn-next" aria-disabled="true" onclick="nextStep()">Continue <i class="fas fa-arrow-right"></i></button>
             </div>
         </div>
 
@@ -677,7 +687,7 @@
             <h2>What province or territory are you in?</h2>
             <p class="question-desc">Investment advisors are provincially regulated. We'll match you with professionals licensed to operate in your region.</p>
             <div class="form-group">
-                <select class="form-select" id="provinceSelect" onchange="handleProvinceSelect(this)">
+                <select class="form-select" id="provinceSelect" aria-label="Province or territory" onchange="handleProvinceSelect(this)">
                     <option value="" disabled selected>Select your province or territory</option>
                     <option value="Alberta">Alberta</option>
                     <option value="British Columbia">British Columbia</option>
@@ -696,7 +706,8 @@
             </div>
             <div class="question-nav">
                 <button class="btn-back" onclick="prevStep()"><i class="fas fa-arrow-left"></i> Back</button>
-                <button class="btn-next" disabled onclick="nextStep()">Continue <i class="fas fa-arrow-right"></i></button>
+                <div class="step-hint" role="status" aria-live="polite"></div>
+                <button class="btn-next" aria-disabled="true" onclick="nextStep()">Continue <i class="fas fa-arrow-right"></i></button>
             </div>
         </div>
 
@@ -730,7 +741,8 @@
             </div>
             <div class="question-nav">
                 <button class="btn-back" onclick="prevStep()"><i class="fas fa-arrow-left"></i> Back</button>
-                <button class="btn-next" disabled onclick="nextStep()">Continue <i class="fas fa-arrow-right"></i></button>
+                <div class="step-hint" role="status" aria-live="polite"></div>
+                <button class="btn-next" aria-disabled="true" onclick="nextStep()">Continue <i class="fas fa-arrow-right"></i></button>
             </div>
         </div>
 
@@ -742,17 +754,17 @@
             <div class="contact-form">
                 <div class="form-group">
                     <label for="clientName"><i class="fas fa-user" style="margin-right: 6px; color: var(--primary-blue);"></i> Full Name</label>
-                    <input type="text" id="clientName" placeholder="e.g. Sarah Thompson" autocomplete="name" required>
-                    <div class="form-error" id="nameError">Please enter your full name.</div>
+                    <input type="text" id="clientName" name="name" placeholder="e.g. Sarah Thompson" autocomplete="name" enterkeyhint="next" aria-describedby="nameError" required>
+                    <div class="form-error" id="nameError" aria-live="polite">Please enter your full name.</div>
                 </div>
                 <div class="form-group">
                     <label for="clientEmail"><i class="fas fa-envelope" style="margin-right: 6px; color: var(--primary-blue);"></i> Email Address</label>
-                    <input type="email" id="clientEmail" placeholder="e.g. sarah@example.com" autocomplete="email" required>
-                    <div class="form-error" id="emailError">Please enter a valid email address.</div>
+                    <input type="email" id="clientEmail" name="email" placeholder="e.g. sarah@example.com" autocomplete="email" required inputmode="email" enterkeyhint="next" aria-describedby="emailError" spellcheck="false">
+                    <div class="form-error" id="emailError" aria-live="polite">Please enter a valid email address.</div>
                 </div>
                 <div class="form-group">
                     <label for="clientPhone"><i class="fas fa-phone" style="margin-right: 6px; color: var(--primary-blue);"></i> Phone Number <span style="color: var(--text-secondary); font-weight: 400;">(optional)</span></label>
-                    <input type="tel" id="clientPhone" placeholder="e.g. 416-555-1234" autocomplete="tel">
+                    <input type="tel" id="clientPhone" name="phone" placeholder="e.g. 416-555-1234" autocomplete="tel" inputmode="tel" enterkeyhint="done">
                 </div>
             </div>
             <div style="margin-top: 20px; padding: 16px 20px; background: rgba(201,168,106,0.08); border-radius: 12px; border: 1px solid rgba(201,168,106,0.2);">
@@ -846,6 +858,56 @@
         // State
         let currentStep = 1;
         const totalSteps = 7;
+
+        // Wizard persistence: best-effort only. Storage can be unavailable
+        // (private browsing); the wizard must work identically without it,
+        // so these catches stay silent by design rather than logging noise.
+        const WIZARD_KEY = 'findadvisor-wizard-v1';
+        function persistWizard() {
+            try {
+                sessionStorage.setItem(WIZARD_KEY, JSON.stringify({
+                    answers,
+                    currentStep,
+                    contact: {
+                        name: (document.getElementById('clientName') || {}).value || '',
+                        email: (document.getElementById('clientEmail') || {}).value || '',
+                        phone: (document.getElementById('clientPhone') || {}).value || ''
+                    }
+                }));
+            } catch (e) { /* storage unavailable: persistence is optional */ }
+        }
+        function clearWizard() {
+            try { sessionStorage.removeItem(WIZARD_KEY); } catch (e) { /* ditto */ }
+        }
+        function restoreWizard() {
+            let saved = null;
+            try { saved = JSON.parse(sessionStorage.getItem(WIZARD_KEY) || 'null'); } catch (e) { /* ditto */ }
+            if (!saved || !saved.answers) return;
+            Object.assign(answers, saved.answers);
+            for (const [step, value] of Object.entries(saved.answers)) {
+                const card = document.querySelector(`.question-card[data-step="${step}"]`);
+                if (!card) continue;
+                const opt = card.querySelector(`.option-card[data-value="${CSS.escape(String(value))}"]`);
+                if (opt) {
+                    opt.classList.add('selected');
+                    opt.setAttribute('aria-pressed', 'true');
+                }
+                if (step === '5') {
+                    const sel = document.getElementById('provinceSelect');
+                    if (sel) sel.value = value;
+                }
+                setNextEnabled(card, true);
+            }
+            const c = saved.contact || {};
+            if (c.name) document.getElementById('clientName').value = c.name;
+            if (c.email) document.getElementById('clientEmail').value = c.email;
+            if (c.phone) document.getElementById('clientPhone').value = c.phone;
+            const step = parseInt(saved.currentStep, 10);
+            if (step > 1 && step <= totalSteps) {
+                currentStep = step;
+                showStep(currentStep, { scroll: false });
+            }
+        }
         const answers = {};
 
         // DOM refs
@@ -856,25 +918,44 @@
 
         // Initialize: attach click handlers to all option cards
         document.querySelectorAll('.option-card').forEach(card => {
+            card.setAttribute('role', 'button');
+            card.setAttribute('tabindex', '0');
+            card.setAttribute('aria-pressed', 'false');
             card.addEventListener('click', function() {
                 const parent = this.closest('.question-card');
                 // Deselect siblings
-                parent.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
+                parent.querySelectorAll('.option-card').forEach(c => {
+                    c.classList.remove('selected');
+                    c.setAttribute('aria-pressed', 'false');
+                });
                 // Select this one
                 this.classList.add('selected');
+                this.setAttribute('aria-pressed', 'true');
                 // Store answer
                 const step = parseInt(parent.getAttribute('data-step'));
                 answers[step] = this.getAttribute('data-value');
-                // Enable next button
-                parent.querySelector('.btn-next').disabled = false;
+                setNextEnabled(parent, true);
+                persistWizard();
+            });
+            card.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    this.click();
+                }
             });
         });
+
+        ['clientName', 'clientEmail', 'clientPhone'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.addEventListener('input', persistWizard);
+        });
+        setTimeout(restoreWizard, 50);
 
         function handleProvinceSelect(sel) {
             if (sel.value) {
                 answers[5] = sel.value;
-                const card = sel.closest('.question-card');
-                card.querySelector('.btn-next').disabled = false;
+                setNextEnabled(sel.closest('.question-card'), true);
+                persistWizard();
             }
         }
 
@@ -884,7 +965,8 @@
             currentStepEl.textContent = currentStep;
         }
 
-        function showStep(step) {
+        function showStep(step, opts) {
+            opts = opts || {};
             document.querySelectorAll('.question-card').forEach(card => {
                 card.classList.remove('active');
             });
@@ -897,14 +979,59 @@
                 target.style.animation = '';
             }
             updateProgress();
-            // Scroll to top of questionnaire
-            progressSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            if (opts.scroll === false) return;
+            const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+            // On narrow screens the progress bar sits above the fold but the
+            // question does not; scroll the question itself into view there.
+            const anchor = (window.matchMedia('(max-width: 768px)').matches && target) ? target : progressSection;
+            anchor.scrollIntoView({ behavior, block: 'start' });
+            if (behavior === 'smooth') {
+                // Some Chrome configs silently drop smooth programmatic scrolls
+                // (found on the ACC production walk); settle instantly if so.
+                setTimeout(() => {
+                    const r = anchor.getBoundingClientRect();
+                    if (r.top < -20 || r.top > 200) {
+                        anchor.scrollIntoView({ behavior: 'auto', block: 'start' });
+                    }
+                }, 450);
+            }
+        }
+
+        const STEP_HINTS = {
+            1: 'Choose an investment focus to continue.',
+            2: 'Choose an asset range to continue.',
+            3: 'Choose an investment goal to continue.',
+            4: 'Choose a fee structure to continue.',
+            5: 'Select your province or territory to continue.',
+            6: 'Choose a meeting preference to continue.'
+        };
+
+        function activeCard() {
+            return document.querySelector(`.question-card[data-step="${currentStep}"]`);
+        }
+
+        function setHint(card, msg) {
+            const hint = card && card.querySelector('.step-hint');
+            if (hint) hint.textContent = msg || '';
+        }
+
+        function setNextEnabled(card, enabled) {
+            const btn = card && card.querySelector('.btn-next');
+            if (btn) btn.setAttribute('aria-disabled', enabled ? 'false' : 'true');
+            if (enabled) setHint(card, '');
         }
 
         function nextStep() {
+            const card = activeCard();
+            if (STEP_HINTS[currentStep] && !answers[currentStep]) {
+                setHint(card, STEP_HINTS[currentStep]);
+                return;
+            }
+            setHint(card, '');
             if (currentStep < totalSteps) {
                 currentStep++;
                 showStep(currentStep);
+                persistWizard();
             }
         }
 
@@ -928,8 +1055,12 @@
             nameError.classList.remove('visible');
             emailError.classList.remove('visible');
 
+            name.removeAttribute('aria-invalid');
+            email.removeAttribute('aria-invalid');
+
             if (!name.value.trim() || name.value.trim().length < 2) {
                 name.classList.add('error');
+                name.setAttribute('aria-invalid', 'true');
                 nameError.classList.add('visible');
                 valid = false;
             }
@@ -937,10 +1068,15 @@
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!email.value.trim() || !emailRegex.test(email.value.trim())) {
                 email.classList.add('error');
+                email.setAttribute('aria-invalid', 'true');
                 emailError.classList.add('visible');
                 valid = false;
             }
 
+            if (!valid) {
+                const firstBad = document.querySelector('.contact-form input.error');
+                if (firstBad) firstBad.focus();
+            }
             return valid;
         }
 
@@ -987,7 +1123,8 @@
                 return;
             }
 
-            // Show confirmation only on real success
+            // Show confirmation only on real success; saved session is done
+            clearWizard();
             document.querySelectorAll('.question-card').forEach(card => card.classList.remove('active'));
             progressSection.style.display = 'none';
             confirmationCard.classList.add('active');
