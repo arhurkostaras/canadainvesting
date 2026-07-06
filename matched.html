@@ -83,7 +83,7 @@
                 var info = document.getElementById('matchInfo');
                 info.style.display = 'block';
                 var specText = specialty ? specialty + ' ' : '';
-                info.innerHTML = '<p><strong>' + data.professionals.length + ' ' + specText + 'advisors matched</strong> in ' + province + ' based on your search criteria</p>';
+                info.innerHTML = '<p><strong>' + data.professionals.length + ' ' + specText + 'advisors matched</strong> in ' + province + ' based on your search criteria</p><p style="font-size:12px;color:var(--text-2);margin-top:6px;">Professionals subscribe to be listed; subscription tier is one of the ranking factors.</p>';
 
                 var container = document.getElementById('results');
                 data.professionals.forEach(function(p) {
