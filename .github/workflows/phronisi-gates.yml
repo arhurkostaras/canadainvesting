@@ -40,6 +40,57 @@ jobs:
           fi
           echo "PASS: zero raw color hex outside the tokens file."
 
+  copy-ban:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: No adjudicated-banned copy phrases in root pages
+        run: |
+          # Rule: honest-copy adjudication (2026-07-05). Root *.html only;
+          # generated province/directory subdirectories and public/ are out
+          # of scope for this gate. Banned phrases per
+          # ~/phronisi-ops/docs/ADJUDICATION-RULINGS-2026-07-05.md.
+          # The guarantee wording lives ONLY on guarantee.html; every other
+          # page links to /guarantee (single-source rule, ruling 2).
+          set -euo pipefail
+          phrases=(
+            "guaranteed top"
+            "bank-level"
+            "premier"
+            "in 24 Hours"
+            "24hr Average"
+            "within 24hrs"
+            "3 qualified leads"
+            "Founding 500"
+            "spots remaining"
+            "priority search placement"
+            "compounds over time"
+            "First AI-Powered"
+            "perfect match"
+            "Perfect Investment Advisor"
+            "weekly CIRO"
+            "Continuous Verification"
+            "Only CIRO-registered"
+          )
+          fail=0
+          for p in "${phrases[@]}"; do
+            hits=$(grep -n -i -F -e "$p" ./*.html || true)
+            if [ -n "$hits" ]; then
+              echo "FAIL: banned phrase '$p' found:"
+              echo "$hits" | head -10
+              fail=1
+            fi
+          done
+          if [ "$fail" -ne 0 ]; then
+            echo ""
+            echo "Fix: these phrases were ruled out by the honest-copy adjudication."
+            echo "See ~/phronisi-ops/docs/ADJUDICATION-RULINGS-2026-07-05.md for the"
+            echo "approved replacement wording. Guarantee wording is single-sourced"
+            echo "on guarantee.html; link to /guarantee instead of restating terms."
+            exit 1
+          fi
+          echo "PASS: zero banned copy phrases in root pages."
+
   lighthouse-a11y:
     runs-on: ubuntu-latest
     steps:
