@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <title>Your Perfect Advisor Matches - CanadaInvesting.app</title>
+    <title>Your Advisor Matches - CanadaInvesting.app</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -149,36 +149,36 @@
     <div id="loadingScreen" class="loading-screen">
         <div class="loading-animation"></div>
         <div class="loading-text"><i class="fas fa-robot"></i> AI Analyzing Your Requirements...</div>
-        <div class="loading-subtext">Evaluating 20,000+ advisors to find your perfect matches</div>
+        <div class="loading-subtext">Evaluating our advisor network to find strong matches</div>
     </div>
 
     <!-- Results Content -->
     <div id="resultsContent" class="container hidden">
         <div class="header">
-            <h1><i class="fas fa-maple-leaf"></i> Your Perfect Advisor Matches</h1>
+            <h1><i class="fas fa-maple-leaf"></i> Your Advisor Matches</h1>
             <p class="subtitle" id="analysisSubtitle">Our AI analyzed your requirements and found your top matches</p>
         </div>
 
         <div class="match-summary">
             <h2><i class="fas fa-bullseye"></i> AI Matching Complete</h2>
-            <p id="summaryText">We've identified exceptional advisors who are perfectly suited for your investment needs.</p>
+            <p id="summaryText">We've identified strong advisor matches for your investment needs. Professionals subscribe to be listed; subscription tier is one of the ranking factors.</p>
 
             <div class="summary-stats">
                 <div class="stat-item">
-                    <span class="stat-number" id="totalAnalyzed">20,000+</span>
+                    <span class="stat-number" id="totalAnalyzed">--</span>
                     <span class="stat-label">Advisors Analyzed</span>
                 </div>
                 <div class="stat-item">
                     <span class="stat-number">3</span>
-                    <span class="stat-label">Perfect Matches</span>
+                    <span class="stat-label">Strong Matches</span>
                 </div>
                 <div class="stat-item">
                     <span class="stat-number" id="topScore">--</span>
                     <span class="stat-label">Top Match Score</span>
                 </div>
                 <div class="stat-item">
-                    <span class="stat-number">24hrs</span>
-                    <span class="stat-label">Response Time</span>
+                    <span class="stat-number">1 Day</span>
+                    <span class="stat-label">Business-Day Response Target</span>
                 </div>
             </div>
         </div>
@@ -189,7 +189,7 @@
 
         <div class="next-steps">
             <h2><i class="fas fa-rocket"></i> What Happens Next?</h2>
-            <p>We've sent your requirements to all three advisors. You'll receive personalized proposals within 24 hours. Choose the advisor that feels like the best fit and start your partnership!</p>
+            <p>We've sent your requirements to all three advisors. We aim to have responses to you within 1 business day. Choose the advisor that feels like the best fit and start your partnership!</p>
 
             <div class="cta-buttons" style="justify-content: center;">
                 <a href="contact" class="btn btn-primary">Questions? Contact Us</a>
@@ -198,7 +198,7 @@
 
             <div class="guarantee-reminder">
                 <h3><i class="fas fa-search"></i> Quality Match Promise</h3>
-                <p>Our AI-powered matching connects you directly with pre-screened advisors who specialize in your investment needs and portfolio size. No contracts, no fees - just quality introductions to financial professionals who fit your exact needs.</p>
+                <p>Our AI-powered matching connects you with registry-checked advisors who specialize in your investment needs and portfolio size. No contracts, no fees for clients. If your match isn't a fit, we'll rematch you at no cost. See <a href="guarantee">our guarantee page</a> for the full terms.</p>
             </div>
         </div>
     </div>
@@ -530,7 +530,7 @@
 
             const investmentNeed = needText[investorData.investment_need || investorData.business_type] || 'investment';
             document.getElementById('summaryText').textContent =
-                `We've identified exceptional advisors who are perfectly suited for your ${investmentNeed} needs.`;
+                `We've identified strong advisor matches for your ${investmentNeed} needs. Professionals subscribe to be listed; subscription tier is one of the ranking factors.`;
 
             const container = document.getElementById('matchesContainer');
             container.innerHTML = '';
