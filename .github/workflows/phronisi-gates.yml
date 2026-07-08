@@ -90,12 +90,8 @@ jobs:
               fail=1
             fi
           done
-          # TEMPORARY EXCLUSION pending Arthur's R-K ruling (2026-07-08): the
-          # revenue calculator's cap-based model is HELD for a rebuild/reframe/
-          # retire decision; its "up to N matches" text may not be edited until
-          # that ruling. Remove this exclusion the moment R-K is executed.
           for r in "${regexes[@]}"; do
-            hits=$(grep -n -i -E -e "$r" $(ls ./*.html | grep -v advisor-revenue-calculator.html) || true)
+            hits=$(grep -n -i -E -e "$r" ./*.html || true)
             if [ -n "$hits" ]; then
               echo "FAIL: banned pattern '$r' (ruling #45 family) found:"
               echo "$hits" | head -10
