@@ -71,12 +71,27 @@ jobs:
             "weekly CIRO"
             "Continuous Verification"
             "Only CIRO-registered"
+            "Premium search ranking"
+          )
+          # Ruling #45 family (2026-07-08 pricing-truth pass): any guaranteed-result
+          # ranking phrase is banned in every form, so this leg is regex, not fixed.
+          regexes=(
+            "guaranteed[[:space:]]+top"
+            "guaranteed[^.<]*results"
           )
           fail=0
           for p in "${phrases[@]}"; do
             hits=$(grep -n -i -F -e "$p" ./*.html || true)
             if [ -n "$hits" ]; then
               echo "FAIL: banned phrase '$p' found:"
+              echo "$hits" | head -10
+              fail=1
+            fi
+          done
+          for r in "${regexes[@]}"; do
+            hits=$(grep -n -i -E -e "$r" ./*.html || true)
+            if [ -n "$hits" ]; then
+              echo "FAIL: banned pattern '$r' (ruling #45 family) found:"
               echo "$hits" | head -10
               fail=1
             fi
