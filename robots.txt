@@ -6,7 +6,6 @@ Allow: /index.html
 Allow: /find-advisor.html
 Allow: /join-as-advisor.html
 Allow: /pricing.html
-Allow: /advisor-revenue-calculator.html
 Allow: /contact.html
 Allow: /guarantee.html
 Allow: /why-we-win.html
