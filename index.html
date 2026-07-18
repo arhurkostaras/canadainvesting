@@ -595,6 +595,142 @@
 <style id="phronisi-type">body{font-family:var(--font-body)}h1,h2,h3,.section-title{font-family:var(--font-display)}</style>
 </head>
 <body>
+<!--
+  ============================================================
+  WEBINAR ANNOUNCEMENT BANNER — canadainvesting.app ONLY
+  ============================================================
+  Webinar : "AI for Investment Professionals" — Thursday, August 27, 2026 · 2:00 PM Eastern
+  Link    : https://phronisi.app/webinar/advisors/  (UTM params already appended below)
+
+  PLACEMENT
+  - Insert this entire snippet immediately after the opening <body> tag
+    of index.html on canadainvesting.app. Do not nest it inside any
+    existing wrapper/container div.
+  - The snippet is fully self-contained (scoped .phw-banner* classes,
+    inline <style>, inline <script>). No external CSS/JS, no changes to
+    any other file are required.
+
+  DISMISS BEHAVIOUR
+  - The close button removes the banner for the current page view only.
+    This is intentional: in-page JS only, session-only, NO localStorage,
+    NO cookies. Keep it that simple — do not add persistence.
+
+  ROLLBACK
+  - Delete this snippet from index.html. Nothing else is touched.
+
+  DO NOT reuse this file on canadaaccountants.app or canadalawyers.app —
+  each site has its own banner file with its own webinar date and link.
+  ============================================================
+-->
+<div id="phw-banner" class="phw-banner" role="region" aria-label="Webinar announcement">
+  <style>
+    .phw-banner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px 16px;
+      padding: 10px 44px 10px 16px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 10100;
+      background: var(--ink-2);
+      border-bottom: 1px solid var(--line-strong);
+      color: var(--bone);
+      font-family: inherit;
+      font-size: 14.5px;
+      line-height: 1.45;
+      text-align: center;
+      box-sizing: border-box;
+    }
+    .phw-banner__text { margin: 0; }
+    .phw-banner__text strong { color: var(--cream); font-weight: 600; }
+    .phw-banner__cta {
+      display: inline-block;
+      padding: 5px 14px;
+      border-radius: 999px;
+      background: var(--gold);
+      color: var(--ink);
+      font-weight: 600;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .phw-banner__cta:hover { background: var(--gold-bright); }
+    .phw-banner__cta:focus-visible,
+    .phw-banner__close:focus-visible {
+      outline: 2px solid var(--gold-bright);
+      outline-offset: 2px;
+    }
+    .phw-banner__close {
+      position: absolute;
+      top: 50%;
+      right: 10px;
+      transform: translateY(-50%);
+      width: 28px;
+      height: 28px;
+      border: 0;
+      border-radius: 6px;
+      background: transparent;
+      color: var(--mute-2);
+      font-size: 18px;
+      line-height: 1;
+      cursor: pointer;
+    }
+    .phw-banner__close:hover { color: var(--cream); background: var(--ink-3); }
+    @media (max-width: 640px) {
+      .phw-banner {
+        flex-direction: column;
+        align-items: center;
+        padding: 12px 44px 12px 16px;
+      }
+    }
+  </style>
+  <p class="phw-banner__text">
+    <strong>Free 45-minute session for investment professionals:</strong>
+    AI without the hype &mdash; Thu, Aug&nbsp;27 &middot; 2:00&nbsp;PM&nbsp;ET
+  </p>
+  <a class="phw-banner__cta"
+     href="https://phronisi.app/webinar/advisors/?utm_source=canadainvesting&amp;utm_medium=banner&amp;utm_campaign=webinar_aug2026">
+    Reserve your seat &rarr;
+  </a>
+  <button class="phw-banner__close" type="button" aria-label="Dismiss announcement">&#10005;</button>
+</div>
+<script>
+  /* Session-only dismiss: removes the banner for this page view.
+     Intentionally no localStorage / cookies.
+     The site's top bar is position:fixed at top:0, which would cover an
+     in-flow banner, so the banner is fixed above it: while present, the
+     body and the site bar are pushed down by the banner height; dismiss
+     reverts both. Runs on DOMContentLoaded because the site bar's markup
+     appears later in <body> than this script. */
+  (function () {
+    function init() {
+      var b = document.getElementById('phw-banner');
+      if (!b) return;
+      var bar = document.querySelector('.nav');
+      function place() {
+        var h = b.offsetHeight;
+        document.body.style.paddingTop = h + 'px';
+        if (bar) bar.style.top = h + 'px';
+      }
+      place();
+      window.addEventListener('resize', place);
+      b.querySelector('.phw-banner__close').addEventListener('click', function () {
+        window.removeEventListener('resize', place);
+        b.remove();
+        document.body.style.paddingTop = '';
+        if (bar) bar.style.top = '';
+      });
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  })();
+</script>
     <!-- AI Badge -->
     <a href="ai-demo" class="ai-badge">
         <span class="ai-badge-icon"></span> AI-Powered Matching
