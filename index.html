@@ -631,7 +631,11 @@
       flex-wrap: wrap;
       gap: 8px 16px;
       padding: 10px 44px 10px 16px;
-      position: relative;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 10100;
       background: #111827;
       border-bottom: 1px solid #2a3446;
       color: #e8ecf2;
@@ -695,13 +699,36 @@
 </div>
 <script>
   /* Session-only dismiss: removes the banner for this page view.
-     Intentionally no localStorage / cookies. */
+     Intentionally no localStorage / cookies.
+     The site's top bar is position:fixed at top:0, which would cover an
+     in-flow banner, so the banner is fixed above it: while present, the
+     body and the site bar are pushed down by the banner height; dismiss
+     reverts both. Runs on DOMContentLoaded because the site bar's markup
+     appears later in <body> than this script. */
   (function () {
-    var b = document.getElementById('phw-banner');
-    if (!b) return;
-    b.querySelector('.phw-banner__close').addEventListener('click', function () {
-      b.remove();
-    });
+    function init() {
+      var b = document.getElementById('phw-banner');
+      if (!b) return;
+      var bar = document.querySelector('.nav');
+      function place() {
+        var h = b.offsetHeight;
+        document.body.style.paddingTop = h + 'px';
+        if (bar) bar.style.top = h + 'px';
+      }
+      place();
+      window.addEventListener('resize', place);
+      b.querySelector('.phw-banner__close').addEventListener('click', function () {
+        window.removeEventListener('resize', place);
+        b.remove();
+        document.body.style.paddingTop = '';
+        if (bar) bar.style.top = '';
+      });
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
   })();
 </script>
     <!-- AI Badge -->
