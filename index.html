@@ -636,9 +636,9 @@
       left: 0;
       right: 0;
       z-index: 10100;
-      background: #111827;
-      border-bottom: 1px solid #2a3446;
-      color: #e8ecf2;
+      background: var(--ink-2);
+      border-bottom: 1px solid var(--line-strong);
+      color: var(--bone);
       font-family: inherit;
       font-size: 14.5px;
       line-height: 1.45;
@@ -646,21 +646,21 @@
       box-sizing: border-box;
     }
     .phw-banner__text { margin: 0; }
-    .phw-banner__text strong { color: #ffffff; font-weight: 600; }
+    .phw-banner__text strong { color: var(--cream); font-weight: 600; }
     .phw-banner__cta {
       display: inline-block;
       padding: 5px 14px;
       border-radius: 999px;
-      background: #3b82f6;
-      color: #ffffff;
+      background: var(--gold);
+      color: var(--ink);
       font-weight: 600;
       text-decoration: none;
       white-space: nowrap;
     }
-    .phw-banner__cta:hover { background: #2f6fd6; }
+    .phw-banner__cta:hover { background: var(--gold-bright); }
     .phw-banner__cta:focus-visible,
     .phw-banner__close:focus-visible {
-      outline: 2px solid #93c5fd;
+      outline: 2px solid var(--gold-bright);
       outline-offset: 2px;
     }
     .phw-banner__close {
@@ -673,12 +673,12 @@
       border: 0;
       border-radius: 6px;
       background: transparent;
-      color: #9aa7ba;
+      color: var(--mute-2);
       font-size: 18px;
       line-height: 1;
       cursor: pointer;
     }
-    .phw-banner__close:hover { color: #ffffff; background: #1f2937; }
+    .phw-banner__close:hover { color: var(--cream); background: var(--ink-3); }
     @media (max-width: 640px) {
       .phw-banner {
         flex-direction: column;
