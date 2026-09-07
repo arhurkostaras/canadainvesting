@@ -487,6 +487,12 @@
                     <div class="cta-feature"><i class="fas fa-check"></i> Client leads</div>
                 </div>
             </section>
+
+            <!-- Correct-or-remove: public dispute form on the backend (2026-09-07) -->
+            <p style="text-align:center;margin:12px 0 0;font-size:13px;color:var(--text-3);">
+                Is this your profile and something is wrong?
+                <a id="disputeLink" rel="nofollow" style="color:var(--text-3);text-decoration:underline;cursor:pointer;">Correct or remove this profile</a>
+            </p>
         </div>
     </div>
 
@@ -546,6 +552,8 @@
                 showError();
                 return;
             }
+            const disputeLink = document.getElementById('disputeLink');
+            if (disputeLink) disputeLink.href = `${API_BASE}/api/profiles/${encodeURIComponent(id)}/dispute`;
 
             try {
                 const resp = await fetch(`${API_BASE}/api/profiles/${encodeURIComponent(id)}`);
@@ -557,6 +565,12 @@
                 if (resp.status === 410) {
                     let gatedBody = null;
                     try { gatedBody = await resp.json(); } catch (e) {}
+                    // 2026-09-07: PROFILE_REMOVED = hidden or removed at the person's
+                    // request. No name, no "being verified" copy, no claim CTA.
+                    if (gatedBody && gatedBody.code === 'PROFILE_REMOVED') {
+                        showRemoved(gatedBody.message);
+                        return;
+                    }
                     const gatedName = (gatedBody && gatedBody.profile_name) ? gatedBody.profile_name : '';
                     showGated(gatedName);
                     return;
@@ -600,6 +614,26 @@
         function showError() {
             document.getElementById('loadingState').style.display = 'none';
             document.getElementById('errorState').style.display = 'block';
+        }
+
+        // 2026-09-07: handler for HTTP 410 PROFILE_REMOVED (the person asked for a
+        // correction or removal, or the profile was removed at their request).
+        // Deliberately carries no name and no claim path; the message comes from
+        // the backend body and says whether the hide is pending or permanent.
+        function showRemoved(message) {
+            document.getElementById('loadingState').style.display = 'none';
+            const errorState = document.getElementById('errorState');
+            errorState.style.display = 'block';
+            document.title = 'Profile not available | CanadaInvesting.app';
+            if (!document.querySelector('meta[name="robots"]')) {
+                const robots = document.createElement('meta');
+                robots.name = 'robots'; robots.content = 'noindex';
+                document.head.appendChild(robots);
+            }
+            errorState.innerHTML =
+                '<h2 style="margin-top:0;">This profile is not available</h2>' +
+                '<p>' + escapeHtml(message || 'This profile was removed at the request of the person it describes.') + '</p>' +
+                '<p><a href="find-advisor">Search for an advisor</a></p>';
         }
 
         // 2026-05-31: dedicated handler for HTTP 410 PROFILE_UNDER_REVIEW. The
